@@ -40,3 +40,23 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+ul.listRoles
+{
+  width: 300px;
+  height: auto;
+  padding: 5px;
+  margin: 5px;
+  list-style-type: none;
+  border-radius: 5px;
+  min-height: 500px;
+}
+ul.listRoles li
+{
+  padding: 5px;
+  margin: 10px;
+  background-color: #ffff99;
+  cursor: pointer;
+  border: 1px solid Black;
+  border-radius: 5px;
+}

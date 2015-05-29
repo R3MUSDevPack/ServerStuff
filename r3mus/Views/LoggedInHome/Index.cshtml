@@ -35,13 +35,16 @@
         <p style="font-family:Arial; font-size:small; font-weight:600">
             @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
         </p>
-        <table class="table" style="font-family:Arial; font-size:small; font-weight:600">
+        <table class="table col-md-1" 6 style="font-family:Arial; font-size:small; font-weight:600">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.ApiKey)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.VerificationCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccessMask)
                 </th>
                 <th></th>
             </tr>
@@ -54,6 +57,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.VerificationCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccessMask)
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { apiKey = item.ApiKey }, new { @class = "btn btn-default" }) |

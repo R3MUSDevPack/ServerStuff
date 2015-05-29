@@ -401,11 +401,21 @@ namespace r3mus.Models
     public class ApiInfo
     {
         public int Id { get; set; }
+
         [Display(Name = "Api Key")]
         public int ApiKey { get; set; }
+
         [Display(Name = "Verification Code")]
+        [DataType(DataType.MultilineText)]
+        [UIHint("DisplayVCode")]
         public string VerificationCode { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Access Mask")]
+        public long AccessMask { get { return EveOnlineApi.CreateApiKey(Convert.ToInt32(ApiKey), VerificationCode).Init().AccessMask; } }
+
         public ApplicationUser User { get; set; }
+        
         public bool ValidateAccessMask(ApplicationUser.IDType type)
         {
             bool result = false;
@@ -414,22 +424,21 @@ namespace r3mus.Models
 
             try
             {
-                var newkey = EveOnlineApi.CreateApiKey(Convert.ToInt32(ApiKey), VerificationCode).Init();
+                var mask = AccessMask;
 
                 if (type == ApplicationUser.IDType.Corporation)
                 {
-                    result = (newkey.AccessMask == corpAccessMask);
+                    result = (mask == corpAccessMask);
                 }
                 else if (type == ApplicationUser.IDType.Alliance)
                 {
-                    result = (newkey.AccessMask == allianceAccessMask);
+                    result = (mask == allianceAccessMask);
                 }
             }
             catch (Exception ex) { }
 
             return result;
         }
-
     }
 
     public class Title
@@ -443,7 +452,7 @@ namespace r3mus.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 

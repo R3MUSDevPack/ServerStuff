@@ -29,16 +29,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @if (item.Avatar != null)
-            {
-                <a href="@Url.Action("ViewProfile", "WebsiteAdmin", new { id = @item.Id })">
+            <a href="@Url.Action("ViewProfile", "WebsiteAdmin", new { id = @item.Id })">
+                @if (item.Avatar != null)
+                {
                     <img src="@item.Avatar" />
-                </a>
-            }
-            else
-            {
-                <span>Image Not Yet Available</span>
-            }
+                }
+                else
+                {
+                    <span>Image Not Yet Available</span>
+                }
+            </a>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserName)

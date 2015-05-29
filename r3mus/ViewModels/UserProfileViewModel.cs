@@ -31,5 +31,11 @@ namespace r3mus.ViewModels
         public string Titles { get; set; }
 
         public List<ApiInfo> ApiKeys { get; set; }
+
+        [Display(Name = "Available Roles")]
+        public List<string> AvailableRoles { get; set; }
+
+        [Display(Name = "Assigned Roles")]
+        public List<string> UserRoles { get; set; }
     }
 }

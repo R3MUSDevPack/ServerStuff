@@ -9,6 +9,7 @@ using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace r3mus.Controllers
 {
@@ -16,6 +17,7 @@ namespace r3mus.Controllers
     public class WebsiteAdminController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
         //
         // GET: /WebsiteAdmin/
@@ -36,7 +38,7 @@ namespace r3mus.Controllers
                                                                                 MemberSince = Convert.ToDateTime(user.MemberSince),
                                                                                 MemberType = user.MemberType,
                                                                                 Titles = string.Join(", ", db.Titles.Where(title => title.UserId == user.Id).Select(title => title.TitleName).ToList()),
-                                                                                WebsiteRoles = string.Join(", ", user.Roles.Select(role => role.Role.Name).ToList()),
+                                                                                WebsiteRoles = string.Join(", ", user.Roles.Select(role => role.RoleId).ToList()),
                                                                                 Avatar = user.Avatar
             }));
 
@@ -97,7 +99,9 @@ namespace r3mus.Controllers
             currentUser = db.Users.Where(user => user.Id == id).FirstOrDefault();
             currentUser.LoadApiKeys();
             currentUser.Titles = db.Titles.Where(title => title.UserId == id).ToList();
-                
+
+            var roles = db.Roles.Select(role => role.Name).ToList();
+                                        
             if(currentUser.Titles.Count == 0)
             {
                 currentUser.Titles.Add(new Title(){ UserId = currentUser.Id, TitleName = "Corp Member"});
@@ -107,10 +111,43 @@ namespace r3mus.Controllers
                 Id = currentUser.Id,
                 UserName = currentUser.UserName, EmailAddress = currentUser.EmailAddress, MemberSince = Convert.ToDateTime(currentUser.MemberSince), 
                 MemberType = currentUser.MemberType, Avatar = currentUser.Avatar, Titles = string.Join(", ", currentUser.Titles.Select(t => t.TitleName).ToList()),
-                WebsiteRoles = string.Join(", ", currentUser.Roles.Select(role => role.Role.Name).ToList())
+                WebsiteRoles = string.Join(", ", currentUser.Roles.Select(role => role.RoleId).ToList()),
+                ApiKeys = db.ApiInfoes.Where(api => api.User.Id == currentUser.Id).ToList(),
+                UserRoles = userManager.GetRoles(currentUser.Id).ToList(),
+                AvailableRoles = roles
             };
 
             return View(userProfile);
+        }
+
+        [Authorize(Roles = "CEO, Admin, Director")]
+        public ActionResult AssignRoles(FormCollection form)
+        {
+            string userId = form["userId"].ToString();
+            ApplicationUser currentUser = db.Users.Where(user => user.Id == userId).FirstOrDefault();
+
+            var roles = db.Roles.Select(role => role.Name).ToList();
+            var userRoles = userManager.GetRoles(currentUser.Id).ToList();
+
+            var account = new AccountController();
+
+            foreach (var role in roles)
+            {
+                if ((form[role] != null) && !userRoles.Contains(role))
+                {
+                    account.UserManager.AddToRole(currentUser.Id, role);
+                }
+            }
+
+            foreach (var role in userRoles)
+            {
+                if ((form[role] == null))
+                {
+                    account.UserManager.RemoveFromRole(currentUser.Id, role);
+                }
+            }
+            
+            return RedirectToAction("ViewProfile", new { id = currentUser.Id });
         }
 
         public ActionResult UpdateApiDetails(string originator, string id = "")

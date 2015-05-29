@@ -1,0 +1,35 @@
+﻿@model r3mus.ViewModels.UserProfileViewModel
+
+@using(Html.BeginForm("AssignRoles", "WebsiteAdmin", FormMethod.Post))
+{
+    String[] availableRoles = Model.AvailableRoles.ToArray<string>();
+    String[] userRoles = Model.UserRoles.ToArray<string>();
+    @Html.Hidden("userId", Model.Id)
+    <table>
+        <tr>
+            <th style="text-align: center">
+                Available Roles                
+            </th>
+        </tr>
+        <tr>
+            <td style="vertical-align: top">
+                <ul id="listRoles" class="listRoles">
+                    @foreach (String role in availableRoles)
+                    {
+                        <li>
+                            @if (userRoles.Contains(role))
+                            {
+                                <input type="checkbox" id="@role" name="@role" value="@role" checked /> @role
+                            }
+                            else
+                            {
+                                <input type="checkbox" id="@role" name="@role" value="@role" /> @role
+                            }
+                        </li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Save Roles" class="btn btn-default" />
+}
