@@ -1,0 +1,31 @@
+﻿<li>@Html.ActionLink("Training", "RedirectToMoodle", "LoggedInHome")</li>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Recruitment <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li>@Html.ActionLink("Recruitment Home", "Index", "Recruitment")</li>
+        <li>@Html.ActionLink("Add Names", "AddNames", "Recruitment")</li>
+        <li>@Html.ActionLink("Get Names", "GetNames", "Recruitment")</li>
+        <li>@Html.ActionLink("Review Outstanding Applications", "ShowApplications", "Recruitment")</li>
+        <li>@Html.ActionLink("Review Completed Applications", "ShowApplications", "Recruitment", new { review = true }, null)</li>
+    </ul>
+</li>
+
+@if(User.IsInRole("Admin") || User.IsInRole("CEO") || User.IsInRole("CEO"))
+{
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Website Admin <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("View Users", "ViewUsers", "WebsiteAdmin")</li>
+        </ul>
+    </li>
+}
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('.dropdown-toggle').dropdown();
+
+        });
+
+    </script>

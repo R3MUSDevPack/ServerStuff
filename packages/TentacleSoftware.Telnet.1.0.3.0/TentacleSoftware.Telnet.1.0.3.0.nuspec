@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>TentacleSoftware.Telnet</id>
+    <version>1.0.3.0</version>
+    <title>TentacleSoftware.Telnet</title>
+    <authors>Sam Wood</authors>
+    <owners>Sam Wood</owners>
+    <licenseUrl>https://github.com/Spksh/TentacleSoftware.Telnet/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/Spksh/TentacleSoftware.Telnet</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple task-based event-driven Telnet client that supports SOCKS4 proxies.</description>
+    <releaseNotes />
+    <copyright>Copyright © 2015 Sam Wood</copyright>
+  </metadata>
+</package>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimpleLocalisation.Web</name>
+    </assembly>
+    <members>
+        <member name="M:SimpleLocalisation.Web.XmlFileTextSource.Get">
+            <summary>
+            Method for getting all the texts the <see cref="T:SimpleLocalisation.ITextSource"/> holds.
+            </summary>
+            <returns>A collection of all texts.</returns>
+        </member>
+    </members>
+</doc>

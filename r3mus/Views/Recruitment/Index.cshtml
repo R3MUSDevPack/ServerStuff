@@ -1,0 +1,40 @@
+﻿@model r3mus.ViewModels.RecruitmentStatsViewModel
+
+@{
+    ViewBag.Title = "Recruitment";
+}
+
+<h2>Recruitment</h2>
+<p>
+    @Html.ActionLink("Add Names", "AddNames", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Get Names", "GetNames", null, new { @class = "btn btn-default" })
+</p>
+
+<h3>Statistics</h3>
+    <h4>Number of mails to send: @Html.DisplayFor(m => m.MailsToSend)</h4>
+    <h4>Number of applications to process: @Html.DisplayFor(m => m.ApplicationsToProcess)</h4>
+<p>
+    <h4>Submitted</h4>
+    <dl class="dl-horizontal">
+
+        @foreach (r3mus.Models.LastWeeksSubmissionStat stat in Model.Submitters)
+        {
+            <dt>@stat.Submitter</dt>
+            <dd>@stat.Submitted.ToString()</dd>
+        }
+
+    </dl>
+</p>
+
+<p>
+    <h4>Mailed</h4>
+    <dl class="dl-horizontal">
+
+        @foreach (r3mus.Models.LastWeeksMailStat stat in Model.Mailers)
+        {
+            <dt>@stat.Mailer</dt>
+            <dd>@stat.Mailed.ToString()</dd>
+        }
+
+    </dl>
+</p>

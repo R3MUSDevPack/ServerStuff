@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="r3mus_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'r3mus_DB.dbo.LastWeeksMailStats' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LastWeeksMailStats">
+          <Key>
+            <PropertyRef Name="Mailer" />
+          </Key>
+          <Property Name="Id" Type="bigint" />
+          <Property Name="Mailer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Mailed" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'r3mus_DB.dbo.LastWeeksSubmissionStats' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LastWeeksSubmissionStats">
+          <Key>
+            <PropertyRef Name="Submitter" />
+          </Key>
+          <Property Name="Id" Type="bigint" />
+          <Property Name="Submitter" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Submitted" Type="int" />
+        </EntityType>
+        <EntityContainer Name="r3mus_DBModelStoreContainer">
+          <EntitySet Name="LastWeeksMailStats" EntityType="Self.LastWeeksMailStats" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LastWeeksMailStats].[Id] AS [Id], 
+    [LastWeeksMailStats].[Mailer] AS [Mailer], 
+    [LastWeeksMailStats].[Mailed] AS [Mailed]
+    FROM [dbo].[LastWeeksMailStats] AS [LastWeeksMailStats]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LastWeeksSubmissionStats" EntityType="Self.LastWeeksSubmissionStats" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LastWeeksSubmissionStats].[Id] AS [Id], 
+    [LastWeeksSubmissionStats].[Submitter] AS [Submitter], 
+    [LastWeeksSubmissionStats].[Submitted] AS [Submitted]
+    FROM [dbo].[LastWeeksSubmissionStats] AS [LastWeeksSubmissionStats]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="r3mus_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LastWeeksMailStat">
+          <Key>
+            <PropertyRef Name="Mailer" />
+          </Key>
+          <Property Name="Id" Type="Int64" />
+          <Property Name="Mailer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mailed" Type="Int32" />
+        </EntityType>
+        <EntityType Name="LastWeeksSubmissionStat">
+          <Key>
+            <PropertyRef Name="Submitter" />
+          </Key>
+          <Property Name="Id" Type="Int64" />
+          <Property Name="Submitter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Submitted" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="RecruitmentStatEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LastWeeksMailStats" EntityType="Self.LastWeeksMailStat" />
+          <EntitySet Name="LastWeeksSubmissionStats" EntityType="Self.LastWeeksSubmissionStat" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="r3mus_DBModelStoreContainer" CdmEntityContainer="RecruitmentStatEntities">
+          <EntitySetMapping Name="LastWeeksMailStats">
+            <EntityTypeMapping TypeName="r3mus_DBModel.LastWeeksMailStat">
+              <MappingFragment StoreEntitySet="LastWeeksMailStats">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Mailer" ColumnName="Mailer" />
+                <ScalarProperty Name="Mailed" ColumnName="Mailed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LastWeeksSubmissionStats">
+            <EntityTypeMapping TypeName="r3mus_DBModel.LastWeeksSubmissionStat">
+              <MappingFragment StoreEntitySet="LastWeeksSubmissionStats">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Submitter" ColumnName="Submitter" />
+                <ScalarProperty Name="Submitted" ColumnName="Submitted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

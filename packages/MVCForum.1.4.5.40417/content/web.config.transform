@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+	<configSections>
+		<section name="MVCForumSettings" type="mvcForum.Core.Configuration.MVCForumSettings, mvcForum.Core" />
+		<section name="mvcForum" type="mvcForum.Core.Configuration.MVCForumSection, mvcForum.Core"/>
+		<section name="authenticationProviders" type="SimpleAuthentication.Core.Config.ProviderConfiguration, SimpleAuthentication.Core" />
+	</configSections>
+
+	<authenticationProviders>
+		<providers>
+		</providers>
+	</authenticationProviders>
+
+	<MVCForumSettings defaultCulture="en-GB"
+					defaultTimezone="GMT Standard Time"
+					topicsPerPage="15"
+					messagesPerPage="20"
+					siteURL="http://localhost"
+					robotEmailAddress="robot@mydomain"
+					robotName="My Forum Robot" />
+
+	<mvcForum>
+		<databaseBuilder type="mvcForum.DataProvider.EntityFramework.DataProviderConfiguration, mvcForum.DataProvider.EntityFramework" />
+		<dependencyContainerBuilder type="MVCBootstrap.Ninject.DependencyContainer, MVCBootstrap.Ninject" />
+		<storageBuilder type="mvcForum.Web.DependencyBuilders.StorageBuilder, mvcForum.Web" />
+
+		<themeProviderComponent type="mvcForum.Web.ForumThemeProvider, mvcForum.Web" />
+		<themeUrlProviderComponent type="MVCThemes.SimpleThemeURLProvider, MVCThemes" />
+		<eventPublisherComponent type="ApplicationBoilerplate.Events.EventPublisher, ApplicationBoilerplate" />
+		<asyncTaskComponent type="MVCBootstrap.Web.Events.AsyncTask, MVCBootstrap" />
+
+		<urlProviderComponent type="mvcForum.Web.Providers.MVCURLProvider, mvcForum.Web" />
+
+		<mailServiceComponent type="MVCBootstrap.Web.Mvc.Services.MailService, MVCBootstrap" />
+		<membershipServiceComponent type="MVCBootstrap.Web.Mvc.Services.AccountMembershipService, MVCBootstrap" />
+		<formsAuthenticationComponent type="MVCBootstrap.Web.Mvc.Services.FormsAuthenticationService, MVCBootstrap" />
+		<userProviderComponent type="mvcForum.Web.Providers.MVCForumUserProvider, mvcForum.Web" />
+
+		<loggingProviderComponent type="mvcForum.Web.TraceLog, mvcForum.Web" />
+
+		<searchBuilders>
+			<add name="Lucene" type="mvcForum.SearchProvider.Lucene.LuceneSearchBuilder, mvcForum.SearchProvider.Lucene" />
+		</searchBuilders>
+
+		<additionalBuilders>
+			<add name="Core" type="mvcForum.Core.DependencyBuilders.CoreBuilder, mvcForum.Core" />
+			<add name="ForumConf" type="mvcForum.Web.ForumConfigurator, mvcForum.Web" />
+			<add name="ForumAdmin" type="mvcForum.Web.DependencyBuilders.ForumAdminBuilder, mvcForum.Web" />
+			<add name="WebCommon" type="mvcForum.Web.DependencyBuilders.WebCommonBuilder, mvcForum.Web" />
+			<add name="AddOnEmbeddedViews" type="mvcForum.AddOns.AddOnBuilder, mvcForum.AddOns" />
+			<add name="Akismet" type="mvcForum.AddOns.Akismet.AkismetBuilder, mvcForum.AddOns" />
+			<add name="MultiPost" type="mvcForum.AddOns.MultiPost.MultiPostBuilder, mvcForum.AddOns" />
+			<add name="NewUserTrial" type="mvcForum.AddOns.NewUserTrial.NewUserTrialBuilder, mvcForum.AddOns" />
+			<add name="StopForumSpam" type="mvcForum.AddOns.StopForumSpam.StopForumSpamBuilder, mvcForum.AddOns" />
+			<!-- Put any additional builders in here! -->
+		</additionalBuilders>
+
+		<contentParserComponents>
+			<add name="BBCode" type="mvcForum.AddOns.ContentParsing.BBCParser, mvcForum.AddOns" />
+			<add name="MarkDown" type="mvcForum.AddOns.ContentParsing.MarkDownParser, mvcForum.AddOns" />
+			<add name="Regular" type="mvcForum.AddOns.ContentParsing.RegularParser, mvcForum.AddOns" />
+		</contentParserComponents>
+
+		<eventListenerComponents>
+			<add name="Following" type="mvcForum.Web.Events.FollowingEventListener, mvcForum.Web" />
+			<add name="Moderation" type="mvcForum.Web.Events.ModerationEventListener, mvcForum.Web" />
+			<add name="PostReportResolved" type="mvcForum.Web.Events.PostReportResolvedEventListener, mvcForum.Web" />
+			<add name="NewAndUpdatedContent" type="mvcForum.Web.Events.NewAndUpdatedContentEventListener, mvcForum.Web" />
+			<add name="FlagUpdated" type="mvcForum.Web.Events.FlagUpdatedEventListener, mvcForum.Web" />
+			<add name="Installation" type="mvcForum.Web.Events.InstallationEventListener, mvcForum.Web" />
+
+			<!-- Lucene -->
+			<add name="Lucene" type="mvcForum.SearchProvider.Lucene.LuceneContentChangeEventListener, mvcForum.SearchProvider.Lucene" />
+
+			<!-- Add ons -->
+			<add name="Akismet" type="mvcForum.AddOns.Akismet.AkismetAddOn, mvcForum.AddOns" />
+			<add name="MultiPost" type="mvcForum.AddOns.MultiPost.MultiPostAddOn, mvcForum.AddOns" />
+			<add name="NewUserTrial" type="mvcForum.AddOns.NewUserTrial.NewUserTrialAddOn, mvcForum.AddOns" />
+			<add name="StopForumSpam" type="mvcForum.AddOns.StopForumSpam.StopForumSpamAddOn, mvcForum.AddOns" />
+		</eventListenerComponents>
+		<!--<repositoryComponents>
+			<add type="mvcForum.DataProvider.EntityFramework.Repositories.TopicRepository, mvcForum.DataProvider.EntityFramework" interface="mvcForum.Core.Interfaces.Data.ITopicRepository, mvcForum.Core" />
+		</repositoryComponents>-->
+	</mvcForum>
+
+	<connectionStrings>
+		<add name="mvcForum.DataProvider.MainDB" connectionString="Data Source=.\SQL2008r2Express;Initial Catalog=mvcforum.test;User ID=sa;password=123456;" />
+	</connectionStrings>
+
+	<system.web>
+
+		<membership defaultProvider="ProviderWrapper">
+			<providers>
+				<clear />
+
+				<add name="ProviderWrapper"
+						 type="mvcForum.Web.Providers.MembershipProviderWrapper"
+						 WrappedProvider="TheRealProvider" />
+
+				<add name="TheRealProvider"
+						 type="MVCBootstrap.Web.Security.SimpleMembershipProvider"
+						 applicationName="mvcForum"
+						 minRequiredPasswordLength="6" />
+
+			</providers>
+		</membership>
+
+		<roleManager enabled="true" defaultProvider="SimpleProvider">
+			<providers>
+				<clear />
+
+				<add name="SimpleProvider"
+						 type="MVCBootstrap.Web.Security.SimpleRoleProvider" />
+
+			</providers>
+		</roleManager>
+
+		<pages>
+			<namespaces>
+				<add namespace="MVCThemes.Extensions" />
+			</namespaces>
+		</pages>
+
+	</system.web>
+
+</configuration>

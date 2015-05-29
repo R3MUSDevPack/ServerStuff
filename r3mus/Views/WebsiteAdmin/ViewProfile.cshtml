@@ -1,0 +1,67 @@
+﻿@model r3mus.ViewModels.UserProfileViewModel
+
+@{
+    ViewBag.Title = "View Profile";
+}
+
+<h2>View Profile</h2>
+
+<div>
+    <h4>@Model.UserName</h4>
+	<hr />
+    @if (Model.Avatar != null)
+    {
+        <img src="@Model.Avatar" />
+    }
+    else
+    {
+        <span>Image Not Yet Available</span>
+    }
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberSince)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberSince)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WebsiteRoles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WebsiteRoles)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Import from Eve", "UpdateApiDetails", new { id=Model.Id, originator="ViewProfile" }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to List", "ViewUsers", null, new { @class = "btn btn-default" })
+</p>

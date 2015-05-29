@@ -1,0 +1,16 @@
+﻿@model r3mus.ViewModels.ApplicationReviewViewModel
+
+@{
+    ViewBag.Title = "Show Application";
+}
+
+<h2>Application Review - @Model.Applicant.Name</h2>
+
+@{Html.RenderPartial("_ViewApplicantInfo");}
+
+@{Html.RenderPartial("_ViewApplicationHistory");}
+
+@if (!ViewBag.Complete)
+{
+    {Html.RenderPartial("_NewReviewItem");}
+}

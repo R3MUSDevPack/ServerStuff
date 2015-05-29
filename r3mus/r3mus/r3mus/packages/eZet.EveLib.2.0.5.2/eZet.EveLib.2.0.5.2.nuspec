@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>eZet.EveLib</id>
+    <version>2.0.5.2</version>
+    <title>EveLib.NET</title>
+    <authors>Lars Kristian Dahl</authors>
+    <owners>Lars Kristian Dahl</owners>
+    <licenseUrl>https://raw.githubusercontent.com/ezet/evelib/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ezet/evelib</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>EveLib is a .NET Library for accessing the Eve Online API, CREST, and many other popular APIs</description>
+    <releaseNotes>Fixed two bugs in CharacterSheet causing it to throw exceptions.</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <language />
+    <tags>EveLib EveOnline CREST EveCentral EveMarketData ZKillboard Element43</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="6.0.0" />
+    </dependencies>
+    <references>
+      <reference file="EveLib.Core.dll" />
+      <reference file="EveLib.Element43.dll" />
+      <reference file="EveLib.EveCentral.dll" />
+      <reference file="EveLib.EveCrest.dll" />
+      <reference file="EveLib.EveMarketData.dll" />
+      <reference file="EveLib.EveOnline.dll" />
+      <reference file="EveLib.StaticData.dll" />
+      <reference file="EveLib.ZKillboard.dll" />
+      <reference file="EveLib.EveWho.dll" />
+    </references>
+  </metadata>
+</package>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MVCBootstrap.EntityFramework</name>
+    </assembly>
+    <members>
+        <member name="M:MVCBootstrap.EntityFramework.Repository`1.ReadAll">
+            <summary>
+            Reads all elements.
+            To avoid instantiating all elements, use LINQ to specify the needed elements
+            and use the ToList() method to fetch those elements and only those from the database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MVCBootstrap.EntityFramework.Repository`1.ReadOne(ApplicationBoilerplate.DataProvider.ISpecification{`0})">
+            <summary>
+            Read one and only one element that matches the specification.
+            </summary>
+            <param name="spec"></param>
+            <returns>One element or null</returns>
+        </member>
+        <member name="M:MVCBootstrap.EntityFramework.Repository`1.ReadMany(ApplicationBoilerplate.DataProvider.ISpecification{`0})">
+            <summary>
+            Read the elements that match the specification.
+            </summary>
+            <param name="spec">The specification for the elements wanted.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

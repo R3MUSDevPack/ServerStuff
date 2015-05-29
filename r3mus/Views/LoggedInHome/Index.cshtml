@@ -1,0 +1,84 @@
+﻿@model IEnumerable<r3mus.Models.ApiInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<h2>Index</h2>
+@if (ViewBag.Message != string.Empty)
+{
+    <table>
+        <thead>            
+            @ViewBag.Message
+        </thead>        
+        @if (ViewBag.ErrorMessage != string.Empty)
+        {
+        <tr>
+            @ViewBag.ErrorMessage
+        </tr>
+        }
+    </table>
+}
+<div id="tabs" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+    <ul>
+        <li class="ui-state-default ui-corner-top"><a href="#APITab">Api Keys</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#TSTab">Teamspeak</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#HipchatTab">Hipchat</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#MoodleTab">Training</a></li>
+    </ul>
+
+    <div id="APITab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        <p style="font-family:Arial; font-size:small; font-weight:600">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
+        </p>
+        <table class="table" style="font-family:Arial; font-size:small; font-weight:600">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApiKey)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VerificationCode)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApiKey)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VerificationCode)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { apiKey = item.ApiKey }, new { @class = "btn btn-default" }) |
+                        @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                        @Html.ActionLink("Delete", "Delete", new { apiKey = item.ApiKey }, new { @class = "btn btn-default" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div id="TSTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        @Html.Partial("_RegisterForTeamspeak")
+    </div>
+    <div id="HipchatTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        @Html.Partial("_RegisterForHipchat")
+    </div>
+    <div id="MoodleTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        @Html.Partial("_RegisterForMoodle")
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#tabs").tabs({
+            event: "click"
+        });
+    });
+</script>

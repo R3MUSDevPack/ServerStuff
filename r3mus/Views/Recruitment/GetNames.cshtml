@@ -1,0 +1,17 @@
+﻿
+
+@{
+    ViewBag.Title = "Get Names";
+}
+
+<h2>Get Names</h2>
+
+@using (Html.BeginForm("GetNames", "Recruitment", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <p style="width:100%">
+        <textarea id="mailees" name="mailees" readonly rows="4" cols="100" style="text-align:left; max-width:100%;">@ViewBag.Mailees</textarea>
+    </p>
+    @*<button class="btn btn-default">Mark Names Sent</button>*@
+    <input type="submit" value="Mark Names Sent" name="GetNames:sent" class="btn btn-default" />
+    <input type="submit" value="Unlock Names" name="GetNames:unlock" class="btn btn-default" />
+}

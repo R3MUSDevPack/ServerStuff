@@ -1,0 +1,9 @@
+﻿@using (Html.BeginForm("RegisterForTeamspeak", "LoggedInHome", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <p style="font-family:Arial; font-size:small; font-weight:600">
+        Make sure you are logged in to Teamspeak as @ViewBag.TSName.
+    </p>
+    <fieldset>
+        <input type="submit" value="Register" class="btn btn-default" />
+    </fieldset>
+}

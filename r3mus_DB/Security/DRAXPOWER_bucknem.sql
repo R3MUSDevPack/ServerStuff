@@ -1,0 +1,2 @@
+﻿CREATE USER [DRAXPOWER\bucknem] FOR LOGIN [DRAXPOWER\bucknem];
+

@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApplicationBoilerplate</name>
+    </assembly>
+    <members>
+        <member name="T:ApplicationBoilerplate.Events.EventPublisher">
+            <summary>
+            Class used for publishing event.
+            </summary>
+        </member>
+        <member name="T:ApplicationBoilerplate.Events.IEventPublisher">
+            <summary>
+            Interface for event publisher classes.
+            </summary>
+        </member>
+        <member name="M:ApplicationBoilerplate.Events.IEventPublisher.Publish``1(``0)">
+            <summary>
+            Method used when publishing an event.
+            </summary>
+            <typeparam name="TPayload">The type of the payload.</typeparam>
+            <param name="payload">The data detailing the event being published.</param>
+        </member>
+        <member name="F:ApplicationBoilerplate.Events.EventPublisher.listeners">
+            <summary>
+            A list of event listeners.
+            </summary>
+        </member>
+        <member name="F:ApplicationBoilerplate.Events.EventPublisher.logger">
+            <summary>
+            A logger service.
+            </summary>
+        </member>
+        <member name="M:ApplicationBoilerplate.Events.EventPublisher.#ctor(System.Collections.Generic.IEnumerable{ApplicationBoilerplate.Events.IEventListener},ApplicationBoilerplate.Logging.ILogger)">
+            <summary>
+            Constructor for the EventPublisher class.
+            </summary>
+            <param name="listeners">The list of event listeners.</param>
+        </member>
+        <member name="M:ApplicationBoilerplate.Events.EventPublisher.Publish``1(``0)">
+            <summary>
+            Publish an event with the given payload.
+            </summary>
+            <typeparam name="TPayload">Generic type of the payload/data.</typeparam>
+            <param name="payload">The data detailing the event being published.</param>
+        </member>
+        <member name="T:ApplicationBoilerplate.DependencyInjection.IDependencyBuilder">
+            <summary>
+            Dependency builder interface.
+            </summary>
+        </member>
+        <member name="M:ApplicationBoilerplate.DependencyInjection.IDependencyBuilder.Configure(ApplicationBoilerplate.DependencyInjection.IDependencyContainer)">
+            <summary>
+            Method for configuring the container.
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:ApplicationBoilerplate.DependencyInjection.IDependencyBuilder.ValidateRequirements(System.Collections.Generic.IList{ApplicationBoilerplate.DependencyInjection.ApplicationRequirement})">
+            <summary>
+            Validate the builders requirements.
+            </summary>
+            <param name="feedback">Container for returned feedback.</param>
+        </member>
+        <member name="T:ApplicationBoilerplate.DataProvider.IContext">
+            <summary>
+            Context interface used for getting to the data repositories and as a unit of work object.
+            </summary>
+        </member>
+        <member name="M:ApplicationBoilerplate.DataProvider.IContext.GetRepository``1">
+            <summary>
+            Generic method for getting a data repository.
+            </summary>
+            <typeparam name="TEntity">Generic type for the data object.</typeparam>
+            <returns>A repository for the given entity.</returns>
+        </member>
+        <member name="M:ApplicationBoilerplate.DataProvider.IContext.SaveChanges">
+            <summary>
+            Save any changes done in the life-time of the context.
+            </summary>
+        </member>
+        <member name="T:ApplicationBoilerplate.DataProvider.ContextBase">
+            <summary>
+            Base implementation of the Context interface.
+            </summary>
+        </member>
+        <member name="F:ApplicationBoilerplate.DataProvider.ContextBase.container">
+            <summary>
+            Dependency container instance.
+            </summary>
+        </member>
+        <member name="M:ApplicationBoilerplate.DataProvider.ContextBase.#ctor(ApplicationBoilerplate.DependencyInjection.IDependencyContainer)">
+            <summary>
+            Constructor for the ContextBase class.
+            </summary>
+            <param name="container">A dependency container.</param>
+        </member>
+        <member name="M:ApplicationBoilerplate.DataProvider.ContextBase.Dispose">
+            <summary>
+            Method for disposing the ContextBase object.
+            </summary>
+        </member>
+        <member name="T:ApplicationBoilerplate.Events.IAsyncEventListener`1">
+            <summary>
+            Interface for asynchronously event listeners.
+            </summary>
+            <typeparam name="TPayload">The type of the payload.</typeparam>
+        </member>
+        <member name="T:ApplicationBoilerplate.Events.IEventListener`1">
+            <summary>
+            A generic interface for event listener classes.
+            </summary>
+            <typeparam name="TPayload"></typeparam>
+        </member>
+        <member name="T:ApplicationBoilerplate.Events.IEventListener">
+            <summary>
+            Interface for event listener classes.
+            </summary>
+        </member>
+        <member name="M:ApplicationBoilerplate.Events.IEventListener.Handle(System.Object)">
+            <summary>
+            Method for handling the event here and now.
+            </summary>
+            <param name="payload"></param>
+        </member>
+        <member name="P:ApplicationBoilerplate.Events.IEventListener.UniqueEvent">
+            <summary>
+            Can this listener only have one event of the given type at a given moment in time?
+            </summary>
+        </member>
+        <member name="P:ApplicationBoilerplate.Events.IEventListener.Priority">
+            <summary>
+            Priority, in ascending order.
+            </summary>
+        </member>
+        <member name="M:ApplicationBoilerplate.Events.IEventListener`1.Handle(`0)">
+            <summary>
+            The generic handle method.
+            </summary>
+            <param name="payload"></param>
+        </member>
+        <member name="M:ApplicationBoilerplate.Events.IAsyncEventListener`1.Queue(`0)">
+            <summary>
+            Method for queueing an event.
+            </summary>
+            <typeparam name="TPayload">The type of the payload.</typeparam>
+        </member>
+        <member name="P:ApplicationBoilerplate.Events.IAsyncEventListener`1.RunAsynchronously">
+            <summary>
+            Can this handler handle asynchronously events?
+            </summary>
+        </member>
+        <member name="T:ApplicationBoilerplate.DependencyInjection.IDependencyContainer">
+            <summary>
+            Interface for a dependency container.
+            </summary>
+        </member>
+        <member name="M:ApplicationBoilerplate.DependencyInjection.IDependencyContainer.Configure">
+            <summary>
+            Method for configuring the container.
+            </summary>
+        </member>
+        <member name="F:ApplicationBoilerplate.DependencyInjection.RequirementLevel.Fatal">
+            <summary>
+            Use this if the application or part of it will fail because of this requirement missing.
+            </summary>
+        </member>
+        <member name="F:ApplicationBoilerplate.DependencyInjection.RequirementLevel.Warning">
+            <summary>
+            Use this if part of the application will not work as expected because of this requirement missing.
+            This could be a missing SMTP configuration, the application will work, but no e-mails will be sent.
+            </summary>
+        </member>
+        <member name="F:ApplicationBoilerplate.DependencyInjection.RequirementLevel.Info">
+            <summary>
+            Information, use this for debugging
+            </summary>
+        </member>
+        <member name="M:ApplicationBoilerplate.Events.IAsyncTask.Execute(ApplicationBoilerplate.Events.IEventListener,System.Object,System.Int32)">
+            <summary>
+            Method for executing a asynchronously task.
+            </summary>
+            <param name="listener"></param>
+            <param name="data">The data that should be pushed to the task asynchronously.</param>
+            <param name="delay">The delay, in seconds, before the task should be executed.</param>
+        </member>
+    </members>
+</doc>

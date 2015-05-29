@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimpleLocalisation</name>
+    </assembly>
+    <members>
+        <member name="M:SimpleLocalisation.Processing.ParameterValue.Wrap(System.Object)">
+            <summary>
+            Wraps the specified value if its not a <see cref="T:SimpleLocalisation.Processing.ParameterValue"/> already.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>        
+        </member>
+        <member name="P:SimpleLocalisation.Processing.ParameterValue.Value">
+            <summary>
+            The actual value.
+            </summary>
+        </member>
+        <member name="P:SimpleLocalisation.Processing.ParameterValue.DefaultFormat">
+            <summary>
+            Default format if nothing is specified
+            </summary>
+        </member>
+        <member name="T:SimpleLocalisation.ITextSource">
+            <summary>
+            Interface for a text source
+            </summary>
+        </member>
+        <member name="M:SimpleLocalisation.ITextSource.Get(System.String,System.String,SimpleLocalisation.Language)">
+            <summary>
+            Get a localised text entry for the given language, namespace and key.
+            </summary>
+            <param name="key">The key for the text.</param>
+            <param name="ns">The namespace of the text.</param>
+            <param name="language">The language of the text.</param>
+            <returns>A localised text (or null).</returns>
+        </member>
+        <member name="M:SimpleLocalisation.ITextSource.Get">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SimpleLocalisation.Processing.ParameterValues.DelegateFormatWrapper`2.DelegateReference">
+            <summary>
+            Gets or sets the object reference that will be passed to the formatting delegate.
+            </summary>
+            <value>
+            The delegate reference.
+            </value>
+        </member>
+        <member name="T:SimpleLocalisation.DateTimeExtensions">
+            <summary>
+            Extensions for the <see cref="T:System.DateTime"/> struct.
+            </summary>
+        </member>
+        <member name="M:SimpleLocalisation.DateTimeExtensions.AdjustToTimeZone(System.DateTime)">
+            <summary>
+            Adjusts the date to the local (server) <see cref="T:System.TimeZoneInfo"/>.
+            </summary>
+            <param name="date">The date.</param>
+            <returns>A date time adjusted to the local (server) time zone.</returns>
+        </member>
+        <member name="M:SimpleLocalisation.DateTimeExtensions.AdjustToTimeZone(System.DateTime,System.TimeZoneInfo)">
+            <summary>
+            Adjusts the date to the <see cref="T:System.TimeZoneInfo"/> specified.
+            </summary>
+            <param name="date">The date.</param>
+            <param name="timeZoneInfo">The time zone info.</param>
+            <returns>A date time adjusted to the given time zone.</returns>
+        </member>
+        <member name="M:SimpleLocalisation.DateTimeExtensions.AdjustToTimeZone(System.DateTime,SimpleLocalisation.ICultureContext)">
+            <summary>
+            Adjusts the date to the current <see cref="T:System.TimeZoneInfo"/>.
+            </summary>
+            <param name="date">The date.</param>
+            <param name="context">The <see cref="T:SimpleLocalisation.ICultureContext"/>.</param>
+            <returns>A date time adjusted to the current time zone.</returns>
+        </member>
+        <member name="P:SimpleLocalisation.Processing.PatternDialect.PatternTransformer">
+            <summary>
+            Gets or sets a pattern transformer to make simple transformations to the dialect's grammar. (See e.g. <see cref="!:HHtmlPatternTransformer"/>)
+            </summary>
+            <value>
+            The pattern transformer.
+            </value>
+        </member>
+        <member name="M:SimpleLocalisation.Support.ObjectHelper.ParamsToParameterSet(System.Object,System.Boolean)">
+            <summary>
+            Converts an object to a parameter set.
+            </summary>
+            <param name="data">The object to convert.</param>
+            <param name="addWithIndex">if set to <c>true</c> values are also added by index, e.g. new { Test = 10 } will be added both as "Test" and "0".</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleLocalisation.ICultureContext">
+            <summary>
+            Interface for getting the current language and time-zone.
+            </summary>
+        </member>
+        <member name="P:SimpleLocalisation.ICultureContext.Language">
+            <summary>
+            The current language.
+            </summary>
+        </member>
+        <member name="P:SimpleLocalisation.ICultureContext.TimeZone">
+            <summary>
+            The current time-zone.
+            </summary>
+        </member>
+        <member name="F:SimpleLocalisation.Parsing.DefaultExpressionParser.EscapeChars">
+            <summary>
+            If these chars are escaped in texts they will not be misinterpreted
+            </summary>
+        </member>
+        <member name="M:SimpleLocalisation.Parsing.DefaultExpressionParser.Parse(System.IO.TextReader)">
+            <summary>
+            Parses the specified pattern returned by the reader and localizes error messages with the text manager specified
+            </summary>
+            <param name="reader">The reader.</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleLocalisation.ExceptionHelper">
+            <summary>
+            Helper for localizing exception messages.
+            </summary>    
+        </member>
+        <member name="P:SimpleLocalisation.ExceptionHelper.Key">
+            <summary>
+            Gets or sets the key used for finding the localized text.
+            </summary>
+            <value>
+            The key.
+            </value>
+        </member>
+        <member name="P:SimpleLocalisation.ExceptionHelper.DefaultMessage">
+            <summary>
+            Gets or sets the default message if no localization entry is found.
+            </summary>
+            <value>
+            The default message.
+            </value>
+        </member>
+        <member name="P:SimpleLocalisation.ExceptionHelper._parameters">
+            <summary>
+            Gets or sets the parameters. These are used in the localization and added as {0}, {1}, {2} etc. for string.Format when the default message is returned
+            </summary>
+            <value>
+            The parameters.
+            </value>
+        </member>
+        <member name="P:SimpleLocalisation.ExceptionHelper.For">
+            <summary>
+            Gets the exception the helper is for.
+            </summary>
+        </member>
+        <member name="M:SimpleLocalisation.Processing.ParameterValues.FormatWrapper`1.#ctor(`0,System.String)">
+            <summary>
+            Creates a new FormatWrapper for the value specified using the formatExpression
+            </summary>
+            <param name="value">The value.</param>
+            <param name="formatExpression">The format expression. Wraps format around the value. {#} will be replaced with the actual value</param>
+        </member>
+        <member name="M:SimpleLocalisation.Parsing.CustomExpressionPart.Decorate(SimpleLocalisation.Processing.PatternDialect)">
+            <summary>
+            Override this method to use the build in pattern decorator
+            </summary>        
+        </member>
+        <member name="M:SimpleLocalisation.Parsing.CustomExpressionPart.Evaluate(SimpleLocalisation.Processing.EvaluationContext,System.IO.TextWriter)">
+            <summary>
+            Override this method to use the build in pattern evaluator
+            </summary>        
+        </member>
+        <member name="T:SimpleLocalisation.Processing.ValueFormatters.NumberToRomanConvertor">
+            <summary>
+            Thanks http://www.blackwasp.co.uk/RomanToNumber.aspx
+            </summary>
+        </member>
+    </members>
+</doc>

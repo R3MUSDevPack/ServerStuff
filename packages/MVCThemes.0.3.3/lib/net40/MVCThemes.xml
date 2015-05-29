@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MVCThemes</name>
+    </assembly>
+    <members>
+        <member name="T:MVCThemes.SimpleThemeURLProvider">
+            <summary>
+            The simple implementation of a IThemeURLProvider using the base URL: ~/Themes/{Theme}/
+            </summary>
+        </member>
+        <member name="M:MVCThemes.SimpleThemeURLProvider.GetThemeBaseURL(System.String)">
+            <summary>
+            Builds a path to the root of the Views folder where the views for the given theme are located.
+            </summary>
+            <param name="theme">The theme.</param>
+            <returns>The root of the given theme, always ending with a slash.</returns>
+        </member>
+        <member name="M:MVCThemes.ThemeViewEngine.StoreDefaultFormats">
+            <summary>
+            Caches the default formats from the razor engine, we'll need these, as we change them base on theme.
+            </summary>
+        </member>
+        <member name="M:MVCThemes.ThemeViewEngine.FindPartialView(System.Web.Mvc.ControllerContext,System.String,System.Boolean)">
+            <summary>
+            Finds the specified partial view by using the specified controller context.
+            </summary>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.ArgumentException"/>
+            <param name="controllerContext">The controller context.</param>
+            <param name="partialViewName">The name of the partial view.</param>
+            <param name="useCache">true to use the cached partial view.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MVCThemes.ThemeViewEngine.FindView(System.Web.Mvc.ControllerContext,System.String,System.String,System.Boolean)">
+            <summary>
+            Finds the specified view by using the specified controller context and master view name.
+            </summary>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.ArgumentException"/>
+            <param name="controllerContext">The controller context.</param>
+            <param name="viewName">The name of the view.</param>
+            <param name="masterName">The name of the master view.</param>
+            <param name="useCache">true to use the cached view.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MVCThemes.Extensions.WebBasePageExtensions.BasePath(System.Web.WebPages.WebPageBase)">
+            <summary>
+            Return the base path of the given page, including the current selected theme (if any).
+            </summary>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MVCThemes.Extensions.UrlHelperExtensions.ThemeViewBasePath(System.Web.Mvc.UrlHelper)">
+            <summary>
+            Extension method for getting the base path of the views folder,
+            taking into account the current theme and area if any.
+            </summary>
+            <returns>The base path to the views folder</returns>
+        </member>
+        <member name="M:MVCThemes.Extensions.UrlHelperExtensions.GetTheme">
+            <summary>
+            Method for getting the current theme, if any.
+            </summary>
+            <returns>The selected theme.</returns>
+        </member>
+        <member name="M:MVCThemes.Extensions.UrlHelperExtensions.ContentPath(System.Web.Mvc.UrlHelper)">
+            <summary>
+            Extension method for getting the path to the content folder of the theme selected.
+            If no theme is selected, the content folder in the root folder is returned.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MVCThemes.Extensions.UrlHelperExtensions.ThemeRootPath(System.Web.Mvc.UrlHelper)">
+            <summary>
+            Extension method for getting the root path of the theme. If no theme is selected, the root
+            of the site is returned.
+            </summary>
+            <param name="url"></param>
+            <returns>The root of the selected theme.</returns>
+        </member>
+    </members>
+</doc>

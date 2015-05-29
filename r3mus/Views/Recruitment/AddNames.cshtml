@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Add Names";
+}
+
+<h2>Add Names</h2>
+@using (Html.BeginForm("AddNames", "Recruitment"))
+{
+    <div id="AddNames">
+        @*@Html.TextArea("Names", new  { rows = "20", columns = "1" })*@
+
+        <textarea id="Names" name="Names" rows="4" cols="100" style="text-align:left; max-width:100%;"></textarea>
+        <br />
+        <button class="btn btn-default">Add Names</button>
+    </div>
+}

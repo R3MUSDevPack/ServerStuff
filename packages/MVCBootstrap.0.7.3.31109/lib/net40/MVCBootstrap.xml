@@ -1,0 +1,404 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MVCBootstrap</name>
+    </assembly>
+    <members>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.ModelStateDictionaryExtensions.ErrorString(System.Web.Mvc.ModelStateDictionary)">
+            <summary>
+            Method for getting a complete string of all errors.
+            </summary>
+            <param name="state">The ModelState</param>
+            <returns>A joint string of all errors found in the ModelState.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Events.AsyncTask.GetListener(System.String)">
+            <summary>
+            Get the full name of the listener
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Events.AsyncWebTask.Post(System.Collections.Generic.Dictionary{System.String,System.Object},System.Uri)">
+            <summary>
+            Post the parameters to the given URI.
+            </summary>
+            <param name="parameters">Parameters that needs to be posted.</param>
+            <param name="uri">The recipient of the POST.</param>
+        </member>
+        <member name="T:MVCBootstrap.DependencyInjection.LocalizationBuilder">
+            <summary>
+            Dependency builder that handles wiring of the localization framework.
+            </summary>
+        </member>
+        <member name="T:MVCBootstrap.DependencyInjection.ProviderBuilder">
+            <summary>
+            This dependency builders binds the most common interfaces/services needed when using users on your site.
+            A <see ref="MVCBootstrap.Web.WebUserProvider">WebUserProvider</see> for getting the current user,
+            <see ref="MVCBootstrap.Web.FormsAuthenticationservice">FormsAuthenticationservice</see> for handling authentication,
+            <see ref="MVCBootstrap.Web.AccountMembershipService">AccountMembershipService</see> for ASP.NET membership and a MailService for sending e-mails.
+            </summary>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Navigations.NavigationBase.GetNavigation(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            This method returns the list of visible/accessible navigation items.
+            </summary>
+            <param name="html">The HtmlHelper</param>
+            <param name="onlyVisible"></param>
+            <returns>A list of visible/accessible navigation items.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Navigations.NavigationBase.HandlePageList(System.Boolean,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{MVCBootstrap.Web.Mvc.Navigations.NavigationItem},System.Collections.Generic.List{MVCBootstrap.Web.Mvc.Navigations.NavigationItem})">
+            <summary>
+            This method generates a list of visible/accessible navigation items.
+            </summary>
+            <param name="signedIn">Is the current user known/authenticted.</param>
+            <param name="controller">The current controller.</param>
+            <param name="action">The current action.</param>
+            <param name="area">The current area.</param>
+            <param name="pages">The list of pages in the navigation</param>
+            <param name="output">The list of visible/accessible pages.</param>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Navigations.NavigationBase.IsActive(MVCBootstrap.Web.Mvc.Navigations.NavigationItem,System.String,System.String,System.String)">
+            <summary>
+            This method determines whether or not the given navigation item is the active/selected one.
+            </summary>
+            <param name="item">The navigation item</param>
+            <param name="controller">The current controller.</param>
+            <param name="action">The current action.</param>
+            <param name="area">The current area.</param>
+            <returns>True if the given navigation item is the active/selected one.</returns>
+        </member>
+        <member name="T:MVCBootstrap.Web.Mvc.Filters.OnlyLocalCallsAttribute">
+            <summary>
+            A class that can be used to decorate a class or action to limit access.
+            The class will allow local calls (from the server to the server) and will also check access against
+            IP addresses mentioned in the app.config/web.config file.
+            </summary>
+        </member>
+        <member name="F:MVCBootstrap.Web.Mvc.Filters.OnlyLocalCallsAttribute.addresses">
+            <summary>
+            List of additional allowed IP addresses.
+            </summary>
+        </member>
+        <member name="P:MVCBootstrap.Web.Mvc.Controllers.LocalizedBaseController.CurrentTimeZoneInfo">
+            <summary>
+            Get the <c ref="System.TimeZoneInfo">TimeZoneInfo</c> of the current request.
+            You should only access this property after OnActionExecuting har been called.
+            </summary>
+        </member>
+        <member name="P:MVCBootstrap.Web.Mvc.Controllers.LocalizedBaseController.CurrentCultureInfo">
+            <summary>
+            Get the <c ref="System.Globalization.CultureInfo">CultureInfo</c> of the current request.
+            You should only access this property after OnActionExecuting har been called.
+            </summary>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.HTMLExtensions.Navigation(System.Web.Mvc.HtmlHelper,System.Web.Mvc.UrlHelper,System.String)">
+            <summary>
+            Extension method for getting the list of visible/accessible navigation items for the given navigation.
+            </summary>
+            <param name="html">The HtmlHelper.</param>
+            <param name="url">The UrlHelper.</param>
+            <param name="name">The name of the requested navigation.</param>
+            <returns>The list of visible/accessible navigation items.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.HTMLExtensions.IsCurrent(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            Extension method for checking the current action against a given action.
+            </summary>
+            <param name="html">The HtmlHelper.</param>
+            <param name="action">An action name.</param>
+            <returns>If the given action is the current action, true is returned</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.HTMLExtensions.IsCurrent(System.Web.Mvc.HtmlHelper,System.String,System.String)">
+            <summary>
+            Extension method for checking the current action against a given action and controller.
+            </summary>
+            <param name="html">The HtmlHelper.</param>
+            <param name="action">An action name.</param>
+            <param name="controller">A controller name.</param>
+            <returns>If the given action and controller is the current action and controller, true is returned</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.HTMLExtensions.LocalizedString(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            Get the localized string with the given key.
+            </summary>
+            <param name="html">The HtmlHelper.</param>
+            <param name="key">The key of the localized string.</param>
+            <returns>A localized string.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.HTMLExtensions.LocalizedString(System.Web.Mvc.HtmlHelper,System.String,System.String)">
+            <summary>
+            Get the localized string with the given key and namespace.
+            </summary>
+            <param name="html">The HtmlHelper.</param>
+            <param name="key">The key of the localized string.</param>
+            <param name="namespace">The namespace.</param>
+            <returns>A localized string.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.HTMLExtensions.LocalizedString(System.Web.Mvc.HtmlHelper,System.String,System.String,System.Object)">
+            <summary>
+            Get the localized string with the given key, namespace and values.
+            </summary>
+            <param name="html">The HtmlHelper.</param>
+            <param name="key">The key of the localized string.</param>
+            <param name="namespace">The namespace.</param>
+            <param name="values">The values to insert into the string.</param>
+            <returns>A localized string.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.HTMLExtensions.LocalizedHtmlString(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            Get the localized html string with the given key.
+            </summary>
+            <param name="html">The HtmlHelper.</param>
+            <param name="key">The key of the localized html string.</param>
+            <returns>A localized html string.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.HTMLExtensions.LocalizedHtmlString(System.Web.Mvc.HtmlHelper,System.String,System.String)">
+            <summary>
+            Get the localized html string with the given key and namespace.
+            </summary>
+            <param name="html">The HtmlHelper.</param>
+            <param name="key">The key of the localized html string.</param>
+            <param name="namespace">The namespace.</param>
+            <returns>A localized html string.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.HTMLExtensions.LocalizedHtmlString(System.Web.Mvc.HtmlHelper,System.String,System.String,System.Object)">
+            <summary>
+            Get the localized html string with the given key, namespace and values.
+            </summary>
+            <param name="html">The HtmlHelper.</param>
+            <param name="key">The key of the localized html string.</param>
+            <param name="namespace">The namespace.</param>
+            <param name="values">The values to insert into the string.</param>
+            <returns>A localized html string.</returns>
+        </member>
+        <member name="M:MVCBootstrap.DateTimeExtensions.ToUtc(System.DateTime)">
+            <summary>
+            Method for converting the input to an UTC date!
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Security.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider.
+            </summary>
+            <param name="name">The friendly name of the provider.</param>
+            <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
+            <exception cref="T:System.ArgumentNullException">The name of the provider is null.</exception>
+            <exception cref="T:System.ArgumentException">The name of the provider has a length of zero.</exception>
+            <exception cref="T:System.InvalidOperationException">An attempt is made to call System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection) on a provider after the provider has already been initialized.</exception>
+        </member>
+        <member name="M:MVCBootstrap.Web.Security.SimpleMembershipProvider.GetUser(System.String,System.Boolean)">
+            <summary>
+            Return the user with the given username, if any exist.
+            </summary>
+            <param name="username">Name of the user</param>
+            <param name="userIsOnline">Is the user online, if he is, the LastVisit datestamp will be updated.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Security.SimpleMembershipProvider.UpdateUser(System.Web.Security.MembershipUser)">
+            <summary>
+            Updates a member's properties.
+            </summary>
+            <param name="user">Membership user to update.</param>
+            <exception cref="T:System.ArgumentNullException">The membership user is null.</exception>
+            <exception cref="T:System.FormatException">The e-mail address is invalid.</exception>
+        </member>
+        <member name="M:MVCBootstrap.Web.Security.SimpleMembershipProvider.ValidateUser(System.String,System.String)">
+            <summary>
+            Validates a user's credentials.
+            </summary>
+            <param name="username">Username to validate.</param>
+            <param name="password">User password to validate.</param>
+            <returns>Returns true if the credentials are valid and false if they are not.</returns>
+        </member>
+        <member name="P:MVCBootstrap.Web.Security.SimpleMembershipProvider.ApplicationName">
+            <summary>
+            The friendly name of the provider.
+            </summary>
+        </member>
+        <member name="P:MVCBootstrap.Web.Security.SimpleMembershipProvider.PasswordAttemptLockoutDuration">
+            <summary>
+            The duration, in minutes, that a lockout due to a bad password is considered still in effect.
+            </summary>
+        </member>
+        <member name="P:MVCBootstrap.Web.Security.SimpleMembershipProvider.PasswordAttemptWindow">
+            <summary>
+            The time window, in minutes, during which failed password attemps are tracked.
+            </summary>
+        </member>
+        <member name="P:MVCBootstrap.Web.Security.SimpleMembershipProvider.UserIsOnlineTimeWindow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MVCBootstrap.Web.Security.SimpleMembershipProvider.MaxInvalidPasswordAttempts">
+            <summary>
+            The number of failed password attempts allowed before a user's account is locked.
+            </summary>
+        </member>
+        <member name="P:MVCBootstrap.Web.Security.SimpleMembershipProvider.MinRequiredPasswordLength">
+            <summary>
+            The minimum number of characters required in a password. The value can be from 1 to 128.
+            </summary>
+        </member>
+        <member name="T:MVCBootstrap.Web.Mvc.Extensions.StringExtensions">
+            <summary>
+            Extension methods for the String object.
+            </summary>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.StringExtensions.ToSlug(System.String)">
+            <summary>
+            Extension method for creating a 'slug' from a string.
+            A slug will contain a lower-cased string, containing letters, digits or the hyphen.
+            </summary>
+            <param name="input">String to convert into a slug.</param>
+            <returns>A lower-cased 'slug' string</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.StringExtensions.ToEnglishSlug(System.String)">
+            <summary>
+            Extension method for creating a 'slug' from a string.
+            A slug will contain a lower-cased string, containing english letters, digits or the hyphen.
+            </summary>
+            <param name="input">String to convert into a slug.</param>
+            <returns>A lower-cased 'slug' string</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.StringExtensions.ToDigest(System.String,System.Int32)">
+            <summary>
+            The first (maxLength) part of the input string is returned. The text is split on
+            white-space, punctuation and separators.
+            </summary>
+            <param name="input">The string to extract the digest from.</param>
+            <param name="maxLength">The maximum number of character in the digest.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.StringExtensions.ToParagraphs(System.String)">
+            <summary>
+            The method takes the input string, splits it at any newline, and wraps the part in the paragraph-tag
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MVCBootstrap.Web.Mvc.JsonPResult">
+            <summary>
+            A Mvc ActionResult class that will return the result as JSONP.
+            </summary>
+        </member>
+        <member name="T:MVCBootstrap.Web.WebUserProvider">
+            <summary>
+            A user provider for ASP.NET websites.
+            </summary>
+        </member>
+        <member name="P:MVCBootstrap.Web.WebUserProvider.ActiveUser">
+            <summary>
+            Get the authenticated user.
+            </summary>
+        </member>
+        <member name="P:MVCBootstrap.Web.WebUserProvider.Authenticated">
+            <summary>
+            Do we have an authenticated user?
+            </summary>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Services.FormsAuthenticationService.SignIn(System.String,System.Boolean)">
+            <summary>
+            Method for signing in the given user.
+            </summary>
+            <param name="username">Username of the user</param>
+            <param name="createPersistentCookie">A boolean indicating whether or not the the user is remember for next visit</param>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Services.FormsAuthenticationService.SignOut">
+            <summary>
+            Sign out the current authenticated user.
+            </summary>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.TagBuilderExtensions.ToMvcHtmlString(System.Web.Mvc.TagBuilder)">
+            <summary>
+            Extension method for creating a MvcHtmlString from a TagBuilder object.
+            </summary>
+            <param name="tagBuilder">The TagBuilder instance.</param>
+            <returns>The MvcHtmlString output of the given TagBuilder.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Controllers.BaseController.CustomJson(System.Object)">
+            <summary>
+            Method using Newtonsoft's Json library to convert the data to JSON output.
+            The JavascriptDateTimeConverter and StringEnumConverter is used as formatters.
+            The output content type is 'application/json' and the encoding is UTF-8.
+            </summary>
+            <param name="data">The data that will be converted to JSON.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Controllers.BaseController.CustomJson(System.Object,System.String)">
+            <summary>
+            Method using Newtonsoft's Json library to convert the data to JSON output.
+            The JavascriptDateTimeConverter and StringEnumConverter is used as formatters.
+            The output encoding is UTF-8.
+            </summary>
+            <param name="data">The data that will be converted to JSON.</param>
+            <param name="contentType">The output content type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Controllers.BaseController.CustomJson(System.Object,System.String,System.Text.Encoding)">
+            <summary>
+            Method using Newtonsoft's Json library to convert the data to JSON output.
+            The JavascriptDateTimeConverter and StringEnumConverter is used as formatters.
+            </summary>
+            <param name="data">The data that will be converted to JSON.</param>
+            <param name="contentType">The output content type.</param>
+            <param name="encoding">The output encoding.</param>
+            <returns></returns>
+        </member>
+        <member name="P:MVCBootstrap.Web.Mvc.Controllers.BaseController.Authenticated">
+            <summary>
+            Boolean indicating whether or not the request is done by an authenticated user.
+            </summary>
+        </member>
+        <member name="P:MVCBootstrap.Web.Mvc.Controllers.BaseController.ActiveUser">
+            <summary>
+            Get the authenticated user.
+            </summary>
+        </member>
+        <member name="M:MVCBootstrap.Web.Security.SimpleRoleProvider.DeleteRole(System.String,System.Boolean)">
+            <summary>
+            Removes a role from the data source for the configured applicationName.
+            </summary>
+            <param name="roleName">The name of the role to delete.</param>
+            <param name="throwOnPopulatedRole">If true, throw an exception if roleName has one or more members and do not delete roleName.</param>
+            <returns>True if the role was successfully deleted; otherwise, false.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Security.SimpleRoleProvider.FindUsersInRole(System.String,System.String)">
+            <summary>
+            Gets an array of user names in a role where the user name contains the specified user name to match.
+            </summary>
+            <param name="roleName">The role to search in.</param>
+            <param name="usernameToMatch">The user name to search for.</param>
+            <returns>A string array containing the names of all the users where the user name matches usernameToMatch and the user is a member of the specified role.</returns>
+        </member>
+        <member name="M:MVCBootstrap.Web.Security.SimpleRoleProvider.RemoveUsersFromRoles(System.String[],System.String[])">
+            <summary>
+            Removes the specified user names from the specified roles for the configured applicationName.
+            </summary>
+            <param name="usernames">A string array of user names to be removed from the specified roles.</param>
+            <param name="roleNames">A string array of role names to remove the specified user names from.</param>
+        </member>
+        <member name="T:MVCBootstrap.Web.Security.GenericMembershipProvider">
+            <summary>
+            
+            </summary>
+            <remarks>
+            Code heavily inspired by the MongoDB.Web project on GitHub
+            Answer/question functionality is not implemented yet!
+            </remarks>
+        </member>
+        <member name="M:MVCBootstrap.Web.Mvc.Extensions.LabelExtensions.LabelFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Object)">
+            <summary>
+            Extension method for creating a label with additional html attributes.
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="html"></param>
+            <param name="expression"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

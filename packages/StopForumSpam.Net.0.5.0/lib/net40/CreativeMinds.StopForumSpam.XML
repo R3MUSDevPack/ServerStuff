@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreativeMinds.StopForumSpam</name>
+    </assembly>
+    <members>
+        <member name="M:CreativeMinds.StopForumSpam.HTTP.HTTPClient.#ctor">
+            <summary>
+            Constructor of a HTTPClient.
+            </summary>
+        </member>
+        <member name="M:CreativeMinds.StopForumSpam.HTTP.HTTPClient.Get(System.Uri)">
+            <summary>
+            Send a GET request to the given url.
+            </summary>
+            <param name="url">Destination of the GET request</param>
+            <returns>The data returned in the response to the request</returns>
+        </member>
+        <member name="M:CreativeMinds.StopForumSpam.HTTP.HTTPClient.Get(System.Uri,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Send a GET request to the given url with the given paramters.
+            </summary>
+            <param name="url">Destination of the GET request</param>
+            <param name="parameters">The parameters of the request</param>
+            <returns>The data returned in the response to the request</returns>
+        </member>
+        <member name="M:CreativeMinds.StopForumSpam.HTTP.HTTPClient.Post(System.Uri)">
+            <summary>
+            Send a POST request to the given Url.
+            </summary>
+            <param name="url">Destination of the POST request</param>
+            <returns>The data returned in the response to the request</returns>
+        </member>
+        <member name="M:CreativeMinds.StopForumSpam.HTTP.HTTPClient.Post(System.Uri,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Send a POST request the given parameters to the given Url.
+            </summary>
+            <param name="url">Destination of the POST request</param>
+            <param name="parameters">The parameters of the request</param>
+            <returns>The data returned in the response to the request</returns>
+        </member>
+        <member name="M:CreativeMinds.StopForumSpam.HTTP.HTTPClient.Request(CreativeMinds.StopForumSpam.HTTP.HTTPMethod,System.Uri,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            A HTTP request of the given type, to the given Url and with the given parameters are created.
+            </summary>
+            <param name="method">Request method</param>
+            <param name="url">The destinatio Url of the request</param>
+            <param name="parameters">The parameters for the request</param>
+            <returns>The data returned in the response to the request</returns>
+        </member>
+        <member name="P:CreativeMinds.StopForumSpam.HTTP.HTTPClient.Timeout">
+            <summary>
+            Timeout of the requests.
+            </summary>
+        </member>
+        <member name="T:CreativeMinds.StopForumSpam.RequestType">
+            <summary>
+            Type of the request
+            </summary>
+        </member>
+        <member name="F:CreativeMinds.StopForumSpam.RequestType.IPAddress">
+            <summary>
+            Use when checking an IP address
+            </summary>
+        </member>
+        <member name="F:CreativeMinds.StopForumSpam.RequestType.Username">
+            <summary>
+            Use when checking an username
+            </summary>
+        </member>
+        <member name="F:CreativeMinds.StopForumSpam.RequestType.EmailAddress">
+            <summary>
+            Use when checking an e-mail address
+            </summary>
+        </member>
+        <member name="T:CreativeMinds.StopForumSpam.HTTP.HTTPMethod">
+            <summary>
+            Method of an HTTP request
+            </summary>
+        </member>
+        <member name="F:CreativeMinds.StopForumSpam.HTTP.HTTPMethod.POST">
+            <summary>
+            Use when a POST request
+            </summary>
+        </member>
+        <member name="F:CreativeMinds.StopForumSpam.HTTP.HTTPMethod.GET">
+            <summary>
+            Use when a GET request
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1267 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EveLib.EveCrest</name>
+    </assembly>
+    <members>
+        <member name="T:eZet.EveLib.Modules.EveCrest">
+            <summary>
+                Provides access to the Eve Online CREST API.
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Modules.EveCrest.DefaultUri">
+            <summary>
+                The default URI used to access the CREST API. This can be overridded by setting the BaseUri.
+            </summary>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.#ctor">
+            <summary>
+                Creates a new EveCrest object with a default request handler
+            </summary>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetRootAsync">
+            <summary>
+                Returns the CREST root
+                Path: /
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetRoot">
+            <summary>
+                Returns the CREST root
+                Path: /
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetKillmailAsync(System.Int64,System.String)">
+            <summary>
+                Returns data on the specified killmail.
+                Path: /killmails/$warId/$hash/
+            </summary>
+            <param name="id">Killmail ID</param>
+            <param name="hash">Killmail hash</param>
+            <returns>Returns data for the specified killmail.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetKillmail(System.Int64,System.String)">
+            <summary>
+                Returns data on the specified killmail.
+                Path: /killmails/$warId/$hash/
+            </summary>
+            <param name="id">Killmail ID</param>
+            <param name="hash">Killmail hash</param>
+            <returns>Returns data for the specified killmail.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIncursionsAsync">
+            <summary>
+                Returns a list of all active incursions.
+                Path: /incursions/
+            </summary>
+            <returns>A list of all active incursions.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIncursions">
+            <summary>
+                Returns a list of all active incursions.
+                Path: /incursions/
+            </summary>
+            <returns>A list of all active incursions.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetAlliancesAsync(System.Int32)">
+            <summary>
+                Returns a list of all alliances.
+                Path: /alliances/
+            </summary>
+            <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
+            <returns>A list of all alliances.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetAlliances(System.Int32)">
+            <summary>
+                Returns a list of all alliances.
+                Path: /alliances/
+            </summary>
+            <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
+            <returns>A list of all alliances.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetAllianceAsync(System.Int64)">
+            <summary>
+                Returns data about a specific alliance.
+                Path: /alliances/$allianceId/
+            </summary>
+            <param name="allianceId">A valid alliance ID</param>
+            <returns>Data for specified alliance</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetAlliance(System.Int64)">
+            <summary>
+                Returns data about a specific alliance.
+                Path: /alliances/$allianceId/
+            </summary>
+            <param name="allianceId">A valid alliance ID</param>
+            <returns>Data for specified alliance</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetMarketHistoryAsync(System.Int32,System.Int32)">
+            <summary>
+                Returns daily price and volume history for a specific region and item type.
+                Path: /market/$regionId/types/$typeId/history/
+            </summary>
+            <param name="regionId">Region ID</param>
+            <param name="typeId">Type ID</param>
+            <returns>Market history for the specified region and type.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetMarketHistory(System.Int32,System.Int32)">
+            <summary>
+                Returns daily price and volume history for a specific region and item type.
+                Path: /market/$regionId/types/$typeId/history/
+            </summary>
+            <param name="regionId">Region ID</param>
+            <param name="typeId">Type ID</param>
+            <returns>Market history for the specified region and type.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetMarketPricesAsync">
+            <summary>
+                Returns the average and adjusted values for all items
+                Path: /market/prices/
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetMarketPrices">
+            <summary>
+                Returns the average and adjusted values for all items
+                Path: /market/prices/
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetWarsAsync(System.Int32)">
+            <summary>
+                Returns a list of all wars.
+                Path: /wars/
+            </summary>
+            <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
+            <returns>A list of all wars.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetWars(System.Int32)">
+            <summary>
+                Returns a list of all wars.
+                Path: /wars/
+            </summary>
+            <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
+            <returns>A list of all wars.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetWarAsync(System.Int32)">
+            <summary>
+                Returns data for a specific war.
+                Path: /wars/$warId/
+            </summary>
+            <param name="warId">CrestWar ID</param>
+            <returns>Data for the specified war.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetWar(System.Int32)">
+            <summary>
+                Returns data for a specific war.
+                Path: /wars/$warId/
+            </summary>
+            <param name="warId">CrestWar ID</param>
+            <returns>Data for the specified war.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetWarKillmailsAsync(System.Int32)">
+            <summary>
+                Returns a list of all killmails related to a specified war.
+                Path: /wars/$warId/killmails/all/
+            </summary>
+            <param name="warId">CrestWar ID</param>
+            <returns>A list of all killmails related to the specified war.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetWarKillmails(System.Int32)">
+            <summary>
+                Returns a list of all killmails related to a specified war.
+                Path: /wars/$warId/killmails/all/
+            </summary>
+            <param name="warId">CrestWar ID</param>
+            <returns>A list of all killmails related to the specified war.</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetSpecialitiesAsync">
+            <summary>
+                Returns a list of all industry specialities
+                Path: /industry/specialities/
+            </summary>
+            <returns>A list of all industry specialities</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetSpecialities">
+            <summary>
+                Returns a list of all industry specialities
+                Path: /industry/specialities/
+            </summary>
+            <returns>A list of all industry specialities</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetSpecialityAsync(System.Int32)">
+            <summary>
+                Returns details for the requested speciality
+            </summary>
+            <param name="specialityId">Speciality ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetSpeciality(System.Int32)">
+            <summary>
+                Returns details for the requested speciality
+            </summary>
+            <param name="specialityId">Speciality ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIndustryTeamsAsync">
+            <summary>
+                Returns a list of all industry teams
+            </summary>
+            <returns>A list of all industry teams</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIndustryTeams">
+            <summary>
+                Returns a list of all industry teams
+            </summary>
+            <returns>A list of all industry teams</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIndustryTeamAsync(System.Int32)">
+            <summary>
+                Returns data for the specified industry team
+            </summary>
+            <param name="teamId">The team ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIndustryTeam(System.Int32)">
+            <summary>
+                Returns data for the specified industry team
+            </summary>
+            <param name="teamId">The team ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIndustrySystemsAsync">
+            <summary>
+                Returns a list of industry systems and prices
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIndustrySystems">
+            <summary>
+                Returns a list of industry systems and prices
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIndustryTeamAuctionsAsync">
+            <summary>
+                Returns a list of all current industry team auctions
+            </summary>
+            <returns>A list of all current industry team auctions</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIndustryTeamAuction">
+            <summary>
+                Returns a list of all current industry team auctions
+            </summary>
+            <returns>A list of all current industry team auctions</returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIndustryFacilitiesAsync">
+            <summary>
+                Returns a collection of all industry facilities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZet.EveLib.Modules.EveCrest.GetIndustryFacilities">
+            <summary>
+                Returns a collection of all industry facilities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestEntity">
+            <summary>
+                Represents a simple CREST entity with an ID
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestEntity.Id">
+            <summary>
+                The ID
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustryFacilities">
+            <summary>
+                Eve CREST Industry Facilities
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestCollectionResponse">
+            <summary>
+                Represents a CREST collection response
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestCollectionResponse.TotalCount">
+            <summary>
+                The total number of items in the collection
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestCollectionResponse.PageCount">
+            <summary>
+                The number of pages in the collection
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryFacilities.Facilities">
+            <summary>
+                A list of facilities
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustryFacilities.Facility">
+            <summary>
+                Represents an industry facility
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryFacilities.Facility.FacilityId">
+            <summary>
+                The facility ID
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryFacilities.Facility.Name">
+            <summary>
+                The facility name
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryFacilities.Facility.SolarSystem">
+            <summary>
+                The solar system
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryFacilities.Facility.Region">
+            <summary>
+                The region
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryFacilities.Facility.Tax">
+            <summary>
+                The facility tax
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryFacilities.Facility.Owner">
+            <summary>
+                The owner
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryFacilities.Facility.Type">
+            <summary>
+                The facility type
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustrySpeciality">
+            <summary>
+                Represents a speciality
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustrySpeciality.Id">
+            <summary>
+                The speciality ID
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustrySpeciality.Name">
+            <summary>
+                The speciality name
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustrySpeciality.Groups">
+            <summary>
+                A list of the spezialization groups
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.Group">
+            <summary>
+                Represents a speciality group
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.Group.Id">
+            <summary>
+                The group ID
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustrySystems">
+            <summary>
+                Represents the response for Industry Systems in CREST
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustrySystems.SolarSystems">
+            <summary>
+                The solar system
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustrySystems.SolarSystemEntry">
+            <summary>
+                Represesents a solar system for a SystemCostEntry
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustrySystems.SolarSystemEntry.SolarSystem">
+            <summary>
+                The solar system
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustrySystems.SolarSystemEntry.SystemCostIndices">
+            <summary>
+                A list of system costs
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustrySystems.SystemCostEntry">
+            <summary>
+                Represents a system cost index in CREST Industry Systems collection
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustrySystems.SystemCostEntry.CostIndex">
+            <summary>
+                The cost index
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustrySystems.SystemCostEntry.ActivityId">
+            <summary>
+                The activity ID
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustrySystems.SystemCostEntry.ActivityName">
+            <summary>
+                The activity name
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustryTeam">
+            <summary>
+                Represents a CREST industry team
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeam.SolarSystem">
+            <summary>
+                The solar system
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeam.Specialization">
+            <summary>
+                The team specialization
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeam.CreationTime">
+            <summary>
+                The team creation time
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeam.ExpiryTime">
+            <summary>
+                The team expiry time
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeam.CostModifier">
+            <summary>
+                The team cost modifier
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeam.Workers">
+            <summary>
+                A list of the team workers
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeam.Name">
+            <summary>
+                The team name
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeam.Activity">
+            <summary>
+                Activity
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustryTeamAuction">
+            <summary>
+                Response type for CREST Industry Team Auctions
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamAuction.Auctions">
+            <summary>
+                A list of team auctions
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustryTeamAuction.TeamAuction">
+            <summary>
+                Represents a team auction
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamAuction.TeamAuction.SolarSystem">
+            <summary>
+                The solar system the auction is for
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamAuction.TeamAuction.Specialization">
+            <summary>
+                The specialization of the team
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamAuction.TeamAuction.CreationTime">
+            <summary>
+                The time the team was created
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamAuction.TeamAuction.ExpiryTime">
+            <summary>
+                The time the team will expire
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamAuction.TeamAuction.AuctionExpiryTime">
+            <summary>
+                The expiry time of the auction
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamAuction.TeamAuction.CostModifier">
+            <summary>
+                The team cost modifier
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamAuction.TeamAuction.Workers">
+            <summary>
+                A list of workers on the team
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustryTeams">
+            <summary>
+                Represents a CREST /industry/teams/ response
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeams.Teams">
+            <summary>
+                A list of the teams
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustryTeamWorker">
+            <summary>
+                Represents a team worker
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamWorker.Bonus">
+            <summary>
+                The worker bonus
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamWorker.Specialization">
+            <summary>
+                The worker specialization
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustryTeamWorker.BonusType">
+            <summary>
+                Represents the worker bonus types
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Modules.Models.CrestIndustryTeamWorker.BonusType.Me">
+            <summary>
+                Material Efficency Bonus
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Modules.Models.CrestIndustryTeamWorker.BonusType.Pe">
+            <summary>
+                Production Efficiency Bonus
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndustryTeamWorker.WorkerBonus">
+            <summary>
+                Represents a worker bonus
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamWorker.WorkerBonus.Id">
+            <summary>
+                The bonus ID
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamWorker.WorkerBonus.Value">
+            <summary>
+                The bonus value
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndustryTeamWorker.WorkerBonus.Type">
+            <summary>
+                The bonus type
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestMarketPrices">
+            <summary>
+                Represents CREST market prices
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketPrices.Prices">
+            <summary>
+                A list of market price entries
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestMarketPrices.MarketPriceEntry">
+            <summary>
+                Represents an entry in the Market Price Response collection
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketPrices.MarketPriceEntry.Type">
+            <summary>
+                The item type
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketPrices.MarketPriceEntry.AveragePrice">
+            <summary>
+                The estimated value as displayed in game
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketPrices.MarketPriceEntry.AdjustedPrice">
+            <summary>
+                The adjusted price, used for some internal calculations and valuations, ie. industry
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestRoot">
+            <summary>
+                Represents the root response for CREST
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.Motd">
+            <summary>
+                The message of the day for each service
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.CrestEndpoint">
+            <summary>
+                The uri for CREST base
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.ServerVersion">
+            <summary>
+                The server version
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.ServiceStatus">
+            <summary>
+                The service status for all services
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.ServerName">
+            <summary>
+                The server name
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.UserCounts">
+            <summary>
+                The number of current users of services
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.Time">
+            <summary>
+                Current Time endpoint
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestRoot.ServiceStatusType">
+            <summary>
+                Represents the server status types
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Modules.Models.CrestRoot.ServiceStatusType.Online">
+            <summary>
+                Server is online
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Modules.Models.CrestRoot.ServiceStatusType.Vip">
+            <summary>
+                Server is in VIP mode
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Modules.Models.CrestRoot.ServiceStatusType.Offline">
+            <summary>
+                Server is offline
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestRoot.MessageOfTheDay">
+            <summary>
+                Represents a Motd object
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.MessageOfTheDay.Dust">
+            <summary>
+                Gets the MOTD for Dust 514
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.MessageOfTheDay.Eve">
+            <summary>
+                Gets the MOTD for Eve Online
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.MessageOfTheDay.Server">
+            <summary>
+                Gets a url for the MOTD on the server
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestRoot.ServerStatus">
+            <summary>
+                Represents the service status for all servers
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.ServerStatus.Dust">
+            <summary>
+                The service status for DUST
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.ServerStatus.Eve">
+            <summary>
+                The service status for EVE Online
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.ServerStatus.Server">
+            <summary>
+                The service status for the api server
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestRoot.UserCount">
+            <summary>
+                Represents the number of current users of services
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.UserCount.Dust">
+            <summary>
+                Number of currently online users for DUST
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestRoot.UserCount.Eve">
+            <summary>
+                Number of currently online users for Eve Online
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIndstrySpecialities">
+            <summary>
+                Represents a CREST /industry/specialities/ response
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIndstrySpecialities.Specializations">
+            <summary>
+                A list of specializations
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestAlliance">
+            <summary>
+                Represents a CREST /allliances/$allianceId/ reponse
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.Id">
+            <summary>
+                The alliance ID
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.Name">
+            <summary>
+                The alliance name
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.StartDate">
+            <summary>
+                The alliance creation date
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.ShortName">
+            <summary>
+                The alliance ticker
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.CorporationsCount">
+            <summary>
+                The number of corporations in the alliance
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.Description">
+            <summary>
+                The alliance description
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.Deleted">
+            <summary>
+                True if the alliance is deleted, otherwise false
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.Url">
+            <summary>
+                The alliance URL, if any
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.ExecutorCorporation">
+            <summary>
+                The alliance executor corporation
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.CreatorCorporation">
+            <summary>
+                The alliance creator corporation
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.CreatorCharacter">
+            <summary>
+                The alliance creator character
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliance.Corporations">
+            <summary>
+                A list of all corporations in the alliance
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestAlliances">
+            <summary>
+                Represents a CREST /alliances/ response
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestAlliances.Alliances">
+            <summary>
+                A list of alliances
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestLinkedEntity">
+            <summary>
+                Represents a basic CREST entity
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestLinkedEntity.Id">
+            <summary>
+                The entity name
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestLinkedEntity.Href">
+            <summary>
+                The entity href
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestError">
+            <summary>
+                Represents a CREST exception
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestError.Message">
+            <summary>
+                The error message
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestError.Key">
+            <summary>
+                The error key
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestError.ExceptionType">
+            <summary>
+                The exception type
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestError.RefId">
+            <summary>
+                The exception reference ID, if any
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestHref`1">
+            <summary>
+                Represents a CREST href object
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:eZet.EveLib.Modules.Models.CrestHref`1.ToString">
+            <summary>
+                Returns the href as a string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestHref`1.Value">
+            <summary>
+                The href object
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIconEntity">
+            <summary>
+                Represents a CREST entity with a name and icon
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestNamedEntity">
+            <summary>
+                Represents a CREST entity with a name
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestNamedEntity.Name">
+            <summary>
+                The name
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIconEntity.Icon">
+            <summary>
+                The icon href
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIncursions">
+            <summary>
+                Represents a CREST /incursions/ response
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIncursions.Incursions">
+            <summary>
+                A list of incursions
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIncursions.IncursionState">
+            <summary>
+                Represens the incursion states
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Modules.Models.CrestIncursions.IncursionState.Established">
+            <summary>
+                Established incursion
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Modules.Models.CrestIncursions.IncursionState.Mobilizing">
+            <summary>
+                Mobilizing incursion
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Modules.Models.CrestIncursions.IncursionState.Withdrawing">
+            <summary>
+                Withdrawing incursion
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestIncursions.Incursion">
+            <summary>
+                Represents an incursion
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIncursions.Incursion.Influence">
+            <summary>
+                The incursion influence
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIncursions.Incursion.HasBoss">
+            <summary>
+                True if the incursion has a boss
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIncursions.Incursion.State">
+            <summary>
+                The incursion state
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIncursions.Incursion.StatingSolarSystem">
+            <summary>
+                The incursion's staging system
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestIncursions.Incursion.Constellation">
+            <summary>
+                The constellation
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestKillmail">
+            <summary>
+                Represents a CREST killmail
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.SolarSystem">
+            <summary>
+                The solar system
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillId">
+            <summary>
+                The kill ID
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillTime">
+            <summary>
+                The time of the event
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.Attackers">
+            <summary>
+                A list of attackers
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.AttackerCount">
+            <summary>
+                The number of attackers
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.Victim">
+            <summary>
+                The victim
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.War">
+            <summary>
+                The war this kill is related to
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestKillmail.Item">
+            <summary>
+                Represents a killmail item
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.Item.Singleton">
+            <summary>
+                True if this item was a singleton
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.Item.Flag">
+            <summary>
+                The item flag
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.Item.QuantityDestroyed">
+            <summary>
+                The quantity that was destroyed
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestKillmail.KillmailAttacker">
+            <summary>
+                Represents a killmail attacker
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestKillmail.KillmailEntity">
+            <summary>
+                Base class for killmail entities
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillmailEntity.Character">
+            <summary>
+                The character
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillmailEntity.Corporation">
+            <summary>
+                The corporation
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillmailEntity.Alliance">
+            <summary>
+                The alliance
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillmailEntity.ShipType">
+            <summary>
+                The ship type
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillmailAttacker.DamageDone">
+            <summary>
+                The amount of damage done by this entity
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillmailAttacker.WeaponType">
+            <summary>
+                The weapon type used
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillmailAttacker.FinalBlow">
+            <summary>
+                True if this entity had the final  blow
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillmailAttacker.SecurityStatus">
+            <summary>
+                The security status
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestKillmail.KillmailVictim">
+            <summary>
+                Represents a killmail victim
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillmailVictim.DamageTaken">
+            <summary>
+                The amount of damage taken
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmail.KillmailVictim.Items">
+            <summary>
+                A list of items the victim held
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestKillmails">
+            <summary>
+                Represents a CREST /killmails/ response
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestKillmails.Killmails">
+            <summary>
+                A list of killmails
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestMarketHistory">
+            <summary>
+                Represents a CREST market history response
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketHistory.Entries">
+            <summary>
+                A list of market history entries
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestMarketHistory.MarketHistoryEntry">
+            <summary>
+                Represents an entry (day) in the market history
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketHistory.MarketHistoryEntry.Volume">
+            <summary>
+                The volume of items moved
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketHistory.MarketHistoryEntry.OrderCount">
+            <summary>
+                The number of orders
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketHistory.MarketHistoryEntry.LowPrice">
+            <summary>
+                The lowest price
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketHistory.MarketHistoryEntry.HighPrice">
+            <summary>
+                The highst price
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketHistory.MarketHistoryEntry.AvgPrice">
+            <summary>
+                The average price
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestMarketHistory.MarketHistoryEntry.Date">
+            <summary>
+                The date this entry represents
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestWar">
+            <summary>
+                Represents a CREST war
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.Id">
+            <summary>
+                The war ID
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.TimeDeclared">
+            <summary>
+                The time the war was declared
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.TimeStarted">
+            <summary>
+                The time the war started
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.TimeFinished">
+            <summary>
+                The time the war finished
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.OpenForAllies">
+            <summary>
+                True if the war is open for allies
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.AllyCount">
+            <summary>
+                The number of allied entities
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.Mutual">
+            <summary>
+                True if the war is mutual
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.Defender">
+            <summary>
+                The defending entity
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.Aggressor">
+            <summary>
+                The aggressing entity
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestWar.WarEntity">
+            <summary>
+                Represents an entity in a war
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.WarEntity.ShipsKilled">
+            <summary>
+                The number of ships killed
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWar.WarEntity.IskKilled">
+            <summary>
+                The amount of isk killed
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestWars">
+            <summary>
+                Represents a CREST collection of wars
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWars.Wars">
+            <summary>
+                A list of wars
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Models.CrestWars.War">
+            <summary>
+                Represents a war in a war collection
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWars.War.Id">
+            <summary>
+                The ID
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Models.CrestWars.War.Href">
+            <summary>
+                The href
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.Exceptions.EveCrestException">
+            <summary>
+                Exception for EveCrest
+            </summary>
+        </member>
+        <member name="M:eZet.EveLib.Modules.Exceptions.EveCrestException.#ctor(System.String,System.Net.WebException,System.String,System.String,System.String)">
+            <summary>
+                Creates a new Eve Crest Exception
+            </summary>
+            <param name="message">Error message returned by CREST</param>
+            <param name="innerException">The WebException that caused this exception</param>
+            <param name="key">The Key returned by CREST</param>
+            <param name="exceptionType">The Exception Type returned by CREST</param>
+            <param name="refId">the Ref ID returned by CREST</param>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Exceptions.EveCrestException.Key">
+            <summary>
+                Gets the Eve CREST Exception key
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Exceptions.EveCrestException.ExceptionType">
+            <summary>
+                Gets the Eve CREST Exception Type
+            </summary>
+        </member>
+        <member name="P:eZet.EveLib.Modules.Exceptions.EveCrestException.RefId">
+            <summary>
+                Gets the Eve CREST Exception Reference ID, if any.
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Modules.RequestHandlers.EveCrestRequestHandler">
+            <summary>
+                Performs requests on the Eve Online CREST API.
+            </summary>
+        </member>
+        <member name="M:eZet.EveLib.Modules.RequestHandlers.EveCrestRequestHandler.#ctor(eZet.EveLib.Core.Serializers.ISerializer)">
+            <summary>
+                Creates a new EveCrestRequestHandler
+            </summary>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:eZet.EveLib.Modules.RequestHandlers.EveCrestRequestHandler.RequestAsync``1(System.Uri)">
+            <summary>
+                Performs a request, deserializes it, and returns the deserialized data.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="uri"></param>
+            <returns></returns>
+        </member>
+        <member name="P:eZet.EveLib.Modules.RequestHandlers.EveCrestRequestHandler.Serializer">
+            <summary>
+                Gets or sets the serialier used to deserialize responses
+            </summary>
+        </member>
+    </members>
+</doc>

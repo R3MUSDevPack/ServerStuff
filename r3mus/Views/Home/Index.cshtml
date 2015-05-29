@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Welcome";
+}
+@if (ViewBag.Message != string.Empty)
+{
+    <div class="alert-info col-md-12">
+        @ViewBag.Message
+    </div>
+}
+<div class="row">
+    <div class="col-md-4">
+        <h2>Latest News</h2>
+        <p>
+            <h4>@ViewBag.NewsDate</h4>
+            <h3>@ViewBag.NewsTitle</h3>
+            <br />
+            @ViewBag.NewsArticle
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>More About Us</h2>
+        <p>@ViewBag.AboutUs</p>
+        <p><a class="btn btn-default" href="~/Home/About">Read More</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Chat to the Wolves</h2>
+        <p>Got a question? Come and join the Wolves in our public Hipchat channel. We might be doing other things, but we'll get to you as soon as we're awake / fuelled with coffee / sober.</p>
+        <p><a class="btn btn-default" href="https://www.hipchat.com/gp2LCgtnC" onclick="window.open('https://www.hipchat.com/gp2LCgtnC', 'newwindow', 'width=800, height=500'); return false;">Chat &raquo;</a></p>
+    </div>
+</div>

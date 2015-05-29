@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RandomQuoteBot.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="HipchatToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">k05sP8cuu2MwPwBsXXXje0yJXRrxypE6q6SzlsQV</Value>
+    </Setting>
+    <Setting Name="SlackWebhook" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Plugin" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Hipchat</Value>
+    </Setting>
+    <Setting Name="RoomName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">The Den</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

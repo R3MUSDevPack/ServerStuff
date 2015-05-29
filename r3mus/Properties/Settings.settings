@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="r3mus.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CorpAPI" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">4285630</Value>
+    </Setting>
+    <Setting Name="VCode" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">hmZDX0Ptrvb33GscSJVfeRy6rogh06XcymVI9GdueMahoRxZDvh0lWsOeGiBaKbS</Value>
+    </Setting>
+    <Setting Name="MoodleToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">a7c31796d590c338d13eecdf4c74ef42</Value>
+    </Setting>
+    <Setting Name="MoodleBaseURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">training.r3mus.org</Value>
+    </Setting>
+    <Setting Name="TSURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">r3mus.org</Value>
+    </Setting>
+    <Setting Name="TS_CorpGroup" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Wolf</Value>
+    </Setting>
+    <Setting Name="TS_AlliGroup" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Nagan</Value>
+    </Setting>
+    <Setting Name="TS_Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">yKHcHIkT</Value>
+    </Setting>
+    <Setting Name="CorpTicker" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">R3MUS</Value>
+    </Setting>
+    <Setting Name="AllianceTicker" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">NAGA</Value>
+    </Setting>
+    <Setting Name="HipchatToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">k05sP8cuu2MwPwBsXXXje0yJXRrxypE6q6SzlsQV</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

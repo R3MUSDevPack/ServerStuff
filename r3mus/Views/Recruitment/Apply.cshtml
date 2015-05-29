@@ -1,0 +1,127 @@
+﻿@model r3mus.ViewModels.ApplicantViewModel
+
+@{
+    ViewBag.Title = "Apply";
+}
+
+<h2>Many thanks for your interest in Raised By Wolves Inc.</h2>
+<p>
+    Before completing this application form please make sure you read the @Html.ActionLink("About", "About", "Home") section of this site to make sure that we are the right corp for you. The @Html.ActionLink("About", "About", "Home") page covers our corp philosophy, what we will do for you and what we expect from you in return so it is important.
+</p>
+<p>
+    Once you have completed the form below, one of our screeners will take a look at your application and send you an invitation to join our corp. We aim to do this within 24 hours but please be patient.
+</p>
+<p>
+    Occasionally we may need to talk to you if an issue comes up in the screening process. We will either do this via in-game chat or on Teamspeak.
+</p>
+<p>
+    As soon as you have joined Raised By Wolves Inc you will receive an in-game mail explaining how to join our services, how to find out all the information you will need to be able to join us and how to get help from us if you get stuck or need advice.
+</p>
+<p>
+    Once you have submitted your application, come and say hello in our <a href="https://www.hipchat.com/gp2LCgtnC" onclick="window.open('https://www.hipchat.com/gp2LCgtnC', 'newwindow', 'width=800, height=500'); return false;">Public Channel</a>.
+</p>
+@if (ViewBag.Message != string.Empty)
+{
+    <div class="alert-warning col-md-8">
+        @ViewBag.Message
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ApplicantViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName)
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeZone)
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TimeZone, Model.TimeZones)
+            </div>
+        </div>
+
+        <div class="form-group float-right">
+            <div class="col-md-8 alert-info">
+                If you do not have a full API Key set up (with an access mask of 268435455) please do so now. You can click the button on the right to create one, and set the expiry to 1 week from today. We recommend naming it something to differentiate it from other keys, such as "R3MUS_1".
+            </div>
+            <table>
+                <tr>
+                    <td><div class="col-md-4"><a href="https://community.eveonline.com/support/api-key/CreatePredefined?accessMask=268435455" class="btn btn-default" target="_blank">Create API</a></div></td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApiKey, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ApiKey)
+                @Html.ValidationMessageFor(model => model.ApiKey)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VerificationCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VerificationCode)
+                @Html.ValidationMessageFor(model => model.VerificationCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Age, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Age)
+                @Html.ValidationMessageFor(model => model.Age)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ToonAge, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ToonAge)
+                @Html.ValidationMessageFor(model => model.ToonAge)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Source, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Source)
+                @Html.ValidationMessageFor(model => model.Source)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Information, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Information, new { style = "max-width:1000px; width: 500px; height:200px; max-width:100%;" })
+                @Html.ValidationMessageFor(model => model.Information)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

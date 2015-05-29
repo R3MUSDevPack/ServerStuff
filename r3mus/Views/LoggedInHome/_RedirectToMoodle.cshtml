@@ -1,0 +1,10 @@
+﻿<form id="training-login" action="http://training.r3mus.org/login/index.php" method="post">
+    <input name="username" value="@User.Identity.Name.ToLower().Replace(" ", "")" style="visibility:hidden" />
+    <input name="password" value="r3MuSU53r#" style="visibility:hidden" />
+</form>
+
+<script language="javascript" type="text/javascript">
+    (function () {
+        document.getElementById("training-login").submit();
+    })();
+</script>

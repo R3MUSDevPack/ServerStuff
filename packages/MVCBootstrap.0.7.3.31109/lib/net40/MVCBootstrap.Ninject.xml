@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MVCBootstrap.Ninject</name>
+    </assembly>
+    <members>
+        <member name="M:MVCBootstrap.Ninject.App_Start.NinjectWebCommon.Stop">
+            <summary>
+            Stops the application.
+            </summary>
+        </member>
+        <member name="M:MVCBootstrap.Ninject.App_Start.NinjectWebCommon.CreateKernel">
+            <summary>
+            Creates the kernel that will manage your application.
+            </summary>
+            <returns>The created kernel.</returns>
+        </member>
+    </members>
+</doc>
