@@ -12,7 +12,7 @@ using r3mus.Filters;
 
 namespace r3mus.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Recruiter, Screener, Director, CEO, Admin")]
     public class RecruitmentController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
