@@ -8,6 +8,9 @@
     [Age]              NVARCHAR (MAX) NULL,
     [ToonAge]          NVARCHAR (MAX) NULL,
     [Source]           NVARCHAR (MAX) NULL,
+    [TimeZone]         NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_dbo.Applicants] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+
 

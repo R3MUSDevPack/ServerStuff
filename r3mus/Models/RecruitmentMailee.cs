@@ -37,7 +37,27 @@ namespace r3mus.Models
         {
             //long corpId = JKON.EveWho.EveWho.GetCharacter(Name, Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).info.corporation_id;
 
-            long corpId = JKON.EveWho.Api.GetCharacter(Name, Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).result.corporationID;
+            long corpId;
+
+            try
+            {
+                corpId = JKON.EveWho.Api.GetCharacter(Name, Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).result.corporationID;
+            }
+            catch(Exception ex)
+            {
+                try
+                {
+                    corpId = JKON.EveWho.EveWho.GetCharacter(Name, Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).info.corporation_id;
+                }
+                catch (Exception ex1)
+                {
+                    corpId = -1;
+                }
+                if(corpId == 0)
+                {
+                    corpId = -1;
+                }
+            }
 
             CorpId_AtLastCheck = corpId;
             return ((corpId >= 1000000) && (corpId <= 1000200));

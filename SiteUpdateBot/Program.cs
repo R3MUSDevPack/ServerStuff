@@ -55,53 +55,53 @@ namespace SiteUpdateBot
             }
         }
 
-        public static void GetWebsiteUserDetails(bool FullUpdate)
-        {
-            try
-            {
-                var r3musDB = new r3musDbContext();
-                var users = r3musDB.Users;
+        //public static void GetWebsiteUserDetails(bool FullUpdate)
+        //{
+        //    try
+        //    {
+        //        var r3musDB = new r3musDbContext();
+        //        var users = r3musDB.Users;
 
-                if (FullUpdate)
-                {
-                    Console.WriteLine("Updating all {0} users", users.Count());
-                    var counter = 0;
-                    foreach (var user in users)
-                    {
-                        try
-                        {
-                            var cUsrTitles = user.Titles;
+        //        if (FullUpdate)
+        //        {
+        //            Console.WriteLine("Updating all {0} users", users.Count());
+        //            var counter = 0;
+        //            foreach (var user in users)
+        //            {
+        //                try
+        //                {
+        //                    var cUsrTitles = user.Titles;
 
-                            counter++;
-                            Console.WriteLine(string.Format("Updating #{0} user {1}", counter.ToString(), user.UserName));
-                            user.GetDetails(true);
+        //                    counter++;
+        //                    Console.WriteLine(string.Format("Updating #{0} user {1}", counter.ToString(), user.UserName));
+        //                    user.GetDetails(true);
 
-                            r3musDB.Titles.Where(dbTitle => dbTitle.UserId == user.Id).ToList().Where(dbTitle => cUsrTitles.Any(cUsrTitle => dbTitle.TitleName == cUsrTitle.TitleName)).ToList().ForEach(dbTitle => r3musDB.Entry(dbTitle).State = EntityState.Unchanged);
-                            r3musDB.Titles.Where(dbTitle => dbTitle.UserId == user.Id).ToList().Where(dbTitle => !cUsrTitles.Any(cUsrTitle => dbTitle.TitleName == cUsrTitle.TitleName)).ToList().ForEach(dbTitle => r3musDB.Entry(dbTitle).State = EntityState.Deleted);
+        //                    r3musDB.Titles.Where(dbTitle => dbTitle.UserId == user.Id).ToList().Where(dbTitle => cUsrTitles.Any(cUsrTitle => dbTitle.TitleName == cUsrTitle.TitleName)).ToList().ForEach(dbTitle => r3musDB.Entry(dbTitle).State = EntityState.Unchanged);
+        //                    r3musDB.Titles.Where(dbTitle => dbTitle.UserId == user.Id).ToList().Where(dbTitle => !cUsrTitles.Any(cUsrTitle => dbTitle.TitleName == cUsrTitle.TitleName)).ToList().ForEach(dbTitle => r3musDB.Entry(dbTitle).State = EntityState.Deleted);
 
-                        }
-                        catch (Exception ex) { Console.WriteLine(string.Format("User: {0}, Error {1}", user.UserName, ex.Message)); }
-                    }
-                    r3musDB.Users = users;
-                }
-                else
-                {
-                    var userList = users.Where(user => user.Avatar == null);
-                    Console.WriteLine("Updating {0} users", userList.Count());
-                    foreach (var user in userList)
-                    {
-                        try
-                        {
-                            Console.WriteLine(string.Format("Updating user {0}", user.UserName));
-                            user.GetDetails(true);
-                        }
-                        catch (Exception ex) { Console.WriteLine(string.Format("User: {0}, Error {1}", user.UserName, ex.Message)); }
-                    }
-                }
-                r3musDB.SaveChanges();
-            }
-            catch (Exception ex) { }
-        }
+        //                }
+        //                catch (Exception ex) { Console.WriteLine(string.Format("User: {0}, Error {1}", user.UserName, ex.Message)); }
+        //            }
+        //            r3musDB.Users = users;
+        //        }
+        //        else
+        //        {
+        //            var userList = users.Where(user => user.Avatar == null);
+        //            Console.WriteLine("Updating {0} users", userList.Count());
+        //            foreach (var user in userList)
+        //            {
+        //                try
+        //                {
+        //                    Console.WriteLine(string.Format("Updating user {0}", user.UserName));
+        //                    user.GetDetails(true);
+        //                }
+        //                catch (Exception ex) { Console.WriteLine(string.Format("User: {0}, Error {1}", user.UserName, ex.Message)); }
+        //            }
+        //        }
+        //        r3musDB.SaveChanges();
+        //    }
+        //    catch (Exception ex) { }
+        //}
 
         private static DateTime GetLastRunTime()
         {
@@ -155,7 +155,7 @@ namespace SiteUpdateBot
 
             sw.Stop();
             Console.WriteLine("{0} mailees processed in {1}", mailees.Count().ToString(), sw.Elapsed.ToString());
-
+            
             r3musDB.SaveChanges();
 
             return (r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Count() > 0);
