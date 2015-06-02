@@ -1,0 +1,22 @@
+﻿@model IEnumerable<r3mus.Models.Forum>
+@{
+    ViewBag.Title = "Forums";
+}
+
+<table class="table" style="border:double;">
+    <tr>
+        <th style="border:groove;">
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="border:groove;">
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+        </tr>
+    }
+
+</table>

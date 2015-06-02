@@ -1,0 +1,51 @@
+﻿@model IEnumerable<r3mus.ViewModels.ForumViewModel>
+@{
+    ViewBag.Title = "Forum Admin";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
+</p>
+
+<table class="table" style="border:double;">
+    <tr>
+        <th style="border:groove;">
+            @Html.DisplayNameFor(model => model.Forum.Title)
+        </th>
+        <th style="border:groove;">
+            @Html.DisplayNameFor(model => model.Forum.MinimumRole)
+        </th>
+        <th style="border:groove;">               
+            @Html.DisplayNameFor(model => model.CreatorName)         
+        </th>
+        <th style="border:groove;">
+            @Html.DisplayNameFor(model => model.Forum.Created)            
+        </th>
+        <th style="border:groove;">Admin Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="border:groove;">
+                @Html.DisplayFor(modelItem => item.Forum.Title)
+            </td>
+            <td style="border:groove;">
+                @Html.DisplayFor(modelItem => item.Forum.MinimumRole)
+            </td>
+            <td style="border:groove;">
+                @Html.DisplayFor(modelItem => item.CreatorName)
+            </td>
+            <td style="border:groove;">
+                @Html.DisplayFor(modelItem => item.Forum.Created)
+            </td>
+
+            <td style="border:groove;">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Forum.Id }, new { @class = "btn btn-default" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Forum.Id }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>
+</body>

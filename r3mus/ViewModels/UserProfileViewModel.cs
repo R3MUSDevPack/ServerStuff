@@ -24,6 +24,7 @@ namespace r3mus.ViewModels
         public string EmailAddress { get; set; }
 
         [Display(Name = "Joined current corp")]
+        [UIHint("_DateTime")]
         public DateTime MemberSince { get; set; }
         
         public string Avatar { get; set; }

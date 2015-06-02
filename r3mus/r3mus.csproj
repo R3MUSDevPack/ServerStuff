@@ -219,6 +219,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoggedInHomeController.cs" />
     <Compile Include="Controllers\RecruitmentController.cs" />
@@ -264,6 +265,14 @@
     <Compile Include="Migrations\201505291354235_UpdateEFIdentity.Designer.cs">
       <DependentUpon>201505291354235_UpdateEFIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506021359403_AddForums.cs" />
+    <Compile Include="Migrations\201506021359403_AddForums.Designer.cs">
+      <DependentUpon>201506021359403_AddForums.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506021406442_AddForums1.cs" />
+    <Compile Include="Migrations\201506021406442_AddForums1.Designer.cs">
+      <DependentUpon>201506021406442_AddForums1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Applicant.cs" />
     <Compile Include="Models\ApplicantList.Context.cs">
@@ -284,6 +293,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicantList.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\LastWeeksMailStat.cs">
       <DependentUpon>LastWeeksSubmissionStats.tt</DependentUpon>
     </Compile>
@@ -305,17 +315,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LastWeeksSubmissionStats.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Models\RecruitmentHelper.cs" />
     <Compile Include="Models\RecruitmentMailee.cs" />
+    <Compile Include="Models\Thread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repository\SQLForumRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ApplicantViewModel.cs" />
     <Compile Include="ViewModels\ApplicationReviewViewModel.cs" />
+    <Compile Include="ViewModels\ForumViewModel.cs" />
     <Compile Include="ViewModels\RecruitmentStatsViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
@@ -468,6 +482,12 @@
     <Content Include="Views\Shared\DisplayTemplates\DisplayVCode.cshtml" />
     <Content Include="Views\WebsiteAdmin\_RoleManagement.cshtml" />
     <Content Include="Views\LoggedInHome\_RegisterForSlack.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\_DateTime.cshtml" />
+    <Content Include="Views\Forum\Index.cshtml" />
+    <Content Include="Views\Forum\Create.cshtml" />
+    <Content Include="Views\Forum\Edit.cshtml" />
+    <Content Include="Views\Forum\AdminIndex.cshtml" />
+    <Content Include="Views\Forum\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -510,6 +530,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505291354235_UpdateEFIdentity.resx">
       <DependentUpon>201505291354235_UpdateEFIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506021359403_AddForums.resx">
+      <DependentUpon>201506021359403_AddForums.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506021406442_AddForums1.resx">
+      <DependentUpon>201506021406442_AddForums1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

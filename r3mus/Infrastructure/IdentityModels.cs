@@ -458,6 +458,10 @@ namespace r3mus.Models
 
         //public System.Data.Entity.DbSet<r3mus.Models.ApplicationUser> Users { get; set; }
 
+        public System.Data.Entity.DbSet<r3mus.Models.Forum> Forums { get; set; }
+        public System.Data.Entity.DbSet<r3mus.Models.Post> Posts { get; set; }
+        public System.Data.Entity.DbSet<r3mus.Models.Thread> Threads { get; set; }
+
         public System.Data.Entity.DbSet<r3mus.Models.ApiInfo> ApiInfoes { get; set; }
         public System.Data.Entity.DbSet<r3mus.Models.RecruitmentMailee> RecruitmentMailees { get; set; }
 

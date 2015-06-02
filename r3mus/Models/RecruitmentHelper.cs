@@ -39,16 +39,6 @@ namespace r3mus.Models
 
     }
 
-    //public class RecruitmentHelper
-    //{
-    //    public static bool CheckNPCCorp(string toonName)
-    //    {
-    //        long corpId = JKON.EveWho.EveWho.GetCharacter(toonName, Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).info.corporation_id;
-
-    //        return ((corpId >= 1000000) && (corpId <= 1000200));
-    //    }
-    //}
-
     [MetadataType(typeof(ApplicationMetaData))]
     public partial class Application
     { 
@@ -91,9 +81,11 @@ namespace r3mus.Models
         public int VerificationCode { get; set; }
 
         [Display(Name = "Last Update")]
+        [UIHint("_DateTime")]
         public DateTime LastStatusUpdate { get; set; }
 
         [Display(Name = "Status Update")]
+        [UIHint("_DateTime")]
         public DateTime DateTimeCreated { get; set; }
 
         [Display(Name = "Screener")]

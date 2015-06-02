@@ -17,7 +17,9 @@ namespace r3mus.Models
 
         public int Id { get; set; }
         public string Name { get; set; }
+        [UIHint("_DateTime")]
         public DateTime Submitted { get; set; }
+        [UIHint("_DateTime")]
         public DateTime? Mailed { get; set; }
         public string SubmitterId { get; set; }
         public string MailerId { get; set; }
