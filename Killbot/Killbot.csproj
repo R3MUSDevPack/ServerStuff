@@ -99,6 +99,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\APIViewer\JKON.EveWho\JKON.EveApi.csproj">
+      <Project>{df188f56-5100-40a0-ab70-58fd5dbd3a05}</Project>
+      <Name>JKON.EveApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hipchat_Plugin\Hipchat_Plugin.csproj">
       <Project>{62d74a6f-20e1-4b2b-a400-f1f8a31700c0}</Project>
       <Name>Hipchat_Plugin</Name>

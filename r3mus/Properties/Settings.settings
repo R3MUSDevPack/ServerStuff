@@ -35,5 +35,11 @@
     <Setting Name="HipchatToken" Type="System.String" Scope="Application">
       <Value Profile="(Default)">k05sP8cuu2MwPwBsXXXje0yJXRrxypE6q6SzlsQV</Value>
     </Setting>
+    <Setting Name="SlackToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">xoxs-4459251457-4460324675-5169000795-972d6847de</Value>
+    </Setting>
+    <Setting Name="SlackInviteURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://r3mus.slack.com/api/users.admin.invite?email={0}&amp;channels=C04DH7DFR&amp;token={1}&amp;set_active=true&amp;_attempts=1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

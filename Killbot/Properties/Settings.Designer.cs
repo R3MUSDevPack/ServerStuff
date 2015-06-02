@@ -70,7 +70,7 @@ namespace Killbot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Hipchat")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Slack")]
         public string Plugin {
             get {
                 return ((string)(this["Plugin"]));
@@ -97,7 +97,7 @@ namespace Killbot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hooks.slack.com/services/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")]
         public string SlackWebhook {
             get {
                 return ((string)(this["SlackWebhook"]));
@@ -128,6 +128,15 @@ namespace Killbot.Properties {
         public string MessageFormatLine6 {
             get {
                 return ((string)(this["MessageFormatLine6"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Debug {
+            get {
+                return ((bool)(this["Debug"]));
             }
         }
     }

@@ -18,6 +18,8 @@ using eZet.EveLib.ZKillboardModule.Models;
 
 using Hipchat_Plugin;
 using Slack_Plugin;
+using System.Text.RegularExpressions;
+using JKON.EveWho;
 
 namespace Killbot
 {
@@ -25,23 +27,40 @@ namespace Killbot
     {
         static void Main(string[] args)
         {
-            CorporationSheet corpSheet = GetCorpDetails();
+            try
+            {
+                CorporationSheet corpSheet = GetCorpDetails();
+                if (Properties.Settings.Default.Debug)
+                {
+                    SendPM(string.Format("Corpsheet for {0} obtained.", corpSheet.Ticker));
+                }
 
-            UpdateRunTime(CheckKills(corpSheet.Ticker, corpSheet.CorporationID));
+                UpdateRunTime(CheckKills(corpSheet.Ticker, corpSheet.CorporationID));
+            }
+            catch(Exception ex)
+            {
+                SendPM(ex.Message);
+            }
         }
 
         private static DateTime CheckKills(string corpName, long corpId)
         {
             CorporationSheet Corp = GetCorpDetails();
+
+            DateTime Latest = Convert.ToDateTime(ConfigurationSettings.AppSettings["StartDate"]);
+
             ZkbResponse Kills; 
             ZKillboard kb = new ZKillboard();
             ZKillboardOptions Options = new ZKillboardOptions();
             IEnumerable<ZkbResponse.ZkbKill> OrderedKills;
-            DateTime Latest = Convert.ToDateTime(ConfigurationSettings.AppSettings["StartDate"]);
             Options.CorporationId.Add(Corp.CorporationID);
             if (Latest > DateTime.MinValue)
             {
                 Options.StartTime = Latest;
+            }
+            if (Properties.Settings.Default.Debug)
+            {
+                SendPM(string.Format("Using StartTime {0}.", Latest.ToString("yyyy-MM-dd HH:mm:ss")));
             }
 
             try
@@ -60,6 +79,10 @@ namespace Killbot
             }
             catch (Exception Ex)
             {
+                if (Properties.Settings.Default.Debug)
+                {
+                    SendPM(Ex.Message);
+                }
             }
             try
             {
@@ -80,15 +103,12 @@ namespace Killbot
             }
             catch (Exception Ex)
             {
+                if (Properties.Settings.Default.Debug)
+                {
+                    SendPM(Ex.Message);
+                }
             }
-            //if (Options.StartTime == null)
-            //{
-            //    SendPM("Start Time is null");
-            //}
-            //else
-            //{
-            //    SendPM(string.Concat("Start Time is ", Options.StartTime.ToString()));
-            //}
+
             return Latest;
         }
 
@@ -100,8 +120,26 @@ namespace Killbot
             }
             else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
             {
+                //message = Linkify(message);
                 Slack.SendToRoom(message, Properties.Settings.Default.RoomName, Properties.Settings.Default.SlackWebhook);
             }
+        }
+
+        private static string Linkify(string SearchText)
+        {
+            Regex regx = new Regex(@"\b(((\S+)?)(@|mailto\:|(news|(ht|f)tp(s?))\://)\S+)\b", RegexOptions.IgnoreCase);
+            SearchText = SearchText.Replace("&nbsp;", " ");
+            MatchCollection matches = regx.Matches(SearchText);
+
+            foreach (Match match in matches)
+            {
+                if (match.Value.StartsWith("http"))
+                { // if it starts with anything else then dont linkify -- may already be linked!
+                    SearchText = SearchText.Replace(match.Value, "<a href='" + match.Value + "'>" + match.Value + "</a>");
+                }
+            }
+
+            return SearchText;
         }
 
         private static void SendPM(string message)
@@ -112,7 +150,7 @@ namespace Killbot
             }
             else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
             {
-                Slack.SendPM(message, "Clyde en Marland", Properties.Settings.Default.SlackWebhook);
+                Slack.SendPM(message, "ClydeenMarland", Properties.Settings.Default.SlackWebhook);
             }
         }
 
@@ -241,6 +279,12 @@ namespace Killbot
 
         private static void UpdateRunTime(DateTime writeThis)
         {
+
+            if (Properties.Settings.Default.Debug)
+            {
+                SendPM(string.Format("Updating run time: {0}.", writeThis.ToString("yyyy-MM-dd HH:mm:ss")));
+            }
+
             Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
             config.AppSettings.Settings.Remove("StartDate");
             config.AppSettings.Settings.Add("StartDate", writeThis.ToString("yyyy-MM-dd HH:mm:ss"));

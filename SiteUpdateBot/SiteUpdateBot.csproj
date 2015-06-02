@@ -96,9 +96,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Hipchat_Plugin\Hipchat_Plugin.csproj">
+      <Project>{62d74a6f-20e1-4b2b-a400-f1f8a31700c0}</Project>
+      <Name>Hipchat_Plugin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\r3mus\r3mus.csproj">
       <Project>{50a8220b-9598-4b98-a436-e561e579787d}</Project>
       <Name>r3mus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slack_Plugin\Slack_Plugin.csproj">
+      <Project>{eca1a3dd-2245-41c8-8100-20133906fad3}</Project>
+      <Name>Slack_Plugin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

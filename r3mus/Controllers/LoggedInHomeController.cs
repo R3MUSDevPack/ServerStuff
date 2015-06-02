@@ -305,6 +305,32 @@ namespace r3mus.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult RegisterForSlack()
+        {
+            string result = string.Empty;
+            string URI = string.Format(Properties.Settings.Default.SlackInviteURL, UserManager.FindById(User.Identity.GetUserId()).EmailAddress, Properties.Settings.Default.SlackToken);
+            using(WebClient client = new WebClient())
+            {
+                byte[] response = client.DownloadData(URI);
+                result = System.Text.Encoding.UTF8.GetString(response);
+            }
+            
+            if(result.Contains("false"))
+            {
+                TempData.Add("Message", string.Format("Could not send an invitation: {0}", result));
+            }
+            else if (result.Contains("true"))
+            {
+                TempData.Add("Message", string.Format("Slack invitation sent to {0}; please check your email inbox.", UserManager.FindById(User.Identity.GetUserId()).EmailAddress));
+            }
+            else
+            {
+                TempData.Add("Message", string.Format("Could not send an invitation: unknown reason."));
+            }
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

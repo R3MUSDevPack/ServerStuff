@@ -467,6 +467,7 @@
     <Content Include="Views\WebsiteAdmin\ViewProfile.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DisplayVCode.cshtml" />
     <Content Include="Views\WebsiteAdmin\_RoleManagement.cshtml" />
+    <Content Include="Views\LoggedInHome\_RegisterForSlack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

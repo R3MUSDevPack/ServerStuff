@@ -13,6 +13,8 @@ namespace SiteUpdateBot
         //public System.Data.Entity.DbSet<r3mus.Models.ApiInfo> ApiInfoes { get; set; }
         public System.Data.Entity.DbSet<r3mus.Models.RecruitmentMailee> RecruitmentMailees { get; set; }
 
+        public System.Data.Entity.DbSet<r3mus.Models.ApplicantList> Applicants { get; set; }
+
         //public System.Data.Entity.DbSet<r3mus.Models.Applicant> Applicants { get; set; }
 
         //public System.Data.Entity.DbSet<r3mus.Models.Application> Applications { get; set; }

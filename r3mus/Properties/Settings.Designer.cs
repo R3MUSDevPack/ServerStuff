@@ -121,5 +121,24 @@ namespace r3mus.Properties {
                 return ((string)(this["HipchatToken"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("xoxs-4459251457-4460324675-5169000795-972d6847de")]
+        public string SlackToken {
+            get {
+                return ((string)(this["SlackToken"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://r3mus.slack.com/api/users.admin.invite?email={0}&channels=C04DH7DFR&token=" +
+            "{1}&set_active=true&_attempts=1")]
+        public string SlackInviteURL {
+            get {
+                return ((string)(this["SlackInviteURL"]));
+            }
+        }
     }
 }

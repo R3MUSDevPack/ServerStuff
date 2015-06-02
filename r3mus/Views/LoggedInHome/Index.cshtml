@@ -27,7 +27,8 @@
     <ul>
         <li class="ui-state-default ui-corner-top"><a href="#APITab">Api Keys</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#TSTab">Teamspeak</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#HipchatTab">Hipchat</a></li>
+        @*<li class="ui-state-default ui-corner-top"><a href="#HipchatTab">Hipchat</a></li>*@
+        <li class="ui-state-default ui-corner-top"><a href="#SlackTab">Slack</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#MoodleTab">Training</a></li>
     </ul>
 
@@ -74,8 +75,11 @@
     <div id="TSTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         @Html.Partial("_RegisterForTeamspeak")
     </div>
-    <div id="HipchatTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    @*<div id="HipchatTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         @Html.Partial("_RegisterForHipchat")
+    </div>*@
+    <div id="SlackTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        @Html.Partial("_RegisterForSlack")
     </div>
     <div id="MoodleTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         @Html.Partial("_RegisterForMoodle")

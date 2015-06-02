@@ -25,7 +25,7 @@ namespace SiteUpdateBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4285630")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4425806")]
         public string CorpAPI {
             get {
                 return ((string)(this["CorpAPI"]));
@@ -34,7 +34,7 @@ namespace SiteUpdateBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("hmZDX0Ptrvb33GscSJVfeRy6rogh06XcymVI9GdueMahoRxZDvh0lWsOeGiBaKbS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("sgzakeHa3MwhV7WmxQY3pH7ZGMbipr7xN1bqk5pgon7nv5ZjqFZ6ci4B49crp4Ke")]
         public string VCode {
             get {
                 return ((string)(this["VCode"]));
@@ -50,6 +50,60 @@ namespace SiteUpdateBot.Properties {
             }
             set {
                 this["LastCheckedAt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Slack")]
+        public string Plugin {
+            get {
+                return ((string)(this["Plugin"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("recruitment")]
+        public string RoomName {
+            get {
+                return ((string)(this["RoomName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("k05sP8cuu2MwPwBsXXXje0yJXRrxypE6q6SzlsQV")]
+        public string HipchatToken {
+            get {
+                return ((string)(this["HipchatToken"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hooks.slack.com/services/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")]
+        public string SlackWebhook {
+            get {
+                return ((string)(this["SlackWebhook"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("New application received from {0} at {1}.")]
+        public string NewApp_MessageFormatLine1 {
+            get {
+                return ((string)(this["NewApp_MessageFormatLine1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Application from {0} was updated to {1} by {2} at {3}.")]
+        public string AppUpdate_MessageFormatLine2 {
+            get {
+                return ((string)(this["AppUpdate_MessageFormatLine2"]));
             }
         }
     }

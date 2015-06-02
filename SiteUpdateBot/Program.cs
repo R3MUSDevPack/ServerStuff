@@ -1,4 +1,7 @@
-﻿using r3mus.Models;
+﻿using Hipchat_Plugin;
+using r3mus.Models;
+using r3mus.ViewModels;
+using Slack_Plugin;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,8 +15,7 @@ using System.Threading.Tasks;
 namespace SiteUpdateBot
 {
     class Program
-    {        
-
+    {      
         static void Main(string[] args)
         {
 
@@ -28,11 +30,14 @@ namespace SiteUpdateBot
 
             //GetWebsiteUserDetails(doFullRun);
             //UpdateMailees();
-            ResetMailees(doFullRun);
-            while(UpdateMailees())
-            {
-                System.Threading.Thread.Sleep(2000);
-            }
+
+            NotifyApplicationChanges(lastFullRunTime);
+
+            //ResetMailees(doFullRun);
+            //while(UpdateMailees())
+            //{
+            //    System.Threading.Thread.Sleep(2000);
+            //}
 
             if(doFullRun)
             {
@@ -159,6 +164,55 @@ namespace SiteUpdateBot
             r3musDB.SaveChanges();
 
             return (r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Count() > 0);
+        }
+
+        private static void NotifyApplicationChanges(DateTime lastRunTime)
+        {
+            var r3musDB = new ApplicantEntities();
+            var lastCheck = DateTime.Now.AddMinutes(-1);
+            var applications = r3musDB.ApplicantLists.Where(applicant => applicant.LastStatusUpdate >= lastCheck).ToList();
+
+            Console.WriteLine(string.Format("Running applications check from {0}.", lastCheck.ToString("yyyy-MM-dd HH:mm:ss")));
+
+            foreach(var application in applications)
+            {
+                if(application.Status == ApplicationReviewViewModel.ApplicationStatus.Applied.ToString())
+                {
+                    SendMessage(string.Format(Properties.Settings.Default.NewApp_MessageFormatLine1, application.Name, application.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
+                }
+                else
+                {
+                    SendMessage(string.Format(Properties.Settings.Default.AppUpdate_MessageFormatLine2, application.Name, application.Status, application.UserName, application.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
+                }
+            }
+            //if(applications.Count == 0)
+            //{
+            //    SendMessage("I am a robot. Beep.");
+            //}
+        }
+        
+        private static void SendMessage(string message)
+        {
+            if (Properties.Settings.Default.Plugin.ToUpper() == "HIPCHAT")
+            {
+                Hipchat.SendToRoom(message, Properties.Settings.Default.RoomName, Properties.Settings.Default.HipchatToken);
+            }
+            else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
+            {
+                Slack.SendToRoom(message, Properties.Settings.Default.RoomName, Properties.Settings.Default.SlackWebhook);
+            }
+        }
+
+        private static void SendPM(string message)
+        {
+            if (Properties.Settings.Default.Plugin.ToUpper() == "HIPCHAT")
+            {
+                Hipchat.SendPM(message, "Clyde en Marland", Properties.Settings.Default.HipchatToken);
+            }
+            else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
+            {
+                Slack.SendPM(message, "Clyde en Marland", Properties.Settings.Default.SlackWebhook);
+            }
         }
     }
 }

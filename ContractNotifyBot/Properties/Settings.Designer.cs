@@ -12,7 +12,7 @@ namespace ContractNotifyBot.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace ContractNotifyBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("k05sP8cuu2MwPwBsXXXje0yJXRrxypE6q6SzlsQV")]
+        [global::System.Configuration.DefaultSettingValueAttribute("hmZDX0Ptrvb33GscSJVfeRy6rogh06XcymVI9GdueMahoRxZDvh0lWsOeGiBaKbS")]
         public string HipchatToken {
             get {
                 return ((string)(this["HipchatToken"]));
@@ -34,7 +34,7 @@ namespace ContractNotifyBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hooks.slack.com/services/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")]
         public string SlackWebhook {
             get {
                 return ((string)(this["SlackWebhook"]));
@@ -43,7 +43,7 @@ namespace ContractNotifyBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4287991")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4285630")]
         public int CorpAPI {
             get {
                 return ((int)(this["CorpAPI"]));
@@ -52,7 +52,7 @@ namespace ContractNotifyBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("VCode")]
+        [global::System.Configuration.DefaultSettingValueAttribute("hmZDX0Ptrvb33GscSJVfeRy6rogh06XcymVI9GdueMahoRxZDvh0lWsOeGiBaKbS")]
         public string VCode {
             get {
                 return ((string)(this["VCode"]));
@@ -110,6 +110,15 @@ namespace ContractNotifyBot.Properties {
         public string MessageFormatLine4 {
             get {
                 return ((string)(this["MessageFormatLine4"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Volume: {0}.")]
+        public string MessageFormatLine5 {
+            get {
+                return ((string)(this["MessageFormatLine5"]));
             }
         }
     }
