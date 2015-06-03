@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace r3mus.Controllers
 {
+    [Authorize]
     public class ForumController : Controller
     {
         SQLForumRepository repository = new SQLForumRepository();
@@ -30,8 +31,27 @@ namespace r3mus.Controllers
         {
             ViewBag.Message = "Forum detail";
             var forum = repository.GetForumByID(id);
-            ViewBag.Threads = repository.GetThreadsByForum(id).ToList();
+            //ViewBag.Threads = repository.GetThreadsByForum(id).ToList();
             return View(forum);
+        }
+
+        public ActionResult ShowForum(int id)
+        {
+            var forum = repository.GetForumByID(id);
+            var threads = repository.GetThreadsByForum(id).Where(thread => thread != null).ToList();
+            threads.ForEach(thread => thread.Posts = repository.GetPostsByThread(thread.Id).Where(post => post != null).ToList());
+
+            var forumVM = new ForumViewModel()
+            {
+                Forum = forum,
+                RoleList = new SelectList(db.Roles.Select(role => role.Name).ToList<string>(), repository.GetForumByID(id).MinimumRole),
+                CreatorName = db.Users.Where(user => user.Id == forum.CreatorId).FirstOrDefault().UserName,
+                Threads = threads
+            };
+
+            ViewBag.Message = forum.Title;
+
+            return View(forumVM);
         }
 
         [Authorize(Roles = "Admin, CEO, Director")]

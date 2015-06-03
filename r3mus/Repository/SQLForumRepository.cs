@@ -56,7 +56,7 @@ namespace r3mus.Repository
             }
             else
             {
-                throw new SecurityException();
+                return null;
             }
         }
 
@@ -94,14 +94,7 @@ namespace r3mus.Repository
                 }
             });
 
-            if(threads.Count() > 0)
-            {
-                return threads.AsQueryable();
-            }
-            else
-            {
-                throw new SecurityException();
-            }
+            return threads.AsQueryable();
         }
 
         public Thread GetThreadByID(int ThreadID)
@@ -115,7 +108,7 @@ namespace r3mus.Repository
             }
             else
             {
-                throw new SecurityException();
+                return null;
             }
         }
 
@@ -153,14 +146,7 @@ namespace r3mus.Repository
                 }
             });
 
-            if(posts.Count() > 0)
-            {
-                return posts.AsQueryable();
-            }
-            else
-            {
-                throw new SecurityException();
-            }
+            return posts.AsQueryable();
         }
         
         public Post GetPostByID(int PostID)
@@ -175,7 +161,7 @@ namespace r3mus.Repository
             }
             else
             {
-                throw new SecurityException();
+                return null;
             }
         }
 

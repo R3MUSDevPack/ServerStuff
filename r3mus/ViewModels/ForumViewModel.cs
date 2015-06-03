@@ -13,8 +13,10 @@ namespace r3mus.ViewModels
         public Forum Forum { get; set; }
         
         public SelectList RoleList { get; set; }
-
+        
         [DisplayName("Creator")]
         public string CreatorName { get; set; }
+
+        public List<Thread> Threads { get; set; }
     }
 }

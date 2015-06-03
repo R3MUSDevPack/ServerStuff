@@ -13,8 +13,9 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td style="border:groove;">
-                @Html.DisplayFor(modelItem => item.Title)
+            <td style="border:groove;" class="col-md-10 alert-dismissable">
+                @*@Html.DisplayFor(modelItem => item.Title)*@
+                @Html.ActionLink(item.Title, "ShowForum", new { id = item.Id })
             </td>
         </tr>
     }

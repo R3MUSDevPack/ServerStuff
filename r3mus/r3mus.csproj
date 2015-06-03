@@ -223,6 +223,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoggedInHomeController.cs" />
     <Compile Include="Controllers\RecruitmentController.cs" />
+    <Compile Include="Controllers\ThreadController.cs" />
     <Compile Include="Controllers\WebsiteAdminController.cs" />
     <Compile Include="Filters\CustomAttributes.cs" />
     <Compile Include="Filters\Extensions.cs" />
@@ -488,6 +489,8 @@
     <Content Include="Views\Forum\Edit.cshtml" />
     <Content Include="Views\Forum\AdminIndex.cshtml" />
     <Content Include="Views\Forum\Delete.cshtml" />
+    <Content Include="Views\Forum\ShowForum.cshtml" />
+    <Content Include="Views\Thread\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
