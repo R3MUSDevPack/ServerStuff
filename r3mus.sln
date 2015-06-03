@@ -34,7 +34,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "r3mus_DB", "r3mus_DB\r3mus_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteUpdateBot", "SiteUpdateBot\SiteUpdateBot.csproj", "{AF5D7C45-0D2B-4CBE-9C32-FA14358F3542}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JKON.EveApi", "..\..\APIViewer\JKON.EveWho\JKON.EveApi.csproj", "{DF188F56-5100-40A0-AB70-58FD5DBD3A05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JKON.EveApi", "JKON.EveWho\JKON.EveApi.csproj", "{DF188F56-5100-40A0-AB70-58FD5DBD3A05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
