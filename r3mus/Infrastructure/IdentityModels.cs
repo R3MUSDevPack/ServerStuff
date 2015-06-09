@@ -412,7 +412,8 @@ namespace r3mus.Models
 
         [NotMapped]
         [Display(Name = "Access Mask")]
-        public long AccessMask { get { return EveOnlineApi.CreateApiKey(Convert.ToInt32(ApiKey), VerificationCode).Init().AccessMask; } }
+        [UIHint("AccessMaskHighlight")]
+        public long AccessMask { get { try { return EveOnlineApi.CreateApiKey(Convert.ToInt32(ApiKey), VerificationCode).Init().AccessMask; } catch (Exception ex) { return -1; } } }
 
         public ApplicationUser User { get; set; }
         

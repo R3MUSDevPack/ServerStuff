@@ -1,5 +1,5 @@
 ﻿<li>@Html.ActionLink("Training", "RedirectToMoodle", "LoggedInHome")</li>
-<li>@Html.ActionLink("Forums", "Index", "Forum")</li>
+@*<li>@Html.ActionLink("Forums", "Index", "Forum")</li>*@
 
 @if(User.IsInRole("Admin") || User.IsInRole("Director") || User.IsInRole("CEO") || User.IsInRole("Recruiter") || User.IsInRole("Screener"))
 {
@@ -27,7 +27,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Website Admin <span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li>@Html.ActionLink("User Admin", "ViewUsers", "WebsiteAdmin")</li>
-            <li>@Html.ActionLink("Forum Admin", "AdminIndex", "Forum")</li>
+            @*<li>@Html.ActionLink("Forum Admin", "AdminIndex", "Forum")</li>*@
         </ul>
     </li>
 }

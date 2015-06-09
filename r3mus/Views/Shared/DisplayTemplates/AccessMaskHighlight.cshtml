@@ -1,0 +1,10 @@
+﻿@model long
+
+@if (Model != 268435455)
+{
+    <div class="alert-warning">@Model</div>
+}
+else
+{
+    <strong>@Model</strong>
+}

@@ -33,3 +33,10 @@
     </table>
     <input type="submit" value="Save Roles" class="btn btn-default" />
 }
+<p>
+    @using (Html.BeginForm("ResetPassword", "WebsiteAdmin", FormMethod.Post))
+    {
+        @Html.Hidden("userId", Model.Id)
+        <input type="submit" value="Reset Password" class="btn btn-warning" />
+    }
+</p>

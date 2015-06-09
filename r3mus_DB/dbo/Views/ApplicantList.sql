@@ -3,6 +3,7 @@
 
 
 
+
 CREATE VIEW [dbo].[ApplicantList]
 AS
 	SELECT 
@@ -31,7 +32,7 @@ AS
 			WHERE [Applicants].[Id] = [Applications].[ApplicantId]
 		)		
 	INNER JOIN [r3mus_DB].[dbo].[Applications] AS [Applied] WITH (NOLOCK)
-		ON [Applied].[Id] = [Applied].[ApplicantId]
+		ON [Applicants].[Id] = [Applied].[ApplicantId]
 		AND [Applied].[DateTimeCreated] = 
 		(
 			SELECT MIN([DateTimeCreated])

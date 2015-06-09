@@ -34,6 +34,7 @@ namespace ContractNotifyBot
             var now = DateTime.Now;
 
             DateTime lastFullRunTime = GetLastRunTime();
+            Console.WriteLine(string.Format("Start Time : {0}", lastFullRunTime.ToString("yyyy-MM-dd HH:mm:ss")));
 
             try
             {
@@ -57,18 +58,26 @@ namespace ContractNotifyBot
                 {
                     if ((Contract.Type == EveAI.Live.Utility.Contract.ContractType.Courier) && (Contract.Status == EveAI.Live.Utility.Contract.ContractStatus.Outstanding))
                     {
+                        Console.WriteLine(string.Format("Contract notification: {0}", FormatMessage(Contract, Names[Contract.IssuerID].result.characterName)));
                         SendMessage(FormatMessage(Contract, Names[Contract.IssuerID].result.characterName));
+                        if (Contract.DateIssued > lastFullRunTime) { lastFullRunTime = Contract.DateIssued; }
                     }
                 }
-                UpdateRunTime(now);
+                UpdateRunTime(lastFullRunTime);
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+            }
+            if(Environment.UserInteractive)
+            {
+                System.Threading.Thread.Sleep(10000);
             }
         }
 
         private static void UpdateRunTime(DateTime writeThis)
         {
+            Console.WriteLine(string.Format("New LastRunTime: {0}", writeThis.ToString("yyyy-MM-dd HH:mm:ss")));
             Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
             Console.WriteLine(string.Format("Updating Last Run Time in {0}", config.FilePath));
             config.AppSettings.Settings.Remove("LastCheckedAt");

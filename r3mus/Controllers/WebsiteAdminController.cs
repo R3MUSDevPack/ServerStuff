@@ -11,13 +11,23 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
+using Microsoft.Owin.Security.DataProtection;
+using Microsoft.AspNet.Identity.Owin;
+
 namespace r3mus.Controllers
 {
     [Authorize(Roles = "Admin, Director, CEO")]
     public class WebsiteAdminController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-        private UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+        private ApplicationDbContext db;
+        private UserManager<ApplicationUser> userManager;
+
+        public WebsiteAdminController()
+        {
+            db = new ApplicationDbContext();
+            userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            userManager.UserValidator = new UserValidator<ApplicationUser>(userManager) { AllowOnlyAlphanumericUserNames = false };
+        }
 
         //
         // GET: /WebsiteAdmin/
@@ -41,8 +51,11 @@ namespace r3mus.Controllers
                                                                                 WebsiteRoles = string.Join(", ", user.Roles.Select(role => role.RoleId).ToList()),
                                                                                 Avatar = user.Avatar
             }));
+            var resortModels = userModels.Where(model => model.Titles.Contains("CEO")).ToList();
+            userModels.Where(model => (model.Titles != string.Empty && !model.Titles.Contains("CEO"))).OrderBy(model => model.Titles).OrderBy(model => model.MemberSince).ToList().ForEach(model => resortModels.Add(model));
+            userModels.Where(model => model.Titles == string.Empty).OrderBy(model => model.MemberSince).ToList().ForEach(model => resortModels.Add(model));
 
-            return View(userModels);
+            return View(resortModels);
         }
 
         //public ActionResult ViewUsers(r3mus.Models.ApplicationUser.IDType memberType = r3mus.Models.ApplicationUser.IDType.Corporation)
@@ -91,10 +104,18 @@ namespace r3mus.Controllers
         {
             ApplicationUser currentUser;
 
+            if(TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+
             if (id == string.Empty)
             {
                 id = User.Identity.GetUserId();
             }
+
+            TempData.Clear();
+            TempData.Add("UserId", id);
 
             currentUser = db.Users.Where(user => user.Id == id).FirstOrDefault();
             currentUser.LoadApiKeys();
@@ -170,6 +191,89 @@ namespace r3mus.Controllers
             db.SaveChanges();
 
             return RedirectToAction(originator, new { id = id });
+        }
+
+        public ActionResult DeleteApi(int id, string userId)
+        {
+            db.ApiInfoes.Where(api => api.Id == id).ToList().ForEach(api => db.Entry(api).State = EntityState.Deleted);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewProfile", new { id = userId });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Director, CEO")]
+        public async Task<ActionResult> ResetPassword(string userId = "")
+        {
+            if (userId != string.Empty)
+            {
+                var provider = new DpapiDataProtectionProvider("Website");
+                userManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("Website")) { TokenLifespan = TimeSpan.FromHours(4) };
+
+                var user = userManager.FindById(userId);
+                var token = await userManager.GeneratePasswordResetTokenAsync(userId);
+
+                var result = await userManager.ResetPasswordAsync(userId, token, string.Concat("R3MUSUser_", user.UserName.Substring(0, user.UserName.IndexOf(" "))));
+
+                if(result.Succeeded)
+                {
+                    TempData.Add("Message", string.Format("Password reset confirmed: new password is {0}", string.Concat("R3MUSUser_", user.UserName.Substring(0, user.UserName.IndexOf(" ")))));
+                }
+                else
+                {
+                    TempData.Add("Message", string.Format("Password reset failed: {0}", result.Errors.ToList()[0]));
+                }
+
+                await userManager.UpdateAsync(user);
+            }
+
+            return RedirectToAction("ViewProfile", new { id = userId });
+        }
+
+        public ActionResult EditApi(int id)
+        {
+            var apiInfo = db.ApiInfoes.Where(api => api.Id == id).FirstOrDefault();
+            var userId = TempData["UserId"].ToString();
+
+            TempData.Clear();
+            TempData.Add("UserId", userId);
+            ViewBag.UserId = userId;
+
+            return View(apiInfo);
+        }
+
+        [HttpPost]
+        public ActionResult EditApi(ApiInfo apiInfo)
+        {
+            var userId = TempData["UserId"].ToString();
+            if(ModelState.IsValid)
+            {
+                db.Entry(apiInfo).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return RedirectToAction("ViewProfile", new { id = userId });
+        }
+
+        public ActionResult CreateApi(string id)
+        {
+            var apiInfo = new ApiInfo();
+            //ViewBag.UserId = id;
+            TempData.Clear();
+            TempData.Add("UserId", id);
+            return View(apiInfo);
+        }
+
+        [HttpPost]
+        public ActionResult CreateApi(ApiInfo apiInfo)
+        {
+            string userId = TempData["UserId"].ToString();
+
+            apiInfo.User = db.Users.Where(user => user.Id == userId).FirstOrDefault();
+
+            db.ApiInfoes.Add(apiInfo);
+            db.SaveChanges();            
+
+            return RedirectToAction("ViewProfile", new { id = userId });
         }
 	}
 }

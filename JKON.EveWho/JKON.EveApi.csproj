@@ -32,9 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EveAI.Live, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="EveAI.Live, Version=3.1.1.0, Culture=neutral, PublicKeyToken=670e812152ebd673, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\EveAI\EveAI.Live.dll</HintPath>
+      <HintPath>..\..\..\EveAI\EveAI.Live.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

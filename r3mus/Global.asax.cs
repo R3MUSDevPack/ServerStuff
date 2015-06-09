@@ -17,6 +17,8 @@ namespace r3mus
             //Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationDbContext>());
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
 
+            Database.SetInitializer<ApplicationDbContext>(null);
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

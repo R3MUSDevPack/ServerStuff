@@ -9,6 +9,11 @@
 <div>
     <h4>@Model.UserName</h4>
 	<hr />
+    @if(ViewBag.Message != null)
+    {
+    <h4>@ViewBag.Message</h4>
+    }
+    <hr />
     @if (Model.Avatar != null)
     {
         <img src="@Model.Avatar" />
@@ -66,7 +71,8 @@
         Html.RenderPartial("_RoleManagement");
     }
 
-    <h4>API Details</h4>
+    <h4>API Details</h4>    
+    @Html.ActionLink("Create", "CreateApi", new { id = Model.Id }, new { @class = "btn btn-default" })
     <table class="table">
         <tr>
             <th>
@@ -78,24 +84,44 @@
             <th>
                 @Html.DisplayNameFor(model => model.ApiKeys[0].AccessMask)
             </th>
+            <th></th>
         </tr>
         @foreach (var api in Model.ApiKeys)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => api.ApiKey)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => api.VerificationCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => api.AccessMask)
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => api.ApiKey)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => api.VerificationCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => api.AccessMask)
+                    </td>
+                    <td>                      
+                        @if (User.IsInRole("Admin") || User.IsInRole("Director") || User.IsInRole("CEO"))
+                        {
+                            <table>
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Edit", "EditApi", new { id = api.Id }, new { @class = "btn btn-danger" })
+                                    </td>
+                                    <td>                                             
+                                        @Html.ActionLink("Delete", "DeleteApi", new { id = api.Id }, new { @class = "btn btn-danger" })                              
+                                        @*@using (Html.BeginForm("DeleteAPI", "WebsiteAdmin", new { id = api.Id, userId = Model.Id }, FormMethod.Post))
+                                        {
+                                            <input type="submit" name="Delete" id="Delete" value="Delete" class="btn btn-danger" />
+                                        }*@
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </td>
+                </tr>
         }
     </table>
 </div>
 <p>
     @Html.ActionLink("Import from Eve", "UpdateApiDetails", new { id=Model.Id, originator="ViewProfile" }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Back to List", "ViewUsers", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to Profile", "ViewUsers", null, new { @class = "btn btn-default" })
 </p>

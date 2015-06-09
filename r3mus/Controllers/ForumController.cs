@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace r3mus.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ForumController : Controller
     {
         SQLForumRepository repository = new SQLForumRepository();

@@ -219,11 +219,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ForumController.cs" />
+    <Compile Include="Controllers\ForumController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoggedInHomeController.cs" />
     <Compile Include="Controllers\RecruitmentController.cs" />
-    <Compile Include="Controllers\ThreadController.cs" />
+    <Compile Include="Controllers\ThreadController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\WebsiteAdminController.cs" />
     <Compile Include="Filters\CustomAttributes.cs" />
     <Compile Include="Filters\Extensions.cs" />
@@ -326,7 +330,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Repository\SQLForumRepository.cs" />
+    <Compile Include="Repository\SQLForumRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ApplicantViewModel.cs" />
     <Compile Include="ViewModels\ApplicationReviewViewModel.cs" />
@@ -491,6 +497,9 @@
     <Content Include="Views\Forum\Delete.cshtml" />
     <Content Include="Views\Forum\ShowForum.cshtml" />
     <Content Include="Views\Thread\Create.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AccessMaskHighlight.cshtml" />
+    <Content Include="Views\WebsiteAdmin\EditApi.cshtml" />
+    <Content Include="Views\WebsiteAdmin\CreateApi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

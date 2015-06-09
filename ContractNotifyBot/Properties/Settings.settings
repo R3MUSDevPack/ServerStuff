@@ -9,10 +9,10 @@
       <Value Profile="(Default)">https://hooks.slack.com/services/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</Value>
     </Setting>
     <Setting Name="CorpAPI" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">4285630</Value>
+      <Value Profile="(Default)">4425806</Value>
     </Setting>
     <Setting Name="VCode" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">hmZDX0Ptrvb33GscSJVfeRy6rogh06XcymVI9GdueMahoRxZDvh0lWsOeGiBaKbS</Value>
+      <Value Profile="(Default)">sgzakeHa3MwhV7WmxQY3pH7ZGMbipr7xN1bqk5pgon7nv5ZjqFZ6ci4B49crp4Ke</Value>
     </Setting>
     <Setting Name="Plugin" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Hipchat</Value>

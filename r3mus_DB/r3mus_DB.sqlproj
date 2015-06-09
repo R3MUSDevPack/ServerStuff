@@ -73,10 +73,13 @@
     <Build Include="dbo\Tables\__MigrationHistory.sql" />
     <Build Include="dbo\Views\LastWeeksSubmissionStats.sql" />
     <Build Include="dbo\Views\LastWeeksMailStats.sql" />
-    <Build Include="Security\DRAXPOWER_bucknem.sql" />
     <Build Include="dbo\Tables\Titles.sql" />
     <Build Include="dbo\Tables\Applications.sql" />
     <Build Include="dbo\Tables\Applicants.sql" />
     <Build Include="dbo\Views\ApplicantList.sql" />
+    <Build Include="dbo\Tables\Threads.sql" />
+    <Build Include="dbo\Tables\Posts.sql" />
+    <Build Include="dbo\Tables\Forums.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
   </ItemGroup>
 </Project>

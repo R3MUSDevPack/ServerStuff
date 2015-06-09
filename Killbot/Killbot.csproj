@@ -69,6 +69,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EVEAI.2.6.0.0\lib\net20\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
+    <Reference Include="JKON.EveWho, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\APIViewer\JKON.EveWho\bin\Debug\JKON.EveWho.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>

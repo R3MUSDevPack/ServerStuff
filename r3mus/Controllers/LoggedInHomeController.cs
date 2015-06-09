@@ -64,7 +64,7 @@ namespace r3mus.Controllers
 
         // GET: /LoggedInHome/Create
         [OverrideAuthorization]
-        public ActionResult Create()
+        public ActionResult Create(string userId = "")
         {
             //ApiInfo info = new ApiInfo() { User = UserManager.FindById(User.Identity.GetUserId()) };
             //return View(info);

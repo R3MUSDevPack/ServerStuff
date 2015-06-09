@@ -43,7 +43,7 @@ namespace ContractNotifyBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4285630")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4425806")]
         public int CorpAPI {
             get {
                 return ((int)(this["CorpAPI"]));
@@ -52,7 +52,7 @@ namespace ContractNotifyBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("hmZDX0Ptrvb33GscSJVfeRy6rogh06XcymVI9GdueMahoRxZDvh0lWsOeGiBaKbS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("sgzakeHa3MwhV7WmxQY3pH7ZGMbipr7xN1bqk5pgon7nv5ZjqFZ6ci4B49crp4Ke")]
         public string VCode {
             get {
                 return ((string)(this["VCode"]));
