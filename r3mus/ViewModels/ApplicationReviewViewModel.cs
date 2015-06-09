@@ -21,6 +21,8 @@ namespace r3mus.ViewModels
             DirectorReview,
             [Display(Name = "Awaiting Interview")]
             AwaitingInterview,
+            [Display(Name = "Needs Invitation Sending")]
+            AwaitingInvitation,
             Accepted
         }
 
