@@ -204,6 +204,7 @@ namespace r3mus.Controllers
             {
                 ViewBag.Complete = false;
             }
+            newReviewModel.NewReviewItemStatus = ApplicationReviewViewModel.ApplicationStatus.InScreening;
 
             newReviewModel.Applicant = db.Applicants.Where(a => a.Id == id).FirstOrDefault();
             if((newReviewModel.Applicant.TimeZone == null) || (newReviewModel.Applicant.TimeZone == string.Empty))
@@ -232,7 +233,14 @@ namespace r3mus.Controllers
                 db.Applications.Add(model.NewReviewItem);
                 db.SaveChanges();
 
-                return RedirectToAction("ShowApplications");
+                if (model.NewReviewItemStatus == ApplicationReviewViewModel.ApplicationStatus.InScreening)
+                {
+                    return RedirectToAction("ReviewApplication", new { id = model.NewReviewItem.ApplicantId });
+                }
+                else
+                {
+                    return RedirectToAction("ShowApplications");
+                }
             }
             return View(model);
         }

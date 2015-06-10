@@ -33,11 +33,11 @@ namespace SiteUpdateBot
 
             NotifyApplicationChanges(lastFullRunTime);
 
-            //ResetMailees(doFullRun);
-            //while(UpdateMailees())
-            //{
-            //    System.Threading.Thread.Sleep(2000);
-            //}
+            ResetMailees(doFullRun);
+            while (UpdateMailees())
+            {
+                System.Threading.Thread.Sleep(2000);
+            }
 
             if(doFullRun)
             {
