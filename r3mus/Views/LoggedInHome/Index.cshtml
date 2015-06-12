@@ -36,41 +36,35 @@
         <p style="font-family:Arial; font-size:small; font-weight:600">
             @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
         </p>
-        <table class="table col-md-1" 6 style="font-family:Arial; font-size:small; font-weight:600">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ApiKey)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VerificationCode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AccessMask)
-                </th>
-                <th></th>
-            </tr>
-
+        <div class="col-md-12" style="font-family:Arial; font-size:small; font-weight:600">
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
+                <div class="row">
+                    <div class="col-md-1">
+                        @Html.DisplayNameFor(model => model.ApiKey): 
+                        <br />
                         @Html.DisplayFor(modelItem => item.ApiKey)
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.DisplayNameFor(model => model.VerificationCode):
+                        <br />
                         @Html.DisplayFor(modelItem => item.VerificationCode)
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-md-1">
+                        @Html.DisplayNameFor(model => model.AccessMask):
+                        <br />
                         @Html.DisplayFor(modelItem => item.AccessMask)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { apiKey = item.ApiKey }, new { @class = "btn btn-default" }) |
-                        @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                    </div>
+                    <div class="col-md-1">
+                        @Html.ActionLink("Edit", "Edit", new { apiKey = item.ApiKey }, new { @class = "btn btn-default" })
+                    </div>
+                    <div class="col-md-1">
                         @Html.ActionLink("Delete", "Delete", new { apiKey = item.ApiKey }, new { @class = "btn btn-default" })
-                    </td>
-                </tr>
+                    </div>
+                </div>
             }
+        </div>
 
-        </table>
     </div>
     <div id="TSTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         @Html.Partial("_RegisterForTeamspeak")

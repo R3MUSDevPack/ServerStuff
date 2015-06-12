@@ -500,6 +500,9 @@
     <Content Include="Views\Shared\DisplayTemplates\AccessMaskHighlight.cshtml" />
     <Content Include="Views\WebsiteAdmin\EditApi.cshtml" />
     <Content Include="Views\WebsiteAdmin\CreateApi.cshtml" />
+    <Content Include="Views\Shared\_RecruitmentMenu.cshtml" />
+    <Content Include="Views\Shared\_ServicesMenu.cshtml" />
+    <Content Include="Views\Shared\_AdminMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

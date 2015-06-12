@@ -1,7 +1,11 @@
 ﻿@using (Html.BeginForm("RegisterForTeamspeak", "LoggedInHome", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <p style="font-family:Arial; font-size:small; font-weight:600">
-        Make sure you are logged in to Teamspeak as @ViewBag.TSName.
+        Teamspeak 3 (TS3) is our preferred corp &amp; alliance voice comms solution. Make sure you are logged in to the TS3 server <strong>r3mus.org</strong> as @ViewBag.TSName before completing this step.
+        <br /><br />
+        If you do not have TS3 installed, you should download it from <a href="http://www.teamspeak.com/?page=downloads">here</a> now.
+        <br /><br />
+        You will need to register with the alliance TS3 server seperately. The alliance website can be accessed under "Services > NAGA" at the top of the page.
     </p>
     <fieldset>
         <input type="submit" value="Register" class="btn btn-default" />

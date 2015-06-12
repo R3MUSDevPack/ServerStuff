@@ -32,8 +32,8 @@ namespace r3mus.Models
 
         [DataType(DataType.MultilineText)]
         public string Notes { get; set; }
-
-        public ApplicationUser Reviewer { get; set; }
+        
+        public virtual ApplicationUser Reviewer { get; set; }
 
         public DateTime DateTimeCreated { get; set; }
 
