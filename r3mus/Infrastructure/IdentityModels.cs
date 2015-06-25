@@ -319,34 +319,38 @@ namespace r3mus.Models
             {
                 foreach (ApiInfo info in ApiKeys)
                 {
-
-                    var newkey = EveOnlineApi.CreateApiKey(info.ApiKey, info.VerificationCode).Init();
-                    if ((newkey.IsValidKey()) && newkey.KeyType != (ApiKeyType.Corporation))
+                    try
                     {
-                        var cKey = (CharacterKey)newkey.GetActualKey();
-                        Character toon = null;
-
-                        try
+                        var newkey = EveOnlineApi.CreateApiKey(info.ApiKey, info.VerificationCode).Init();
+                        if ((newkey.IsValidKey()) && newkey.KeyType != (ApiKeyType.Corporation))
                         {
-                            toon = cKey.Characters.Single(c => c.CharacterName == UserName);
-                        }
-                        catch (Exception ex) { }
+                            var cKey = (CharacterKey)newkey.GetActualKey();
+                            Character toon = null;
 
-                        if (toon != null)
-                        {
-                            liveAPI = info;
-
-                            MemberSince = toon.GetCharacterInfo().Result.CorporationDate;
-                            var tempAvatar = ImageServer.DownloadCharacterImage(toon.CharacterId, ImageServer.ImageSize.Size128px);
-                            using (var stream = new MemoryStream())
+                            try
                             {
-                                tempAvatar.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                                Avatar = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(stream.ToArray()));
+                                toon = cKey.Characters.Single(c => c.CharacterName == UserName);
                             }
-                            tempAvatar.Dispose();
-                            break;
+                            catch (Exception ex) { }
+
+                            if (toon != null)
+                            {
+                                liveAPI = info;
+
+                                MemberSince = toon.GetCharacterInfo().Result.CorporationDate;
+                                var tempAvatar = ImageServer.DownloadCharacterImage(toon.CharacterId, ImageServer.ImageSize.Size128px);
+                                using (var stream = new MemoryStream())
+                                {
+                                    tempAvatar.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                                    Avatar = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(stream.ToArray()));
+                                }
+                                tempAvatar.Dispose();
+                                break;
+                            }
                         }
                     }
+                    catch(Exception ex)
+                    { }
                 }
                 if(MemberType == IDType.Corporation.ToString())
                 {

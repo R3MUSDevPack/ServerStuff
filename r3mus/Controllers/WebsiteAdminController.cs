@@ -36,6 +36,13 @@ namespace r3mus.Controllers
             return View();
         }
 
+        public ActionResult TestSlack()
+        {
+            RecruitmentController.SendMessage("Slack Test From Website");
+
+            return RedirectToAction("ViewUsers");
+        }
+
         public ActionResult ViewUsers(r3mus.Models.ApplicationUser.IDType memberType = r3mus.Models.ApplicationUser.IDType.Corporation)
         {
             var users = db.Users.Where(user => user.MemberType == memberType.ToString()).ToList<ApplicationUser>();

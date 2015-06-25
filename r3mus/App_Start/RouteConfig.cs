@@ -18,6 +18,12 @@ namespace r3mus
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Recruitment",
+                url: "Recruitment/{action}/",
+                defaults: new { controller = "Recruitment", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

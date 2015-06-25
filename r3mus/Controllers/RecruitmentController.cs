@@ -9,6 +9,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using r3mus.Filters;
+using Hipchat_Plugin;
+using Slack_Plugin;
 
 namespace r3mus.Controllers
 {
@@ -18,6 +20,7 @@ namespace r3mus.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private RecruitmentStatEntities ent = new RecruitmentStatEntities();
         private ApplicantEntities appent = new ApplicantEntities();
+        private r3mus_MonthRecruitmentStatEntities mnthEnt = new r3mus_MonthRecruitmentStatEntities();
 
         //protected UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
@@ -26,8 +29,23 @@ namespace r3mus.Controllers
         public ActionResult Index()
         {
             var statsVM = new RecruitmentStatsViewModel();
-            statsVM.Submitters = ent.LastWeeksSubmissionStats.ToList();
-            statsVM.Mailers = ent.LastWeeksMailStats.ToList();
+            statsVM.SubmittersLastWeek = ent.LastWeeksSubmissionStats.ToList();
+            statsVM.MailersLastWeek = ent.LastWeeksMailStats.ToList();
+            statsVM.SubmittersLastMonth = mnthEnt.LastMonthsSubmissionStats.ToList();
+            statsVM.MailersLastMonth = mnthEnt.LastMonthsMailStats.ToList();
+            statsVM.MailsToSend = db.RecruitmentMailees.Where(m => (m.MailerId == null) && (m.CorpId_AtLastCheck >= 1000000) && (m.CorpId_AtLastCheck <= 1000200)).Count();
+            statsVM.ApplicationsToProcess = appent.ApplicantLists.Where(a => (a.Status != ApplicationReviewViewModel.ApplicationStatus.Accepted.ToString()) && (a.Status != ApplicationReviewViewModel.ApplicationStatus.Rejected.ToString())).Count();
+
+            return View(statsVM);
+        }
+
+        public ActionResult Home()
+        {
+            var statsVM = new RecruitmentStatsViewModel();
+            statsVM.SubmittersLastWeek = ent.LastWeeksSubmissionStats.ToList();
+            statsVM.MailersLastWeek = ent.LastWeeksMailStats.ToList();
+            statsVM.SubmittersLastMonth = mnthEnt.LastMonthsSubmissionStats.ToList();
+            statsVM.MailersLastMonth = mnthEnt.LastMonthsMailStats.ToList();
             statsVM.MailsToSend = db.RecruitmentMailees.Where(m => (m.MailerId == null) && (m.CorpId_AtLastCheck >= 1000000) && (m.CorpId_AtLastCheck <= 1000200)).Count();
             statsVM.ApplicationsToProcess = appent.ApplicantLists.Where(a => (a.Status != ApplicationReviewViewModel.ApplicationStatus.Accepted.ToString()) && (a.Status != ApplicationReviewViewModel.ApplicationStatus.Rejected.ToString())).Count();
 
@@ -42,10 +60,10 @@ namespace r3mus.Controllers
 
             foreach (RecruitmentMailee mailee in mailees)
             {
-                //if (mailee.IsInNPCCorp())
-                //{
+                if (mailee.IsInNPCCorp())
+                {
                     NPCMailees.Add(mailee);
-                //}
+                }
                 //if (NPCMailees.Count == 20)
                 //{
                 //    break;
@@ -73,7 +91,7 @@ namespace r3mus.Controllers
             mailees.ToList().ForEach(m => m.Mailed = DateTime.Now);
             db.SaveChanges();            
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Home");
         }
 
         [HttpPost]
@@ -89,7 +107,7 @@ namespace r3mus.Controllers
             mailees.ToList().ForEach(m => m.MailerId = null);
             db.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Home");
         }
 
         public ActionResult AddNames()
@@ -116,7 +134,7 @@ namespace r3mus.Controllers
             }
             db.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Home");
         }
 
         [OverrideAuthorization]
@@ -150,6 +168,8 @@ namespace r3mus.Controllers
                 var application = new Application() { ApplicantId = applicant.Id, Notes = "New application", Status = ApplicationReviewViewModel.ApplicationStatus.Applied.ToString(), DateTimeCreated = DateTime.Now };
                 db.Applications.Add(application);
                 db.SaveChanges();
+
+                SendMessage(string.Format(Properties.Settings.Default.NewApp_MessageFormatLine1, applicant.Name, application.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
 
                 TempData.Clear();
                 TempData.Add("Message", "Thank you for your application. A recruiter will contact you shortly.");
@@ -233,6 +253,8 @@ namespace r3mus.Controllers
                 db.Applications.Add(model.NewReviewItem);
                 db.SaveChanges();
 
+                SendMessage(string.Format(Properties.Settings.Default.AppUpdate_MessageFormatLine2, model.Applicant.Name, model.NewReviewItem.Status, model.NewReviewItem.Reviewer, model.NewReviewItem.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
+
                 if (model.NewReviewItemStatus == ApplicationReviewViewModel.ApplicationStatus.InScreening)
                 {
                     return RedirectToAction("ReviewApplication", new { id = model.NewReviewItem.ApplicantId });
@@ -243,6 +265,18 @@ namespace r3mus.Controllers
                 }
             }
             return View(model);
+        }
+
+        public static void SendMessage(string message)
+        {
+            if (Properties.Settings.Default.Plugin.ToUpper() == "HIPCHAT")
+            {
+                Hipchat.SendToRoom(message, Properties.Settings.Default.RecruitmentRoomName, Properties.Settings.Default.HipchatToken);
+            }
+            else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
+            {
+                Slack.SendToRoom(message, Properties.Settings.Default.RecruitmentRoomName, Properties.Settings.Default.SlackWebhook);
+            }
         }
 	}
 }

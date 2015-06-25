@@ -10,7 +10,9 @@ namespace r3mus.ViewModels
     {
         public int MailsToSend { get; set; }
         public int ApplicationsToProcess { get; set; }
-        public List<LastWeeksMailStat> Mailers { get; set; }
-        public List<LastWeeksSubmissionStat> Submitters { get; set; }
+        public List<LastWeeksMailStat> MailersLastWeek { get; set; }
+        public List<LastWeeksSubmissionStat> SubmittersLastWeek { get; set; }
+        public List<LastMonthsMailStat> MailersLastMonth { get; set; }
+        public List<LastMonthsSubmissionStat> SubmittersLastMonth { get; set; }
     }
 }

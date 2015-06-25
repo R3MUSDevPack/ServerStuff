@@ -18,35 +18,45 @@ namespace SiteUpdateBot
     {      
         static void Main(string[] args)
         {
-
-            DateTime checkDT = DateTime.Now;
-            //UpdateRunTime(checkDT);
-            //return;
-            DateTime lastFullRunTime = GetLastRunTime();
-            bool doFullRun = ((checkDT - lastFullRunTime).TotalHours > 23);
-
-            Console.WriteLine(string.Format("Last Run Time {0}", lastFullRunTime));
-            Console.WriteLine(string.Format("Full Run {0}", doFullRun.ToString()));
-
-            //GetWebsiteUserDetails(doFullRun);
-            //UpdateMailees();
-
-            NotifyApplicationChanges(lastFullRunTime);
-
-            ResetMailees(doFullRun);
-            while (UpdateMailees())
+            try
             {
-                System.Threading.Thread.Sleep(2000);
-            }
+                DateTime checkDT = DateTime.Now;
+                //UpdateRunTime(checkDT);
+                //return;
+                DateTime lastFullRunTime = GetLastRunTime();
+                bool doFullRun = ((checkDT - lastFullRunTime).TotalHours > 23);
 
-            if(doFullRun)
+                Console.WriteLine(string.Format("Last Run Time {0}", lastFullRunTime));
+                Console.WriteLine(string.Format("Full Run {0}", doFullRun.ToString()));
+
+                //GetWebsiteUserDetails(doFullRun);
+                //UpdateMailees();
+
+                //NotifyApplicationChanges(lastFullRunTime);
+
+                ResetMailees(doFullRun);
+                while (UpdateMailees())
+                {
+                    System.Threading.Thread.Sleep(2000);
+                }
+
+                if (doFullRun)
+                {
+                    UpdateRunTime(checkDT);
+                }
+
+                Console.WriteLine("Complete!");
+
+                System.Threading.Thread.Sleep(1000);
+            }
+            catch(Exception ex)
             {
-                UpdateRunTime(checkDT);
+                Console.WriteLine(ex.Message);
+                if (Environment.UserInteractive)
+                {
+                    Console.ReadLine();
+                }
             }
-
-            Console.WriteLine("Complete!");
-
-            System.Threading.Thread.Sleep(1000);
         }
 
         public static void ResetMailees(bool reset)
@@ -169,10 +179,10 @@ namespace SiteUpdateBot
         private static void NotifyApplicationChanges(DateTime lastRunTime)
         {
             var r3musDB = new ApplicantEntities();
-            var lastCheck = DateTime.Now.AddMinutes(-1);
-            var applications = r3musDB.ApplicantLists.Where(applicant => applicant.LastStatusUpdate >= lastCheck).ToList();
+            //var lastCheck = DateTime.Now.AddMinutes(-1);
+            var applications = r3musDB.ApplicantLists.Where(applicant => applicant.LastStatusUpdate >= lastRunTime).ToList();
 
-            Console.WriteLine(string.Format("Running applications check from {0}.", lastCheck.ToString("yyyy-MM-dd HH:mm:ss")));
+            Console.WriteLine(string.Format("Running applications check from {0}.", lastRunTime.ToString("yyyy-MM-dd HH:mm:ss")));
 
             foreach(var application in applications)
             {
@@ -185,10 +195,10 @@ namespace SiteUpdateBot
                     SendMessage(string.Format(Properties.Settings.Default.AppUpdate_MessageFormatLine2, application.Name, application.Status, application.UserName, application.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
                 }
             }
-            //if(applications.Count == 0)
-            //{
-            //    SendMessage("I am a robot. Beep.");
-            //}
+            if (Environment.UserInteractive)
+            {
+                SendMessage("I am a robot. Beep.");
+            }
         }
         
         private static void SendMessage(string message)

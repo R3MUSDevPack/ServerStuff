@@ -6,6 +6,13 @@
 
 <h2>View Users</h2>
 
+@if(User.IsInRole("Admin"))
+{
+    <div class="row">
+        @Html.ActionLink("Test Slack", "TestSlack", null, new { @class = "btn btn-default" })
+    </div>
+}
+
 <table class="table">
     <tr>
         <th>

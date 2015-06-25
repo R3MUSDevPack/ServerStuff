@@ -10,10 +10,76 @@
     @Html.ActionLink("Get Names", "GetNames", null, new { @class = "btn btn-default" })
 </p>
 
-<h3>Statistics</h3>
-    <h4>Number of mails to send: @Html.DisplayFor(m => m.MailsToSend)</h4>
-    <h4>Number of applications to process: @Html.DisplayFor(m => m.ApplicationsToProcess)</h4>
-<p>
+<div class="col-md-12">
+
+    <div class="row">
+
+        <h3>Statistics</h3>
+        <h4>Number of mails to send: @Html.DisplayFor(m => m.MailsToSend)</h4>
+        <h4>Number of applications to process: @Html.DisplayFor(m => m.ApplicationsToProcess)</h4>
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <h4>Submitted - Last Week</h4>
+            <dl class="dl-horizontal">
+
+                @foreach (r3mus.Models.LastWeeksSubmissionStat stat in Model.SubmittersLastWeek)
+                {
+                    <dt>@stat.Submitter</dt>
+                    <dd>@stat.Submitted.ToString()</dd>
+                }
+
+            </dl>
+        </div>
+
+        <div class="col-md-4">
+            <h4>Mailed - Last Week</h4>
+            <dl class="dl-horizontal">
+
+                @foreach (r3mus.Models.LastWeeksMailStat stat in Model.MailersLastWeek)
+                {
+                    <dt>@stat.Mailer</dt>
+                    <dd>@stat.Mailed.ToString()</dd>
+                }
+
+            </dl>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <h4>Submitted - Last Month</h4>
+            <dl class="dl-horizontal">
+
+                @foreach (r3mus.Models.LastMonthsSubmissionStat stat in Model.SubmittersLastMonth)
+                {
+                    <dt>@stat.Submitter</dt>
+                    <dd>@stat.Submitted.ToString()</dd>
+                }
+
+            </dl>
+        </div>
+
+        <div class="col-md-4">
+            <h4>Mailed - Last Month</h4>
+            <dl class="dl-horizontal">
+
+                @foreach (r3mus.Models.LastMonthsMailStat stat in Model.MailersLastMonth)
+                {
+                    <dt>@stat.Mailer</dt>
+                    <dd>@stat.Mailed.ToString()</dd>
+                }
+
+            </dl>
+        </div>
+
+    </div>
+    </div>
+
+@*<p>
     <h4>Submitted</h4>
     <dl class="dl-horizontal">
 
@@ -36,5 +102,42 @@
             <dd>@stat.Mailed.ToString()</dd>
         }
 
+    </dl>
+</p>*@
+
+<p>
+    <h4>
+        Tools to make mailing easier
+    </h4>
+    <h5>
+        You will need either Firefox or Chrome as a browser, then download the relevant of these to use the mailing script.
+    </h5>
+    <div>
+        <a href="https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/">Greasemonkey for Firefox</a>
+    </div>
+    <div>
+        <a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en">Tampermonkey for Firefox</a>
+    </div>
+    <dl>
+        <dd>
+            Mailing Script:
+        </dd>
+        <dt>
+            <a href="../Scripts/MailingScript/R3MUS_MM.user.js" download="R3MUS_MM.user">R3MUS_MM.user.js</a>
+        </dt>
+        <dd>
+            Release Date:
+        </dd>
+        <dt>@{
+            if (File.Exists(HttpContext.Current.Server.MapPath("Scripts/MailingScript/R3MUS_MM.user.js").Replace(@"\Recruitment", "")))
+    {
+        <span>@File.GetLastWriteTimeUtc(HttpContext.Current.Server.MapPath("Scripts/MailingScript/R3MUS_MM.user.js").Replace(@"\Recruitment", ""))</span>
+    }
+    else
+    {
+        <span>Cannot display release date</span>
+    }
+}
+        </dt>
     </dl>
 </p>

@@ -140,5 +140,50 @@ namespace r3mus.Properties {
                 return ((string)(this["SlackInviteURL"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("recruitment")]
+        public string RecruitmentRoomName {
+            get {
+                return ((string)(this["RecruitmentRoomName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Slack")]
+        public string Plugin {
+            get {
+                return ((string)(this["Plugin"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hooks.slack.com/services/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")]
+        public string SlackWebhook {
+            get {
+                return ((string)(this["SlackWebhook"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("New application received from {0} at {1}.")]
+        public string NewApp_MessageFormatLine1 {
+            get {
+                return ((string)(this["NewApp_MessageFormatLine1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Application from {0} was updated to {1} by {2} at {3}.")]
+        public string AppUpdate_MessageFormatLine2 {
+            get {
+                return ((string)(this["AppUpdate_MessageFormatLine2"]));
+            }
+        }
     }
 }

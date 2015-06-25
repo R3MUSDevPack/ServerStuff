@@ -129,6 +129,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SlackClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1980a8a7670d37a5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Slack_Plugin\SlackClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -224,6 +229,7 @@
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoggedInHomeController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\RecruitmentController.cs" />
     <Compile Include="Controllers\ThreadController.cs">
       <SubType>Code</SubType>
@@ -299,6 +305,27 @@
       <DependentUpon>ApplicantList.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Forum.cs" />
+    <Compile Include="Models\LastMonthsMailStat.cs">
+      <DependentUpon>LastMonthStats.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LastMonthsSubmissionStat.cs">
+      <DependentUpon>LastMonthStats.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LastMonthStats.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LastMonthStats.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LastMonthStats.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LastMonthStats.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LastMonthStats.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LastMonthStats.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\LastWeeksMailStat.cs">
       <DependentUpon>LastWeeksSubmissionStats.tt</DependentUpon>
     </Compile>
@@ -423,6 +450,25 @@
       <DependentUpon>ApplicantList.edmx</DependentUpon>
       <LastGenOutput>ApplicantList1.cs</LastGenOutput>
     </Content>
+    <EntityDeploy Include="Models\LastMonthStats.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LastMonthStats.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\LastMonthStats.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LastMonthStats.edmx</DependentUpon>
+      <LastGenOutput>LastMonthStats.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\LastMonthStats.edmx.diagram">
+      <DependentUpon>LastMonthStats.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\LastMonthStats.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LastMonthStats.edmx</DependentUpon>
+      <LastGenOutput>LastMonthStats.cs</LastGenOutput>
+    </Content>
+    <Content Include="fonts\xirod.ttf" />
+    <Content Include="fonts\xirod.woff" />
     <None Include="Properties\PublishProfiles\Mine.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -434,6 +480,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MailingScript\R3MUS_MM.user.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -503,6 +550,9 @@
     <Content Include="Views\Shared\_RecruitmentMenu.cshtml" />
     <Content Include="Views\Shared\_ServicesMenu.cshtml" />
     <Content Include="Views\Shared\_AdminMenu.cshtml" />
+    <Content Include="Views\Thread\Index.cshtml" />
+    <Content Include="Views\Recruitment\Home.cshtml" />
+    <Content Include="Views\Shared\_Rules.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -515,6 +565,10 @@
     <ProjectReference Include="..\Hipchat_Plugin\Hipchat_Plugin.csproj">
       <Project>{62d74a6f-20e1-4b2b-a400-f1f8a31700c0}</Project>
       <Name>Hipchat_Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slack_Plugin\Slack_Plugin.csproj">
+      <Project>{eca1a3dd-2245-41c8-8100-20133906fad3}</Project>
+      <Name>Slack_Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Teamspeak+Plugin\Teamspeak_Plugin.csproj">
       <Project>{a594c855-b2f5-4e06-b343-2fe1ff13bb57}</Project>
@@ -557,6 +611,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Post\" />
     <Folder Include="Views\Role\" />
   </ItemGroup>
   <PropertyGroup>

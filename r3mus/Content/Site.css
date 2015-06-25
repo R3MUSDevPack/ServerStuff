@@ -60,3 +60,8 @@ ul.listRoles li
   border: 1px solid Black;
   border-radius: 5px;
 }
+
+@font-face {
+    font-family: 'Xirod';
+    src: url('/fonts/xirod.ttf') format('truetype'), url('/fonts/xirod.woff') format('woff');
+}

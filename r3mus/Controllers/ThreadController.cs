@@ -24,6 +24,7 @@ namespace r3mus.Controllers
         }
         //
         // GET: /Thread/
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             ViewBag.Message = "All Threads";
@@ -107,6 +108,7 @@ namespace r3mus.Controllers
 
         //
         // GET: /Thread/Delete/5
+        [Authorize(Roles = "Admin, CEO, Director")]
         public ActionResult Delete(int id)
         {
             var thread = repository.GetThreadByID(id);
@@ -115,6 +117,7 @@ namespace r3mus.Controllers
 
         //
         // POST: /Thread/Delete/5
+        [Authorize(Roles = "Admin, CEO, Director")]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
