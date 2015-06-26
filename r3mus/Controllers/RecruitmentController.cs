@@ -104,6 +104,7 @@ namespace r3mus.Controllers
             var mailees = (from RecruitmentMailee in db.RecruitmentMailees
                            where names.Contains(RecruitmentMailee.Name)
                            select RecruitmentMailee);
+
             mailees.ToList().ForEach(m => m.MailerId = null);
             db.SaveChanges();
 
@@ -132,6 +133,7 @@ namespace r3mus.Controllers
                     db.RecruitmentMailees.Add(mailee);
                 }
             }
+
             db.SaveChanges();
 
             return RedirectToAction("Home");
