@@ -13,6 +13,7 @@ using EveAI.Product;
 using Hipchat_Plugin;
 using Slack_Plugin;
 using JKON.EveWho.Models;
+using JKON.EveWho.Stations;
 using System.Configuration;
 using System.Reflection;
 
@@ -39,7 +40,7 @@ namespace ContractNotifyBot
             try
             {
                 api = new EveAI.Live.EveApi("Clyde en Marland's Contract Notifier", (long)Properties.Settings.Default.CorpAPI, Properties.Settings.Default.VCode);
-                Contracts = api.GetCorporationContracts().ToList().Where(contract => contract.DateIssued >= lastFullRunTime).ToList();
+                Contracts = api.GetCorporationContracts().ToList().Where(contract => contract.DateIssued > lastFullRunTime).ToList();
 
                 foreach(EveAI.Live.Utility.Contract Contract in Contracts)
                 {
@@ -93,10 +94,34 @@ namespace ContractNotifyBot
 
             messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine1, contract.DateIssued.ToString("yyyy-MM-dd hh:mm:ss")));
             messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine2, IssuerName));
-                messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine3, contract.Reward.ToString()));
+            messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine3, contract.Reward.ToString()));
+
+            var startStation = contract.StartStation;
+            var endStation = contract.EndStation;
+            string startStationName = string.Empty;
+            string endStationName = string.Empty;
+
+
+            if(startStation == null)
+            {
+                startStationName = Api.GetStation(contract.StartStationID).stationName;
+            }
+            else 
+            {
+                startStationName = contract.StartStation.Name;
+            }
+            if(endStation == null)
+            {
+                endStationName = Api.GetStation(contract.EndStationID).stationName;
+            }
+            else
+            {
+                endStationName = contract.EndStation.Name;
+            }
+
             try
             {
-                messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine4, contract.StartStation.Name, contract.EndStation.Name));
+                messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine4, startStationName, endStationName)); //, contract.StartStation.Name, contract.EndStation.Name));
             }
             catch (Exception ex) { }
             messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine5, contract.Volume.ToString()));
@@ -128,6 +153,5 @@ namespace ContractNotifyBot
                 return new DateTime();
             }
         }
-
     }
 }

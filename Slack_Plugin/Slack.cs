@@ -17,6 +17,7 @@ namespace Slack_Plugin
             }
             catch (Exception ex)
             {
+                throw ex;
             }
         }
 

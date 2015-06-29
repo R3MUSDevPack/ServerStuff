@@ -61,7 +61,7 @@ namespace ContractNotifyBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Hipchat")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Slack")]
         public string Plugin {
             get {
                 return ((string)(this["Plugin"]));
@@ -97,7 +97,7 @@ namespace ContractNotifyBot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Value: {0}. ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Value: {0} isk. ")]
         public string MessageFormatLine3 {
             get {
                 return ((string)(this["MessageFormatLine3"]));

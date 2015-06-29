@@ -57,6 +57,8 @@
     <Compile Include="Character\Models\Info.cs" />
     <Compile Include="Kills\Killboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stations\Api.cs" />
+    <Compile Include="Stations\Models\Station.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Kills\Models\" />
