@@ -408,6 +408,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\API_Screenshot.PNG" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -553,6 +554,7 @@
     <Content Include="Views\Thread\Index.cshtml" />
     <Content Include="Views\Recruitment\Home.cshtml" />
     <Content Include="Views\Shared\_Rules.cshtml" />
+    <Content Include="Views\Recruitment\_APIScreenshot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

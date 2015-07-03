@@ -14,7 +14,7 @@ using Slack_Plugin;
 
 namespace r3mus.Controllers
 {
-    [Authorize(Roles = "Recruiter, Screener, Director, CEO, Admin")]
+    [Authorize(Roles = "Line Member, Recruiter, Screener, Director, CEO, Admin")]
     public class RecruitmentController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -52,6 +52,7 @@ namespace r3mus.Controllers
             return View(statsVM);
         }
 
+        [Authorize(Roles = "Recruiter, Screener, Director, CEO, Admin")]
         public ActionResult GetNames()
         {
             var mailees = db.RecruitmentMailees.Where(m => (m.MailerId == null) && (m.CorpId_AtLastCheck >= 1000000) && (m.CorpId_AtLastCheck <= 1000200)).Take(20);
@@ -190,6 +191,7 @@ namespace r3mus.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Recruiter, Screener, Director, CEO, Admin")]
         public ActionResult ShowApplications(bool review = false)
         {
             IQueryable<ApplicantList> apps;
@@ -207,6 +209,7 @@ namespace r3mus.Controllers
             return View(apps);
         }
 
+        [Authorize(Roles = "Screener, Director, CEO, Admin")]
         public ActionResult ReviewApplication(int? id)
         {
             UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
@@ -267,6 +270,12 @@ namespace r3mus.Controllers
                 }
             }
             return View(model);
+        }
+
+        [OverrideAuthorization]
+        public ActionResult APIScreenshot()
+        {
+            return PartialView("_APIScreenshot");
         }
 
         public static void SendMessage(string message)

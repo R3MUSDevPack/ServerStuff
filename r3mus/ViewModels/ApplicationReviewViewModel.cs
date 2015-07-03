@@ -14,6 +14,8 @@ namespace r3mus.ViewModels
             Applied,
             [Display(Name = "In Screening")]
             InScreening,
+            [Display(Name = "Needs API Mail")]
+            NeedsAPIMail,
             [Display(Name = "On Hold")]
             OnHold,
             Rejected,

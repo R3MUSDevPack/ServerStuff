@@ -1,5 +1,8 @@
 ﻿<li>@Html.ActionLink("Training", "RedirectToMoodle", "LoggedInHome")</li>
+@if(User.IsInRole("Admin"))
+{ 
 <li>@Html.ActionLink("Forums", "Index", "Forum")</li>
+}
 
 @{Html.RenderPartial("_RecruitmentMenu");}
 @{Html.RenderPartial("_ServicesMenu");}

@@ -7,7 +7,10 @@
 <h2>Recruitment</h2>
 <p>
     @Html.ActionLink("Add Names", "AddNames", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Get Names", "GetNames", null, new { @class = "btn btn-default" })
+    @if ((User.IsInRole("Recruiter")) || (User.IsInRole("Screener")) || (User.IsInRole("Director")) || (User.IsInRole("CEO")) || (User.IsInRole("Admin")))
+    {
+        @Html.ActionLink("Get Names", "GetNames", null, new { @class = "btn btn-default" })
+    }
 </p>
 
 <div class="col-md-12">

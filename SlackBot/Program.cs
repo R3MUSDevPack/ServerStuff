@@ -157,16 +157,10 @@ namespace SlackBot
 
                     try
                     {
-                        Console.WriteLine("Trying 1");
                         r3musUser = db.AspNetUsers.Where(user => user.UserName.Replace(" ", "").ToLower() == username).FirstOrDefault();
                         if(r3musUser.UserName == string.Empty)
                         {
-                            Console.WriteLine("Trying 2");
                             r3musUser = db.AspNetUsers.Where(user => user.UserName.ToLower().Contains(username)).FirstOrDefault();
-                        }
-                        if (r3musUser.UserName == string.Empty)
-                        {
-                            Console.WriteLine(string.Format("Well that didn't work. I tried this {0}", username));
                         }
                     }
                     catch(Exception ex)
@@ -193,11 +187,6 @@ namespace SlackBot
                     {
                         Console.WriteLine("1 " + ex.Message);
                     }
-
-                    //foreach (var obj in argDict)
-                    //{
-                    //    SendMessage(string.Format("{0}:{1}", obj.Key, obj.Value), channelName);
-                    //}
                 }
 
             }

@@ -18,7 +18,7 @@ namespace SiteUpdateBot
         //public System.Data.Entity.DbSet<r3mus.Models.Applicant> Applicants { get; set; }
 
         //public System.Data.Entity.DbSet<r3mus.Models.Application> Applications { get; set; }
-        //public System.Data.Entity.DbSet<r3mus.Models.Title> Titles { get; set; }
+        public System.Data.Entity.DbSet<r3mus.Models.Title> Titles { get; set; }
 
         public r3musDbContext()
             : base("DefaultConnection")
