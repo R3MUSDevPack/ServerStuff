@@ -124,7 +124,7 @@ namespace r3mus.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("xoxs-4459251457-4460324675-5169000795-972d6847de")]
+        [global::System.Configuration.DefaultSettingValueAttribute("xoxp-4459251457-4460324675-7038754178-57f924")]
         public string SlackToken {
             get {
                 return ((string)(this["SlackToken"]));
