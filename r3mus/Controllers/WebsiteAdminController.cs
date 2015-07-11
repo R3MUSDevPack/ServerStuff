@@ -106,7 +106,7 @@ namespace r3mus.Controllers
         //    return View(userModels);
         //}
 
-        [Authorize]
+        [OverrideAuthorization]
         public ActionResult ViewProfile(string id = "")
         {
             ApplicationUser currentUser;
@@ -118,7 +118,18 @@ namespace r3mus.Controllers
 
             if (id == string.Empty)
             {
-                id = User.Identity.GetUserId();
+                try
+                {
+                    id = User.Identity.GetUserId();
+                    if ((id == null) || (id == string.Empty))
+                    {
+                        return RedirectToAction("Login", "Account");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
             }
 
             TempData.Clear();
