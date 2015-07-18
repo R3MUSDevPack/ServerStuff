@@ -14,7 +14,7 @@ namespace r3mus.Filters
     public class ApiKeyAttribute : ValidationAttribute
     {
         private const string NullValueMessage = "You MUST supply an API Key";
-        private const string InvalidMessage = "You appear to have supplied an invald API Key";
+        private const string InvalidMessage = "You appear to have supplied an invalid API Key";
 
         private const string NumericRegex = "[0-9]";
 

@@ -1,0 +1,56 @@
+﻿<li class="dropdown" id="IntServicesMenuLi" onmouseover="IntServicesMenu_MouseOver()" onmouseout="IntServicesMenu_MouseOut()">
+    <a href="#" class="dropdown-toggle" onmouseover="IntServicesDropdown()" data-toggle="dropdown">Internal Services<span class="caret"></span></a>
+    <ul class="dropdown-menu" id="IntServicesMenu" onmouseover="IntServicesMenu_MouseOver()" onmouseout="IntServicesMenu_MouseOut()">        
+        @if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Forums", "Index", "Forum")</li>
+        }
+
+        <li>
+            <a href="#" class="slideout-toggle" onmouseover="IntServicesSubMenu_MouseOver()" onmouseout="IntServicesSubMenu_MouseOut()" data-toggle="dropdown">Maps<span class="caret"></span></a>
+            <ul class="slide-out-menu" id="IntServicesSlideOut">
+                <li>@Html.ActionLink("Delve", "GetIntelMap_PNG", "Intel", new { map = r3mus.Controllers.IntelController.Map.Delve }, null)</li>
+                <li>@Html.ActionLink("Querious", "GetIntelMap_PNG", "Intel", new { map = r3mus.Controllers.IntelController.Map.Querious }, null)</li>
+            </ul>
+        </li>     
+
+    </ul>
+</li>
+
+<script type="text/javascript">
+
+    //$('#IntServicesSlideOut').next().hide();
+    $('#IntServicesSlideOut').finish().slideUp('fast');
+
+    function IntServicesMenu_MouseOver() {
+        if (($("#IntServicesMenuLi").is(":hover") == true) || ($("#IntServicesMenu").is(":hover") == true)) {
+            $('#IntServicesMenu').finish().slideDown('fast');
+        }
+    }
+
+    function IntServicesMenu_MouseOut() {
+        $('#IntServicesMenu').finish().slideUp('fast');
+    }
+
+    function IntServicesSubMenu_MouseOver() {
+        //alert('');
+        
+        if ($("#IntServicesSlideOut").is(":hover") == true) {
+            $('#IntServicesSlideOut').finish().slideDown('fast');
+        }
+
+        //$('#IntServicesSlideOut').animate({ width: "toggle" });
+        //if (($("#IntServicesSlideOut").is(":hover") == true)) {
+        //    //$('#IntServicesSlideOut').stop(true, true).animate({ width: "toggle" }, { queue: false, duration: 250 });
+        //    $('IntServicesSlideout').finish().
+        //}
+    }
+
+    function IntServicesSubMenu_MouseOut() {
+        $('#IntServicesSlideOut').finish().slideUp('fast');
+        //$('#IntServicesSlideOut').stop(true, true).animate({ width: "toggle" }, { queue: false, duration: 250 });
+    }
+
+</script>
+
+

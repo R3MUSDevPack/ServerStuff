@@ -1,0 +1,11 @@
+﻿@model r3mus.ViewModels.IntelViewModel
+
+@{
+    ViewBag.Title = "GetIntelMap_PNG";
+}
+
+<h2>@Model.Title - Jump Bridge Map</h2>
+
+<div class="col-lg-12">
+    <img src=@Model.Map alt=@string.Format("{0} - JB Map", Model.Title) />
+</div>

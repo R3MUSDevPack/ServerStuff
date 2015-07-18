@@ -228,6 +228,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IntelController.cs" />
     <Compile Include="Controllers\LoggedInHomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\RecruitmentController.cs" />
@@ -364,6 +365,7 @@
     <Compile Include="ViewModels\ApplicantViewModel.cs" />
     <Compile Include="ViewModels\ApplicationReviewViewModel.cs" />
     <Compile Include="ViewModels\ForumViewModel.cs" />
+    <Compile Include="ViewModels\IntelViewModel.cs" />
     <Compile Include="ViewModels\RecruitmentStatsViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
@@ -405,12 +407,18 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Filters\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\API_Screenshot.PNG" />
+    <Content Include="Images\Delve_Tac_Map.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\Querious_Tac_Map.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Properties\Settings.settings">
@@ -468,8 +476,8 @@
       <DependentUpon>LastMonthStats.edmx</DependentUpon>
       <LastGenOutput>LastMonthStats.cs</LastGenOutput>
     </Content>
-    <Content Include="fonts\xirod.ttf" />
-    <Content Include="fonts\xirod.woff" />
+    <Content Include="Filters\fonts\xirod.ttf" />
+    <Content Include="Filters\fonts\xirod.woff" />
     <None Include="Properties\PublishProfiles\Mine.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -555,11 +563,13 @@
     <Content Include="Views\Recruitment\Home.cshtml" />
     <Content Include="Views\Shared\_Rules.cshtml" />
     <Content Include="Views\Recruitment\_APIScreenshot.cshtml" />
+    <Content Include="Views\Shared\_IntServicesMenu.cshtml" />
+    <Content Include="Views\Intel\GetIntelMap_PNG.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Filters\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Filters\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Filters\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
