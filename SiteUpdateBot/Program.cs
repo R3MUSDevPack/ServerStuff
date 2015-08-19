@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,9 +22,9 @@ namespace SiteUpdateBot
         {
             try
             {
-                DateTime checkDT = DateTime.Now;
-                //UpdateRunTime(checkDT);
+                //SyncUsers();
                 //return;
+                DateTime checkDT = DateTime.Now;
                 DateTime lastFullRunTime = GetLastRunTime();
                 bool doFullRun = ((checkDT - lastFullRunTime).TotalHours > 23);
 
@@ -34,15 +36,23 @@ namespace SiteUpdateBot
 
                 //NotifyApplicationChanges(lastFullRunTime);
 
-                ResetMailees(doFullRun);
-                while (UpdateMailees())
-                {
-                    System.Threading.Thread.Sleep(2000);
-                }
+                long totalCount;
 
-                if (doFullRun)
+                using (var r3musDB = new r3musDbContext())
                 {
-                    UpdateRunTime(checkDT);
+                    totalCount = r3musDB.RecruitmentMailees.Where(mailee => (mailee.CorpId_AtLastCheck == 0) && (mailee.Mailed == null)).Count();
+
+                    ResetMailees(doFullRun);
+
+                    if (doFullRun)
+                    {
+                        UpdateRunTime(checkDT);
+                    }
+
+                    while (UpdateMailees() && ((totalCount - r3musDB.RecruitmentMailees.Where(mailee => (mailee.CorpId_AtLastCheck == 0) && (mailee.Mailed == null)).Count()) < 10000))
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                    }
                 }
 
                 Console.WriteLine("Complete!");
@@ -65,8 +75,90 @@ namespace SiteUpdateBot
             {
                 Console.WriteLine("Resetting mailees corpId's to 0");
                 var r3musDB = new r3musDbContext();
-                r3musDB.RecruitmentMailees.ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
+                r3musDB.RecruitmentMailees.Where(mailee => mailee.Mailed == null).ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
                 r3musDB.SaveChanges();
+            }
+        }
+
+        private static string GenerateSaltedHash(string plainText, string salt)
+        {
+            // http://stackoverflow.com/questions/2138429/hash-and-salt-passwords-in-c-sharp
+
+            var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            var saltBytes = Encoding.UTF8.GetBytes(salt);
+
+            // Combine the two lists
+            var plainTextWithSaltBytes = new List<byte>(plainTextBytes.Length + saltBytes.Length);
+            plainTextWithSaltBytes.AddRange(plainTextBytes);
+            plainTextWithSaltBytes.AddRange(saltBytes);
+
+            // Produce 256-bit hashed value i.e. 32 bytes
+            HashAlgorithm algorithm = new SHA256Managed();
+            var byteHash = algorithm.ComputeHash(plainTextWithSaltBytes.ToArray());
+            return Convert.ToBase64String(byteHash);
+        }
+
+        public static void SyncUsers()
+        {
+            var r3musDB = new r3musDbContext();
+            var r3musForum = new r3mus_ForumDBEntities();
+
+            try
+            {
+                var siteUsers = r3musDB.Users.ToList();
+                var forumUsers = r3musForum.MembershipUsers.ToList();
+
+                var forumRole = r3musForum.MembershipRoles.Where(role => role.RoleName == "Standard Members").FirstOrDefault();
+
+                siteUsers.ForEach(siteUser =>
+                    {
+                        var forumUser = forumUsers.Where(user => user.UserName == siteUser.UserName).FirstOrDefault();
+                        if (forumUser == null)
+                        {
+                            forumUser = new MembershipUser()
+                                {
+                                    Id = new Guid(siteUser.Id),
+                                    UserName = siteUser.UserName,
+                                    Password = string.Concat("R3MUSUser_", siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" "))),
+                                    Email = siteUser.EmailAddress,
+                                    PasswordSalt = string.Concat("R3MUS_", siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" "))),
+                                    IsApproved = true,
+                                    IsLockedOut = false,
+                                    CreateDate = DateTime.Now,
+                                    LastLoginDate = DateTime.Now,
+                                    LastPasswordChangedDate = DateTime.Now,
+                                    LastLockoutDate = DateTime.Now,
+                                    FailedPasswordAttemptCount = 3,
+                                    FailedPasswordAnswerAttempt = 3,
+                                    Slug = string.Empty,
+                                    DisableEmailNotifications = true,
+                                    IsExternalAccount = true
+                                };
+                            forumUser.Password = GenerateSaltedHash(forumUser.Password, forumUser.PasswordSalt);
+                            r3musForum.MembershipUsers.Add(forumUser);
+
+                            var role = new MembershipUsersInRole()
+                            {
+                                Id = Guid.NewGuid(),
+                                UserIdentifier = forumUser.Id,
+                                RoleIdentifier = forumRole.Id,
+                                MembershipUser = forumUser,
+                                MembershipRole = forumRole
+                            };
+                            
+                            r3musForum.MembershipUsersInRoles.Add(role);
+                        }
+                    }
+                    );
+                    r3musForum.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -93,8 +185,6 @@ namespace SiteUpdateBot
 
                             r3musDB.Titles.Where(dbTitle => dbTitle.UserId == user.Id).ToList().Where(dbTitle => cUsrTitles.Any(cUsrTitle => dbTitle.TitleName == cUsrTitle.TitleName)).ToList().ForEach(dbTitle => r3musDB.Entry(dbTitle).State = EntityState.Unchanged);
                             r3musDB.Titles.Where(dbTitle => dbTitle.UserId == user.Id).ToList().Where(dbTitle => !cUsrTitles.Any(cUsrTitle => dbTitle.TitleName == cUsrTitle.TitleName)).ToList().ForEach(dbTitle => r3musDB.Entry(dbTitle).State = EntityState.Deleted);
-
-
                         }
                         catch (Exception ex) { Console.WriteLine(string.Format("User: {0}, Error {1}", user.UserName, ex.Message)); }
                     }
@@ -143,39 +233,66 @@ namespace SiteUpdateBot
 
         private static bool UpdateMailees()
         {
-            var r3musDB = new r3musDbContext();
-            var mailees = r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Take(30).ToList();
-            int i = 0;
             Stopwatch sw = new Stopwatch();
-
-            Console.WriteLine(string.Join(", ", mailees.ToList().Select(mailee => mailee.Name).ToList()));
-
             sw.Start();
-
-            foreach (var mailee in mailees)
+            int i = 0;
+            using(var r3musDB = new r3musDbContext())
             {
-                try
+                r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Take(30).ToList().ForEach(mailee =>
                 {
-                    i++;
-                    Console.WriteLine("# {0}: Mailee {1}", i.ToString(), mailee.Name);
-                    mailee.IsInNPCCorp();
-                    //System.Threading.Thread.Sleep(1000);
-                }
-                catch (Exception ex) { Console.WriteLine(string.Format("Mailee: {0}, Error {1}", mailee.Name, ex.Message)); }
-                //if ((i % 20) == 0)
-                //{
-                //    r3musDB.SaveChanges();
-                //    Console.WriteLine("Pausing...");
-                //    System.Threading.Thread.Sleep(15000);
-                //}
+                    try
+                    {
+                        i++;
+                        Console.WriteLine("# {0}: Mailee {1}", i.ToString(), mailee.Name);
+                        mailee.IsInNPCCorp();
+                        //System.Threading.Thread.Sleep(1000);
+                    }
+                    catch (Exception ex) { Console.WriteLine(string.Format("Mailee: {0}, Error {1}", mailee.Name, ex.Message)); }
+                });
+                r3musDB.SaveChanges();
+                sw.Stop();
+                Console.WriteLine("{0} mailees processed in {1}", i.ToString(), sw.Elapsed.ToString());
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                return (r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Count() > 0);
             }
 
-            sw.Stop();
-            Console.WriteLine("{0} mailees processed in {1}", mailees.Count().ToString(), sw.Elapsed.ToString());
-            
-            r3musDB.SaveChanges();
 
-            return (r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Count() > 0);
+            //var r3musDB = new r3musDbContext();
+            //var mailees = r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Take(30).ToList();
+            //int i = 0;
+            //Stopwatch sw = new Stopwatch();
+
+            //Console.WriteLine(string.Join(", ", mailees.ToList().Select(mailee => mailee.Name).ToList()));
+
+            //sw.Start();
+
+            //foreach (var mailee in mailees)
+            //{
+            //    try
+            //    {
+            //        i++;
+            //        Console.WriteLine("# {0}: Mailee {1}", i.ToString(), mailee.Name);
+            //        mailee.IsInNPCCorp();
+            //        //System.Threading.Thread.Sleep(1000);
+            //    }
+            //    catch (Exception ex) { Console.WriteLine(string.Format("Mailee: {0}, Error {1}", mailee.Name, ex.Message)); }
+            //    //if ((i % 20) == 0)
+            //    //{
+            //    //    r3musDB.SaveChanges();
+            //    //    Console.WriteLine("Pausing...");
+            //    //    System.Threading.Thread.Sleep(15000);
+            //    //}
+            //}
+
+            //sw.Stop();
+            //Console.WriteLine("{0} mailees processed in {1}", mailees.Count().ToString(), sw.Elapsed.ToString());
+            
+            //r3musDB.SaveChanges();
+            //GC.Collect();
+
+            //return (r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Count() > 0);
         }
 
         private static void NotifyApplicationChanges(DateTime lastRunTime)

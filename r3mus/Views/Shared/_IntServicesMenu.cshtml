@@ -3,7 +3,7 @@
     <ul class="dropdown-menu" id="IntServicesMenu" onmouseover="IntServicesMenu_MouseOver()" onmouseout="IntServicesMenu_MouseOut()">        
         @if (User.IsInRole("Admin"))
         {
-            <li>@Html.ActionLink("Forums", "Index", "Forum")</li>
+            <li>@Html.ActionLink("Forums", "RedirectToForum", "LoggedInHome")</li>
         }
 
         <li>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="84206255f45a4dca9f6ce8f54c7155e5" Name="Diagram1">
+        <EntityTypeShape EntityType="r3mus_ForumModel.Activity" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Badge" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.BadgeTypeTimeLastChecked" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.BannedEmail" Width="1.5" PointX="2.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.BannedWord" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Category" Width="1.5" PointX="6.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.CategoryNotification" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.CategoryPermissionForRole" Width="1.5" PointX="12" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Email" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Favourite" Width="1.5" PointX="13.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.GlobalPermissionForRole" Width="1.5" PointX="13.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Language" Width="1.5" PointX="11.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.LocaleResourceKey" Width="1.5" PointX="11.75" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.LocaleStringResource" Width="1.5" PointX="14" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.MembershipRole" Width="1.5" PointX="3.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.MembershipUser" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.MembershipUser_Badge" Width="1.5" PointX="6" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.MembershipUserPoint" Width="1.5" PointX="3" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.MembershipUsersInRole" Width="1.5" PointX="6" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Permission" Width="1.5" PointX="9.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Poll" Width="1.5" PointX="3" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.PollAnswer" Width="1.5" PointX="5.25" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.PollVote" Width="1.5" PointX="7.5" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Post" Width="1.5" PointX="9" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.PrivateMessage" Width="1.5" PointX="3" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Setting" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Topic" Width="1.5" PointX="9" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Topic_Tag" Width="1.5" PointX="11.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.TopicNotification" Width="1.5" PointX="11.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.TopicTag" Width="1.5" PointX="9" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.UploadedFile" Width="1.5" PointX="14.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="r3mus_ForumModel.Vote" Width="1.5" PointX="11.25" PointY="22.25" IsExpanded="true" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_MembershipUser_Badge_Badge" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_BadgeTypeTimeLastChecked_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_CategoryNotification_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_CategoryPermissionForRole_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_Topic_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_CategoryNotification_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_CategoryPermissionForRole_MembershipRole" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_CategoryPermissionForRole_Permission" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_LocaleStringResource_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_LocaleStringResource_LocaleResourceKey" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_MembershipUsersInRoles_MembershipRole1" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_Settings_MembershipRole" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_MembershipUser_Badge_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_MembershipUserPoints_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_MembershipUsersInRoles_MembershipUser1" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_Poll_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_PollVote_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_Post_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_PrivateMessage_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_PrivateMessage_MembershipUser1" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_Topic_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_TopicNotification_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_Vote_MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_PollAnswer_Poll" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_PollVote_PollAnswer" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_Post_Topic" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_Vote_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_Topic_Tag_Topic" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_TopicNotification_Topic" ManuallyRouted="false" />
+        <AssociationConnector Association="r3mus_ForumModel.FK_Topic_Tag_TopicTag" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

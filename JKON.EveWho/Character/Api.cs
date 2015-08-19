@@ -1,4 +1,5 @@
 ﻿using EveAI.Live;
+using JKON.EveApi.Corporation.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,10 +17,11 @@ namespace JKON.EveWho
     {
         private const string c_URL = "https://api.eveonline.com/eve/CharacterInfo.xml.aspx";
         private const string c_CHARID = "characterID={0}";
+        private const string c_API = "KeyID={0}&vCode={1}";
 
         public static Models.EveCharacter GetCharacter(string characterName, long apikey, string vcode)
         {
-            var api = new EveApi("R3MUS Recruitment", apikey, vcode);
+            var api = new EveAI.Live.EveApi("R3MUS Recruitment", apikey, vcode);
 
             List<string> list = new List<String>();
             list.Add(characterName);
@@ -117,6 +119,38 @@ namespace JKON.EveWho
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        public static List<Member> GetCorpMembers(long apiKey, string vCode)
+        {
+            try
+            {
+                string reqURL = string.Concat(c_URL, "?", string.Format(c_API, apiKey, vCode));
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(reqURL);
+                request.UserAgent = "JKON.EveWho-Clyde-en-Marland";
+                WebResponse response = request.GetResponse();
+                Stream stream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(stream);
+
+                string data = reader.ReadToEnd();
+
+                using (TextReader treader = new StringReader(data))
+                {
+                    XmlRootAttribute xRoot = new XmlRootAttribute();
+                    xRoot.ElementName = "eveapi";
+                    // xRoot.Namespace = "http://www.cpandl.com";
+                    xRoot.IsNullable = true;
+                    XmlSerializer cruncher = new XmlSerializer(typeof(Models.EveCharacter), xRoot);
+                    toon = (Models.EveCharacter)cruncher.Deserialize(treader);
+                }
+
+                //reader.Close();
+                response.Close();
+            }
+            catch (Exception ex)
+            {
+
             }
         }
     }

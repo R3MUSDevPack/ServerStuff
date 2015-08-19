@@ -59,7 +59,7 @@ namespace SlackBot
                 Console.WriteLine("Socket Type " + mySocket.SocketType);
                 if (mySocket.Connected)
                 {
-                    Console.WriteLine("\nClient Connected!!\n==================\n CLient IP {0}\n", mySocket.RemoteEndPoint);
+                    Console.WriteLine("\nClient Connected!!\n==================\n Client IP {0}\n", mySocket.RemoteEndPoint);
 
 
                     //make a byte array and receive data from the client 
@@ -73,6 +73,7 @@ namespace SlackBot
 
 
                     Console.WriteLine(sBuffer);
+                    System.IO.File.WriteAllText(@"C:\Test\Log.txt", sBuffer);
 
                     if (bits[0] == "GET")
                     {
@@ -195,8 +196,6 @@ namespace SlackBot
                 Console.WriteLine(ex.Message);
             }
         }
-
-
 
         private static void SendMessage(string message, string channel = "bottesting")
         {

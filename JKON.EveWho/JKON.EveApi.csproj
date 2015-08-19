@@ -55,6 +55,7 @@
     <Compile Include="Character\Character.cs" />
     <Compile Include="Character\Models\History.cs" />
     <Compile Include="Character\Models\Info.cs" />
+    <Compile Include="Corporation\Models\Member.cs" />
     <Compile Include="Kills\Killboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stations\Api.cs" />

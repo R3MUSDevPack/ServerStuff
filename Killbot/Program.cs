@@ -29,13 +29,20 @@ namespace Killbot
         {
             try
             {
-                CorporationSheet corpSheet = GetCorpDetails();
-                if (Properties.Settings.Default.Debug)
+                if ((Properties.Settings.Default.CorpId == null) && (Properties.Settings.Default.CorpId != string.Empty))
                 {
-                    SendPM(string.Format("Corpsheet for {0} obtained.", corpSheet.Ticker));
-                }
+                    CorporationSheet corpSheet = GetCorpDetails();
+                    if (Properties.Settings.Default.Debug)
+                    {
+                        SendPM(string.Format("Corpsheet for {0} obtained.", corpSheet.Ticker));
+                    }
 
-                UpdateRunTime(CheckKills(corpSheet.Ticker, corpSheet.CorporationID));
+                    UpdateRunTime(CheckKills(corpSheet.Ticker, corpSheet.CorporationID));
+                }
+                else
+                {
+                    UpdateRunTime(CheckKills(Properties.Settings.Default.CorpTicker, Convert.ToInt64(Properties.Settings.Default.CorpId)));
+                }
             }
             catch(Exception ex)
             {
@@ -45,7 +52,7 @@ namespace Killbot
 
         private static DateTime CheckKills(string corpName, long corpId)
         {
-            CorporationSheet Corp = GetCorpDetails();
+            //CorporationSheet Corp = GetCorpDetails();
 
             DateTime Latest = Convert.ToDateTime(ConfigurationSettings.AppSettings["StartDate"]);
 
@@ -53,7 +60,7 @@ namespace Killbot
             ZKillboard kb = new ZKillboard();
             ZKillboardOptions Options = new ZKillboardOptions();
             IEnumerable<ZkbResponse.ZkbKill> OrderedKills;
-            Options.CorporationId.Add(Corp.CorporationID);
+            Options.CorporationId.Add(corpId);
             if (Latest > DateTime.MinValue)
             {
                 Options.StartTime = Latest;
@@ -146,7 +153,7 @@ namespace Killbot
         {
             if (Properties.Settings.Default.Plugin.ToUpper() == "HIPCHAT")
             {
-                Hipchat.SendPM(message, "Clyde en Marland", Properties.Settings.Default.HipchatToken);
+                Hipchat.SendPM(message, Properties.Settings.Default.HipchatToken, "Clyde en Marland");
             }
             else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
             {

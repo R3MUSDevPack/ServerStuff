@@ -8,12 +8,12 @@ namespace Slack_Plugin
 {
     public class Slack
     {
-        public static void SendToRoom(string message, string roomname, string token)
+        public static void SendToRoom(string message, string roomname, string token, string username = "R3mus Bot")
         {
             try
             {
                 SlackClient client = new SlackClient(token);
-                client.PostMessage(message, "R3mus Bot", string.Concat("#", roomname));
+                client.PostMessage(message, username, string.Concat("#", roomname));
             }
             catch (Exception ex)
             {

@@ -185,5 +185,14 @@ namespace r3mus.Properties {
                 return ((string)(this["AppUpdate_MessageFormatLine2"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost:9666")]
+        public string ForumBaseURL {
+            get {
+                return ((string)(this["ForumBaseURL"]));
+            }
+        }
     }
 }

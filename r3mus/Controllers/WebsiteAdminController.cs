@@ -43,6 +43,11 @@ namespace r3mus.Controllers
             return RedirectToAction("ViewUsers");
         }
 
+        public ActionResult GetAllCorpMembers()
+        {
+            return View();
+        }
+
         public ActionResult ViewUsers(r3mus.Models.ApplicationUser.IDType memberType = r3mus.Models.ApplicationUser.IDType.Corporation)
         {
             var users = db.Users.Where(user => user.MemberType == memberType.ToString()).ToList<ApplicationUser>();
@@ -109,7 +114,6 @@ namespace r3mus.Controllers
         [OverrideAuthorization]
         public ActionResult ViewProfile(string id = "")
         {
-            ApplicationUser currentUser;
 
             if(TempData["Message"] != null)
             {
@@ -135,28 +139,36 @@ namespace r3mus.Controllers
             TempData.Clear();
             TempData.Add("UserId", id);
 
-            currentUser = db.Users.Where(user => user.Id == id).FirstOrDefault();
+            return View(GetUserProfile(id));
+        }
+
+        private UserProfileViewModel GetUserProfile(string id)
+        {
+            var currentUser = db.Users.Where(user => user.Id == id).FirstOrDefault();
             currentUser.LoadApiKeys();
             currentUser.Titles = db.Titles.Where(title => title.UserId == id).ToList();
 
             var roles = db.Roles.Select(role => role.Name).ToList();
-                                        
-            if(currentUser.Titles.Count == 0)
+
+            if (currentUser.Titles.Count == 0)
             {
-                currentUser.Titles.Add(new Title(){ UserId = currentUser.Id, TitleName = "Corp Member"});
+                currentUser.Titles.Add(new Title() { UserId = currentUser.Id, TitleName = "Corp Member" });
             }
 
-            var userProfile = new UserProfileViewModel() { 
+            return new UserProfileViewModel()
+            {
                 Id = currentUser.Id,
-                UserName = currentUser.UserName, EmailAddress = currentUser.EmailAddress, MemberSince = Convert.ToDateTime(currentUser.MemberSince), 
-                MemberType = currentUser.MemberType, Avatar = currentUser.Avatar, Titles = string.Join(", ", currentUser.Titles.Select(t => t.TitleName).ToList()),
+                UserName = currentUser.UserName,
+                EmailAddress = currentUser.EmailAddress,
+                MemberSince = Convert.ToDateTime(currentUser.MemberSince),
+                MemberType = currentUser.MemberType,
+                Avatar = currentUser.Avatar,
+                Titles = string.Join(", ", currentUser.Titles.Select(t => t.TitleName).ToList()),
                 WebsiteRoles = string.Join(", ", currentUser.Roles.Select(role => role.RoleId).ToList()),
                 ApiKeys = db.ApiInfoes.Where(api => api.User.Id == currentUser.Id).ToList(),
                 UserRoles = userManager.GetRoles(currentUser.Id).ToList(),
                 AvailableRoles = roles
             };
-
-            return View(userProfile);
         }
 
         [Authorize(Roles = "CEO, Admin, Director")]

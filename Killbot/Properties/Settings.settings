@@ -41,5 +41,11 @@
     <Setting Name="Debug" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="CorpId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">919189056</Value>
+    </Setting>
+    <Setting Name="CorpTicker" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">VO</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

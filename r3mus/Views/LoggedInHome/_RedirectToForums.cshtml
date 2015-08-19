@@ -1,0 +1,12 @@
+﻿
+<form id="forum-login" action="http://localhost:9666/members/logon" method="post">
+    @Html.AntiForgeryToken()
+    <input name="username" value="@User.Identity.Name" style="visibility:hidden" />
+    <input name="password" value="@ViewBag.PW" style="visibility:hidden" />
+</form>
+
+<script language="javascript" type="text/javascript">
+    (function () {
+        document.getElementById("forum-login").submit();
+    })();
+</script>

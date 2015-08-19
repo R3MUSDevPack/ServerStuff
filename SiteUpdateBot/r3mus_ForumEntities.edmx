@@ -1,0 +1,2356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="r3mus_ForumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Badge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AwardsPoints" Type="int" />
+        </EntityType>
+        <EntityType Name="BadgeTypeTimeLastChecked">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BadgeType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TimeLastChecked" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BannedEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BannedWord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Word" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="IsStopWord" Type="bit" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Category_Id" Type="uniqueidentifier" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="Slug" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="IsLocked" Type="bit" Nullable="false" />
+          <Property Name="ModerateTopics" Type="bit" Nullable="false" />
+          <Property Name="ModeratePosts" Type="bit" Nullable="false" />
+          <Property Name="PageTitle" Type="nvarchar" MaxLength="80" />
+          <Property Name="MetaDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="Path" Type="nvarchar" MaxLength="2500" />
+          <Property Name="Colour" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="CategoryNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Category_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoryPermissionForRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Permission_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MembershipRole_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Category_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsTicked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmailTo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="NameTo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Favourite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MemberId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PostId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TopicId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GlobalPermissionForRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Permission_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MembershipRole_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsTicked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LanguageCulture" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FlagImageFileName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RightToLeft" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocaleResourceKey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="2000" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocaleStringResource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Language_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LocaleResourceKey_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResourceValue" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MembershipRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MembershipUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttempt" Type="int" Nullable="false" />
+          <Property Name="Slug" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="Signature" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="Website" Type="nvarchar" MaxLength="100" />
+          <Property Name="Twitter" Type="nvarchar" MaxLength="60" />
+          <Property Name="Facebook" Type="nvarchar" MaxLength="60" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="500" />
+          <Property Name="FacebookAccessToken" Type="nvarchar" MaxLength="300" />
+          <Property Name="FacebookId" Type="bigint" />
+          <Property Name="TwitterAccessToken" Type="nvarchar" MaxLength="300" />
+          <Property Name="TwitterId" Type="nvarchar" MaxLength="150" />
+          <Property Name="GoogleAccessToken" Type="nvarchar" MaxLength="300" />
+          <Property Name="GoogleId" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsExternalAccount" Type="bit" />
+          <Property Name="TwitterShowFeed" Type="bit" />
+          <Property Name="DisableEmailNotifications" Type="bit" />
+          <Property Name="DisablePosting" Type="bit" />
+          <Property Name="DisablePrivateMessages" Type="bit" />
+          <Property Name="DisableFileUploads" Type="bit" />
+          <Property Name="LoginIdExpires" Type="datetime" />
+          <Property Name="MiscAccessToken" Type="nvarchar" MaxLength="250" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="40" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="40" />
+          <Property Name="LastActivityDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MembershipUser_Badge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Badge_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MembershipUserPoints">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Points" Type="int" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MembershipUsersInRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleIdentifier" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserIdentifier" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsGlobal" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Poll">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsClosed" Type="bit" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PollAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="600" Nullable="false" />
+          <Property Name="Poll_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PollVote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PollAnswer_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PostContent" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="VoteCount" Type="int" Nullable="false" />
+          <Property Name="Topic_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateEdited" Type="datetime" />
+          <Property Name="IsSolution" Type="bit" Nullable="false" />
+          <Property Name="IsTopicStarter" Type="bit" />
+          <Property Name="FlaggedAsSpam" Type="bit" />
+          <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pending" Type="bit" />
+        </EntityType>
+        <EntityType Name="PrivateMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserTo_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserFrom_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateSent" Type="datetime" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="IsSentMessage" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ForumName" Type="nvarchar" MaxLength="500" />
+          <Property Name="ForumUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsClosed" Type="bit" />
+          <Property Name="EnableRSSFeeds" Type="bit" />
+          <Property Name="DisplayEditedBy" Type="bit" />
+          <Property Name="EnablePostFileAttachments" Type="bit" />
+          <Property Name="EnableMarkAsSolution" Type="bit" />
+          <Property Name="EnableSpamReporting" Type="bit" />
+          <Property Name="EnableMemberReporting" Type="bit" />
+          <Property Name="EnableEmailSubscriptions" Type="bit" />
+          <Property Name="ManuallyAuthoriseNewMembers" Type="bit" />
+          <Property Name="EmailAdminOnNewMemberSignUp" Type="bit" />
+          <Property Name="TopicsPerPage" Type="int" />
+          <Property Name="PostsPerPage" Type="int" />
+          <Property Name="EnablePrivateMessages" Type="bit" />
+          <Property Name="MaxPrivateMessagesPerMember" Type="int" />
+          <Property Name="PrivateMessageFloodControl" Type="int" />
+          <Property Name="EnableSignatures" Type="bit" />
+          <Property Name="EnablePoints" Type="bit" />
+          <Property Name="PointsAllowedToVoteAmount" Type="int" />
+          <Property Name="PointsAddedPerPost" Type="int" />
+          <Property Name="PointsAddedPostiveVote" Type="int" />
+          <Property Name="PointsAddedForSolution" Type="int" />
+          <Property Name="PointsDeductedNagativeVote" Type="int" />
+          <Property Name="AdminEmailAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="NotificationReplyEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="SMTP" Type="nvarchar" MaxLength="100" />
+          <Property Name="SMTPUsername" Type="nvarchar" MaxLength="100" />
+          <Property Name="SMTPPort" Type="nvarchar" MaxLength="10" />
+          <Property Name="SMTPEnableSSL" Type="bit" />
+          <Property Name="SMTPPassword" Type="nvarchar" MaxLength="100" />
+          <Property Name="Theme" Type="nvarchar" MaxLength="100" />
+          <Property Name="NewMemberStartingRole" Type="uniqueidentifier" />
+          <Property Name="DefaultLanguage_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ActivitiesPerPage" Type="int" />
+          <Property Name="EnableAkisment" Type="bit" />
+          <Property Name="AkismentKey" Type="nvarchar" MaxLength="100" />
+          <Property Name="CurrentDatabaseVersion" Type="nvarchar" MaxLength="10" />
+          <Property Name="SpamQuestion" Type="nvarchar" MaxLength="500" />
+          <Property Name="SpamAnswer" Type="nvarchar" MaxLength="500" />
+          <Property Name="EnableSocialLogins" Type="bit" />
+          <Property Name="EnablePolls" Type="bit" />
+          <Property Name="NewMemberEmailConfirmation" Type="bit" />
+          <Property Name="SuspendRegistration" Type="bit" />
+          <Property Name="PageTitle" Type="nvarchar" MaxLength="80" />
+          <Property Name="MetaDesc" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Solved" Type="bit" Nullable="false" />
+          <Property Name="Category_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Post_Id" Type="uniqueidentifier" />
+          <Property Name="Slug" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Views" Type="int" />
+          <Property Name="IsSticky" Type="bit" Nullable="false" />
+          <Property Name="IsLocked" Type="bit" Nullable="false" />
+          <Property Name="Poll_Id" Type="uniqueidentifier" />
+          <Property Name="Pending" Type="bit" />
+        </EntityType>
+        <EntityType Name="Topic_Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Topic_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TopicTag_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TopicNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Topic_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TopicTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Slug" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UploadedFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Filename" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Post_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Post_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="VotedByMembershipUser_Id" Type="uniqueidentifier" />
+          <Property Name="DateVoted" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_BadgeTypeTimeLastChecked_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="BadgeTypeTimeLastChecked" Type="Self.BadgeTypeTimeLastChecked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BadgeTypeTimeLastChecked">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryNotification_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="CategoryNotification" Type="Self.CategoryNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryNotification">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryNotification_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="CategoryNotification" Type="Self.CategoryNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryNotification">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryPermissionForRole_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="CategoryPermissionForRole" Type="Self.CategoryPermissionForRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryPermissionForRole">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryPermissionForRole_MembershipRole">
+          <End Role="MembershipRole" Type="Self.MembershipRole" Multiplicity="1" />
+          <End Role="CategoryPermissionForRole" Type="Self.CategoryPermissionForRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryPermissionForRole">
+              <PropertyRef Name="MembershipRole_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryPermissionForRole_Permission">
+          <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+          <End Role="CategoryPermissionForRole" Type="Self.CategoryPermissionForRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryPermissionForRole">
+              <PropertyRef Name="Permission_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocaleStringResource_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="LocaleStringResource" Type="Self.LocaleStringResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocaleStringResource">
+              <PropertyRef Name="Language_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocaleStringResource_LocaleResourceKey">
+          <End Role="LocaleResourceKey" Type="Self.LocaleResourceKey" Multiplicity="1" />
+          <End Role="LocaleStringResource" Type="Self.LocaleStringResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocaleResourceKey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocaleStringResource">
+              <PropertyRef Name="LocaleResourceKey_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembershipUser_Badge_Badge">
+          <End Role="Badge" Type="Self.Badge" Multiplicity="1" />
+          <End Role="MembershipUser_Badge" Type="Self.MembershipUser_Badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Badge">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembershipUser_Badge">
+              <PropertyRef Name="Badge_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembershipUser_Badge_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="MembershipUser_Badge" Type="Self.MembershipUser_Badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembershipUser_Badge">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembershipUserPoints_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="MembershipUserPoints" Type="Self.MembershipUserPoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembershipUserPoints">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembershipUsersInRoles_MembershipRole1">
+          <End Role="MembershipRole" Type="Self.MembershipRole" Multiplicity="1" />
+          <End Role="MembershipUsersInRoles" Type="Self.MembershipUsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembershipUsersInRoles">
+              <PropertyRef Name="RoleIdentifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembershipUsersInRoles_MembershipUser1">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="MembershipUsersInRoles" Type="Self.MembershipUsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembershipUsersInRoles">
+              <PropertyRef Name="UserIdentifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poll_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="Poll" Type="Self.Poll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Poll">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollAnswer_Poll">
+          <End Role="Poll" Type="Self.Poll" Multiplicity="1" />
+          <End Role="PollAnswer" Type="Self.PollAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poll">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PollAnswer">
+              <PropertyRef Name="Poll_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollVote_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="PollVote" Type="Self.PollVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PollVote">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollVote_PollAnswer">
+          <End Role="PollAnswer" Type="Self.PollAnswer" Multiplicity="1" />
+          <End Role="PollVote" Type="Self.PollVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PollAnswer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PollVote">
+              <PropertyRef Name="PollAnswer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="Topic_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrivateMessage_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="PrivateMessage" Type="Self.PrivateMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrivateMessage">
+              <PropertyRef Name="UserTo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrivateMessage_MembershipUser1">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="PrivateMessage" Type="Self.PrivateMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrivateMessage">
+              <PropertyRef Name="UserFrom_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settings_MembershipRole">
+          <End Role="MembershipRole" Type="Self.MembershipRole" Multiplicity="0..1" />
+          <End Role="Settings" Type="Self.Settings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Settings">
+              <PropertyRef Name="NewMemberStartingRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_Tag_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1" />
+          <End Role="Topic_Tag" Type="Self.Topic_Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Topic_Tag">
+              <PropertyRef Name="Topic_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_Tag_TopicTag">
+          <End Role="TopicTag" Type="Self.TopicTag" Multiplicity="1" />
+          <End Role="Topic_Tag" Type="Self.Topic_Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TopicTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Topic_Tag">
+              <PropertyRef Name="TopicTag_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicNotification_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="TopicNotification" Type="Self.TopicNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicNotification">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicNotification_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1" />
+          <End Role="TopicNotification" Type="Self.TopicNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicNotification">
+              <PropertyRef Name="Topic_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="Post_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="r3mus_ForumModelStoreContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Badge" EntityType="Self.Badge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BadgeTypeTimeLastChecked" EntityType="Self.BadgeTypeTimeLastChecked" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BannedEmail" EntityType="Self.BannedEmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BannedWord" EntityType="Self.BannedWord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryNotification" EntityType="Self.CategoryNotification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryPermissionForRole" EntityType="Self.CategoryPermissionForRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favourite" EntityType="Self.Favourite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GlobalPermissionForRole" EntityType="Self.GlobalPermissionForRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocaleResourceKey" EntityType="Self.LocaleResourceKey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocaleStringResource" EntityType="Self.LocaleStringResource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembershipRole" EntityType="Self.MembershipRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembershipUser" EntityType="Self.MembershipUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembershipUser_Badge" EntityType="Self.MembershipUser_Badge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembershipUserPoints" EntityType="Self.MembershipUserPoints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembershipUsersInRoles" EntityType="Self.MembershipUsersInRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poll" EntityType="Self.Poll" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PollAnswer" EntityType="Self.PollAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PollVote" EntityType="Self.PollVote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrivateMessage" EntityType="Self.PrivateMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topic_Tag" EntityType="Self.Topic_Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TopicNotification" EntityType="Self.TopicNotification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TopicTag" EntityType="Self.TopicTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UploadedFile" EntityType="Self.UploadedFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vote" EntityType="Self.Vote" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BadgeTypeTimeLastChecked_MembershipUser" Association="Self.FK_BadgeTypeTimeLastChecked_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="BadgeTypeTimeLastChecked" EntitySet="BadgeTypeTimeLastChecked" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryNotification_Category" Association="Self.FK_CategoryNotification_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryNotification" EntitySet="CategoryNotification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryNotification_MembershipUser" Association="Self.FK_CategoryNotification_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="CategoryNotification" EntitySet="CategoryNotification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryPermissionForRole_Category" Association="Self.FK_CategoryPermissionForRole_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryPermissionForRole" EntitySet="CategoryPermissionForRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryPermissionForRole_MembershipRole" Association="Self.FK_CategoryPermissionForRole_MembershipRole">
+            <End Role="MembershipRole" EntitySet="MembershipRole" />
+            <End Role="CategoryPermissionForRole" EntitySet="CategoryPermissionForRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryPermissionForRole_Permission" Association="Self.FK_CategoryPermissionForRole_Permission">
+            <End Role="Permission" EntitySet="Permission" />
+            <End Role="CategoryPermissionForRole" EntitySet="CategoryPermissionForRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocaleStringResource_Language" Association="Self.FK_LocaleStringResource_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="LocaleStringResource" EntitySet="LocaleStringResource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocaleStringResource_LocaleResourceKey" Association="Self.FK_LocaleStringResource_LocaleResourceKey">
+            <End Role="LocaleResourceKey" EntitySet="LocaleResourceKey" />
+            <End Role="LocaleStringResource" EntitySet="LocaleStringResource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembershipUser_Badge_Badge" Association="Self.FK_MembershipUser_Badge_Badge">
+            <End Role="Badge" EntitySet="Badge" />
+            <End Role="MembershipUser_Badge" EntitySet="MembershipUser_Badge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembershipUser_Badge_MembershipUser" Association="Self.FK_MembershipUser_Badge_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="MembershipUser_Badge" EntitySet="MembershipUser_Badge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembershipUserPoints_MembershipUser" Association="Self.FK_MembershipUserPoints_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="MembershipUserPoints" EntitySet="MembershipUserPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembershipUsersInRoles_MembershipRole1" Association="Self.FK_MembershipUsersInRoles_MembershipRole1">
+            <End Role="MembershipRole" EntitySet="MembershipRole" />
+            <End Role="MembershipUsersInRoles" EntitySet="MembershipUsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembershipUsersInRoles_MembershipUser1" Association="Self.FK_MembershipUsersInRoles_MembershipUser1">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="MembershipUsersInRoles" EntitySet="MembershipUsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poll_MembershipUser" Association="Self.FK_Poll_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="Poll" EntitySet="Poll" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollAnswer_Poll" Association="Self.FK_PollAnswer_Poll">
+            <End Role="Poll" EntitySet="Poll" />
+            <End Role="PollAnswer" EntitySet="PollAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollVote_MembershipUser" Association="Self.FK_PollVote_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="PollVote" EntitySet="PollVote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollVote_PollAnswer" Association="Self.FK_PollVote_PollAnswer">
+            <End Role="PollAnswer" EntitySet="PollAnswer" />
+            <End Role="PollVote" EntitySet="PollVote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_MembershipUser" Association="Self.FK_Post_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_Topic" Association="Self.FK_Post_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrivateMessage_MembershipUser" Association="Self.FK_PrivateMessage_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="PrivateMessage" EntitySet="PrivateMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrivateMessage_MembershipUser1" Association="Self.FK_PrivateMessage_MembershipUser1">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="PrivateMessage" EntitySet="PrivateMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settings_MembershipRole" Association="Self.FK_Settings_MembershipRole">
+            <End Role="MembershipRole" EntitySet="MembershipRole" />
+            <End Role="Settings" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_Category" Association="Self.FK_Topic_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Topic" EntitySet="Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_MembershipUser" Association="Self.FK_Topic_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="Topic" EntitySet="Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_Tag_Topic" Association="Self.FK_Topic_Tag_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="Topic_Tag" EntitySet="Topic_Tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_Tag_TopicTag" Association="Self.FK_Topic_Tag_TopicTag">
+            <End Role="TopicTag" EntitySet="TopicTag" />
+            <End Role="Topic_Tag" EntitySet="Topic_Tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicNotification_MembershipUser" Association="Self.FK_TopicNotification_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="TopicNotification" EntitySet="TopicNotification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicNotification_Topic" Association="Self.FK_TopicNotification_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="TopicNotification" EntitySet="TopicNotification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_MembershipUser" Association="Self.FK_Vote_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUser" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Post" Association="Self.FK_Vote_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="r3mus_ForumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Badge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AwardsPoints" Type="Int32" />
+          <NavigationProperty Name="MembershipUser_Badge" Relationship="Self.FK_MembershipUser_Badge_Badge" FromRole="Badge" ToRole="MembershipUser_Badge" />
+        </EntityType>
+        <EntityType Name="BadgeTypeTimeLastChecked">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <Property Name="BadgeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeLastChecked" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_BadgeTypeTimeLastChecked_MembershipUser" FromRole="BadgeTypeTimeLastChecked" ToRole="MembershipUser" />
+        </EntityType>
+        <EntityType Name="BannedEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="BannedWord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Word" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsStopWord" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Category_Id" Type="Guid" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Slug" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="IsLocked" Type="Boolean" Nullable="false" />
+          <Property Name="ModerateTopics" Type="Boolean" Nullable="false" />
+          <Property Name="ModeratePosts" Type="Boolean" Nullable="false" />
+          <Property Name="PageTitle" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+          <Property Name="Colour" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CategoryNotifications" Relationship="Self.FK_CategoryNotification_Category" FromRole="Category" ToRole="CategoryNotification" />
+          <NavigationProperty Name="CategoryPermissionForRoles" Relationship="Self.FK_CategoryPermissionForRole_Category" FromRole="Category" ToRole="CategoryPermissionForRole" />
+          <NavigationProperty Name="Topics" Relationship="Self.FK_Topic_Category" FromRole="Category" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="CategoryNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Category_Id" Type="Guid" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_CategoryNotification_Category" FromRole="CategoryNotification" ToRole="Category" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_CategoryNotification_MembershipUser" FromRole="CategoryNotification" ToRole="MembershipUser" />
+        </EntityType>
+        <EntityType Name="CategoryPermissionForRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Permission_Id" Type="Guid" Nullable="false" />
+          <Property Name="MembershipRole_Id" Type="Guid" Nullable="false" />
+          <Property Name="Category_Id" Type="Guid" Nullable="false" />
+          <Property Name="IsTicked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_CategoryPermissionForRole_Category" FromRole="CategoryPermissionForRole" ToRole="Category" />
+          <NavigationProperty Name="MembershipRole" Relationship="Self.FK_CategoryPermissionForRole_MembershipRole" FromRole="CategoryPermissionForRole" ToRole="MembershipRole" />
+          <NavigationProperty Name="Permission" Relationship="Self.FK_CategoryPermissionForRole_Permission" FromRole="CategoryPermissionForRole" ToRole="Permission" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="EmailTo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameTo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Favourite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MemberId" Type="Guid" Nullable="false" />
+          <Property Name="PostId" Type="Guid" Nullable="false" />
+          <Property Name="TopicId" Type="Guid" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="GlobalPermissionForRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Permission_Id" Type="Guid" Nullable="false" />
+          <Property Name="MembershipRole_Id" Type="Guid" Nullable="false" />
+          <Property Name="IsTicked" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LanguageCulture" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FlagImageFileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RightToLeft" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LocaleStringResources" Relationship="Self.FK_LocaleStringResource_Language" FromRole="Language" ToRole="LocaleStringResource" />
+        </EntityType>
+        <EntityType Name="LocaleResourceKey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="LocaleStringResources" Relationship="Self.FK_LocaleStringResource_LocaleResourceKey" FromRole="LocaleResourceKey" ToRole="LocaleStringResource" />
+        </EntityType>
+        <EntityType Name="LocaleStringResource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Language_Id" Type="Guid" Nullable="false" />
+          <Property Name="LocaleResourceKey_Id" Type="Guid" Nullable="false" />
+          <Property Name="ResourceValue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_LocaleStringResource_Language" FromRole="LocaleStringResource" ToRole="Language" />
+          <NavigationProperty Name="LocaleResourceKey" Relationship="Self.FK_LocaleStringResource_LocaleResourceKey" FromRole="LocaleStringResource" ToRole="LocaleResourceKey" />
+        </EntityType>
+        <EntityType Name="MembershipRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CategoryPermissionForRoles" Relationship="Self.FK_CategoryPermissionForRole_MembershipRole" FromRole="MembershipRole" ToRole="CategoryPermissionForRole" />
+          <NavigationProperty Name="MembershipUsersInRoles" Relationship="Self.FK_MembershipUsersInRoles_MembershipRole1" FromRole="MembershipRole" ToRole="MembershipUsersInRoles" />
+          <NavigationProperty Name="Settings" Relationship="Self.FK_Settings_MembershipRole" FromRole="MembershipRole" ToRole="Settings" />
+        </EntityType>
+        <EntityType Name="MembershipUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordQuestion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordAnswer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPasswordChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLockoutDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttempt" Type="Int32" Nullable="false" />
+          <Property Name="Slug" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Signature" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Facebook" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookAccessToken" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookId" Type="Int64" />
+          <Property Name="TwitterAccessToken" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="GoogleAccessToken" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="GoogleId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsExternalAccount" Type="Boolean" />
+          <Property Name="TwitterShowFeed" Type="Boolean" />
+          <Property Name="DisableEmailNotifications" Type="Boolean" />
+          <Property Name="DisablePosting" Type="Boolean" />
+          <Property Name="DisablePrivateMessages" Type="Boolean" />
+          <Property Name="DisableFileUploads" Type="Boolean" />
+          <Property Name="LoginIdExpires" Type="DateTime" Precision="3" />
+          <Property Name="MiscAccessToken" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="LastActivityDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BadgeTypeTimeLastCheckeds" Relationship="Self.FK_BadgeTypeTimeLastChecked_MembershipUser" FromRole="MembershipUser" ToRole="BadgeTypeTimeLastChecked" />
+          <NavigationProperty Name="CategoryNotifications" Relationship="Self.FK_CategoryNotification_MembershipUser" FromRole="MembershipUser" ToRole="CategoryNotification" />
+          <NavigationProperty Name="MembershipUser_Badge" Relationship="Self.FK_MembershipUser_Badge_MembershipUser" FromRole="MembershipUser" ToRole="MembershipUser_Badge" />
+          <NavigationProperty Name="MembershipUserPoints" Relationship="Self.FK_MembershipUserPoints_MembershipUser" FromRole="MembershipUser" ToRole="MembershipUserPoints" />
+          <NavigationProperty Name="MembershipUsersInRoles" Relationship="Self.FK_MembershipUsersInRoles_MembershipUser1" FromRole="MembershipUser" ToRole="MembershipUsersInRoles" />
+          <NavigationProperty Name="Polls" Relationship="Self.FK_Poll_MembershipUser" FromRole="MembershipUser" ToRole="Poll" />
+          <NavigationProperty Name="PollVotes" Relationship="Self.FK_PollVote_MembershipUser" FromRole="MembershipUser" ToRole="PollVote" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Post_MembershipUser" FromRole="MembershipUser" ToRole="Post" />
+          <NavigationProperty Name="PrivateMessages" Relationship="Self.FK_PrivateMessage_MembershipUser" FromRole="MembershipUser" ToRole="PrivateMessage" />
+          <NavigationProperty Name="PrivateMessages1" Relationship="Self.FK_PrivateMessage_MembershipUser1" FromRole="MembershipUser" ToRole="PrivateMessage" />
+          <NavigationProperty Name="Topics" Relationship="Self.FK_Topic_MembershipUser" FromRole="MembershipUser" ToRole="Topic" />
+          <NavigationProperty Name="TopicNotifications" Relationship="Self.FK_TopicNotification_MembershipUser" FromRole="MembershipUser" ToRole="TopicNotification" />
+          <NavigationProperty Name="Votes" Relationship="Self.FK_Vote_MembershipUser" FromRole="MembershipUser" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="MembershipUser_Badge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Badge_Id" Type="Guid" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Badge" Relationship="Self.FK_MembershipUser_Badge_Badge" FromRole="MembershipUser_Badge" ToRole="Badge" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_MembershipUser_Badge_MembershipUser" FromRole="MembershipUser_Badge" ToRole="MembershipUser" />
+        </EntityType>
+        <EntityType Name="MembershipUserPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <Property Name="Points" Type="Int32" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_MembershipUserPoints_MembershipUser" FromRole="MembershipUserPoints" ToRole="MembershipUser" />
+        </EntityType>
+        <EntityType Name="MembershipUsersInRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RoleIdentifier" Type="Guid" Nullable="false" />
+          <Property Name="UserIdentifier" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="MembershipRole" Relationship="Self.FK_MembershipUsersInRoles_MembershipRole1" FromRole="MembershipUsersInRoles" ToRole="MembershipRole" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_MembershipUsersInRoles_MembershipUser1" FromRole="MembershipUsersInRoles" ToRole="MembershipUser" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsGlobal" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CategoryPermissionForRoles" Relationship="Self.FK_CategoryPermissionForRole_Permission" FromRole="Permission" ToRole="CategoryPermissionForRole" />
+        </EntityType>
+        <EntityType Name="Poll">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="IsClosed" Type="Boolean" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_Poll_MembershipUser" FromRole="Poll" ToRole="MembershipUser" />
+          <NavigationProperty Name="PollAnswers" Relationship="Self.FK_PollAnswer_Poll" FromRole="Poll" ToRole="PollAnswer" />
+        </EntityType>
+        <EntityType Name="PollAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Answer" Type="String" MaxLength="600" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Poll_Id" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Poll" Relationship="Self.FK_PollAnswer_Poll" FromRole="PollAnswer" ToRole="Poll" />
+          <NavigationProperty Name="PollVotes" Relationship="Self.FK_PollVote_PollAnswer" FromRole="PollAnswer" ToRole="PollVote" />
+        </EntityType>
+        <EntityType Name="PollVote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <Property Name="PollAnswer_Id" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_PollVote_MembershipUser" FromRole="PollVote" ToRole="MembershipUser" />
+          <NavigationProperty Name="PollAnswer" Relationship="Self.FK_PollVote_PollAnswer" FromRole="PollVote" ToRole="PollAnswer" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <Property Name="PostContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VoteCount" Type="Int32" Nullable="false" />
+          <Property Name="Topic_Id" Type="Guid" Nullable="false" />
+          <Property Name="DateEdited" Type="DateTime" Precision="3" />
+          <Property Name="IsSolution" Type="Boolean" Nullable="false" />
+          <Property Name="IsTopicStarter" Type="Boolean" />
+          <Property Name="FlaggedAsSpam" Type="Boolean" />
+          <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pending" Type="Boolean" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_Post_MembershipUser" FromRole="Post" ToRole="MembershipUser" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_Post_Topic" FromRole="Post" ToRole="Topic" />
+          <NavigationProperty Name="Votes" Relationship="Self.FK_Vote_Post" FromRole="Post" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="PrivateMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserTo_Id" Type="Guid" Nullable="false" />
+          <Property Name="UserFrom_Id" Type="Guid" Nullable="false" />
+          <Property Name="DateSent" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <Property Name="IsSentMessage" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_PrivateMessage_MembershipUser" FromRole="PrivateMessage" ToRole="MembershipUser" />
+          <NavigationProperty Name="MembershipUser1" Relationship="Self.FK_PrivateMessage_MembershipUser1" FromRole="PrivateMessage" ToRole="MembershipUser" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ForumName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ForumUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsClosed" Type="Boolean" />
+          <Property Name="EnableRSSFeeds" Type="Boolean" />
+          <Property Name="DisplayEditedBy" Type="Boolean" />
+          <Property Name="EnablePostFileAttachments" Type="Boolean" />
+          <Property Name="EnableMarkAsSolution" Type="Boolean" />
+          <Property Name="EnableSpamReporting" Type="Boolean" />
+          <Property Name="EnableMemberReporting" Type="Boolean" />
+          <Property Name="EnableEmailSubscriptions" Type="Boolean" />
+          <Property Name="ManuallyAuthoriseNewMembers" Type="Boolean" />
+          <Property Name="EmailAdminOnNewMemberSignUp" Type="Boolean" />
+          <Property Name="TopicsPerPage" Type="Int32" />
+          <Property Name="PostsPerPage" Type="Int32" />
+          <Property Name="EnablePrivateMessages" Type="Boolean" />
+          <Property Name="MaxPrivateMessagesPerMember" Type="Int32" />
+          <Property Name="PrivateMessageFloodControl" Type="Int32" />
+          <Property Name="EnableSignatures" Type="Boolean" />
+          <Property Name="EnablePoints" Type="Boolean" />
+          <Property Name="PointsAllowedToVoteAmount" Type="Int32" />
+          <Property Name="PointsAddedPerPost" Type="Int32" />
+          <Property Name="PointsAddedPostiveVote" Type="Int32" />
+          <Property Name="PointsAddedForSolution" Type="Int32" />
+          <Property Name="PointsDeductedNagativeVote" Type="Int32" />
+          <Property Name="AdminEmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NotificationReplyEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SMTP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SMTPUsername" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SMTPPort" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SMTPEnableSSL" Type="Boolean" />
+          <Property Name="SMTPPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Theme" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NewMemberStartingRole" Type="Guid" />
+          <Property Name="DefaultLanguage_Id" Type="Guid" Nullable="false" />
+          <Property Name="ActivitiesPerPage" Type="Int32" />
+          <Property Name="EnableAkisment" Type="Boolean" />
+          <Property Name="AkismentKey" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentDatabaseVersion" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SpamQuestion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SpamAnswer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EnableSocialLogins" Type="Boolean" />
+          <Property Name="EnablePolls" Type="Boolean" />
+          <Property Name="NewMemberEmailConfirmation" Type="Boolean" />
+          <Property Name="SuspendRegistration" Type="Boolean" />
+          <Property Name="PageTitle" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDesc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MembershipRole" Relationship="Self.FK_Settings_MembershipRole" FromRole="Settings" ToRole="MembershipRole" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <Property Name="Solved" Type="Boolean" Nullable="false" />
+          <Property Name="Category_Id" Type="Guid" Nullable="false" />
+          <Property Name="Post_Id" Type="Guid" />
+          <Property Name="Slug" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Views" Type="Int32" />
+          <Property Name="IsSticky" Type="Boolean" Nullable="false" />
+          <Property Name="IsLocked" Type="Boolean" Nullable="false" />
+          <Property Name="Poll_Id" Type="Guid" />
+          <Property Name="Pending" Type="Boolean" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Topic_Category" FromRole="Topic" ToRole="Category" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_Topic_MembershipUser" FromRole="Topic" ToRole="MembershipUser" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Post_Topic" FromRole="Topic" ToRole="Post" />
+          <NavigationProperty Name="Topic_Tag" Relationship="Self.FK_Topic_Tag_Topic" FromRole="Topic" ToRole="Topic_Tag" />
+          <NavigationProperty Name="TopicNotifications" Relationship="Self.FK_TopicNotification_Topic" FromRole="Topic" ToRole="TopicNotification" />
+        </EntityType>
+        <EntityType Name="Topic_Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Topic_Id" Type="Guid" Nullable="false" />
+          <Property Name="TopicTag_Id" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_Topic_Tag_Topic" FromRole="Topic_Tag" ToRole="Topic" />
+          <NavigationProperty Name="TopicTag" Relationship="Self.FK_Topic_Tag_TopicTag" FromRole="Topic_Tag" ToRole="TopicTag" />
+        </EntityType>
+        <EntityType Name="TopicNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Topic_Id" Type="Guid" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_TopicNotification_MembershipUser" FromRole="TopicNotification" ToRole="MembershipUser" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_TopicNotification_Topic" FromRole="TopicNotification" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="TopicTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Tag" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Slug" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Topic_Tag" Relationship="Self.FK_Topic_Tag_TopicTag" FromRole="TopicTag" ToRole="Topic_Tag" />
+        </EntityType>
+        <EntityType Name="UploadedFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Filename" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <Property Name="Post_Id" Type="Guid" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MembershipUser_Id" Type="Guid" Nullable="false" />
+          <Property Name="Post_Id" Type="Guid" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="VotedByMembershipUser_Id" Type="Guid" />
+          <Property Name="DateVoted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MembershipUser" Relationship="Self.FK_Vote_MembershipUser" FromRole="Vote" ToRole="MembershipUser" />
+          <NavigationProperty Name="Post" Relationship="Self.FK_Vote_Post" FromRole="Vote" ToRole="Post" />
+        </EntityType>
+        <Association Name="FK_MembershipUser_Badge_Badge">
+          <End Role="Badge" Type="Self.Badge" Multiplicity="1" />
+          <End Role="MembershipUser_Badge" Type="Self.MembershipUser_Badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Badge">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembershipUser_Badge">
+              <PropertyRef Name="Badge_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BadgeTypeTimeLastChecked_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="BadgeTypeTimeLastChecked" Type="Self.BadgeTypeTimeLastChecked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BadgeTypeTimeLastChecked">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryNotification_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="CategoryNotification" Type="Self.CategoryNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryNotification">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryPermissionForRole_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="CategoryPermissionForRole" Type="Self.CategoryPermissionForRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryPermissionForRole">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryNotification_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="CategoryNotification" Type="Self.CategoryNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryNotification">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryPermissionForRole_MembershipRole">
+          <End Role="MembershipRole" Type="Self.MembershipRole" Multiplicity="1" />
+          <End Role="CategoryPermissionForRole" Type="Self.CategoryPermissionForRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryPermissionForRole">
+              <PropertyRef Name="MembershipRole_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryPermissionForRole_Permission">
+          <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+          <End Role="CategoryPermissionForRole" Type="Self.CategoryPermissionForRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryPermissionForRole">
+              <PropertyRef Name="Permission_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocaleStringResource_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="LocaleStringResource" Type="Self.LocaleStringResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocaleStringResource">
+              <PropertyRef Name="Language_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocaleStringResource_LocaleResourceKey">
+          <End Role="LocaleResourceKey" Type="Self.LocaleResourceKey" Multiplicity="1" />
+          <End Role="LocaleStringResource" Type="Self.LocaleStringResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocaleResourceKey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocaleStringResource">
+              <PropertyRef Name="LocaleResourceKey_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembershipUsersInRoles_MembershipRole1">
+          <End Role="MembershipRole" Type="Self.MembershipRole" Multiplicity="1" />
+          <End Role="MembershipUsersInRoles" Type="Self.MembershipUsersInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembershipUsersInRoles">
+              <PropertyRef Name="RoleIdentifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settings_MembershipRole">
+          <End Role="MembershipRole" Type="Self.MembershipRole" Multiplicity="0..1" />
+          <End Role="Settings" Type="Self.Setting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Settings">
+              <PropertyRef Name="NewMemberStartingRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembershipUser_Badge_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="MembershipUser_Badge" Type="Self.MembershipUser_Badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembershipUser_Badge">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembershipUserPoints_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="MembershipUserPoints" Type="Self.MembershipUserPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembershipUserPoints">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembershipUsersInRoles_MembershipUser1">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="MembershipUsersInRoles" Type="Self.MembershipUsersInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembershipUsersInRoles">
+              <PropertyRef Name="UserIdentifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poll_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="Poll" Type="Self.Poll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Poll">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollVote_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="PollVote" Type="Self.PollVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PollVote">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrivateMessage_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="PrivateMessage" Type="Self.PrivateMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrivateMessage">
+              <PropertyRef Name="UserTo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrivateMessage_MembershipUser1">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="PrivateMessage" Type="Self.PrivateMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrivateMessage">
+              <PropertyRef Name="UserFrom_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicNotification_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="TopicNotification" Type="Self.TopicNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicNotification">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_MembershipUser">
+          <End Role="MembershipUser" Type="Self.MembershipUser" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="MembershipUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollAnswer_Poll">
+          <End Role="Poll" Type="Self.Poll" Multiplicity="1" />
+          <End Role="PollAnswer" Type="Self.PollAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poll">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PollAnswer">
+              <PropertyRef Name="Poll_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollVote_PollAnswer">
+          <End Role="PollAnswer" Type="Self.PollAnswer" Multiplicity="1" />
+          <End Role="PollVote" Type="Self.PollVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PollAnswer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PollVote">
+              <PropertyRef Name="PollAnswer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="Topic_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="Post_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_Tag_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1" />
+          <End Role="Topic_Tag" Type="Self.Topic_Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Topic_Tag">
+              <PropertyRef Name="Topic_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicNotification_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1" />
+          <End Role="TopicNotification" Type="Self.TopicNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicNotification">
+              <PropertyRef Name="Topic_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_Tag_TopicTag">
+          <End Role="TopicTag" Type="Self.TopicTag" Multiplicity="1" />
+          <End Role="Topic_Tag" Type="Self.Topic_Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TopicTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Topic_Tag">
+              <PropertyRef Name="TopicTag_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="r3mus_ForumDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activities" EntityType="Self.Activity" />
+          <EntitySet Name="Badges" EntityType="Self.Badge" />
+          <EntitySet Name="BadgeTypeTimeLastCheckeds" EntityType="Self.BadgeTypeTimeLastChecked" />
+          <EntitySet Name="BannedEmails" EntityType="Self.BannedEmail" />
+          <EntitySet Name="BannedWords" EntityType="Self.BannedWord" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="CategoryNotifications" EntityType="Self.CategoryNotification" />
+          <EntitySet Name="CategoryPermissionForRoles" EntityType="Self.CategoryPermissionForRole" />
+          <EntitySet Name="Emails" EntityType="Self.Email" />
+          <EntitySet Name="Favourites" EntityType="Self.Favourite" />
+          <EntitySet Name="GlobalPermissionForRoles" EntityType="Self.GlobalPermissionForRole" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="LocaleResourceKeys" EntityType="Self.LocaleResourceKey" />
+          <EntitySet Name="LocaleStringResources" EntityType="Self.LocaleStringResource" />
+          <EntitySet Name="MembershipRoles" EntityType="Self.MembershipRole" />
+          <EntitySet Name="MembershipUsers" EntityType="Self.MembershipUser" />
+          <EntitySet Name="MembershipUser_Badge" EntityType="Self.MembershipUser_Badge" />
+          <EntitySet Name="MembershipUserPoints" EntityType="Self.MembershipUserPoint" />
+          <EntitySet Name="MembershipUsersInRoles" EntityType="Self.MembershipUsersInRole" />
+          <EntitySet Name="Permissions" EntityType="Self.Permission" />
+          <EntitySet Name="Polls" EntityType="Self.Poll" />
+          <EntitySet Name="PollAnswers" EntityType="Self.PollAnswer" />
+          <EntitySet Name="PollVotes" EntityType="Self.PollVote" />
+          <EntitySet Name="Posts" EntityType="Self.Post" />
+          <EntitySet Name="PrivateMessages" EntityType="Self.PrivateMessage" />
+          <EntitySet Name="Settings" EntityType="Self.Setting" />
+          <EntitySet Name="Topics" EntityType="Self.Topic" />
+          <EntitySet Name="Topic_Tag" EntityType="Self.Topic_Tag" />
+          <EntitySet Name="TopicNotifications" EntityType="Self.TopicNotification" />
+          <EntitySet Name="TopicTags" EntityType="Self.TopicTag" />
+          <EntitySet Name="UploadedFiles" EntityType="Self.UploadedFile" />
+          <EntitySet Name="Votes" EntityType="Self.Vote" />
+          <AssociationSet Name="FK_MembershipUser_Badge_Badge" Association="Self.FK_MembershipUser_Badge_Badge">
+            <End Role="Badge" EntitySet="Badges" />
+            <End Role="MembershipUser_Badge" EntitySet="MembershipUser_Badge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadgeTypeTimeLastChecked_MembershipUser" Association="Self.FK_BadgeTypeTimeLastChecked_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="BadgeTypeTimeLastChecked" EntitySet="BadgeTypeTimeLastCheckeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryNotification_Category" Association="Self.FK_CategoryNotification_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategoryNotification" EntitySet="CategoryNotifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryPermissionForRole_Category" Association="Self.FK_CategoryPermissionForRole_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategoryPermissionForRole" EntitySet="CategoryPermissionForRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_Category" Association="Self.FK_Topic_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryNotification_MembershipUser" Association="Self.FK_CategoryNotification_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="CategoryNotification" EntitySet="CategoryNotifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryPermissionForRole_MembershipRole" Association="Self.FK_CategoryPermissionForRole_MembershipRole">
+            <End Role="MembershipRole" EntitySet="MembershipRoles" />
+            <End Role="CategoryPermissionForRole" EntitySet="CategoryPermissionForRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryPermissionForRole_Permission" Association="Self.FK_CategoryPermissionForRole_Permission">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="CategoryPermissionForRole" EntitySet="CategoryPermissionForRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocaleStringResource_Language" Association="Self.FK_LocaleStringResource_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="LocaleStringResource" EntitySet="LocaleStringResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocaleStringResource_LocaleResourceKey" Association="Self.FK_LocaleStringResource_LocaleResourceKey">
+            <End Role="LocaleResourceKey" EntitySet="LocaleResourceKeys" />
+            <End Role="LocaleStringResource" EntitySet="LocaleStringResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembershipUsersInRoles_MembershipRole1" Association="Self.FK_MembershipUsersInRoles_MembershipRole1">
+            <End Role="MembershipRole" EntitySet="MembershipRoles" />
+            <End Role="MembershipUsersInRoles" EntitySet="MembershipUsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settings_MembershipRole" Association="Self.FK_Settings_MembershipRole">
+            <End Role="MembershipRole" EntitySet="MembershipRoles" />
+            <End Role="Settings" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembershipUser_Badge_MembershipUser" Association="Self.FK_MembershipUser_Badge_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="MembershipUser_Badge" EntitySet="MembershipUser_Badge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembershipUserPoints_MembershipUser" Association="Self.FK_MembershipUserPoints_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="MembershipUserPoints" EntitySet="MembershipUserPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembershipUsersInRoles_MembershipUser1" Association="Self.FK_MembershipUsersInRoles_MembershipUser1">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="MembershipUsersInRoles" EntitySet="MembershipUsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poll_MembershipUser" Association="Self.FK_Poll_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="Poll" EntitySet="Polls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollVote_MembershipUser" Association="Self.FK_PollVote_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="PollVote" EntitySet="PollVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_MembershipUser" Association="Self.FK_Post_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrivateMessage_MembershipUser" Association="Self.FK_PrivateMessage_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="PrivateMessage" EntitySet="PrivateMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrivateMessage_MembershipUser1" Association="Self.FK_PrivateMessage_MembershipUser1">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="PrivateMessage" EntitySet="PrivateMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_MembershipUser" Association="Self.FK_Topic_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicNotification_MembershipUser" Association="Self.FK_TopicNotification_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="TopicNotification" EntitySet="TopicNotifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_MembershipUser" Association="Self.FK_Vote_MembershipUser">
+            <End Role="MembershipUser" EntitySet="MembershipUsers" />
+            <End Role="Vote" EntitySet="Votes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollAnswer_Poll" Association="Self.FK_PollAnswer_Poll">
+            <End Role="Poll" EntitySet="Polls" />
+            <End Role="PollAnswer" EntitySet="PollAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollVote_PollAnswer" Association="Self.FK_PollVote_PollAnswer">
+            <End Role="PollAnswer" EntitySet="PollAnswers" />
+            <End Role="PollVote" EntitySet="PollVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_Topic" Association="Self.FK_Post_Topic">
+            <End Role="Topic" EntitySet="Topics" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Post" Association="Self.FK_Vote_Post">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Vote" EntitySet="Votes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_Tag_Topic" Association="Self.FK_Topic_Tag_Topic">
+            <End Role="Topic" EntitySet="Topics" />
+            <End Role="Topic_Tag" EntitySet="Topic_Tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicNotification_Topic" Association="Self.FK_TopicNotification_Topic">
+            <End Role="Topic" EntitySet="Topics" />
+            <End Role="TopicNotification" EntitySet="TopicNotifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_Tag_TopicTag" Association="Self.FK_Topic_Tag_TopicTag">
+            <End Role="TopicTag" EntitySet="TopicTags" />
+            <End Role="Topic_Tag" EntitySet="Topic_Tag" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="r3mus_ForumModelStoreContainer" CdmEntityContainer="r3mus_ForumDBEntities">
+          <EntitySetMapping Name="Activities">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Badges">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Badge">
+              <MappingFragment StoreEntitySet="Badge">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="AwardsPoints" ColumnName="AwardsPoints" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BadgeTypeTimeLastCheckeds">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.BadgeTypeTimeLastChecked">
+              <MappingFragment StoreEntitySet="BadgeTypeTimeLastChecked">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+                <ScalarProperty Name="BadgeType" ColumnName="BadgeType" />
+                <ScalarProperty Name="TimeLastChecked" ColumnName="TimeLastChecked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BannedEmails">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.BannedEmail">
+              <MappingFragment StoreEntitySet="BannedEmail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BannedWords">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.BannedWord">
+              <MappingFragment StoreEntitySet="BannedWord">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Word" ColumnName="Word" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="IsStopWord" ColumnName="IsStopWord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+                <ScalarProperty Name="ModerateTopics" ColumnName="ModerateTopics" />
+                <ScalarProperty Name="ModeratePosts" ColumnName="ModeratePosts" />
+                <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+                <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Colour" ColumnName="Colour" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryNotifications">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.CategoryNotification">
+              <MappingFragment StoreEntitySet="CategoryNotification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryPermissionForRoles">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.CategoryPermissionForRole">
+              <MappingFragment StoreEntitySet="CategoryPermissionForRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Permission_Id" ColumnName="Permission_Id" />
+                <ScalarProperty Name="MembershipRole_Id" ColumnName="MembershipRole_Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="IsTicked" ColumnName="IsTicked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emails">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Email">
+              <MappingFragment StoreEntitySet="Email">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmailTo" ColumnName="EmailTo" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="NameTo" ColumnName="NameTo" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favourites">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Favourite">
+              <MappingFragment StoreEntitySet="Favourite">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GlobalPermissionForRoles">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.GlobalPermissionForRole">
+              <MappingFragment StoreEntitySet="GlobalPermissionForRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Permission_Id" ColumnName="Permission_Id" />
+                <ScalarProperty Name="MembershipRole_Id" ColumnName="MembershipRole_Id" />
+                <ScalarProperty Name="IsTicked" ColumnName="IsTicked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LanguageCulture" ColumnName="LanguageCulture" />
+                <ScalarProperty Name="FlagImageFileName" ColumnName="FlagImageFileName" />
+                <ScalarProperty Name="RightToLeft" ColumnName="RightToLeft" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocaleResourceKeys">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.LocaleResourceKey">
+              <MappingFragment StoreEntitySet="LocaleResourceKey">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocaleStringResources">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.LocaleStringResource">
+              <MappingFragment StoreEntitySet="LocaleStringResource">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Language_Id" ColumnName="Language_Id" />
+                <ScalarProperty Name="LocaleResourceKey_Id" ColumnName="LocaleResourceKey_Id" />
+                <ScalarProperty Name="ResourceValue" ColumnName="ResourceValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipRoles">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.MembershipRole">
+              <MappingFragment StoreEntitySet="MembershipRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipUsers">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.MembershipUser">
+              <MappingFragment StoreEntitySet="MembershipUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAnswerAttempt" ColumnName="FailedPasswordAnswerAttempt" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="FacebookAccessToken" ColumnName="FacebookAccessToken" />
+                <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
+                <ScalarProperty Name="TwitterAccessToken" ColumnName="TwitterAccessToken" />
+                <ScalarProperty Name="TwitterId" ColumnName="TwitterId" />
+                <ScalarProperty Name="GoogleAccessToken" ColumnName="GoogleAccessToken" />
+                <ScalarProperty Name="GoogleId" ColumnName="GoogleId" />
+                <ScalarProperty Name="IsExternalAccount" ColumnName="IsExternalAccount" />
+                <ScalarProperty Name="TwitterShowFeed" ColumnName="TwitterShowFeed" />
+                <ScalarProperty Name="DisableEmailNotifications" ColumnName="DisableEmailNotifications" />
+                <ScalarProperty Name="DisablePosting" ColumnName="DisablePosting" />
+                <ScalarProperty Name="DisablePrivateMessages" ColumnName="DisablePrivateMessages" />
+                <ScalarProperty Name="DisableFileUploads" ColumnName="DisableFileUploads" />
+                <ScalarProperty Name="LoginIdExpires" ColumnName="LoginIdExpires" />
+                <ScalarProperty Name="MiscAccessToken" ColumnName="MiscAccessToken" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipUser_Badge">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.MembershipUser_Badge">
+              <MappingFragment StoreEntitySet="MembershipUser_Badge">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Badge_Id" ColumnName="Badge_Id" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipUserPoints">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.MembershipUserPoint">
+              <MappingFragment StoreEntitySet="MembershipUserPoints">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipUsersInRoles">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.MembershipUsersInRole">
+              <MappingFragment StoreEntitySet="MembershipUsersInRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleIdentifier" ColumnName="RoleIdentifier" />
+                <ScalarProperty Name="UserIdentifier" ColumnName="UserIdentifier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Permission">
+              <MappingFragment StoreEntitySet="Permission">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsGlobal" ColumnName="IsGlobal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Polls">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Poll">
+              <MappingFragment StoreEntitySet="Poll">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PollAnswers">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.PollAnswer">
+              <MappingFragment StoreEntitySet="PollAnswer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Poll_Id" ColumnName="Poll_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PollVotes">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.PollVote">
+              <MappingFragment StoreEntitySet="PollVote">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+                <ScalarProperty Name="PollAnswer_Id" ColumnName="PollAnswer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+                <ScalarProperty Name="PostContent" ColumnName="PostContent" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="VoteCount" ColumnName="VoteCount" />
+                <ScalarProperty Name="Topic_Id" ColumnName="Topic_Id" />
+                <ScalarProperty Name="DateEdited" ColumnName="DateEdited" />
+                <ScalarProperty Name="IsSolution" ColumnName="IsSolution" />
+                <ScalarProperty Name="IsTopicStarter" ColumnName="IsTopicStarter" />
+                <ScalarProperty Name="FlaggedAsSpam" ColumnName="FlaggedAsSpam" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrivateMessages">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.PrivateMessage">
+              <MappingFragment StoreEntitySet="PrivateMessage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserTo_Id" ColumnName="UserTo_Id" />
+                <ScalarProperty Name="UserFrom_Id" ColumnName="UserFrom_Id" />
+                <ScalarProperty Name="DateSent" ColumnName="DateSent" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="IsSentMessage" ColumnName="IsSentMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ForumName" ColumnName="ForumName" />
+                <ScalarProperty Name="ForumUrl" ColumnName="ForumUrl" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+                <ScalarProperty Name="EnableRSSFeeds" ColumnName="EnableRSSFeeds" />
+                <ScalarProperty Name="DisplayEditedBy" ColumnName="DisplayEditedBy" />
+                <ScalarProperty Name="EnablePostFileAttachments" ColumnName="EnablePostFileAttachments" />
+                <ScalarProperty Name="EnableMarkAsSolution" ColumnName="EnableMarkAsSolution" />
+                <ScalarProperty Name="EnableSpamReporting" ColumnName="EnableSpamReporting" />
+                <ScalarProperty Name="EnableMemberReporting" ColumnName="EnableMemberReporting" />
+                <ScalarProperty Name="EnableEmailSubscriptions" ColumnName="EnableEmailSubscriptions" />
+                <ScalarProperty Name="ManuallyAuthoriseNewMembers" ColumnName="ManuallyAuthoriseNewMembers" />
+                <ScalarProperty Name="EmailAdminOnNewMemberSignUp" ColumnName="EmailAdminOnNewMemberSignUp" />
+                <ScalarProperty Name="TopicsPerPage" ColumnName="TopicsPerPage" />
+                <ScalarProperty Name="PostsPerPage" ColumnName="PostsPerPage" />
+                <ScalarProperty Name="EnablePrivateMessages" ColumnName="EnablePrivateMessages" />
+                <ScalarProperty Name="MaxPrivateMessagesPerMember" ColumnName="MaxPrivateMessagesPerMember" />
+                <ScalarProperty Name="PrivateMessageFloodControl" ColumnName="PrivateMessageFloodControl" />
+                <ScalarProperty Name="EnableSignatures" ColumnName="EnableSignatures" />
+                <ScalarProperty Name="EnablePoints" ColumnName="EnablePoints" />
+                <ScalarProperty Name="PointsAllowedToVoteAmount" ColumnName="PointsAllowedToVoteAmount" />
+                <ScalarProperty Name="PointsAddedPerPost" ColumnName="PointsAddedPerPost" />
+                <ScalarProperty Name="PointsAddedPostiveVote" ColumnName="PointsAddedPostiveVote" />
+                <ScalarProperty Name="PointsAddedForSolution" ColumnName="PointsAddedForSolution" />
+                <ScalarProperty Name="PointsDeductedNagativeVote" ColumnName="PointsDeductedNagativeVote" />
+                <ScalarProperty Name="AdminEmailAddress" ColumnName="AdminEmailAddress" />
+                <ScalarProperty Name="NotificationReplyEmail" ColumnName="NotificationReplyEmail" />
+                <ScalarProperty Name="SMTP" ColumnName="SMTP" />
+                <ScalarProperty Name="SMTPUsername" ColumnName="SMTPUsername" />
+                <ScalarProperty Name="SMTPPort" ColumnName="SMTPPort" />
+                <ScalarProperty Name="SMTPEnableSSL" ColumnName="SMTPEnableSSL" />
+                <ScalarProperty Name="SMTPPassword" ColumnName="SMTPPassword" />
+                <ScalarProperty Name="Theme" ColumnName="Theme" />
+                <ScalarProperty Name="NewMemberStartingRole" ColumnName="NewMemberStartingRole" />
+                <ScalarProperty Name="DefaultLanguage_Id" ColumnName="DefaultLanguage_Id" />
+                <ScalarProperty Name="ActivitiesPerPage" ColumnName="ActivitiesPerPage" />
+                <ScalarProperty Name="EnableAkisment" ColumnName="EnableAkisment" />
+                <ScalarProperty Name="AkismentKey" ColumnName="AkismentKey" />
+                <ScalarProperty Name="CurrentDatabaseVersion" ColumnName="CurrentDatabaseVersion" />
+                <ScalarProperty Name="SpamQuestion" ColumnName="SpamQuestion" />
+                <ScalarProperty Name="SpamAnswer" ColumnName="SpamAnswer" />
+                <ScalarProperty Name="EnableSocialLogins" ColumnName="EnableSocialLogins" />
+                <ScalarProperty Name="EnablePolls" ColumnName="EnablePolls" />
+                <ScalarProperty Name="NewMemberEmailConfirmation" ColumnName="NewMemberEmailConfirmation" />
+                <ScalarProperty Name="SuspendRegistration" ColumnName="SuspendRegistration" />
+                <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+                <ScalarProperty Name="MetaDesc" ColumnName="MetaDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topics">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Topic">
+              <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+                <ScalarProperty Name="Solved" ColumnName="Solved" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Post_Id" ColumnName="Post_Id" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="Views" ColumnName="Views" />
+                <ScalarProperty Name="IsSticky" ColumnName="IsSticky" />
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+                <ScalarProperty Name="Poll_Id" ColumnName="Poll_Id" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topic_Tag">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Topic_Tag">
+              <MappingFragment StoreEntitySet="Topic_Tag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Topic_Id" ColumnName="Topic_Id" />
+                <ScalarProperty Name="TopicTag_Id" ColumnName="TopicTag_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TopicNotifications">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.TopicNotification">
+              <MappingFragment StoreEntitySet="TopicNotification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Topic_Id" ColumnName="Topic_Id" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TopicTags">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.TopicTag">
+              <MappingFragment StoreEntitySet="TopicTag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UploadedFiles">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.UploadedFile">
+              <MappingFragment StoreEntitySet="UploadedFile">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+                <ScalarProperty Name="Post_Id" ColumnName="Post_Id" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Votes">
+            <EntityTypeMapping TypeName="r3mus_ForumModel.Vote">
+              <MappingFragment StoreEntitySet="Vote">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MembershipUser_Id" ColumnName="MembershipUser_Id" />
+                <ScalarProperty Name="Post_Id" ColumnName="Post_Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="VotedByMembershipUser_Id" ColumnName="VotedByMembershipUser_Id" />
+                <ScalarProperty Name="DateVoted" ColumnName="DateVoted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

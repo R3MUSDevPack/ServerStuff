@@ -224,17 +224,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ForumController.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntelController.cs" />
     <Compile Include="Controllers\LoggedInHomeController.cs" />
-    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\RecruitmentController.cs" />
-    <Compile Include="Controllers\ThreadController.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Controllers\WebsiteAdminController.cs" />
     <Compile Include="Filters\CustomAttributes.cs" />
     <Compile Include="Filters\Extensions.cs" />
@@ -357,9 +350,6 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Repository\SQLForumRepository.cs">
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ApplicantViewModel.cs" />
@@ -546,25 +536,19 @@
     <Content Include="Views\WebsiteAdmin\_RoleManagement.cshtml" />
     <Content Include="Views\LoggedInHome\_RegisterForSlack.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\_DateTime.cshtml" />
-    <Content Include="Views\Forum\Index.cshtml" />
-    <Content Include="Views\Forum\Create.cshtml" />
-    <Content Include="Views\Forum\Edit.cshtml" />
-    <Content Include="Views\Forum\AdminIndex.cshtml" />
-    <Content Include="Views\Forum\Delete.cshtml" />
-    <Content Include="Views\Forum\ShowForum.cshtml" />
-    <Content Include="Views\Thread\Create.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AccessMaskHighlight.cshtml" />
     <Content Include="Views\WebsiteAdmin\EditApi.cshtml" />
     <Content Include="Views\WebsiteAdmin\CreateApi.cshtml" />
     <Content Include="Views\Shared\_RecruitmentMenu.cshtml" />
     <Content Include="Views\Shared\_ServicesMenu.cshtml" />
     <Content Include="Views\Shared\_AdminMenu.cshtml" />
-    <Content Include="Views\Thread\Index.cshtml" />
     <Content Include="Views\Recruitment\Home.cshtml" />
     <Content Include="Views\Shared\_Rules.cshtml" />
     <Content Include="Views\Recruitment\_APIScreenshot.cshtml" />
     <Content Include="Views\Shared\_IntServicesMenu.cshtml" />
     <Content Include="Views\Intel\GetIntelMap_PNG.cshtml" />
+    <Content Include="Views\LoggedInHome\_RegisterForForums.cshtml" />
+    <Content Include="Views\LoggedInHome\_RedirectToForums.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Filters\fonts\glyphicons-halflings-regular.woff" />
@@ -623,7 +607,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Post\" />
+    <Folder Include="Repository\" />
     <Folder Include="Views\Role\" />
   </ItemGroup>
   <PropertyGroup>

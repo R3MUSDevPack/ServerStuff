@@ -139,5 +139,23 @@ namespace Killbot.Properties {
                 return ((bool)(this["Debug"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("919189056")]
+        public string CorpId {
+            get {
+                return ((string)(this["CorpId"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VO")]
+        public string CorpTicker {
+            get {
+                return ((string)(this["CorpTicker"]));
+            }
+        }
     }
 }

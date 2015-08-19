@@ -284,6 +284,12 @@ namespace r3mus.Controllers
             return PartialView("_RedirectToMoodle");
         }
 
+        public ActionResult RedirectToForum()
+        {
+            @ViewBag.PW = string.Concat("R3MUSUser_", User.Identity.Name.Substring(0, User.Identity.Name.IndexOf(" ")));
+            return PartialView("_RedirectToForums");
+        }
+
         public ActionResult RegisterForHipchat()
         {
             return View();
