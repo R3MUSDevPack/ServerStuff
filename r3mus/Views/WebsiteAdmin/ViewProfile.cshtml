@@ -107,11 +107,7 @@
                                         @Html.ActionLink("Edit", "EditApi", new { id = api.Id }, new { @class = "btn btn-danger" })
                                     </td>
                                     <td>                                             
-                                        @Html.ActionLink("Delete", "DeleteApi", new { id = api.Id }, new { @class = "btn btn-danger" })                              
-                                        @*@using (Html.BeginForm("DeleteAPI", "WebsiteAdmin", new { id = api.Id, userId = Model.Id }, FormMethod.Post))
-                                        {
-                                            <input type="submit" name="Delete" id="Delete" value="Delete" class="btn btn-danger" />
-                                        }*@
+                                        @Html.ActionLink("Delete", "DeleteApi", new { id = api.Id, userId = Model.Id }, new { @class = "btn btn-danger" }) 
                                     </td>
                                 </tr>
                             </table>

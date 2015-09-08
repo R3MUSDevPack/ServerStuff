@@ -194,5 +194,23 @@ namespace r3mus.Properties {
                 return ((string)(this["ForumBaseURL"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4425806")]
+        public int LogisticsCorpAPI {
+            get {
+                return ((int)(this["LogisticsCorpAPI"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("sgzakeHa3MwhV7WmxQY3pH7ZGMbipr7xN1bqk5pgon7nv5ZjqFZ6ci4B49crp4Ke")]
+        public string LogisticsVCode {
+            get {
+                return ((string)(this["LogisticsVCode"]));
+            }
+        }
     }
 }

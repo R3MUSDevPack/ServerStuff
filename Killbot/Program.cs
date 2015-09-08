@@ -20,6 +20,7 @@ using Hipchat_Plugin;
 using Slack_Plugin;
 using System.Text.RegularExpressions;
 using JKON.EveWho;
+using JKON.Slack;
 
 namespace Killbot
 {
@@ -29,7 +30,10 @@ namespace Killbot
         {
             try
             {
-                if ((Properties.Settings.Default.CorpId == null) && (Properties.Settings.Default.CorpId != string.Empty))
+                MessagePayload p = new MessagePayload();
+                p.Attachments = new List<MessagePayloadAttachment>();
+
+                if ((Properties.Settings.Default.CorpId == null) || (Properties.Settings.Default.CorpId == string.Empty))
                 {
                     CorporationSheet corpSheet = GetCorpDetails();
                     if (Properties.Settings.Default.Debug)
@@ -80,7 +84,8 @@ namespace Killbot
                 {
                     if ((Options.StartTime == null) || (Options.StartTime < Kill.KillTime))
                     {
-                        SendMessage(FormatKillMessage(Kill, corpName, corpId));
+                        //SendMessage(FormatKillMessage(Kill, corpName, corpId));
+                        SendMessage(HyperFormatKillMessage(Kill, corpName, corpId));
                     }
                 }
             }
@@ -104,7 +109,8 @@ namespace Killbot
                 {
                     if ((Options.StartTime == null) || (Options.StartTime < Kill.KillTime))
                     {
-                        SendMessage(FormatKillMessage(Kill, corpName, corpId));
+                        //SendMessage(FormatKillMessage(Kill, corpName, corpId));
+                        SendMessage(HyperFormatKillMessage(Kill, corpName, corpId));
                     }
                 }
             }
@@ -117,6 +123,19 @@ namespace Killbot
             }
 
             return Latest;
+        }
+
+        private static void SendMessage(MessagePayload message)
+        {
+            if (Properties.Settings.Default.Plugin.ToUpper() == "HIPCHAT")
+            {
+                //Hipchat.SendToRoom(message, Properties.Settings.Default.RoomName, Properties.Settings.Default.HipchatToken);
+            }
+            else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
+            {
+                //message = Linkify(message);
+                Slack.SendToRoom(message, Properties.Settings.Default.RoomName, Properties.Settings.Default.SlackWebhook);
+            }
         }
 
         private static void SendMessage(string message)
@@ -161,6 +180,83 @@ namespace Killbot
             }
         }
 
+        private static void SendPM(MessagePayload message)
+        {
+            if (Properties.Settings.Default.Plugin.ToUpper() == "HIPCHAT")
+            {
+                //Hipchat.SendPM(message, Properties.Settings.Default.HipchatToken, "Clyde en Marland");
+            }
+            else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
+            {
+                Slack.SendPM(message, "ClydeenMarland", Properties.Settings.Default.SlackWebhook);
+            }
+        }
+
+        private static MessagePayload HyperFormatKillMessage(ZkbResponse.ZkbKill kill, string corpName, long corpId)
+        {
+            MessagePayload message = new MessagePayload();
+            message.Attachments = new List<MessagePayloadAttachment>();
+
+            string type;
+            List<string> messageLines = new List<string>();
+
+            if (kill.Victim.CorporationId == corpId)
+            {
+                type = "LOSS";
+            }
+            else
+            {
+                type = "KILL";
+            }
+            EveAI.Map.SolarSystem system = GetSolarSystem(kill.SolarSystemId);
+
+            ZkbResponse.ZkbStats stats = kill.Stats;
+
+            string killTitle = string.Format(Properties.Settings.Default.MessageFormatLine1, corpName, type, kill.KillTime.ToString());
+            //messageLines.Add(killTitle);
+            string killLine1 = string.Format(Properties.Settings.Default.MessageFormatLine2, kill.Victim.CharacterName, GetProductType(kill.Victim.ShipTypeId).Name, system.Name, system.Region.Name);
+            messageLines.Add(killLine1);
+
+            foreach (ZkbResponse.ZkbAttacker Attacker in kill.Attackers)
+            {
+                if (Attacker.FinalBlow == "1")
+                {
+                    messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine3, Attacker.CharacterName, GetProductType(Attacker.ShipTypeId).Name));
+                }
+            }
+            foreach (ZkbResponse.ZkbAttacker Attacker in kill.Attackers)
+            {
+                if (Attacker.CorporationId == corpId)
+                {
+                    messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine4, Attacker.CharacterName, GetProductType(Attacker.ShipTypeId).Name));
+                }
+            }
+            if (stats != null)
+            {
+                messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine5, stats.TotalValue.ToString("N2")));
+            }
+            string killUrl = string.Format(Properties.Settings.Default.KillURL, kill.KillId.ToString());
+            messageLines.Add(string.Empty);
+            
+            message.Attachments.Add(new MessagePayloadAttachment() { 
+                Text = String.Join("\n", messageLines.ToArray()),
+                TitleLink = killUrl, 
+                Title = killTitle,
+                ThumbUrl = string.Format(Properties.Settings.Default.ShipImageUrl, kill.Victim.ShipTypeId.ToString())
+            });
+
+            if(type == "KILL")
+            {
+                message.Attachments.First().Colour = "#00FF00";
+            }
+            else if (type == "LOSS")
+            {
+                message.Attachments.First().Colour = "#FF0000";
+            }
+
+            return message;
+        }
+
         private static string FormatKillMessage(ZkbResponse.ZkbKill kill, string corpName, long corpId)
         {
             string type;
@@ -200,7 +296,8 @@ namespace Killbot
             {
                 messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine5, stats.TotalValue.ToString("N2")));
             }
-            messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine6, kill.KillId.ToString()));
+            string killUrl = string.Format(Properties.Settings.Default.KillURL, kill.KillId.ToString());
+            messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine6, killUrl));
 
             message = String.Join("\n", messageLines.ToArray());
             return message;

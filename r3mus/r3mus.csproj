@@ -227,8 +227,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntelController.cs" />
     <Compile Include="Controllers\LoggedInHomeController.cs" />
+    <Compile Include="Controllers\LogisticsController.cs" />
     <Compile Include="Controllers\RecruitmentController.cs" />
     <Compile Include="Controllers\WebsiteAdminController.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Filters\CustomAttributes.cs" />
     <Compile Include="Filters\Extensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -356,6 +358,7 @@
     <Compile Include="ViewModels\ApplicationReviewViewModel.cs" />
     <Compile Include="ViewModels\ForumViewModel.cs" />
     <Compile Include="ViewModels\IntelViewModel.cs" />
+    <Compile Include="ViewModels\LogisticsContractsViewModel.cs" />
     <Compile Include="ViewModels\RecruitmentStatsViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
@@ -468,6 +471,7 @@
     </Content>
     <Content Include="Filters\fonts\xirod.ttf" />
     <Content Include="Filters\fonts\xirod.woff" />
+    <Content Include="Content\fonts\xirod.woff" />
     <None Include="Properties\PublishProfiles\Mine.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -549,6 +553,7 @@
     <Content Include="Views\Intel\GetIntelMap_PNG.cshtml" />
     <Content Include="Views\LoggedInHome\_RegisterForForums.cshtml" />
     <Content Include="Views\LoggedInHome\_RedirectToForums.cshtml" />
+    <Content Include="Views\Logistics\ContractStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Filters\fonts\glyphicons-halflings-regular.woff" />
@@ -624,11 +629,12 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4283</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5239/</IISUrl>
+          <IISUrl>
+          </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

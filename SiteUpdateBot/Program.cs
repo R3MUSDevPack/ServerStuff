@@ -29,7 +29,7 @@ namespace SiteUpdateBot
                 bool doFullRun = ((checkDT - lastFullRunTime).TotalHours > 23);
 
                 Console.WriteLine(string.Format("Last Run Time {0}", lastFullRunTime));
-                Console.WriteLine(string.Format("Full Run {0}", doFullRun.ToString()));
+                //Console.WriteLine(string.Format("Full Run {0}", doFullRun.ToString()));
 
                 //GetWebsiteUserDetails(doFullRun);
                 //UpdateMailees();
@@ -42,13 +42,15 @@ namespace SiteUpdateBot
                 {
                     totalCount = r3musDB.RecruitmentMailees.Where(mailee => (mailee.CorpId_AtLastCheck == 0) && (mailee.Mailed == null)).Count();
 
-                    ResetMailees(doFullRun);
+                    //ResetMailees(doFullRun);
+                    ResetMailees(true);
 
                     if (doFullRun)
                     {
                         UpdateRunTime(checkDT);
                     }
 
+                    //while (UpdateMailees() && ((totalCount - r3musDB.RecruitmentMailees.Where(mailee => (mailee.CorpId_AtLastCheck == 0) && (mailee.Mailed == null)).Count()) < 10000))
                     while (UpdateMailees() && ((totalCount - r3musDB.RecruitmentMailees.Where(mailee => (mailee.CorpId_AtLastCheck == 0) && (mailee.Mailed == null)).Count()) < 10000))
                     {
                         System.Threading.Thread.Sleep(2000);
@@ -73,10 +75,16 @@ namespace SiteUpdateBot
         {
             if (reset)
             {
-                Console.WriteLine("Resetting mailees corpId's to 0");
                 var r3musDB = new r3musDbContext();
-                r3musDB.RecruitmentMailees.Where(mailee => mailee.Mailed == null).ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
-                r3musDB.SaveChanges();
+
+                //Console.WriteLine(string.Format("Resetting {0} mailees corpId's to 0", 
+                //    r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) 
+                //        && (DbFunctions.DiffHours(DateTime.Now, mailee.Submitted) > 24)).Take(100).Count().ToString()));
+                
+                r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && (DbFunctions.DiffHours(DateTime.Now, mailee.Submitted) > 24)).Take(500).ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
+                var count = r3musDB.SaveChanges();
+                Console.WriteLine(string.Format("Reset {0} mailees corpId's to 0",
+                    count.ToString()));
             }
         }
 
@@ -236,6 +244,8 @@ namespace SiteUpdateBot
             Stopwatch sw = new Stopwatch();
             sw.Start();
             int i = 0;
+            var updateDT = DateTime.Now;
+
             using(var r3musDB = new r3musDbContext())
             {
                 r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Take(30).ToList().ForEach(mailee =>
@@ -245,6 +255,7 @@ namespace SiteUpdateBot
                         i++;
                         Console.WriteLine("# {0}: Mailee {1}", i.ToString(), mailee.Name);
                         mailee.IsInNPCCorp();
+                        mailee.Submitted = updateDT;
                         //System.Threading.Thread.Sleep(1000);
                     }
                     catch (Exception ex) { Console.WriteLine(string.Format("Mailee: {0}, Error {1}", mailee.Name, ex.Message)); }
@@ -257,42 +268,6 @@ namespace SiteUpdateBot
                 GC.WaitForPendingFinalizers();
                 return (r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Count() > 0);
             }
-
-
-            //var r3musDB = new r3musDbContext();
-            //var mailees = r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Take(30).ToList();
-            //int i = 0;
-            //Stopwatch sw = new Stopwatch();
-
-            //Console.WriteLine(string.Join(", ", mailees.ToList().Select(mailee => mailee.Name).ToList()));
-
-            //sw.Start();
-
-            //foreach (var mailee in mailees)
-            //{
-            //    try
-            //    {
-            //        i++;
-            //        Console.WriteLine("# {0}: Mailee {1}", i.ToString(), mailee.Name);
-            //        mailee.IsInNPCCorp();
-            //        //System.Threading.Thread.Sleep(1000);
-            //    }
-            //    catch (Exception ex) { Console.WriteLine(string.Format("Mailee: {0}, Error {1}", mailee.Name, ex.Message)); }
-            //    //if ((i % 20) == 0)
-            //    //{
-            //    //    r3musDB.SaveChanges();
-            //    //    Console.WriteLine("Pausing...");
-            //    //    System.Threading.Thread.Sleep(15000);
-            //    //}
-            //}
-
-            //sw.Stop();
-            //Console.WriteLine("{0} mailees processed in {1}", mailees.Count().ToString(), sw.Elapsed.ToString());
-            
-            //r3musDB.SaveChanges();
-            //GC.Collect();
-
-            //return (r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Count() > 0);
         }
 
         private static void NotifyApplicationChanges(DateTime lastRunTime)

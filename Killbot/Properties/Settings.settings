@@ -21,7 +21,7 @@
       <Value Profile="(Default)">Slack</Value>
     </Setting>
     <Setting Name="RoomName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Kills</Value>
+      <Value Profile="(Default)">it_testing</Value>
     </Setting>
     <Setting Name="HipchatToken" Type="System.String" Scope="Application">
       <Value Profile="(Default)">k05sP8cuu2MwPwBsXXXje0yJXRrxypE6q6SzlsQV</Value>
@@ -36,16 +36,22 @@
       <Value Profile="(Default)">Loss value: {0} ISK. </Value>
     </Setting>
     <Setting Name="MessageFormatLine6" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Kill Link: https://zkillboard.com/kill/{0}/</Value>
+      <Value Profile="(Default)">Kill Link: {0}</Value>
     </Setting>
     <Setting Name="Debug" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="CorpId" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">919189056</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="CorpTicker" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">VO</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="KillURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://zkillboard.com/kill/{0}/</Value>
+    </Setting>
+    <Setting Name="ShipImageUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://image.eveonline.com/Render/{0}_64.png</Value>
     </Setting>
   </Settings>
 </SettingsFile>

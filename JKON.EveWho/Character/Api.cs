@@ -15,7 +15,10 @@ namespace JKON.EveWho
 {
     public class Api
     {
-        private const string c_URL = "https://api.eveonline.com/eve/CharacterInfo.xml.aspx";
+        private const string c_URL = "https://api.eveonline.com/";
+        private const string c_CHARINFOURL = "eve/CharacterInfo.xml.aspx";
+
+        private const string c_CORPMEMBERSURL = "eve/CharacterInfo.xml.aspx";
         private const string c_CHARID = "characterID={0}";
         private const string c_API = "KeyID={0}&vCode={1}";
 
@@ -81,7 +84,7 @@ namespace JKON.EveWho
         {
             try
             {
-                string reqURL = string.Concat(c_URL, "?", string.Format(c_CHARID, characterId));
+                string reqURL = string.Concat(c_URL, c_CHARINFOURL, "?", string.Format(c_CHARID, characterId));
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(reqURL);
                 request.UserAgent = "JKON.EveWho-Clyde-en-Marland";
                 WebResponse response = request.GetResponse();
@@ -90,30 +93,19 @@ namespace JKON.EveWho
 
                 string data = reader.ReadToEnd();
 
-                //JavaScriptSerializer cruncher = new JavaScriptSerializer();
-                //Models.EveCharacter toon = cruncher.Deserialize<Models.EveCharacter>(data);
-
-                //Models.EveCharacter toon = (Models.EveCharacter)cruncher.Deserialize(stream);
-
-                //XmlDocument xmlDoc = new XmlDocument();
-                //xmlDoc.LoadXml(data);
                 Models.EveCharacter toon;
-                //data = data.Replace(@"version=""2""", @"version=""2"" xmlns=""http://tempuri.org/eveapi/""");
 
                 using (TextReader treader = new StringReader(data))
                 {
                     XmlRootAttribute xRoot = new XmlRootAttribute();
                     xRoot.ElementName = "eveapi";
-                    // xRoot.Namespace = "http://www.cpandl.com";
                     xRoot.IsNullable = true;
                     XmlSerializer cruncher = new XmlSerializer(typeof(Models.EveCharacter), xRoot);
                     toon = (Models.EveCharacter)cruncher.Deserialize(treader);
                 }
 
-                //reader.Close();
                 response.Close();
 
-                //return toon;
                 return toon;
             }
             catch (Exception ex)
@@ -124,6 +116,7 @@ namespace JKON.EveWho
 
         public static List<Member> GetCorpMembers(long apiKey, string vCode)
         {
+            Models.EveCharacter toon;
             try
             {
                 string reqURL = string.Concat(c_URL, "?", string.Format(c_API, apiKey, vCode));
@@ -139,13 +132,11 @@ namespace JKON.EveWho
                 {
                     XmlRootAttribute xRoot = new XmlRootAttribute();
                     xRoot.ElementName = "eveapi";
-                    // xRoot.Namespace = "http://www.cpandl.com";
                     xRoot.IsNullable = true;
                     XmlSerializer cruncher = new XmlSerializer(typeof(Models.EveCharacter), xRoot);
                     toon = (Models.EveCharacter)cruncher.Deserialize(treader);
                 }
 
-                //reader.Close();
                 response.Close();
             }
             catch (Exception ex)

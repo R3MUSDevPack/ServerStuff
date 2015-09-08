@@ -79,7 +79,7 @@ namespace Killbot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Kills")]
+        [global::System.Configuration.DefaultSettingValueAttribute("it_testing")]
         public string RoomName {
             get {
                 return ((string)(this["RoomName"]));
@@ -124,7 +124,7 @@ namespace Killbot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Kill Link: https://zkillboard.com/kill/{0}/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Kill Link: {0}")]
         public string MessageFormatLine6 {
             get {
                 return ((string)(this["MessageFormatLine6"]));
@@ -142,7 +142,7 @@ namespace Killbot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("919189056")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string CorpId {
             get {
                 return ((string)(this["CorpId"]));
@@ -151,10 +151,28 @@ namespace Killbot.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("VO")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string CorpTicker {
             get {
                 return ((string)(this["CorpTicker"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://zkillboard.com/kill/{0}/")]
+        public string KillURL {
+            get {
+                return ((string)(this["KillURL"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://image.eveonline.com/Render/{0}_64.png")]
+        public string ShipImageUrl {
+            get {
+                return ((string)(this["ShipImageUrl"]));
             }
         }
     }
