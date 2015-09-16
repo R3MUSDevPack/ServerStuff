@@ -1,0 +1,179 @@
+﻿@using MVCForum.Website
+@{
+    // Global Stuff
+    var theme = Html.Settings().Theme;
+    var themePath = string.Concat(AppConstants.ThemeRootFolder, theme);
+    TempData[AppConstants.GlobalClass] = Convert.ToBoolean(PageData[AppConstants.IsMobileDevice]) ? "mobile" : "desktop";
+    TempData[AppConstants.CurrentAction] = ViewContext.RouteData.GetRequiredString("action").ToLower();
+    TempData[AppConstants.CurrentController] = ViewContext.RouteData.GetRequiredString("controller").ToLower();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.MetaDesc" />
+    @RenderSection("SocialMeta", false)
+    @ViewBag.Canonical
+    @(
+ Bundle.Css()
+                .Add("~/Content/bootstrap/css/bootstrap.css")
+                .Add(themePath + "/Content/Styles/theme.css")
+                .MvcRender("~/content/cache/combined_" + theme + "_#.css")
+    )
+    <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="@Url.Content(themePath + "/content/images/favicon.ico")">
+    <link rel="apple-touch-icon-precomposed" href="@Url.Content(themePath + "/content/images/apple-touch-icon-57-precomposed.png")">
+    <script type="text/javascript">
+        var app_base = '@Url.Content("~/")';
+    </script>
+    @(Bundle.JavaScript()
+                    .Add("~/Scripts/jquery-1.11.1.min.js")
+                    .Add("~/Scripts/jquery.unobtrusive-ajax.js")
+                    .Add("~/Content/bootstrap/js/bootstrap.min.js")
+                    .Add("~/Scripts/jquery.placeholder.min.js")
+                    .Add("~/Content/bootstrap/js/bootstrap-prettify.js")
+                    .Add("~/scripts/pushy/pushy.js")
+                    .Add("~/Scripts/general.js")
+                    .Add(themePath + "/Content/Scripts/general.js")
+                    .MvcRender("~/scripts/cache/combined_" + theme + "_#.js")
+    )
+    @RenderSection("Header", false)
+</head>
+
+<body class="@TempData[AppConstants.GlobalClass].ToString() loggedin-@(User.Identity.IsAuthenticated.ToString().ToLower())">
+    
+    <nav class="pushy pushy-left">
+        <ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole(AppConstants.AdminRoleName))
+                {
+                    <li><a href="@Url.Action("Index", "Admin", new {area = "Admin"}, null)">@Html.LanguageString("Layout.Nav.Admin")</a></li>
+                }
+                <li>@Html.ActionLink(Html.LanguageString("Members.SearchMembers"), "Search", "Members")</li>
+                @Html.Action("SideAdminPanel", "Members")
+            }
+            else
+            {
+                if (Html.Settings().SuspendRegistration != true)
+                {
+                    <li><a href="@Url.Action("Register", "Members")">@Html.LanguageString("Layout.Nav.Register")</a></li>
+                }
+                <li><a href="@Url.Action("LogOn", "Members")">@Html.LanguageString("Layout.Nav.Logon")</a></li>
+            }
+            @Html.Partial("SubNavigation")
+        </ul>
+    </nav>
+    <div class="site-overlay"></div>    
+
+    <header>
+
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle menu-btn">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                        <img src="@Url.Content(themePath + "/content/images/logo.png")" alt="@Html.Lang("Site.MvcForum")" class="logoimg"/>                        
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="mvcforum-nav">
+    
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            if (Html.Settings().SuspendRegistration != true)
+                            {
+                                <li><a href="@Url.Action("Register", "Members")">@Html.LanguageString("Layout.Nav.Register")</a></li>
+                            }
+                            <li><a href="@Url.Action("LogOn", "Members")">@Html.LanguageString("Layout.Nav.Logon")</a></li>
+                        }
+                        @*<li><a href="http://www.mvcforum.com">Main Website</a></li>*@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Html.LanguageString("SideBox.MyTools")<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    @if (User.IsInRole(AppConstants.AdminRoleName))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Admin", new {area = "Admin"}, null)">@Html.LanguageString("Layout.Nav.Admin")</a></li>
+                                    }
+                                    <li>@Html.ActionLink(Html.LanguageString("Members.SearchMembers"), "Search", "Members")</li>
+                                    @Html.Action("SideAdminPanel", "Members")
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="content-strip content-strip-@(User.Identity.IsAuthenticated.ToString().ToLower())">
+        <div class="container sub-nav-container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul>
+                        @Html.Partial("SubNavigation")
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container main-section">
+        @Html.Partial("_GenericMessage")
+        @Html.Partial("_EmailConfirmationNotice")
+        @Html.Partial("_NoScript")
+        <div id="main" class="mainbody">
+
+            @RenderBody()
+
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+
+            @RenderSection("Footer", false)
+
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.Action("GetMainStats", "Stats")
+                </div>
+                <div class="col-sm-6">
+                    @Html.Action("GetCurrentActiveMembers", "Members")
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="licenceblock">
+                        <!-- ########################## IMPORTANT - PLEASE DO NOT REMOVE WITHOUT LICENSE ###########################
+
+                            If you would like to remove the powered by notice, then please vist http://www.mvcforum.com/license -->
+
+                        <p>&copy; @DateTime.UtcNow.Year - @Html.LanguageString("Layout.PoweredBy") <a rel="nofollow" href="http://www.mvcforum.com">MVCForum.com</a></p>
+
+                        <!--########################## IMPORTANT - PLEASE DO NOT REMOVE WITHOUT LICENSE ########################### -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>

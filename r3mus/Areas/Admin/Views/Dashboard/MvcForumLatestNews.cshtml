@@ -1,0 +1,26 @@
+﻿@model MVCForum.Website.Areas.Admin.ViewModels.LatestNewsViewModel
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        MVCForum Latest News
+    </div>
+    @if (Model.RssFeed.Any())
+    {
+        <ul class="list-group">
+            @foreach (var rssItem in Model.RssFeed)
+            {
+                <li class="list-group-item">
+                    <a href="@rssItem.Link" target="_blank">@rssItem.Title</a>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <div class="panel-body">
+            Nothing to show
+        </div>
+    }
+
+</div>

@@ -1,0 +1,457 @@
+﻿@using MVCForum.Website.Application.ExtensionMethods
+@model MVCForum.Website.Areas.Admin.ViewModels.EditSettingsViewModel
+@{
+    ViewBag.Title = "Settings";
+}
+
+@section AdminHeader
+{
+    @(
+ Bundle.JavaScript()
+            .Add("~/Scripts/jquery.validate.min.js")
+            .Add("~/Scripts/jquery.validate.unobtrusive.min.js")
+            .MvcRender("~/scripts/cache/validate-combined_#.js")
+    )
+}
+
+@using (Html.BeginForm("Index", "Settings", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.ValidationSummary(false)
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingGeneral">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseGeneral" aria-expanded="true" aria-controls="collapseGeneral">
+                        General
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseGeneral" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingGeneral">
+                <div class="panel-body">
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ForumName)
+                        @Html.TextBoxFor(model => model.ForumName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ForumName)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ForumUrl)
+                        @Html.TextBoxFor(model => model.ForumUrl, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ForumUrl)
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PageTitle)
+                        @Html.TextBoxFor(model => model.PageTitle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PageTitle)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MetaDesc)
+                        @Html.TextAreaFor(model => model.MetaDesc, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MetaDesc)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.IsClosed, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.IsClosed)
+                        }
+                        @Html.ValidationMessageFor(m => m.IsClosed)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnableRSSFeeds, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnableRSSFeeds)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnableRSSFeeds)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.DisplayEditedBy, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.DisplayEditedBy)
+                        }
+                        @Html.ValidationMessageFor(m => m.DisplayEditedBy)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.SuspendRegistration, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.SuspendRegistration)
+                        }
+                        @Html.ValidationMessageFor(m => m.SuspendRegistration)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnableMarkAsSolution, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnableMarkAsSolution)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnableMarkAsSolution)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnablePolls, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnablePolls)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnablePolls)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnableSpamReporting, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnableSpamReporting)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnableSpamReporting)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnableMemberReporting, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnableMemberReporting)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnableMemberReporting)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnableEmailSubscriptions, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnableEmailSubscriptions)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnableEmailSubscriptions)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.ManuallyAuthoriseNewMembers, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.ManuallyAuthoriseNewMembers)
+                        }
+                        @Html.ValidationMessageFor(m => m.ManuallyAuthoriseNewMembers)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EmailAdminOnNewMemberSignUp, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EmailAdminOnNewMemberSignUp)
+                        }
+                        @Html.ValidationMessageFor(m => m.EmailAdminOnNewMemberSignUp)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.NewMemberEmailConfirmation, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.NewMemberEmailConfirmation)
+                        }
+                        @Html.ValidationMessageFor(m => m.NewMemberEmailConfirmation)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnableSignatures, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnableSignatures)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnableSignatures)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TopicsPerPage)
+                        @Html.TextBoxFor(model => model.TopicsPerPage, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TopicsPerPage)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PostsPerPage)
+                        @Html.TextBoxFor(model => model.PostsPerPage, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PostsPerPage)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ActivitiesPerPage)
+                        @Html.TextBoxFor(model => model.ActivitiesPerPage, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ActivitiesPerPage)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnablePrivateMessages, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnablePrivateMessages)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnablePrivateMessages)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MaxPrivateMessagesPerMember)
+                        @Html.TextBoxFor(model => model.MaxPrivateMessagesPerMember, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaxPrivateMessagesPerMember)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PrivateMessageFloodControl)
+                        @Html.TextBoxFor(model => model.PrivateMessageFloodControl, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PrivateMessageFloodControl)
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingPoints">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePoints" aria-expanded="false" aria-controls="collapsePoints">
+                        Points
+                    </a>
+                </h4>
+            </div>
+            <div id="collapsePoints" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPoints">
+                <div class="panel-body">
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnablePoints, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnablePoints)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnablePoints)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PointsAllowedToVoteAmount)
+                        @Html.TextBoxFor(model => model.PointsAllowedToVoteAmount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PointsAllowedToVoteAmount)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PointsAddedPerPost)
+                        @Html.TextBoxFor(model => model.PointsAddedPerPost, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PointsAddedPerPost)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PointsAddedPostiveVote)
+                        @Html.TextBoxFor(model => model.PointsAddedPostiveVote, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PointsAddedPostiveVote)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PointsDeductedNagativeVote)
+                        @Html.TextBoxFor(model => model.PointsDeductedNagativeVote, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PointsDeductedNagativeVote)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PointsAddedForSolution)
+                        @Html.TextBoxFor(model => model.PointsAddedForSolution, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PointsAddedForSolution)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingEmail">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEmail" aria-expanded="false" aria-controls="collapseEmail">
+                        Email
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseEmail" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEmail">
+                <div class="panel-body">
+
+                    <p class="help-block">Complete the settings below and save, then send a test email using the button below</p>
+                    <p class="help-block"><a href="@Url.Action("TestEmail")" class="btn btn-large btn-success">Test Email Settings</a></p>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AdminEmailAddress)
+                        @Html.TextBoxFor(model => model.AdminEmailAddress, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.AdminEmailAddress)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NotificationReplyEmail)
+                        @Html.TextBoxFor(model => model.NotificationReplyEmail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NotificationReplyEmail)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SMTP)
+                        @Html.TextBoxFor(model => model.SMTP, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SMTP)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SMTPUsername)
+                        @Html.TextBoxFor(model => model.SMTPUsername, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SMTPUsername)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SMTPPassword)
+                        @Html.TextBoxFor(model => model.SMTPPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SMTPPassword)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SMTPPort)
+                        @Html.TextBoxFor(model => model.SMTPPort, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SMTPPort)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.SMTPEnableSSL, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.SMTPEnableSSL)
+                        }
+                        @Html.ValidationMessageFor(m => m.SMTPEnableSSL)
+                    </div>
+
+                    <p class="help-block">
+                        <strong>IMPORTANT:</strong> Only port 25 works in medium trust environments. You will need to comment out the medium trust entry in the web.config if you want to
+                        use any other port number.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTheme">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTheme" aria-expanded="false" aria-controls="collapseTheme">
+                        Theme
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTheme" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTheme">
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Theme)
+                        @Html.DropDownListFor(model => model.Theme, new SelectList(Model.Themes), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Theme)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingStartingRole">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseStartingRole" aria-expanded="false" aria-controls="collapseStartingRole">
+                        Starting Role
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseStartingRole" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingStartingRole">
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NewMemberStartingRole)
+                        @Html.DropDownListFor(model => model.NewMemberStartingRole, new SelectList(Model.Roles, "Id", "RoleName"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NewMemberStartingRole)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingDefaultLanguage">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseDefaultLanguage" aria-expanded="false" aria-controls="collapseDefaultLanguage">
+                        Default Language
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseDefaultLanguage" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDefaultLanguage">
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DefaultLanguage)
+                        @Html.DropDownListFor(model => model.DefaultLanguage, new SelectList(Model.Languages, "Id", "Name"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DefaultLanguage)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingSpam">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSpam" aria-expanded="false" aria-controls="collapseSpam">
+                        Spam
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseSpam" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSpam">
+                <div class="panel-body">
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnableAkisment, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnableAkisment)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnableAkisment)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AkismentKey)
+                        @Html.TextBoxFor(model => model.AkismentKey, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.AkismentKey)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SpamQuestion)
+                        @Html.TextBoxFor(model => model.SpamQuestion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SpamQuestion)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SpamAnswer)
+                        @Html.TextBoxFor(model => model.SpamAnswer, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SpamAnswer)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingSocial">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSocial" aria-expanded="false" aria-controls="collapseSocial">
+                        Social
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseSocial" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSocial">
+                <div class="panel-body">
+                    <p>You must have the correct AppId/Keys for the social accounts (Facebook &amp; Google) in the mvcforum.config file in the root of your website.</p>
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.EnableSocialLogins, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.EnableSocialLogins)
+                        }
+                        @Html.ValidationMessageFor(m => m.EnableSocialLogins)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="submit-holder">
+        <button type="submit" class="btn-mvc btn-mvc-green btn-mvc-large">Save Settings</button>
+    </div>
+
+}
+

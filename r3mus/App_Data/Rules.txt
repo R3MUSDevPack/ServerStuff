@@ -1,0 +1,18 @@
+
+            <ul>
+                <li>Be helpful and supportive to your corp, alliance and coalition friends.</li>
+                <li>While playing the game, be on Team Speak. If you don't wish to participate in a conversation, we have designated "quiet" rooms, but we still require members to be connected.</li>
+                <li>Participate in PvP fleets whenever you can.</li>
+                <li>Complete the basic training and join us in our staging systems within two weeks of joining.</li>
+                <li>Follow the skill plans we provide which will enable you to fly all our corp doctrine ships within a reasonable timeframe.</li>
+                <li>Don't smack-talk in in-game local chat. Keep it classy because you represent our corp and alliance.</li>
+                <li>Do not behave in a discriminatory or predjudiced manner. Racist, sexist, homophobic or any other bigoted opinions are not welcome.</li>
+                <li>Keep yourself up to date with news by reading in-game bulletin boards and in-game mails.</li>
+                <li>Do not participate in highsec ganking unless specifically permitted to do so by a Fleet Commander from our corp.</li>
+            </ul>
+            
+            Turbine Cycle Conditions and Correction Factors
+R72
+
+
+    <object data="http://evemaps.dotlan.net/svg/Delve.svg" type="image/svg+xml" width="1000" height="1000" />

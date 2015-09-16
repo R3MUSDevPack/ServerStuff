@@ -37,11 +37,6 @@
       <HintPath>..\Killbot\bin\Debug\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SlackClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1980a8a7670d37a5, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Slack_Plugin\SlackClient.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,6 +53,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SlackClient\SlackClient.csproj">
+      <Project>{658b5bf5-6b66-42e3-a2c2-7f6dc08ef2d1}</Project>
+      <Name>SlackClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Slack_Plugin\Slack_Plugin.csproj">
       <Project>{eca1a3dd-2245-41c8-8100-20133906fad3}</Project>
       <Name>Slack_Plugin</Name>

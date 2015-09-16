@@ -47,7 +47,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackBot", "SlackBot\SlackB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvePingBot", "EvePingBot\EvePingBot.csproj", "{F91E5DDD-0768-40DE-9175-46B48BD8D53A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackClient", "..\..\APIViewer\SlackClient\SlackClient.csproj", "{658B5BF5-6B66-42E3-A2C2-7F6DC08EF2D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackClient", "SlackClient\SlackClient.csproj", "{658B5BF5-6B66-42E3-A2C2-7F6DC08EF2D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

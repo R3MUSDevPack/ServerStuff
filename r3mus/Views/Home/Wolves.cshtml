@@ -1,0 +1,51 @@
+﻿@model r3mus.ViewModels.CorpMemberViewModel
+
+@{
+    ViewBag.Title = "The Wolves";
+}
+
+<h2>The Wolves</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CorpMembers.FirstOrDefault().Avatar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorpMembers.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorpMembers.FirstOrDefault().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorpMembers.FirstOrDefault().MemberSince)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.CorpMembers)
+    {
+        <tr>
+            <td>
+                    @if ((item.Avatar != null) && (item.Avatar != string.Empty))
+                    {
+                        <img src="@item.Avatar" />
+                    }
+                    else
+                    {
+                        <span>Image Not Yet Available</span>
+                    }
+            </td>
+            <td>
+                @Html.DisplayTextFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayTextFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayTextFor(modelItem => item.MemberSince)
+            </td>
+        </tr>
+    }
+
+</table>

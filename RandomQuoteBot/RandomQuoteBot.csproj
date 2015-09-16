@@ -60,13 +60,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\APIViewer\SlackClient\SlackClient.csproj">
-      <Project>{658b5bf5-6b66-42e3-a2c2-7f6dc08ef2d1}</Project>
-      <Name>SlackClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Hipchat_Plugin\Hipchat_Plugin.csproj">
       <Project>{62d74a6f-20e1-4b2b-a400-f1f8a31700c0}</Project>
       <Name>Hipchat_Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SlackClient\SlackClient.csproj">
+      <Project>{658b5bf5-6b66-42e3-a2c2-7f6dc08ef2d1}</Project>
+      <Name>SlackClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\Slack_Plugin\Slack_Plugin.csproj">
       <Project>{eca1a3dd-2245-41c8-8100-20133906fad3}</Project>

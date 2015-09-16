@@ -1,0 +1,258 @@
+﻿@using MVCForum.Website
+@model MVCForum.Website.ViewModels.PostViewModel
+@{
+    var postId = Model.Post.Id;
+    var loggedOnUserId = Html.CurrentMember() != null ? Html.CurrentMember().Id : Guid.Empty;
+    var isAdmin = User.IsInRole(AppConstants.AdminRoleName);
+    var downVotes = Model.Votes.Where(x => x.Amount < 0).ToList();
+    var upVotes = Model.Votes.Where(x => x.Amount > 0).ToList();
+}
+<div class="post solution-@Model.Post.IsSolution.ToString().ToLower() post-@postId" data-id="@postId">
+
+    <div class="rowcreater hidden-xs">
+        <a id="comment-@postId"></a>
+        <a href="@Model.Post.User.NiceUrl">
+            <img src="@Model.Post.User.MemberImage(SiteConstants.GravatarPostSize)" alt="@Model.Post.User.UserName">
+        </a>
+        @if (Model.Post.User.Roles.Any(x => x.RoleName.Contains(AppConstants.AdminRoleName)))
+        {
+            <span class="label label-default">
+                @Html.Lang("Admin")
+            </span>
+        }
+    </div>
+
+    <div class="rowdetails clearfix">
+
+
+        @if (Html.CurrentMember() != null)
+        {
+            <div class="postadmin">
+                <ul>
+                    <li>
+                        <a class="btn-mvc btn-mvc-small btn-mvc-fullwidth" href="?quote=@Model.Post.Id#createpost">
+                            @Html.LanguageString("Post.Quote")
+                        </a>
+                    </li>
+
+                    @if (Model.Post.User.Id != loggedOnUserId && loggedOnUserId != Guid.Empty && Html.Settings().EnableSpamReporting)
+                    {
+                        <li>
+                            <a class="btn-mvc btn-mvc-small btn-mvc-fullwidth" href="@Url.Action("Report", "Post", new { id = Model.Post.Id })">
+                                @Html.LanguageString("Post.Report")
+                            </a>
+                        </li>
+                    }
+
+                    @if (Model.Post.User.Id == loggedOnUserId || Model.Permissions[AppConstants.PermissionDeletePosts].IsTicked)
+                    {
+                        <li>
+                            <a class="btn-mvc btn-mvc-small btn-mvc-fullwidth" onclick="return confirm('@(Html.LanguageString("Post.DeleteConfirmation"))')" href="@Url.Action("DeletePost", "Post", new { id = Model.Post.Id })">
+                                @Html.LanguageString("Post.Delete")
+                            </a>
+                        </li>
+                    }
+
+                    @if (Model.Post.User.Id == loggedOnUserId || Model.Permissions[AppConstants.PermissionEditPosts].IsTicked)
+                    {
+                        <li>
+                            <a class="btn-mvc btn-mvc-small btn-mvc-fullwidth" href="@Url.Action("EditPostTopic", "Topic", new { id = Model.Post.Id })">
+                                @Html.LanguageString("Post.Edit")
+                            </a>
+                        </li>
+                    }
+
+                    @if ((Model.Post.User.Id == loggedOnUserId && Model.Post.User.DisableFileUploads != true || User.IsInRole(AppConstants.AdminRoleName)) && Model.Permissions[AppConstants.PermissionAttachFiles].IsTicked)
+                    {
+                        <li>
+                            <a class="btn-mvc btn-mvc-small btn-mvc-fullwidth postshowattach" href="#">
+                                @Html.LanguageString("Post.Attach")
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+
+
+        <div class="postdetails@(Html.CurrentMember() == null ? " postdetails-guest" : "")">
+            <div class="postbodytop">
+                <a class="postmember-@postId" href="@Html.Raw(Model.Post.User.NiceUrl)">@Html.Raw(Model.Post.User.UserName)</a>
+                @Html.LanguageString("Post.PostedThis")
+                @DatesUI.GetPrettyDate(Model.Post.DateCreated.ToString())
+                @if (isAdmin && !string.IsNullOrEmpty(Model.Post.IpAddress))
+                {
+                    <text> - @Model.Post.IpAddress</text>
+                }
+                @if (Html.Settings().DisplayEditedBy && Model.Post.DateEdited > Model.Post.DateCreated)
+                {
+
+                    <text> - @Html.LanguageString("Post.LastEdited")  @DatesUI.GetPrettyDate(Model.Post.DateEdited.ToString())</text>
+                }
+            </div>
+
+            <div id="postcontent-@postId" class="postcontent">
+                <p>@Html.Raw(AppHelpers.ConvertPostContent(Model.Post.PostContent))</p>
+
+                @if (Html.Settings().EnableSignatures && !string.IsNullOrEmpty(Model.Post.User.Signature))
+                {
+                    <div class="userpostsignature">@Html.Raw(AppHelpers.ConvertPostContent(Model.Post.User.Signature))</div>
+                }
+            </div>
+
+            <div class="postsocial">
+                <ul>
+                    <li class="permalink">
+                        <a href="@Html.Raw(Model.PermaLink)">
+                            #@Html.Lang("Post.Permalink")
+                        </a>
+                    </li>
+                    @if (Html.Settings().EnablePoints)
+                    {
+                        <li>
+                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                            <span class="count">@upVotes.Count()</span>
+                            @if (Model.AllowedToVote)
+                            {
+                                <a class="votelink" data-id="@postId" data-votetype="up">
+                                    @Html.LanguageString("Post.VoteUp")
+                                </a>
+                            }
+                        </li>
+
+                        <li>
+                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                            <span class="count">@downVotes.Count()</span>
+                            @if (Model.AllowedToVote)
+                            {
+                                <a class="votelink" data-id="@postId" data-votetype="down">
+                                    @Html.LanguageString("Post.VoteDown")
+                                </a>
+                            }
+
+                        </li>
+                    }
+
+                    <li>
+                        <span class="glyphicon @(Model.MemberHasFavourited ? "glyphicon glyphicon-star" : "glyphicon-star-empty")" aria-hidden="true"></span>
+                        <span class="count">@Model.Favourites.Count()</span>
+                        @if (Html.CurrentMember() != null && Model.Post.User.Id != loggedOnUserId)
+                        {
+                            <a class="favourite" data-id="@postId" data-addremove="@(Model.MemberHasFavourited ? "remove" : "add")">
+                                @(Model.MemberHasFavourited ? Html.Lang("Post.Favourited") : Html.Lang("Post.Favourite"))
+                            </a>
+                        }
+                    </li>
+
+                    @if (Html.Settings().EnableMarkAsSolution)
+                    {
+                        if (Model.ParentTopic.Solved && Model.Post.IsSolution)
+                        {
+                            <li>
+                                <span class="glyphicon glyphicon-ok green-colour" aria-hidden="true"></span>
+                            </li>
+                        }
+                        else if (!Model.ParentTopic.Solved && !Model.Post.IsTopicStarter && Model.ParentTopic.User.Id == loggedOnUserId)
+                        {
+                            <li>
+                                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                                <a class="solutionlink" data-id="@postId">
+                                    @Html.LanguageString("Post.IsSolution")
+                                </a>
+                            </li>
+                        }
+                    }
+
+                </ul>
+
+            </div>
+
+            @if (Model.Post.IsTopicStarter && Model.ParentTopic.Tags.Any())
+            {
+                <div class="posttags tagsinput">
+                    @foreach (var tag in Model.ParentTopic.Tags)
+                    {
+                        <span class="tag"><span><a href="@Html.Raw(tag.NiceUrl)">@Html.Raw(tag.Tag)</a></span></span>
+                    }
+                </div>
+            }
+
+            @if (Model.Post.Files != null && Model.Post.Files.Any())
+            {
+
+                <div class="postuploadedfilesholder clearfix">
+                    <p>@Html.Lang("Post.AttachedFiles")</p>
+                    <ul>
+                        @foreach (var file in Model.Post.Files.OrderByDescending(o => o.DateCreated))
+                        {
+                            <li>
+                                <a class="fileupload" href="@Html.Raw(Url.Content(file.FilePath))">
+                                    @if (AppHelpers.FileIsImage(file.FilePath))
+                                    {
+                                        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                    }
+                                </a>
+                                @if (Model.Post.User.Id == loggedOnUserId || User.IsInRole(AppConstants.AdminRoleName))
+                                {
+                                    <a href="@Url.Action("DeleteUploadedFile", "Upload", new { file.Id })" class="deleteupload" title="@Html.LanguageString("Post.Delete")">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </a>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            @if (Model.Permissions[AppConstants.PermissionAttachFiles].IsTicked && Model.Post.User.DisableFileUploads != true)
+            {
+                <div class="postuploadholder">
+                    @using (Html.BeginForm("UploadPostFiles", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="input-group input-group-sm">
+
+                            <span class="input-group-btn">
+                                <span class="btn btn-default btn-file">
+                                    @Html.LanguageString("Post.Browse") <input type="file" name="files" id="files" value="" multiple="multiple">
+                                </span>
+                            </span>
+                            <input type="text" class="form-control" readonly="">
+                        </div>
+                        <p>
+                            <input type="submit" value="@Html.LanguageString("Post.Upload")" class="btn-mvc btn-mvc-small postuploadbutton" />
+                            <span style="display: none;" class="ajaxspinner" title="@Html.LanguageString("Post.PleaseWait")">@Html.LanguageString("Post.PleaseWait")</span>
+                            <input type="hidden" name="uploadPostId" id="uploadPostId" value="@Model.Post.Id" />
+                        </p>
+                    }
+                </div>
+            }
+
+            @if (upVotes.Any())
+            {
+                <div class="postlikedby">
+
+                    <ul>
+                        <li class="text">@Html.Lang("Post.LikedBy")</li>
+                        @foreach (var vote in upVotes)
+                        {
+                            <li>
+                                <a href="@vote.User.NiceUrl">
+                                    <img src="@vote.User.MemberImage(SiteConstants.GravatarLikedBySize)" alt="@vote.User.UserName" title="@vote.User.UserName">
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+        </div>
+
+
+
+
+    </div>
+</div>

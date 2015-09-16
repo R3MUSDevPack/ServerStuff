@@ -58,7 +58,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\APIViewer\SlackClient\SlackClient.csproj">
+    <ProjectReference Include="..\SlackClient\SlackClient.csproj">
       <Project>{658b5bf5-6b66-42e3-a2c2-7f6dc08ef2d1}</Project>
       <Name>SlackClient</Name>
     </ProjectReference>
