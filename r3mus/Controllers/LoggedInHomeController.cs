@@ -33,6 +33,7 @@ namespace r3mus.Controllers
             ViewBag.TSName = TSDetails.Key;
             var currentUser = UserManager.FindById(User.Identity.GetUserId());
             currentUser.LoadApiKeys();
+            ViewBag.FullAPIAccessMask = Properties.Settings.Default.FullAPIAccessMask;
 
             if (TempData["Message"] != null)
             {

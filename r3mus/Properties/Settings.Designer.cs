@@ -124,7 +124,7 @@ namespace r3mus.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("xoxp-4459251457-4460324675-7038754178-57f924")]
+        [global::System.Configuration.DefaultSettingValueAttribute("xoxp-4459251457-4460324675-10475473043-239b3cc333")]
         public string SlackToken {
             get {
                 return ((string)(this["SlackToken"]));
@@ -170,7 +170,7 @@ namespace r3mus.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("New application received from {0} at {1}.")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Someone new wants to be a Wolf!")]
         public string NewApp_MessageFormatLine1 {
             get {
                 return ((string)(this["NewApp_MessageFormatLine1"]));
@@ -210,6 +210,51 @@ namespace r3mus.Properties {
         public string LogisticsVCode {
             get {
                 return ((string)(this["LogisticsVCode"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://evewho.com/pilot/{0}")]
+        public string EveWhoPilotURL {
+            get {
+                return ((string)(this["EveWhoPilotURL"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://image.eveonline.com/Character/{0}_{1}.png")]
+        public string CharacterImageServerURL {
+            get {
+                return ((string)(this["CharacterImageServerURL"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1073741823")]
+        public long FullAPIAccessMask {
+            get {
+                return ((long)(this["FullAPIAccessMask"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Puppy Watch Update!")]
+        public string AppUpdate_MessageFormatLine1 {
+            get {
+                return ((string)(this["AppUpdate_MessageFormatLine1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("New application received from {0} at {1}.")]
+        public string NewApp_MessageFormatLine2 {
+            get {
+                return ((string)(this["NewApp_MessageFormatLine2"]));
             }
         }
     }

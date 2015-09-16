@@ -11,6 +11,9 @@ namespace r3mus.ViewModels
     {
         public string Id { get; set; }
 
+        [Display(Name = "Member Name")]
+        public string MemberName { get; set; }
+
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
@@ -26,8 +29,17 @@ namespace r3mus.ViewModels
         [Display(Name = "Joined current corp")]
         [UIHint("_DateTime")]
         public DateTime MemberSince { get; set; }
-        
+
+        [Display(Name = "Last Logged In")]
+        [UIHint("_DateTime")]
+        public DateTime LastLogon { get; set; }
         public string Avatar { get; set; }
+
+        [Display(Name = "Current Location")]
+        public string CurrentLocation { get; set; }
+
+        [Display(Name = "Current Ship")]
+        public string ShipType { get; set; }
 
         public string Titles { get; set; }
 

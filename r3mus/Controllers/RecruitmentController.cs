@@ -11,6 +11,8 @@ using System.Web.Mvc;
 using r3mus.Filters;
 using Hipchat_Plugin;
 using Slack_Plugin;
+using JKON.Slack;
+using JKON.EveWho;
 
 namespace r3mus.Controllers
 {
@@ -144,6 +146,7 @@ namespace r3mus.Controllers
         public ActionResult Apply()
         {
             var model = new ApplicantViewModel();
+            @ViewBag.FullAccessMask = Properties.Settings.Default.FullAPIAccessMask.ToString();
 
             return View(model);
         }
@@ -172,7 +175,20 @@ namespace r3mus.Controllers
                 db.Applications.Add(application);
                 db.SaveChanges();
 
-                SendMessage(string.Format(Properties.Settings.Default.NewApp_MessageFormatLine1, applicant.Name, application.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
+                //SendMessage(string.Format(Properties.Settings.Default.NewApp_MessageFormatLine1, applicant.Name, application.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
+
+                MessagePayload message = new MessagePayload();
+                message.Attachments = new List<MessagePayloadAttachment>();
+
+                message.Attachments.Add(new MessagePayloadAttachment()
+                {
+                    Text = string.Format(Properties.Settings.Default.NewApp_MessageFormatLine2, applicant.Name, application.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")),
+                    TitleLink = string.Format(Properties.Settings.Default.EveWhoPilotURL, applicant.Name.Replace(" ", "+")),
+                    Title = Properties.Settings.Default.NewApp_MessageFormatLine1,
+                    ThumbUrl = string.Format(Properties.Settings.Default.CharacterImageServerURL, Api.GetCharacterID(applicant.Name), 64.ToString()),
+                    Colour = "#FFC200"
+                });
+                RecruitmentController.SendMessage(message);
 
                 TempData.Clear();
                 TempData.Add("Message", "Thank you for your application. A recruiter will contact you shortly.");
@@ -258,7 +274,20 @@ namespace r3mus.Controllers
                 db.Applications.Add(model.NewReviewItem);
                 db.SaveChanges();
 
-                SendMessage(string.Format(Properties.Settings.Default.AppUpdate_MessageFormatLine2, model.Applicant.Name, model.NewReviewItem.Status, model.NewReviewItem.Reviewer.UserName, model.NewReviewItem.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
+                //SendMessage(string.Format(Properties.Settings.Default.AppUpdate_MessageFormatLine2, model.Applicant.Name, model.NewReviewItem.Status, model.NewReviewItem.Reviewer.UserName, model.NewReviewItem.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
+
+                MessagePayload message = new MessagePayload();
+                message.Attachments = new List<MessagePayloadAttachment>();
+
+                message.Attachments.Add(new MessagePayloadAttachment()
+                {
+                    Text = string.Format(Properties.Settings.Default.AppUpdate_MessageFormatLine2, model.Applicant.Name, model.NewReviewItem.Status, model.NewReviewItem.Reviewer.UserName, model.NewReviewItem.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")),
+                    TitleLink = string.Format(Properties.Settings.Default.EveWhoPilotURL, model.Applicant.Name.Replace(" ", "+")),
+                    Title = Properties.Settings.Default.AppUpdate_MessageFormatLine1,
+                    ThumbUrl = string.Format(Properties.Settings.Default.CharacterImageServerURL, "pilot", Api.GetCharacterID(model.Applicant.Name)),
+                    Colour = "#FFC200"
+                });
+                RecruitmentController.SendMessage(message);
 
                 if (model.NewReviewItemStatus == ApplicationReviewViewModel.ApplicationStatus.InScreening)
                 {
@@ -285,6 +314,13 @@ namespace r3mus.Controllers
                 Hipchat.SendToRoom(message, Properties.Settings.Default.RecruitmentRoomName, Properties.Settings.Default.HipchatToken);
             }
             else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
+            {
+                Slack.SendToRoom(message, Properties.Settings.Default.RecruitmentRoomName, Properties.Settings.Default.SlackWebhook);
+            }
+        }
+        public static void SendMessage(MessagePayload message)
+        {
+            if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
             {
                 Slack.SendToRoom(message, Properties.Settings.Default.RecruitmentRoomName, Properties.Settings.Default.SlackWebhook);
             }

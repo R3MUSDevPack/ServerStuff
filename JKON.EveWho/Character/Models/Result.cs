@@ -44,3 +44,26 @@ namespace JKON.EveWho.EveCharacter.Models
         public List<row> employmentHistory { get; set; }
     }
 }
+
+namespace JKON.EveWho.EveCharacterID.Models
+{
+    [DataContract]
+    public class result
+    {
+        [DataMember]
+        public List<row> rowset { get; set; }
+
+    }
+
+    
+    [DataContract]
+    public class row
+    {
+        [DataMember]
+        [System.Xml.Serialization.XmlAttribute("characterID")]
+        public long ID { get; set; }
+        [DataMember]
+        [System.Xml.Serialization.XmlAttribute("name")]
+        public string Name { get; set; }
+    }
+}

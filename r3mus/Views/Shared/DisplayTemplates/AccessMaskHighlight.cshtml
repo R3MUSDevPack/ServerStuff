@@ -1,6 +1,6 @@
 ﻿@model long
 
-@if (Model != 268435455)
+@if ((Model != 268435455) || (Model != @ViewBag.FullAPIAccessMask))
 {
     <div class="alert-warning">@Model</div>
 }

@@ -94,6 +94,8 @@ namespace r3mus.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.FullAPIAccessMask = Properties.Settings.Default.FullAPIAccessMask;
+            
             return View();
         }
 

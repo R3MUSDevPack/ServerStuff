@@ -1,4 +1,7 @@
-﻿using System;
+﻿using JKON.EveApi.Corporation.Models;
+using JKON.EveWho;
+using r3mus.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -53,6 +56,18 @@ namespace r3mus.Controllers
             ViewBag.Message = "You can contact us with any questions by the following methods:";
 
             return View();
+        }
+
+        [OutputCache(Duration = 3600)]
+        public ActionResult Wolves()
+        {
+            var members = Api.GetCorpMembers(Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode);
+            var resortMembers = members.Where(member => member.Title.Contains("CEO")).ToList();
+            members.Where(member => member.Title.Contains("Director") && !member.Title.Contains("CEO")).OrderBy(member => member.Title).OrderBy(member => member.MemberSince).ToList().ForEach(member => resortMembers.Add(member));
+            members.Where(member => (member.Title != string.Empty && (!member.Title.Contains("CEO") && !member.Title.Contains("Director")))).OrderBy(member => member.Title).OrderBy(member => member.MemberSince).ToList().ForEach(member => resortMembers.Add(member));
+            members.Where(member => member.Title == string.Empty).OrderBy(member => member.MemberSince).ToList().ForEach(member => resortMembers.Add(member));
+
+            return View(new CorpMemberViewModel() { CorpMembers = resortMembers });
         }
     }
 }

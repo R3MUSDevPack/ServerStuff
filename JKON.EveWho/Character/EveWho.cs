@@ -27,7 +27,7 @@ namespace JKON.EveWho
 
         public static Models.Character GetCharacter(string characterName, long apikey, string vcode)
         {
-            var api = new EveApi("R3MUS Recruitment", apikey, vcode);
+            var api = new EveAI.Live.EveApi("R3MUS Recruitment", apikey, vcode);
 
             List<string> list = new List<String>();
             list.Add(characterName);

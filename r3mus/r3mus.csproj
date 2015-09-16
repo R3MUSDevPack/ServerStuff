@@ -89,9 +89,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\EveAI\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
-    <Reference Include="JKON.EveWho">
-      <HintPath>..\..\..\APIViewer\JKON.EveWho\bin\Debug\JKON.EveWho.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -129,14 +126,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SlackClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1980a8a7670d37a5, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Slack_Plugin\SlackClient.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -147,6 +143,14 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -223,6 +227,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntelController.cs" />
@@ -356,11 +361,13 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ApplicantViewModel.cs" />
     <Compile Include="ViewModels\ApplicationReviewViewModel.cs" />
+    <Compile Include="ViewModels\CorpMemberViewModel.cs" />
     <Compile Include="ViewModels\ForumViewModel.cs" />
     <Compile Include="ViewModels\IntelViewModel.cs" />
     <Compile Include="ViewModels\LogisticsContractsViewModel.cs" />
     <Compile Include="ViewModels\RecruitmentStatsViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
+    <Compile Include="WebAPI\ExternalServicesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\AboutUs.txt" />
@@ -554,6 +561,7 @@
     <Content Include="Views\LoggedInHome\_RegisterForForums.cshtml" />
     <Content Include="Views\LoggedInHome\_RedirectToForums.cshtml" />
     <Content Include="Views\Logistics\ContractStatus.cshtml" />
+    <Content Include="Views\Home\Wolves.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Filters\fonts\glyphicons-halflings-regular.woff" />
@@ -563,9 +571,17 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\APIViewer\SlackClient\SlackClient.csproj">
+      <Project>{658b5bf5-6b66-42e3-a2c2-7f6dc08ef2d1}</Project>
+      <Name>SlackClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hipchat_Plugin\Hipchat_Plugin.csproj">
       <Project>{62d74a6f-20e1-4b2b-a400-f1f8a31700c0}</Project>
       <Name>Hipchat_Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JKON.EveWho\JKON.EveApi.csproj">
+      <Project>{df188f56-5100-40a0-ab70-58fd5dbd3a05}</Project>
+      <Name>JKON.EveApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\Slack_Plugin\Slack_Plugin.csproj">
       <Project>{eca1a3dd-2245-41c8-8100-20133906fad3}</Project>
@@ -629,12 +645,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>4283</DevelopmentServerPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:21626/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -338,13 +338,17 @@ namespace r3mus.Models
                                 liveAPI = info;
 
                                 MemberSince = toon.GetCharacterInfo().Result.CorporationDate;
-                                var tempAvatar = ImageServer.DownloadCharacterImage(toon.CharacterId, ImageServer.ImageSize.Size128px);
-                                using (var stream = new MemoryStream())
-                                {
-                                    tempAvatar.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                                    Avatar = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(stream.ToArray()));
-                                }
-                                tempAvatar.Dispose();
+
+                                //var tempAvatar = ImageServer.DownloadCharacterImage(toon.CharacterId, ImageServer.ImageSize.Size128px);
+                                //using (var stream = new MemoryStream())
+                                //{
+                                //    tempAvatar.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                                //    Avatar = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(stream.ToArray()));
+                                //}
+                                //tempAvatar.Dispose();
+
+                                Avatar = GetAvatar(toon.CharacterId, ImageServer.ImageSize.Size128px);
+
                                 break;
                             }
                         }
@@ -361,6 +365,20 @@ namespace r3mus.Models
             {
                 UnloadApiKeys();
             }
+        }
+
+        public static string GetAvatar(long charId, ImageServer.ImageSize size)
+        {
+            string avatar;
+
+            var tempAvatar = ImageServer.DownloadCharacterImage(charId, size);
+            using (var stream = new MemoryStream())
+            {
+                tempAvatar.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                avatar = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(stream.ToArray()));
+            }
+            tempAvatar.Dispose();
+            return avatar;
         }
 
         public void GetTitles(ApiInfo liveAPI)
@@ -419,13 +437,22 @@ namespace r3mus.Models
         [UIHint("AccessMaskHighlight")]
         public long AccessMask { get { try { return EveOnlineApi.CreateApiKey(Convert.ToInt32(ApiKey), VerificationCode).Init().AccessMask; } catch (Exception ex) { return -1; } } }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
+
+        public List<Character> GetDetails()
+        {
+            CharacterKey key = EveOnlineApi.CreateCharacterKey(ApiKey, VerificationCode);
+            var chars = key.Characters.ToList();
+            //var charList = key.GetCharacterList();
+            return chars;
+        }
         
         public bool ValidateAccessMask(ApplicationUser.IDType type)
         {
             bool result = false;
             long allianceAccessMask = 8388608;
-            long corpAccessMask = 268435455;
+            long corpOldAccessMask = 268435455;
+            long corpNewAccessMask = Properties.Settings.Default.FullAPIAccessMask;
 
             try
             {
@@ -433,7 +460,7 @@ namespace r3mus.Models
 
                 if (type == ApplicationUser.IDType.Corporation)
                 {
-                    result = (mask == corpAccessMask);
+                    result = ((mask == corpOldAccessMask) || (mask == corpNewAccessMask));
                 }
                 else if (type == ApplicationUser.IDType.Alliance)
                 {

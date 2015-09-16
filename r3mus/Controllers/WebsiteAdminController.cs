@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 
 using Microsoft.Owin.Security.DataProtection;
 using Microsoft.AspNet.Identity.Owin;
+using JKON.Slack;
+using JKON.EveWho;
 
 namespace r3mus.Controllers
 {
@@ -38,7 +40,18 @@ namespace r3mus.Controllers
 
         public ActionResult TestSlack()
         {
-            RecruitmentController.SendMessage("Slack Test From Website");
+            //RecruitmentController.SendMessage("Slack Test From Website");
+            MessagePayload message = new MessagePayload();
+            message.Attachments = new List<MessagePayloadAttachment>();
+
+            message.Attachments.Add(new MessagePayloadAttachment()
+            {
+                Text = "Testing",
+                TitleLink = string.Format(Properties.Settings.Default.EveWhoPilotURL, User.Identity.Name.Replace(" ", "+")),
+                Title = "Check this out!",
+                ThumbUrl = string.Format(Properties.Settings.Default.CharacterImageServerURL, "pilot", Api.GetCharacterID(User.Identity.Name))
+            });
+            RecruitmentController.SendMessage(message);
 
             return RedirectToAction("ViewUsers");
         }
@@ -48,26 +61,93 @@ namespace r3mus.Controllers
             return View();
         }
 
+        [OutputCache(Duration = 3600)]
         public ActionResult ViewUsers(r3mus.Models.ApplicationUser.IDType memberType = r3mus.Models.ApplicationUser.IDType.Corporation)
         {
             var users = db.Users.Where(user => user.MemberType == memberType.ToString()).ToList<ApplicationUser>();
             var userModels = new List<UserProfileViewModel>();
 
-            users.ForEach(user => userModels.Add(new UserProfileViewModel() { 
-                                                                                Id = user.Id, 
-                                                                                UserName = user.UserName, 
-                                                                                EmailAddress = user.EmailAddress,
-                                                                                MemberSince = Convert.ToDateTime(user.MemberSince),
-                                                                                MemberType = user.MemberType,
-                                                                                Titles = string.Join(", ", db.Titles.Where(title => title.UserId == user.Id).Select(title => title.TitleName).ToList()),
-                                                                                WebsiteRoles = string.Join(", ", user.Roles.Select(role => role.RoleId).ToList()),
-                                                                                Avatar = user.Avatar
-            }));
-            var resortModels = userModels.Where(model => model.Titles.Contains("CEO")).ToList();
-            userModels.Where(model => (model.Titles != string.Empty && !model.Titles.Contains("CEO"))).OrderBy(model => model.Titles).OrderBy(model => model.MemberSince).ToList().ForEach(model => resortModels.Add(model));
-            userModels.Where(model => model.Titles == string.Empty).OrderBy(model => model.MemberSince).ToList().ForEach(model => resortModels.Add(model));
+            List<ApiInfo> apis = new List<ApiInfo>();
 
-            return View(resortModels);
+            var members = Api.GetCorpMembers(Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode);
+            var resortModels = members.Where(member => member.Title.Contains("CEO")).ToList();
+            members.Where(member => member.Title.Contains("Director") && !member.Title.Contains("CEO")).OrderBy(member => member.Title).OrderBy(member => member.MemberSince).ToList().ForEach(member => resortModels.Add(member));
+            members.Where(member => (member.Title != string.Empty && (!member.Title.Contains("CEO") && !member.Title.Contains("Director")))).OrderBy(member => member.Title).OrderByDescending(member => member.LastLogonDateTime).ToList().ForEach(member => resortModels.Add(member));
+            members.Where(member => member.Title == string.Empty).OrderByDescending(member => member.LastLogonDateTime).ToList().ForEach(member => resortModels.Add(member));
+
+            resortModels.ForEach(member =>
+            {
+                member.Title = member.Title.Replace(member.ID.ToString(), "").Trim().Trim(',');
+                var user = users.Where(usr => usr.UserName == member.Name).FirstOrDefault();
+                if (user == null)
+                {
+                    if (apis.Count() == 0)
+                    {
+                        apis = db.ApiInfoes.ToList();
+                    }
+                    apis.ForEach(api =>
+                        {
+                            try
+                            {
+                                var chars = api.GetDetails();
+                                if (chars.Any(toon => toon.CharacterName == member.Name))
+                                {
+                                    user = api.User;
+                                    //member.Title = member.Title.Replace(user.Id.ToString(), "").Trim().Trim(',');
+                                    return;
+                                }
+                            }
+                            catch (Exception ex) { }
+                        });
+                    if(user == null)
+                    {
+                        user = new ApplicationUser()
+                        {
+                            Id = 0.ToString(),
+                            UserName = "Not Registered",
+                            EmailAddress = "Not Registered",
+                            MemberType = "Not Registered",
+                            MemberSince = member.MemberSince,
+                            Titles = new List<Title>()
+                        };
+                    }
+                    try
+                    {
+                        user.Avatar = ApplicationUser.GetAvatar(JKON.EveWho.Api.GetCharacterID(member.Name), EveAI.Live.ImageServer.ImageSize.Size128px);
+                    }
+                    catch (Exception ex) { }
+                }
+                int titleIsId;
+                int.TryParse(member.Title, out titleIsId);
+                if (titleIsId != null)
+                {
+                    try
+                    {
+                        var chkUser = Api.GetCharacter(titleIsId);
+                        member.Title = member.Title.Replace(titleIsId.ToString(), string.Format("This is {0}", chkUser.result.characterName));
+                    }
+                    catch (Exception ex1) { }
+                }
+
+                userModels.Add(new UserProfileViewModel()
+                {
+                    Id = user.Id,
+                    MemberName = member.Name,
+                    UserName = user.UserName,
+                    EmailAddress = user.EmailAddress,
+                    MemberSince = Convert.ToDateTime(member.MemberSince),
+                    MemberType = user.MemberType,
+                    Titles = member.Title,
+                    WebsiteRoles = string.Join(", ", user.Roles.Select(role => role.RoleId).ToList()),
+                    Avatar = user.Avatar,
+                    CurrentLocation = member.Location,
+                    LastLogon = Convert.ToDateTime(member.LastLogonDateTime),
+                    ShipType = member.ShipType,
+                    UserRoles = member.Roles.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries).ToList()
+                });
+            });
+
+            return View(userModels);
         }
 
         //public ActionResult ViewUsers(r3mus.Models.ApplicationUser.IDType memberType = r3mus.Models.ApplicationUser.IDType.Corporation)
@@ -145,10 +225,16 @@ namespace r3mus.Controllers
         private UserProfileViewModel GetUserProfile(string id)
         {
             var currentUser = db.Users.Where(user => user.Id == id).FirstOrDefault();
+            //var currentUser = userManager.FindById(id);
             currentUser.LoadApiKeys();
             currentUser.Titles = db.Titles.Where(title => title.UserId == id).ToList();
 
+            var member = Api.GetCorpMembers(Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).Where(mbr => mbr.Name == currentUser.UserName).FirstOrDefault();
+
             var roles = db.Roles.Select(role => role.Name).ToList();
+            var userId = currentUser.Id;
+            //var userRoles = userManager.GetRoles(userId.ToString()).ToList();
+            var userRoles = db.Roles.Where(role => role.Users.Any(user => user.UserId == currentUser.Id)).Select(role => role.Name).ToList();
 
             if (currentUser.Titles.Count == 0)
             {
@@ -166,8 +252,11 @@ namespace r3mus.Controllers
                 Titles = string.Join(", ", currentUser.Titles.Select(t => t.TitleName).ToList()),
                 WebsiteRoles = string.Join(", ", currentUser.Roles.Select(role => role.RoleId).ToList()),
                 ApiKeys = db.ApiInfoes.Where(api => api.User.Id == currentUser.Id).ToList(),
-                UserRoles = userManager.GetRoles(currentUser.Id).ToList(),
-                AvailableRoles = roles
+                UserRoles = userRoles,
+                AvailableRoles = roles,
+                CurrentLocation = member.Location,
+                LastLogon = Convert.ToDateTime(member.LastLogonDateTime),
+                ShipType = member.ShipType
             };
         }
 

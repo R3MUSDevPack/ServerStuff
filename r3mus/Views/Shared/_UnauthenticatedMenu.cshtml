@@ -1,3 +1,31 @@
-﻿<li>@Html.ActionLink("About", "About", "Home")</li>
+﻿@*<li>@Html.ActionLink("About", "About", "Home")</li>*@
+
+<li class="dropdown" id="AboutMenuLi" onmouseover="AboutMenu_MouseOver()" onmouseout="AboutMenu_MouseOut()">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <span class="caret"></span></a>
+    <ul class="dropdown-menu" id="AboutMenu" onmouseover="AboutMenu_MouseOver()" onmouseout="AboutMenu_MouseOut()">
+
+        <li>@Html.ActionLink("About Us", "About", "Home")</li>
+
+        <li>@Html.ActionLink("Meet The Wolves", "Wolves", "Home")</li>
+
+    </ul>
+
+</li>
+
 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 <li>@Html.ActionLink("Apply", "Apply", "Recruitment")</li>
+
+
+<script type="text/javascript">
+
+    function AboutMenu_MouseOver() {
+        if (($("#AboutMenuLi").is(":hover") == true) || ($("#AboutMenu").is(":hover") == true)) {
+            $('#AboutMenu').finish().slideDown('fast');
+        }
+    }
+
+    function AboutMenu_MouseOut() {
+        $('#AboutMenu').finish().slideUp('fast');
+    }
+
+</script> 

@@ -16,7 +16,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Avatar)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Avatar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -30,22 +33,42 @@
         <th>
             @Html.DisplayNameFor(model => model.MemberSince)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastLogon)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            <a href="@Url.Action("ViewProfile", "WebsiteAdmin", new { id = @item.Id })">
-                @if (item.Avatar != null)
-                {
-                    <img src="@item.Avatar" />
-                }
-                else
-                {
-                    <span>Image Not Yet Available</span>
-                }
-            </a>
+            @if(item.Id != 0.ToString())
+            { 
+                <a href="@Url.Action("ViewProfile", "WebsiteAdmin", new { id = @item.Id })">
+                    @if (item.Avatar != null)
+                    {
+                        <img src="@item.Avatar" />
+                    }
+                    else
+                    {
+                        <span>Image Not Yet Available</span>
+                    }
+                </a>
+            }
+            else
+            {
+                    if (item.Avatar != null)
+                    {
+                        <img src="@item.Avatar" />
+                    }
+                    else
+                    {
+                        <span>Image Not Yet Available</span>
+                    }
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
@@ -59,8 +82,18 @@
         <td>
             @Html.DisplayFor(modelItem => item.MemberSince)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastLogon)
+        </td>
         <td>            
-            @Html.ActionLink("Import from Eve", "UpdateApiDetails", new { id = item.Id, originator = "ViewUsers" }, new { @class = "btn btn-default" })
+            @if(item.Id != 0.ToString())
+            {
+                @Html.ActionLink("Import from Eve", "UpdateApiDetails", new { id = item.Id, originator = "ViewUsers" }, new { @class = "btn btn-default" })
+            }
+            else
+            {
+                <span>Import Not Available</span>
+            }
         </td>
     </tr>
 }

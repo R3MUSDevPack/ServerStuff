@@ -51,11 +51,11 @@
     
     <div class="form-group float-right">
         <div class="col-md-6 alert-info">
-            If you do not have a full API Key set up (with an access mask of 268435455 for corp members, or 8388608 for alliance members) please do so now. You can click this shortcut to create one (don't forget to change to "No Expiry"!)
+            If you do not have a full API Key set up (with an access mask of @ViewBag.FullAPIAccessMask for corp members, or 8388608 for alliance members) please do so now. You can click this shortcut to create one (don't forget to change to "No Expiry"!)
         </div>
         <table>
             <tr>
-                <td><div class="col-md-10"><a href="https://community.eveonline.com/support/api-key/CreatePredefined?accessMask=268435455" class="btn btn-default" target="_blank">Create Corp API</a></div></td>
+                <td><div class="col-md-10"><a href="https://community.eveonline.com/support/api-key/CreatePredefined?accessMask=@ViewBag.FullAPIAccessMask" class="btn btn-default" target="_blank">Create Corp API</a></div></td>
                 <td><div class="col-md-10"><a href="https://community.eveonline.com/support/api-key/CreatePredefined?accessMask=8388608" class="btn btn-default" target="_blank">Create Alliance API</a></div></td>
             </tr>
         </table>

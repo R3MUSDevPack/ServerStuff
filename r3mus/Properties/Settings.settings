@@ -36,7 +36,7 @@
       <Value Profile="(Default)">k05sP8cuu2MwPwBsXXXje0yJXRrxypE6q6SzlsQV</Value>
     </Setting>
     <Setting Name="SlackToken" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">xoxp-4459251457-4460324675-7038754178-57f924</Value>
+      <Value Profile="(Default)">xoxp-4459251457-4460324675-10475473043-239b3cc333</Value>
     </Setting>
     <Setting Name="SlackInviteURL" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://r3mus.slack.com/api/users.admin.invite?email={0}&amp;channels=C04DH7DFR&amp;token={1}&amp;set_active=true&amp;_attempts=1</Value>
@@ -51,7 +51,7 @@
       <Value Profile="(Default)">https://hooks.slack.com/services/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</Value>
     </Setting>
     <Setting Name="NewApp_MessageFormatLine1" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">New application received from {0} at {1}.</Value>
+      <Value Profile="(Default)">Someone new wants to be a Wolf!</Value>
     </Setting>
     <Setting Name="AppUpdate_MessageFormatLine2" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Application from {0} was updated to {1} by {2} at {3}.</Value>
@@ -64,6 +64,21 @@
     </Setting>
     <Setting Name="LogisticsVCode" Type="System.String" Scope="Application">
       <Value Profile="(Default)">sgzakeHa3MwhV7WmxQY3pH7ZGMbipr7xN1bqk5pgon7nv5ZjqFZ6ci4B49crp4Ke</Value>
+    </Setting>
+    <Setting Name="EveWhoPilotURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://evewho.com/pilot/{0}</Value>
+    </Setting>
+    <Setting Name="CharacterImageServerURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://image.eveonline.com/Character/{0}_{1}.png</Value>
+    </Setting>
+    <Setting Name="FullAPIAccessMask" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">1073741823</Value>
+    </Setting>
+    <Setting Name="AppUpdate_MessageFormatLine1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Puppy Watch Update!</Value>
+    </Setting>
+    <Setting Name="NewApp_MessageFormatLine2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">New application received from {0} at {1}.</Value>
     </Setting>
   </Settings>
 </SettingsFile>

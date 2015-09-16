@@ -26,6 +26,12 @@ namespace Killbot
 {
     class Program
     {
+        enum ZKBType
+        {
+            Kill, 
+            Loss
+        }
+
         static void Main(string[] args)
         {
             try
@@ -40,12 +46,11 @@ namespace Killbot
                     {
                         SendPM(string.Format("Corpsheet for {0} obtained.", corpSheet.Ticker));
                     }
-
-                    UpdateRunTime(CheckKills(corpSheet.Ticker, corpSheet.CorporationID));
+                    CheckKills(corpSheet.Ticker, corpSheet.CorporationID);
                 }
                 else
                 {
-                    UpdateRunTime(CheckKills(Properties.Settings.Default.CorpTicker, Convert.ToInt64(Properties.Settings.Default.CorpId)));
+                    CheckKills(Properties.Settings.Default.CorpTicker, Convert.ToInt64(Properties.Settings.Default.CorpId));
                 }
             }
             catch(Exception ex)
@@ -54,75 +59,88 @@ namespace Killbot
             }
         }
 
-        private static DateTime CheckKills(string corpName, long corpId)
+        private static void CheckKills(string corpName, long corpId)
         {
-            //CorporationSheet Corp = GetCorpDetails();
+            string killKey = "StartDate_Kills";
+            string lossKey = "StartDate_Losses";
 
-            DateTime Latest = Convert.ToDateTime(ConfigurationSettings.AppSettings["StartDate"]);
+            DateTime LatestKill = Convert.ToDateTime(ConfigurationSettings.AppSettings[killKey]).AddMinutes(1);
+            DateTime LatestLoss = Convert.ToDateTime(ConfigurationSettings.AppSettings[lossKey]).AddMinutes(1);
+            
+            KeyValuePair<DateTime, List<ZkbResponse.ZkbKill>> Kills;
+            KeyValuePair<DateTime, List<ZkbResponse.ZkbKill>> Losses;
 
-            ZkbResponse Kills; 
+            try
+            {
+                Kills = GetZKBResponse(corpId, LatestKill, ZKBType.Kill);
+                if (Kills.Value.Count() > 0)
+                {
+                    Kills.Value.ForEach(kill => {
+                        //Console.WriteLine(FormatKillMessage(kill, corpName, corpId));
+                        SendMessage(HyperFormatKillMessage(kill, corpName, corpId));
+                    });
+
+                    UpdateRunTime(Kills.Key, killKey);
+                }
+            }
+            catch (Exception Ex)
+            {
+                if (Properties.Settings.Default.Debug)
+                {
+                    SendPM(Ex.Message);
+                }
+            }
+
+            try
+            {
+                Losses = GetZKBResponse(corpId, LatestLoss, ZKBType.Loss);
+                if (Losses.Value.Count() > 0)
+                {
+                    Losses.Value.ForEach(kill => {
+                        //Console.WriteLine(FormatKillMessage(kill, corpName, corpId));
+                        SendMessage(HyperFormatKillMessage(kill, corpName, corpId));
+                    });
+
+                    UpdateRunTime(Losses.Key, lossKey);
+                }
+            }
+            catch (Exception Ex)
+            {
+                if (Properties.Settings.Default.Debug)
+                {
+                    SendPM(Ex.Message);
+                }
+            }
+        }
+
+        private static KeyValuePair<DateTime, List<ZkbResponse.ZkbKill>> GetZKBResponse(long corpId, DateTime startTime, ZKBType type)
+        {
+            ZkbResponse Kills;
             ZKillboard kb = new ZKillboard();
             ZKillboardOptions Options = new ZKillboardOptions();
-            IEnumerable<ZkbResponse.ZkbKill> OrderedKills;
+            List<ZkbResponse.ZkbKill> OrderedKills;
             Options.CorporationId.Add(corpId);
-            if (Latest > DateTime.MinValue)
+
+            if (startTime > DateTime.MinValue)
             {
-                Options.StartTime = Latest;
+                Options.StartTime = startTime;
             }
             if (Properties.Settings.Default.Debug)
             {
-                SendPM(string.Format("Using StartTime {0}.", Latest.ToString("yyyy-MM-dd HH:mm:ss")));
+                SendPM(string.Format("Using StartTime {0}.", startTime.ToString("yyyy-MM-dd HH:mm:ss")));
             }
 
-            try
+            if(type == ZKBType.Kill)
             {
                 Kills = kb.GetKills(Options);
-                OrderedKills = Kills.OrderBy(Kill => Kill.KillTime);
-                Latest = OrderedKills.Last().KillTime;
-
-                foreach (ZkbResponse.ZkbKill Kill in OrderedKills)
-                {
-                    if ((Options.StartTime == null) || (Options.StartTime < Kill.KillTime))
-                    {
-                        //SendMessage(FormatKillMessage(Kill, corpName, corpId));
-                        SendMessage(HyperFormatKillMessage(Kill, corpName, corpId));
-                    }
-                }
             }
-            catch (Exception Ex)
-            {
-                if (Properties.Settings.Default.Debug)
-                {
-                    SendPM(Ex.Message);
-                }
-            }
-            try
+            else
             {
                 Kills = kb.GetLosses(Options);
-                OrderedKills = Kills.OrderBy(Kill => Kill.KillTime);
-                if (OrderedKills.Last().KillTime > Latest)
-                {
-                    Latest = OrderedKills.Last().KillTime;
-                }
-
-                foreach (ZkbResponse.ZkbKill Kill in OrderedKills)
-                {
-                    if ((Options.StartTime == null) || (Options.StartTime < Kill.KillTime))
-                    {
-                        //SendMessage(FormatKillMessage(Kill, corpName, corpId));
-                        SendMessage(HyperFormatKillMessage(Kill, corpName, corpId));
-                    }
-                }
             }
-            catch (Exception Ex)
-            {
-                if (Properties.Settings.Default.Debug)
-                {
-                    SendPM(Ex.Message);
-                }
-            }
+            OrderedKills = Kills.OrderBy(Kill => Kill.KillTime).ToList();
 
-            return Latest;
+            return new KeyValuePair<DateTime, List<ZkbResponse.ZkbKill>>(OrderedKills.Last().KillTime, OrderedKills);
         }
 
         private static void SendMessage(MessagePayload message)
@@ -381,7 +399,7 @@ namespace Killbot
             return result;
         }
 
-        private static void UpdateRunTime(DateTime writeThis)
+        private static void UpdateRunTime(DateTime writeThis, string key)
         {
 
             if (Properties.Settings.Default.Debug)
@@ -390,8 +408,8 @@ namespace Killbot
             }
 
             Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
-            config.AppSettings.Settings.Remove("StartDate");
-            config.AppSettings.Settings.Add("StartDate", writeThis.ToString("yyyy-MM-dd HH:mm:ss"));
+            config.AppSettings.Settings.Remove(key);
+            config.AppSettings.Settings.Add(key, writeThis.ToString("yyyy-MM-dd HH:mm:ss"));
             config.Save();
         }
     }

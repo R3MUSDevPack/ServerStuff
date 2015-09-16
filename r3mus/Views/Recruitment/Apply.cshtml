@@ -65,13 +65,13 @@
 
         <div class="form-group float-right">
             <div class="col-md-8 alert-info">
-                If you do not have a full API Key set up (with an access mask of 268435455) please do so now. You can click the button on the right to create one, and set the expiry to 1 week from today. We recommend naming it something to differentiate it from other keys, such as "R3MUS_1". Please ensure you have set the character option to 'All'.
+                If you do not have a full API Key set up (with an access mask of @ViewBag.FullAccessMask) please do so now. You can click the button on the right to create one, and set the expiry to 1 week from today. We recommend naming it something to differentiate it from other keys, such as "R3MUS_1". Please ensure you have set the character option to 'All'.
                 <br/>
                 Click <a href="/Recruitment/APIScreenshot" style="font-weight:bold;" onclick="window.open('/Recruitment/APIScreenshot', 'newwindow', 'width=800, height=500'); return false;">here</a> for a screenshot of how this should look.
             </div>
             <table>
                 <tr>
-                    <td><div class="col-md-4"><a href="https://community.eveonline.com/support/api-key/CreatePredefined?accessMask=268435455" class="btn btn-default" target="_blank">Create API</a></div></td>
+                    <td><div class="col-md-4"><a href="https://community.eveonline.com/support/api-key/CreatePredefined?accessMask=@ViewBag.FullAccessMask" class="btn btn-default" target="_blank">Create API</a></div></td>
                 </tr>
             </table>
         </div>
