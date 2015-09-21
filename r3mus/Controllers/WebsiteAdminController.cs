@@ -49,7 +49,7 @@ namespace r3mus.Controllers
                 Text = "Testing",
                 TitleLink = string.Format(Properties.Settings.Default.EveWhoPilotURL, User.Identity.Name.Replace(" ", "+")),
                 Title = "Check this out!",
-                ThumbUrl = string.Format(Properties.Settings.Default.CharacterImageServerURL, Api.GetCharacterID(User.Identity.Name), 64.ToString())
+                ThumbUrl = string.Format(Properties.Settings.Default.CharacterImageServerURL, "pilot", Api.GetCharacterID(User.Identity.Name))
             });
             RecruitmentController.SendMessage(message);
 

@@ -87,60 +87,60 @@ namespace ContractNotifyBot
             config.Save();
         }
 
-        private static MessagePayload HyperFormatMessage(EveAI.Live.Utility.Contract contract, string IssuerName)
-        {
-            MessagePayload message = new MessagePayload();
-            message.Attachments = new List<MessagePayloadAttachment>();
+        //private static MessagePayload HyperFormatMessage(EveAI.Live.Utility.Contract contract, string IssuerName)
+        //{
+        //    MessagePayload message = new MessagePayload();
+        //    message.Attachments = new List<MessagePayloadAttachment>();
 
-            string type;
-            List<string> messageLines = new List<string>();
+        //    string type;
+        //    List<string> messageLines = new List<string>();
 
-            messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine1, contract.DateIssued.ToString("yyyy-MM-dd hh:mm:ss")));
-            messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine2, IssuerName));
-            messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine3, contract.Reward.ToString()));
+        //    messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine1, contract.DateIssued.ToString("yyyy-MM-dd hh:mm:ss")));
+        //    messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine2, IssuerName));
+        //    messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine3, contract.Reward.ToString()));
 
-            var startStation = contract.StartStation;
-            var endStation = contract.EndStation;
-            string startStationName = string.Empty;
-            string endStationName = string.Empty;
+        //    var startStation = contract.StartStation;
+        //    var endStation = contract.EndStation;
+        //    string startStationName = string.Empty;
+        //    string endStationName = string.Empty;
 
 
-            if (startStation == null)
-            {
-                startStationName = Api.GetStation(contract.StartStationID).stationName;
-            }
-            else
-            {
-                startStationName = contract.StartStation.Name;
-            }
-            if (endStation == null)
-            {
-                endStationName = Api.GetStation(contract.EndStationID).stationName;
-            }
-            else
-            {
-                endStationName = contract.EndStation.Name;
-            }
+        //    if (startStation == null)
+        //    {
+        //        startStationName = Api.GetStation(contract.StartStationID).stationName;
+        //    }
+        //    else
+        //    {
+        //        startStationName = contract.StartStation.Name;
+        //    }
+        //    if (endStation == null)
+        //    {
+        //        endStationName = Api.GetStation(contract.EndStationID).stationName;
+        //    }
+        //    else
+        //    {
+        //        endStationName = contract.EndStation.Name;
+        //    }
 
-            try
-            {
-                messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine4, startStationName, endStationName)); //, contract.StartStation.Name, contract.EndStation.Name));
-            }
-            catch (Exception ex) { }
-            messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine5, contract.Volume.ToString()));
+        //    try
+        //    {
+        //        messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine4, startStationName, endStationName)); //, contract.StartStation.Name, contract.EndStation.Name));
+        //    }
+        //    catch (Exception ex) { }
+        //    messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine5, contract.Volume.ToString()));
 
-            //message = String.Join("\n", messageLines.ToArray());
+        //    //message = String.Join("\n", messageLines.ToArray());
 
-            message.Attachments.Add(new MessagePayloadAttachment()
-            {
-                Text = String.Join("\n", messageLines.ToArray()),
-                TitleLink = string.Format(Properties.Settings.Default.StationURL, Api.GetStation(contract.EndStationID).),
-                Title = "",
-                ThumbUrl = string.Format(Properties.Settings.Default.StationURL, JKON.EveWho.Api.GetCharacterID(IssuerName), 64.ToString()),
-            });
+        //    message.Attachments.Add(new MessagePayloadAttachment()
+        //    {
+        //        Text = String.Join("\n", messageLines.ToArray()),
+        //        TitleLink = string.Format(Properties.Settings.Default.StationURL, Api.GetStation(contract.EndStationID).),
+        //        Title = "",
+        //        ThumbUrl = string.Format(Properties.Settings.Default.StationURL, JKON.EveWho.Api.GetCharacterID(IssuerName), 64.ToString()),
+        //    });
 
-            return message;
-        }
+        //    return message;
+        //}
 
         private static string FormatMessage(EveAI.Live.Utility.Contract contract, string IssuerName)
         {
