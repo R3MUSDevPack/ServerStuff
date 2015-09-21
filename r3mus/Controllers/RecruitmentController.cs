@@ -284,7 +284,7 @@ namespace r3mus.Controllers
                     Text = string.Format(Properties.Settings.Default.AppUpdate_MessageFormatLine2, model.Applicant.Name, model.NewReviewItem.Status, model.NewReviewItem.Reviewer.UserName, model.NewReviewItem.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")),
                     TitleLink = string.Format(Properties.Settings.Default.EveWhoPilotURL, model.Applicant.Name.Replace(" ", "+")),
                     Title = Properties.Settings.Default.AppUpdate_MessageFormatLine1,
-                    ThumbUrl = string.Format(Properties.Settings.Default.CharacterImageServerURL, "pilot", Api.GetCharacterID(model.Applicant.Name)),
+                    ThumbUrl = string.Format(Properties.Settings.Default.CharacterImageServerURL, Api.GetCharacterID(model.Applicant.Name), 64.ToString()),
                     Colour = "#FFC200"
                 });
                 RecruitmentController.SendMessage(message);

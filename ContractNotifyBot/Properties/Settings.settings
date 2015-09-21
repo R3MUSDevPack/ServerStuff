@@ -35,5 +35,8 @@
     <Setting Name="MessageFormatLine5" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Volume: {0}.</Value>
     </Setting>
+    <Setting Name="StationURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://evemaps.dotlan.net/outpost/{0}</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

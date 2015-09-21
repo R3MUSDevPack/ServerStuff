@@ -121,5 +121,14 @@ namespace ContractNotifyBot.Properties {
                 return ((string)(this["MessageFormatLine5"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://evemaps.dotlan.net/outpost/{0}")]
+        public string StationURL {
+            get {
+                return ((string)(this["StationURL"]));
+            }
+        }
     }
 }
