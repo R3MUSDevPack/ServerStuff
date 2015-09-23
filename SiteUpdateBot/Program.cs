@@ -41,6 +41,9 @@ namespace SiteUpdateBot
                 using (var r3musDB = new r3musDbContext())
                 {
                     totalCount = r3musDB.RecruitmentMailees.Where(mailee => (mailee.CorpId_AtLastCheck == 0) && (mailee.Mailed == null)).Count();
+                    totalCount = r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && (DbFunctions.DiffHours(DateTime.Now, mailee.Submitted) > 24)).Count();
+                    totalCount = r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && (DbFunctions.DiffHours(mailee.Submitted, DateTime.Now) > 24)).Count();
+                    //totalCount = r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && ((DateTime.Now - mailee.Submitted).TotalHours > 24)).Count();
 
                     //ResetMailees(doFullRun);
                     ResetMailees(true);
@@ -80,8 +83,9 @@ namespace SiteUpdateBot
                 //Console.WriteLine(string.Format("Resetting {0} mailees corpId's to 0", 
                 //    r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) 
                 //        && (DbFunctions.DiffHours(DateTime.Now, mailee.Submitted) > 24)).Take(100).Count().ToString()));
-                
-                r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && (DbFunctions.DiffHours(DateTime.Now, mailee.Submitted) > 24)).Take(500).ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
+
+                r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && (DbFunctions.DiffHours(mailee.Submitted, DateTime.Now) >= 24)).Take(500).ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
+                //r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && (DbFunctions.DiffHours(mailee.Submitted, DateTime.Now) >= 24)).Take(500).ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
                 var count = r3musDB.SaveChanges();
                 Console.WriteLine(string.Format("Reset {0} mailees corpId's to 0",
                     count.ToString()));
@@ -254,7 +258,7 @@ namespace SiteUpdateBot
                     {
                         i++;
                         Console.WriteLine("# {0}: Mailee {1}", i.ToString(), mailee.Name);
-                        mailee.IsInNPCCorp();
+                        mailee.GetToonDetails();
                         mailee.Submitted = updateDT;
                         //System.Threading.Thread.Sleep(1000);
                     }

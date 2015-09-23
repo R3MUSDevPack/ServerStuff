@@ -22,5 +22,8 @@ namespace JKON.EveWho.Character.Models
         public string name { get; set; }
         [DataMember]
         public double sec_status { get; set; }
+
+        [DataMember]
+        public List<history> history { get; set; }
     }
 }

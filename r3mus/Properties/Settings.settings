@@ -68,9 +68,6 @@
     <Setting Name="EveWhoPilotURL" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://evewho.com/pilot/{0}</Value>
     </Setting>
-    <Setting Name="CharacterImageServerURL" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://image.eveonline.com/Character/{0}_{1}.png</Value>
-    </Setting>
     <Setting Name="FullAPIAccessMask" Type="System.Int64" Scope="Application">
       <Value Profile="(Default)">1073741823</Value>
     </Setting>
@@ -79,6 +76,12 @@
     </Setting>
     <Setting Name="NewApp_MessageFormatLine2" Type="System.String" Scope="Application">
       <Value Profile="(Default)">New application received from {0} at {1}.</Value>
+    </Setting>
+    <Setting Name="CharacterImageServerURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://image.eveonline.com/Character/{0}_{1}.png</Value>
+    </Setting>
+    <Setting Name="MaxDayAgeForMailees" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">548</Value>
     </Setting>
   </Settings>
 </SettingsFile>

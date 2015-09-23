@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace JKON.EveWho.EveCharacter.Models
 {
@@ -16,12 +17,16 @@ namespace JKON.EveWho.EveCharacter.Models
     public class row
     {
         [DataMember]
-        public long recordID { get; set; }
+        [XmlAttribute("recordID")]
+        public long RecordID { get; set; }
         [DataMember]
-        public long corporationID { get; set; }
+        [XmlAttribute("corporationID")]
+        public long CorporationID { get; set; }
         [DataMember]
-        public string corporationName { get; set; }
+        [XmlAttribute("corporationName")]
+        public string CorporationName { get; set; }
         [DataMember]
-        public DateTime startDate { get; set; }
+        [XmlAttribute("startDate")]
+        public string StartDate { get; set; }
     }
 }

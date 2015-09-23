@@ -48,7 +48,14 @@ namespace r3mus.Controllers
             statsVM.MailersLastWeek = ent.LastWeeksMailStats.ToList();
             statsVM.SubmittersLastMonth = mnthEnt.LastMonthsSubmissionStats.ToList();
             statsVM.MailersLastMonth = mnthEnt.LastMonthsMailStats.ToList();
-            statsVM.MailsToSend = db.RecruitmentMailees.Where(m => (m.MailerId == null) && (m.CorpId_AtLastCheck >= 1000000) && (m.CorpId_AtLastCheck <= 1000200)).Count();
+            statsVM.MailsToSend = db.RecruitmentMailees.Where(m =>
+                (m.MailerId == null)).ToList().Where(m =>
+                ((m.InNPCCorp)
+                && (m.DateOfBirthInRange))
+                //&& (m.CorpId_AtLastCheck >= 1000000)
+                //&& (m.CorpId_AtLastCheck <= 1000200)
+                //&& (((DateTime.Now - m.DateOfBirth).Days < Properties.Settings.Default.MaxDayAgeForMailees)))
+                ).Count();
             statsVM.ApplicationsToProcess = appent.ApplicantLists.Where(a => (a.Status != ApplicationReviewViewModel.ApplicationStatus.Accepted.ToString()) && (a.Status != ApplicationReviewViewModel.ApplicationStatus.Rejected.ToString())).Count();
 
             return View(statsVM);
@@ -60,18 +67,25 @@ namespace r3mus.Controllers
             var mailees = db.RecruitmentMailees.Where(m => (m.MailerId == null) && (m.CorpId_AtLastCheck >= 1000000) && (m.CorpId_AtLastCheck <= 1000200)).Take(20);
 
             List<RecruitmentMailee> NPCMailees = new List<RecruitmentMailee>();
-
-            foreach (RecruitmentMailee mailee in mailees)
-            {
-                if (mailee.IsInNPCCorp())
+            
+            NPCMailees.ForEach(mailee => {
+                if (mailee.InNPCCorp && mailee.DateOfBirthInRange)
                 {
                     NPCMailees.Add(mailee);
-                }
-                //if (NPCMailees.Count == 20)
-                //{
-                //    break;
-                //}
-            }
+                } 
+                });
+
+            //foreach (RecruitmentMailee mailee in mailees)
+            //{
+            //    if (mailee.IsInNPCCorp())
+            //    {
+            //        NPCMailees.Add(mailee);
+            //    }
+            //    //if (NPCMailees.Count == 20)
+            //    //{
+            //    //    break;
+            //    //}
+            //}
 
             NPCMailees.ToList().ForEach(m => m.MailerId = User.Identity.GetUserId());
             db.SaveChanges();

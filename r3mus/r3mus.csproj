@@ -292,6 +292,10 @@
     <Compile Include="Migrations\201506021406442_AddForums1.Designer.cs">
       <DependentUpon>201506021406442_AddForums1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509231040459_RecruitmentMaillee_DoB.cs" />
+    <Compile Include="Migrations\201509231040459_RecruitmentMaillee_DoB.Designer.cs">
+      <DependentUpon>201509231040459_RecruitmentMaillee_DoB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Applicant.cs" />
     <Compile Include="Models\ApplicantList.Context.cs">
@@ -629,6 +633,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506021406442_AddForums1.resx">
       <DependentUpon>201506021406442_AddForums1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509231040459_RecruitmentMaillee_DoB.resx">
+      <DependentUpon>201509231040459_RecruitmentMaillee_DoB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

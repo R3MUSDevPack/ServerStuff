@@ -41,7 +41,14 @@ namespace JKON.EveWho.EveCharacter.Models
         public double securityStatus { get; set; }
 
         [DataMember]
-        public List<row> employmentHistory { get; set; }
+        [XmlElement("rowset")]
+        public rowset employmentHistory { get; set; }
+    }
+
+    public class rowset
+    {
+        [XmlElement("row")]
+        public List<row> employmentRecords { get; set; }
     }
 }
 

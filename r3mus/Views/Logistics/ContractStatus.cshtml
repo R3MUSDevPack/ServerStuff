@@ -26,7 +26,7 @@
             <li>Days to complete: 14</li>
             <li>No Illegal Items, Assembled Cargo Containers, or Fitted Ships</li>
         </ul>
-        <strong>Cost: </strong>450 isk per m3<br />
+        <strong>Cost: </strong>500 isk per m3<br />
         <h4>To calculate the reward, enter the size (m3) of your contract here</h4>
         <input type="text" id="volume" onkeyup="calculate()" />&nbsp;<label id="cost">0 isk</label>
         <h4>If you need help in setting up a contract or have any questions, please ask in the #logistics channel on Slack.</h4>
@@ -95,7 +95,7 @@
                     {
                         <tr>
                             <td><strong>Value: </strong></td>
-                            <td>@Html.DisplayFor(c => contract.Reward)</td>
+                            <td>@Html.DisplayFor(c => contract.Reward) (should be @Html.DisplayFor(c => (contract.Volume * 500)))</td>
                         </tr>
                         <tr>
                             <td><strong>Volume: </strong></td>
@@ -111,7 +111,7 @@
     function calculate() {
         try {
             if (!isNaN($('#volume').val())) {
-                $('#cost').text(($('#volume').val() * 450).toString() + ' isk');
+                $('#cost').text(($('#volume').val() * 500).toString() + ' isk');
             }
             else {
                 $('#cost').text('Error - please check your volume');

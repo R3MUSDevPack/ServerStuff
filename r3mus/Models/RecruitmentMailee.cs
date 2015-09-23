@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -23,8 +24,15 @@ namespace r3mus.Models
         public DateTime? Mailed { get; set; }
         public string SubmitterId { get; set; }
         public string MailerId { get; set; }
+        [UIHint("_DateTime")]
+        public DateTime? DateOfBirth { get; set; }
 
         public long CorpId_AtLastCheck { get; set; }
+
+        [NotMapped]
+        public bool InNPCCorp { get { return IsInNPCCorp(); } }
+        [NotMapped]
+        public bool DateOfBirthInRange { get { return IsDateOfBirthInRange(); } }
 
         public RecruitmentMailee()
         {
@@ -35,34 +43,49 @@ namespace r3mus.Models
             catch (Exception ex) { }
         }
 
-        public bool IsInNPCCorp()
+        public void GetToonDetails()
         {
-            //long corpId = JKON.EveWho.EveWho.GetCharacter(Name, Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).info.corporation_id;
-
-            long corpId;
-
             try
             {
-                corpId = JKON.EveWho.Api.GetCharacter(Name, Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).result.corporationID;
+                var toon = JKON.EveWho.Api.GetCharacter(Name, Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).result;
+                CorpId_AtLastCheck = toon.corporationID;
+                DateOfBirth = Convert.ToDateTime(toon.employmentHistory.employmentRecords.LastOrDefault().StartDate);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 try
                 {
-                    corpId = JKON.EveWho.EveWho.GetCharacter(Name, Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).info.corporation_id;
+                    var toon = JKON.EveWho.EveWho.GetCharacter(Name, Convert.ToInt64(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode);
+                    CorpId_AtLastCheck = toon.info.corporation_id;
+                    DateOfBirth = toon.history.LastOrDefault().start_date;
                 }
                 catch (Exception ex1)
                 {
-                    corpId = -1;
+                    CorpId_AtLastCheck = -1;
+                    DateOfBirth = new DateTime(1900, 1, 1);
                 }
-                if(corpId == 0)
+                if (CorpId_AtLastCheck == 0)
                 {
-                    corpId = -1;
+                    CorpId_AtLastCheck = -1;
                 }
             }
+        }
 
-            CorpId_AtLastCheck = corpId;
-            return ((corpId >= 1000000) && (corpId <= 1000200));
+        private bool IsInNPCCorp()
+        {
+            return ((CorpId_AtLastCheck >= 1000000) && (CorpId_AtLastCheck <= 1000200));
+        }
+
+        private bool IsDateOfBirthInRange()
+        {
+            if (DateOfBirth.HasValue)
+            {
+                return ((DateTime.Now - DateOfBirth.Value).Days < Properties.Settings.Default.MaxDayAgeForMailees);
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 
