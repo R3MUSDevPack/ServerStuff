@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace r3mus.Controllers
 {
+    [Authorize]
     public class LogisticsController : Controller
     {
         public ActionResult ContractStatus()

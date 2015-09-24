@@ -49,13 +49,10 @@ namespace r3mus.Controllers
             statsVM.SubmittersLastMonth = mnthEnt.LastMonthsSubmissionStats.ToList();
             statsVM.MailersLastMonth = mnthEnt.LastMonthsMailStats.ToList();
             statsVM.MailsToSend = db.RecruitmentMailees.Where(m =>
-                (m.MailerId == null)).ToList().Where(m =>
+                (m.MailerId == null && !m.Name.Contains("Citizen") && !m.Name.Contains("Trader") && !m.Name.Contains("Miner"))).ToList()
+            .Where(m =>
                 ((m.InNPCCorp)
-                && (m.DateOfBirthInRange))
-                //&& (m.CorpId_AtLastCheck >= 1000000)
-                //&& (m.CorpId_AtLastCheck <= 1000200)
-                //&& (((DateTime.Now - m.DateOfBirth).Days < Properties.Settings.Default.MaxDayAgeForMailees)))
-                ).Count();
+                && (m.DateOfBirthInRange))).Count();
             statsVM.ApplicationsToProcess = appent.ApplicantLists.Where(a => (a.Status != ApplicationReviewViewModel.ApplicationStatus.Accepted.ToString()) && (a.Status != ApplicationReviewViewModel.ApplicationStatus.Rejected.ToString())).Count();
 
             return View(statsVM);
@@ -64,16 +61,20 @@ namespace r3mus.Controllers
         [Authorize(Roles = "Recruiter, Screener, Director, CEO, Admin")]
         public ActionResult GetNames()
         {
-            var mailees = db.RecruitmentMailees.Where(m => (m.MailerId == null) && (m.CorpId_AtLastCheck >= 1000000) && (m.CorpId_AtLastCheck <= 1000200)).Take(20);
+            var mailees = db.RecruitmentMailees.Where(m =>
+                (m.MailerId == null && !m.Name.Contains("Citizen") && !m.Name.Contains("Trader") && !m.Name.Contains("Miner"))).ToList()
+            .Where(m =>
+                ((m.InNPCCorp)
+                && (m.DateOfBirthInRange))).ToList();
 
-            List<RecruitmentMailee> NPCMailees = new List<RecruitmentMailee>();
-            
-            NPCMailees.ForEach(mailee => {
-                if (mailee.InNPCCorp && mailee.DateOfBirthInRange)
-                {
-                    NPCMailees.Add(mailee);
-                } 
-                });
+            //List < RecruitmentMailee> NPCMailees = new List<RecruitmentMailee>();
+
+            //mailees.ForEach(mailee => {
+            //    if (mailee.InNPCCorp && mailee.DateOfBirthInRange)
+            //    {
+            //        NPCMailees.Add(mailee);
+            //    } 
+            //    });
 
             //foreach (RecruitmentMailee mailee in mailees)
             //{
@@ -87,10 +88,10 @@ namespace r3mus.Controllers
             //    //}
             //}
 
-            NPCMailees.ToList().ForEach(m => m.MailerId = User.Identity.GetUserId());
+            mailees.ToList().ForEach(m => m.MailerId = User.Identity.GetUserId());
             db.SaveChanges();
 
-            ViewBag.Mailees = string.Join(",", NPCMailees.Select(m => m.Name).ToArray());
+            ViewBag.Mailees = string.Join(",", mailees.Select(m => m.Name).ToArray());
 
             return View();
         }

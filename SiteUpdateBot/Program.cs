@@ -85,6 +85,11 @@ namespace SiteUpdateBot
                 //        && (DbFunctions.DiffHours(DateTime.Now, mailee.Submitted) > 24)).Take(100).Count().ToString()));
 
                 r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && (DbFunctions.DiffHours(mailee.Submitted, DateTime.Now) >= 24)).Take(500).ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
+                r3musDB.RecruitmentMailees.Where(m =>
+                (m.MailerId == null && !m.Name.Contains("Citizen") && !m.Name.Contains("Trader") && !m.Name.Contains("Miner"))).ToList()
+                    .Where(m => ((m.InNPCCorp)
+                        && (m.DateOfBirthInRange))).Take(500).ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
+
                 //r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && (DbFunctions.DiffHours(mailee.Submitted, DateTime.Now) >= 24)).Take(500).ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
                 var count = r3musDB.SaveChanges();
                 Console.WriteLine(string.Format("Reset {0} mailees corpId's to 0",
@@ -248,7 +253,7 @@ namespace SiteUpdateBot
             Stopwatch sw = new Stopwatch();
             sw.Start();
             int i = 0;
-            var updateDT = DateTime.Now;
+            //var updateDT = DateTime.Now;
 
             using(var r3musDB = new r3musDbContext())
             {
@@ -259,7 +264,7 @@ namespace SiteUpdateBot
                         i++;
                         Console.WriteLine("# {0}: Mailee {1}", i.ToString(), mailee.Name);
                         mailee.GetToonDetails();
-                        mailee.Submitted = updateDT;
+                        //mailee.Submitted = updateDT;
                         //System.Threading.Thread.Sleep(1000);
                     }
                     catch (Exception ex) { Console.WriteLine(string.Format("Mailee: {0}, Error {1}", mailee.Name, ex.Message)); }

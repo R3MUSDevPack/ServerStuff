@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hipchat_Plugin", "Hipchat_Plugin\Hipchat_Plugin.csproj", "{62D74A6F-20E1-4B2B-A400-F1F8A31700C0}"
 EndProject
@@ -16,8 +16,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomQuoteBot", "RandomQuoteBot\RandomQuoteBot.csproj", "{817C5BF8-DCD6-4B80-9E09-12C2E444871D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "r3mus", "r3mus\r3mus.csproj", "{50A8220B-9598-4B98-A436-E561E579787D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "r3musTest", "r3musTest\r3musTest.csproj", "{2EA3BE63-E88E-4E06-A86B-E193C968DC17}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{67C40F8B-5B2D-4996-81CD-CA5E3B51E1FD}"
 	ProjectSection(SolutionItems) = preProject
@@ -83,10 +81,6 @@ Global
 		{50A8220B-9598-4B98-A436-E561E579787D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50A8220B-9598-4B98-A436-E561E579787D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50A8220B-9598-4B98-A436-E561E579787D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2EA3BE63-E88E-4E06-A86B-E193C968DC17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2EA3BE63-E88E-4E06-A86B-E193C968DC17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2EA3BE63-E88E-4E06-A86B-E193C968DC17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2EA3BE63-E88E-4E06-A86B-E193C968DC17}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A594C855-B2F5-4E06-B343-2FE1FF13BB57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A594C855-B2F5-4E06-B343-2FE1FF13BB57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A594C855-B2F5-4E06-B343-2FE1FF13BB57}.Release|Any CPU.ActiveCfg = Release|Any CPU
