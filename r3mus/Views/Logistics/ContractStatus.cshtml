@@ -95,7 +95,8 @@
                     {
                         <tr>
                             <td><strong>Value: </strong></td>
-                            <td>@Html.DisplayFor(c => contract.Reward) (should be @Html.DisplayFor(c => (contract.Volume * 500)))</td>
+                            @{ var correctReward = (contract.Volume * 500); }
+                            <td>@Html.DisplayFor(c => contract.Reward) (should be @Html.DisplayFor(c => correctReward))</td>
                         </tr>
                         <tr>
                             <td><strong>Volume: </strong></td>

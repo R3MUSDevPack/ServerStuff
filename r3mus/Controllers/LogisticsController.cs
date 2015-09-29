@@ -1,5 +1,6 @@
 ﻿using EveAI.Live;
 using JKON.EveWho.Models;
+using JKON.EveWho.Stations;
 using r3mus.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,19 @@ namespace r3mus.Controllers
                     (contract.Status == EveAI.Live.Utility.Contract.ContractStatus.InProgress))).ToList();
 
                 IDs = Contracts.Select(contract => contract.IssuerID).ToList();
+
+                Contracts.ForEach(contract =>
+                {
+                    if(contract.StartStation == null) {
+                        var startStation = Api.GetStation(contract.StartStationID);
+                        contract.StartStation = new EveAI.SpaceStation.Station() { Name = startStation.stationName };
+                    }
+                    if (contract.EndStation == null)
+                    {
+                        var endStation = Api.GetStation(contract.EndStationID);
+                        contract.EndStation = new EveAI.SpaceStation.Station() { Name = endStation.stationName };
+                    }
+                });
 
                 Contracts.Select(contract => contract.IssuerID).ToList().ForEach(id =>
                         {
