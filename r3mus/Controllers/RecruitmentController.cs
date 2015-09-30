@@ -259,8 +259,23 @@ namespace r3mus.Controllers
             else
             {
                 ViewBag.Complete = false;
+                if(newReviewModel.ApplicationInfo.Last().Status.Replace(" ", "") == ApplicationReviewViewModel.ApplicationStatus.Applied.ToString())
+                {
+                    newReviewModel.NewReviewItemStatus = ApplicationReviewViewModel.ApplicationStatus.InScreening;
+                }
+                else if(newReviewModel.ApplicationInfo.Last().Status.Replace(" ", "") == ApplicationReviewViewModel.ApplicationStatus.NeedsAPIMail.ToString())
+                {
+                    newReviewModel.NewReviewItemStatus = ApplicationReviewViewModel.ApplicationStatus.APIMailSent;
+                }
+                else if (newReviewModel.ApplicationInfo.Last().Status.Replace(" ", "") == ApplicationReviewViewModel.ApplicationStatus.AwaitingInvitation.ToString())
+                {
+                    newReviewModel.NewReviewItemStatus = ApplicationReviewViewModel.ApplicationStatus.Accepted;
+                }
+                else
+                {
+                    newReviewModel.NewReviewItemStatus = (ApplicationReviewViewModel.ApplicationStatus)Enum.Parse(typeof(ApplicationReviewViewModel.ApplicationStatus), newReviewModel.ApplicationInfo.Last().Status.Replace(" ", ""));
+                }
             }
-            newReviewModel.NewReviewItemStatus = ApplicationReviewViewModel.ApplicationStatus.InScreening;
 
             newReviewModel.Applicant = db.Applicants.Where(a => a.Id == id).FirstOrDefault();
             if((newReviewModel.Applicant.TimeZone == null) || (newReviewModel.Applicant.TimeZone == string.Empty))
@@ -288,9 +303,7 @@ namespace r3mus.Controllers
                 
                 db.Applications.Add(model.NewReviewItem);
                 db.SaveChanges();
-
-                //SendMessage(string.Format(Properties.Settings.Default.AppUpdate_MessageFormatLine2, model.Applicant.Name, model.NewReviewItem.Status, model.NewReviewItem.Reviewer.UserName, model.NewReviewItem.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
-
+                
                 MessagePayload message = new MessagePayload();
                 message.Attachments = new List<MessagePayloadAttachment>();
 

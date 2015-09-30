@@ -16,15 +16,17 @@ namespace r3mus.ViewModels
             InScreening,
             [Display(Name = "Needs API Mail")]
             NeedsAPIMail,
+            [Display(Name = "API Mail Sent")]
+            APIMailSent,
             [Display(Name = "On Hold")]
             OnHold,
-            Rejected,
             [Display(Name = "Director Review")]
             DirectorReview,
             [Display(Name = "Awaiting Interview")]
             AwaitingInterview,
-            [Display(Name = "Needs Invitation Sending")]
+            [Display(Name = "Awaiting Invitation")]
             AwaitingInvitation,
+            Rejected,
             Accepted
         }
 
