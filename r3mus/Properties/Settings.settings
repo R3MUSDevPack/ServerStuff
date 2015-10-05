@@ -39,7 +39,7 @@
       <Value Profile="(Default)">xoxp-4459251457-4460324675-10475473043-239b3cc333</Value>
     </Setting>
     <Setting Name="SlackInviteURL" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://r3mus.slack.com/api/users.admin.invite?email={0}&amp;channels=C04DH7DFR&amp;token={1}&amp;set_active=true&amp;_attempts=1</Value>
+      <Value Profile="(Default)">http://{2}.slack.com/api/users.admin.invite?email={0}&amp;token={1}&amp;set_active=true&amp;_attempts=1</Value>
     </Setting>
     <Setting Name="RecruitmentRoomName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">recruitment</Value>

@@ -16,6 +16,9 @@ using System.Web.Script.Serialization;
 using System.Threading.Tasks;
 using Teamspeak_Plugin;
 using System.Data.Entity.Infrastructure;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace r3mus.Controllers
 {
@@ -24,7 +27,6 @@ namespace r3mus.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         protected UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-        //protected UserManager<ApplicationUser> UserManager;
         
         // GET: /LoggedInHome/
         public ActionResult Index()
@@ -315,15 +317,36 @@ namespace r3mus.Controllers
         [HttpPost]
         public ActionResult RegisterForSlack()
         {
-            string result = string.Empty;
-            string URI = string.Format(Properties.Settings.Default.SlackInviteURL, UserManager.FindById(User.Identity.GetUserId()).EmailAddress, Properties.Settings.Default.SlackToken);
-            using(WebClient client = new WebClient())
+            var result = string.Empty;
+            //string URI = string.Format(Properties.Settings.Default.SlackInviteURL, UserManager.FindById(User.Identity.GetUserId()).EmailAddress, Properties.Settings.Default.SlackToken);
+            //using(WebClient client = new WebClient())
+            //{
+            //    byte[] response = client.DownloadData(URI);
+            //    result = System.Text.Encoding.UTF8.GetString(response);
+            //}
+
+            using (var client = new HttpClient())
             {
-                byte[] response = client.DownloadData(URI);
-                result = System.Text.Encoding.UTF8.GetString(response);
+                client.BaseAddress = new Uri(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~")));
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                try
+                {                    
+                    var task = Task.Factory.StartNew(() => JsonConvert.DeserializeObject<string>(client.GetStringAsync(string.Format("api/SlackRegistry/r3mus/{0}/{1}",
+                        UserManager.FindById(User.Identity.GetUserId()).EmailAddress,
+                        Properties.Settings.Default.SlackToken
+                        )).Result));
+                    task.Wait();
+                    result = task.Result;
+                }
+                catch(Exception ex)
+                {
+                    result = string.Format("false:{0}", ex.Message);
+                }
             }
-            
-            if(result.Contains("false"))
+
+            if (result.Contains("false"))
             {
                 TempData.Add("Message", string.Format("Could not send an invitation: {0}", result));
             }
@@ -336,6 +359,21 @@ namespace r3mus.Controllers
                 TempData.Add("Message", string.Format("Could not send an invitation: unknown reason."));
             }
             return RedirectToAction("Index");
+        }
+
+        private static async Task<string> SlackRegistry_WebService(string baseURL)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseURL);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                
+                using (var response = await client.GetAsync(""))
+                {
+                    return await response.Content.ReadAsAsync<string>();
+                }
+            }
         }
 
         protected override void Dispose(bool disposing)
