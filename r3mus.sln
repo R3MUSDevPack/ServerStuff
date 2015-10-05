@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hipchat_Plugin", "Hipchat_Plugin\Hipchat_Plugin.csproj", "{62D74A6F-20E1-4B2B-A400-F1F8A31700C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hipchat_Plugin_TestHarness", "Hipchat_Plugin_TestHarness\Hipchat_Plugin_TestHarness.csproj", "{5873D953-9EDC-4160-9419-2F90EF202D82}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Killbot", "Killbot\Killbot.csproj", "{71243FF9-71B3-4BBA-AA63-1A42F1BCCD20}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slack_Plugin", "Slack_Plugin\Slack_Plugin.csproj", "{ECA1A3DD-2245-41C8-8100-20133906FAD3}"
@@ -38,6 +36,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 	ProjectSection(SolutionItems) = preProject
 		JKON.EveWho\bin\Debug\EveAI.Core.dll = JKON.EveWho\bin\Debug\EveAI.Core.dll
 		JKON.EveWho\bin\Debug\EveAI.Live.dll = JKON.EveWho\bin\Debug\EveAI.Live.dll
+		JKON.EveWho\bin\Debug\EveLib.Core.dll = JKON.EveWho\bin\Debug\EveLib.Core.dll
+		JKON.EveWho\bin\Debug\EveLib.Core.xml = JKON.EveWho\bin\Debug\EveLib.Core.xml
+		JKON.EveWho\bin\Debug\EveLib.Element43.dll = JKON.EveWho\bin\Debug\EveLib.Element43.dll
+		JKON.EveWho\bin\Debug\EveLib.Element43.xml = JKON.EveWho\bin\Debug\EveLib.Element43.xml
+		JKON.EveWho\bin\Debug\EveLib.EveCentral.dll = JKON.EveWho\bin\Debug\EveLib.EveCentral.dll
+		JKON.EveWho\bin\Debug\EveLib.EveCentral.xml = JKON.EveWho\bin\Debug\EveLib.EveCentral.xml
+		JKON.EveWho\bin\Debug\EveLib.EveCrest.dll = JKON.EveWho\bin\Debug\EveLib.EveCrest.dll
+		JKON.EveWho\bin\Debug\EveLib.EveCrest.xml = JKON.EveWho\bin\Debug\EveLib.EveCrest.xml
+		JKON.EveWho\bin\Debug\EveLib.EveMarketData.dll = JKON.EveWho\bin\Debug\EveLib.EveMarketData.dll
+		JKON.EveWho\bin\Debug\EveLib.EveMarketData.xml = JKON.EveWho\bin\Debug\EveLib.EveMarketData.xml
+		JKON.EveWho\bin\Debug\EveLib.EveOnline.dll = JKON.EveWho\bin\Debug\EveLib.EveOnline.dll
+		JKON.EveWho\bin\Debug\EveLib.EveOnline.xml = JKON.EveWho\bin\Debug\EveLib.EveOnline.xml
+		JKON.EveWho\bin\Debug\EveLib.StaticData.dll = JKON.EveWho\bin\Debug\EveLib.StaticData.dll
+		JKON.EveWho\bin\Debug\EveLib.StaticData.xml = JKON.EveWho\bin\Debug\EveLib.StaticData.xml
+		JKON.EveWho\bin\Debug\EveLib.ZKillboard.dll = JKON.EveWho\bin\Debug\EveLib.ZKillboard.dll
+		JKON.EveWho\bin\Debug\EveLib.ZKillboard.xml = JKON.EveWho\bin\Debug\EveLib.ZKillboard.xml
 		JKON.EveWho\bin\Debug\Ionic.Zip.Reduced.dll = JKON.EveWho\bin\Debug\Ionic.Zip.Reduced.dll
 	EndProjectSection
 EndProject
@@ -57,10 +71,6 @@ Global
 		{62D74A6F-20E1-4B2B-A400-F1F8A31700C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62D74A6F-20E1-4B2B-A400-F1F8A31700C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62D74A6F-20E1-4B2B-A400-F1F8A31700C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5873D953-9EDC-4160-9419-2F90EF202D82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5873D953-9EDC-4160-9419-2F90EF202D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5873D953-9EDC-4160-9419-2F90EF202D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5873D953-9EDC-4160-9419-2F90EF202D82}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71243FF9-71B3-4BBA-AA63-1A42F1BCCD20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{71243FF9-71B3-4BBA-AA63-1A42F1BCCD20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71243FF9-71B3-4BBA-AA63-1A42F1BCCD20}.Release|Any CPU.ActiveCfg = Release|Any CPU

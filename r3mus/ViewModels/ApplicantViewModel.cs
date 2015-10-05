@@ -1,5 +1,4 @@
-﻿using eZet.EveLib.Modules;
-using r3mus.Models;
+﻿using r3mus.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

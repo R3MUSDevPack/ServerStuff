@@ -4,160 +4,160 @@
         <name>EveLib.Element43</name>
     </assembly>
     <members>
-        <member name="T:eZet.EveLib.Modules.Element43Legacy">
+        <member name="T:eZet.EveLib.Element43Module.Element43Legacy">
             <summary>
                 Class for accessing the Element43 Legacy API
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.Element43Legacy.DefaultUri">
+        <member name="F:eZet.EveLib.Element43Module.Element43Legacy.DefaultUri">
             <summary>
                 The default api URI
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.Element43Legacy.#ctor">
+        <member name="M:eZet.EveLib.Element43Module.Element43Legacy.#ctor">
             <summary>
                 Default constructor, with a default base uri and request handler.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.Element43Legacy.GetMarketStat(eZet.EveLib.Modules.Element43Options)">
+        <member name="M:eZet.EveLib.Element43Module.Element43Legacy.GetMarketStat(eZet.EveLib.Element43Module.Element43Options)">
             <summary>
                 Returns aggregate statistics for the items specified.
             </summary>
             <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
             <returns></returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.Element43Legacy.GetMarketStatAsync(eZet.EveLib.Modules.Element43Options)">
+        <member name="M:eZet.EveLib.Element43Module.Element43Legacy.GetMarketStatAsync(eZet.EveLib.Element43Module.Element43Options)">
             <summary>
                 Returns aggregate statistics for the items specified.
             </summary>
             <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
             <returns></returns>
         </member>
-        <member name="P:eZet.EveLib.Modules.Element43Legacy.BaseUri">
+        <member name="P:eZet.EveLib.Element43Module.Element43Legacy.BaseUri">
             <summary>
                 Gets or sets the base URI for requests.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Element43Legacy.RequestHandler">
+        <member name="P:eZet.EveLib.Element43Module.Element43Legacy.RequestHandler">
             <summary>
                 Gets or sets the RequestHandler used to perform requests.
             </summary>
         </member>
-        <member name="T:eZet.EveLib.Modules.Element43Options">
+        <member name="T:eZet.EveLib.Element43Module.Element43Options">
             <summary>
                 Provides a set of configurable options for EveCentral requests.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.Element43Options.#ctor">
+        <member name="M:eZet.EveLib.Element43Module.Element43Options.#ctor">
             <summary>
                 Creates a new options object.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.Element43Options.GetItemQuery(System.String)">
+        <member name="M:eZet.EveLib.Element43Module.Element43Options.GetItemQuery(System.String)">
             <summary>
                 Returns items in a query string format.
             </summary>
             <param name="paramName"></param>
             <returns></returns>
         </member>
-        <member name="P:eZet.EveLib.Modules.Element43Options.Items">
+        <member name="P:eZet.EveLib.Element43Module.Element43Options.Items">
             <summary>
                 Gets or sets a collection of type IDs.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Element43Options.Region">
+        <member name="P:eZet.EveLib.Element43Module.Element43Options.Region">
             <summary>
                 Gets or sets a collection of region IDs.
             </summary>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.Element43MarketStatResponse">
+        <member name="T:eZet.EveLib.Element43Module.Models.MarketStatResponse">
             <summary>
-                Class Element43MarketStatResponse.
+                Class MarketStatResponse.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatResponse.Result">
+        <member name="P:eZet.EveLib.Element43Module.Models.MarketStatResponse.Result">
             <summary>
                 Gets or sets the result.
             </summary>
             <value>The result.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.Element43MarketStatItem">
+        <member name="T:eZet.EveLib.Element43Module.Models.Element43MarketStatItem">
             <summary>
                 Class Element43MarketStatItem.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatItem.TypeId">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatItem.TypeId">
             <summary>
                 Gets or sets the type identifier.
             </summary>
             <value>The type identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatItem.BuyOrders">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatItem.BuyOrders">
             <summary>
                 Gets or sets the buy orders.
             </summary>
             <value>The buy orders.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatItem.SellOrders">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatItem.SellOrders">
             <summary>
                 Gets or sets the sell orders.
             </summary>
             <value>The sell orders.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatItem.LastUpdate">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatItem.LastUpdate">
             <summary>
                 Gets or sets the last update.
             </summary>
             <value>The last update.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatItem.VolumeLastWeek">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatItem.VolumeLastWeek">
             <summary>
                 Gets or sets the volume last week.
             </summary>
             <value>The volume last week.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.Element43MarketStatOrderData">
+        <member name="T:eZet.EveLib.Element43Module.Models.Element43MarketStatOrderData">
             <summary>
                 Class Element43MarketStatOrderData.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatOrderData.Volume">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatOrderData.Volume">
             <summary>
                 Gets or sets the volume.
             </summary>
             <value>The volume.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatOrderData.Average">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatOrderData.Average">
             <summary>
                 Gets or sets the average.
             </summary>
             <value>The average.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatOrderData.Max">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatOrderData.Max">
             <summary>
                 Gets or sets the maximum.
             </summary>
             <value>The maximum.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatOrderData.Min">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatOrderData.Min">
             <summary>
                 Gets or sets the minimum.
             </summary>
             <value>The minimum.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatOrderData.StdDev">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatOrderData.StdDev">
             <summary>
                 Gets or sets the standard dev.
             </summary>
             <value>The standard dev.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatOrderData.Median">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatOrderData.Median">
             <summary>
                 Gets or sets the median.
             </summary>
             <value>The median.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.Element43MarketStatOrderData.Percentile">
+        <member name="P:eZet.EveLib.Element43Module.Models.Element43MarketStatOrderData.Percentile">
             <summary>
                 Gets or sets the percentile.
             </summary>

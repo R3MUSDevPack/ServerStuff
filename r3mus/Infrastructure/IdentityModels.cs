@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-using eZet.EveLib.Modules;
-using eZet.EveLib.Modules.Models.Account;
-using eZet.EveLib.Modules.Models;
 using r3mus.Infrastructure;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +10,8 @@ using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 using EveAI.Live;
 using System.IO;
+//using eZet.EveLib.EveWhoModule.Models;
+using eZet.EveLib.EveXmlModule;
 
 namespace r3mus.Models
 {
@@ -112,7 +111,7 @@ namespace r3mus.Models
 
             try
             {
-                var newkey = EveOnlineApi.CreateApiKey(apiKey, vcode).Init();
+                var newkey = EveXml.CreateApiKey(apiKey, vcode).Init();
                 if ((newkey.IsValidKey()) && newkey.KeyType != (ApiKeyType.Corporation))
                 {
                     var cKey = (CharacterKey)newkey.GetActualKey();
@@ -156,7 +155,7 @@ namespace r3mus.Models
 
             try
             {
-                var newkey = EveOnlineApi.CreateApiKey(apiKey, vcode).Init();
+                var newkey = EveXml.CreateApiKey(apiKey, vcode).Init();
                 if ((newkey.IsValidKey()) && newkey.KeyType != (ApiKeyType.Corporation))
                 {
                     var cKey = (CharacterKey)newkey.GetActualKey();
@@ -209,7 +208,7 @@ namespace r3mus.Models
             
             try
             {
-                var newkey = EveOnlineApi.CreateApiKey(apiKey, vcode).Init();
+                var newkey = EveXml.CreateApiKey(apiKey, vcode).Init();
                 var cKey = (CorporationKey)newkey.GetActualKey();
 
                 List<long> list = new List<long>();
@@ -321,7 +320,7 @@ namespace r3mus.Models
                 {
                     try
                     {
-                        var newkey = EveOnlineApi.CreateApiKey(info.ApiKey, info.VerificationCode).Init();
+                        var newkey = EveXml.CreateApiKey(info.ApiKey, info.VerificationCode).Init();
                         if ((newkey.IsValidKey()) && newkey.KeyType != (ApiKeyType.Corporation))
                         {
                             var cKey = (CharacterKey)newkey.GetActualKey();
@@ -383,7 +382,7 @@ namespace r3mus.Models
 
         public void GetTitles(ApiInfo liveAPI)
         {
-            var corp = ((CorporationKey)EveOnlineApi.CreateApiKey(Convert.ToInt32(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).Init().GetActualKey()).Corporation;
+            var corp = ((CorporationKey)EveXml.CreateApiKey(Convert.ToInt32(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode).Init().GetActualKey()).Corporation;
             var titles = corp.GetMemberTracking().Result.Members.Where(member => member.CharacterName == UserName).FirstOrDefault().Title.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             var titleList = new List<Title>();
             foreach (var title in titles)
@@ -435,13 +434,13 @@ namespace r3mus.Models
         [NotMapped]
         [Display(Name = "Access Mask")]
         [UIHint("AccessMaskHighlight")]
-        public long AccessMask { get { try { return EveOnlineApi.CreateApiKey(Convert.ToInt32(ApiKey), VerificationCode).Init().AccessMask; } catch (Exception ex) { return -1; } } }
+        public long AccessMask { get { try { return EveXml.CreateApiKey(Convert.ToInt32(ApiKey), VerificationCode).Init().AccessMask; } catch (Exception ex) { return -1; } } }
 
         public virtual ApplicationUser User { get; set; }
 
         public List<Character> GetDetails()
         {
-            CharacterKey key = EveOnlineApi.CreateCharacterKey(ApiKey, VerificationCode);
+            CharacterKey key = EveXml.CreateCharacterKey(ApiKey, VerificationCode);
             var chars = key.Characters.ToList();
             //var charList = key.GetCharacterList();
             return chars;

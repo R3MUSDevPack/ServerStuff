@@ -36,7 +36,12 @@
         </member>
         <member name="F:eZet.EveLib.Core.Config.AppData">
             <summary>
-                Path to ApplicationData folder.
+                relCachePath to ApplicationData folder.
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Core.Config.ImagePath">
+            <summary>
+                relCachePath to image directory
             </summary>
         </member>
         <member name="F:eZet.EveLib.Core.Config.CacheFactory">
@@ -44,29 +49,14 @@
                 The cache factory
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Core.Config.CacheRegisterFileName">
-            <summary>
-                Filename for the Cache Register
-            </summary>
-        </member>
-        <member name="F:eZet.EveLib.Core.Config.CachePath">
-            <summary>
-                Path to cache directory
-            </summary>
-        </member>
-        <member name="F:eZet.EveLib.Core.Config.ImagePath">
-            <summary>
-                Path to image directory
-            </summary>
-        </member>
-        <member name="F:eZet.EveLib.Core.Config.CacheRegister">
-            <summary>
-                Full path to cache register file
-            </summary>
-        </member>
         <member name="F:eZet.EveLib.Core.Config.UserAgent">
             <summary>
                 UserAgent used for HTTP requests
+            </summary>
+        </member>
+        <member name="T:eZet.EveLib.Core.Converters.BoolConverter">
+            <summary>
+            Class BoolConverter.
             </summary>
         </member>
         <member name="T:eZet.EveLib.Core.EveLib">
@@ -104,14 +94,14 @@
                 Gets or sets the request handler used by this instance
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Core.Util.EveLibApiBase.BaseUri">
+        <member name="P:eZet.EveLib.Core.Util.EveLibApiBase.Host">
             <summary>
-                Gets or sets the base URI used to access this API. This should include a trailing backslash.
+                Gets or sets the base URI used to access this API.
             </summary>
         </member>
         <member name="P:eZet.EveLib.Core.Util.EveLibApiBase.ApiPath">
             <summary>
-                Gets or sets the relative path to the API base.
+                Gets or sets the path to the API root relative to Host.
             </summary>
         </member>
         <member name="M:eZet.EveLib.Core.EveLib.#ctor">
@@ -483,7 +473,7 @@
         <member name="T:eZet.EveLib.Core.Properties.PathReferenceAttribute">
             <summary>
                 Indicates that a parameter is a path to a file or a folder
-                within a web project. Path can be relative or absolute,
+                within a web project. relCachePath can be relative or absolute,
                 starting from web root (~)
             </summary>
         </member>
@@ -591,6 +581,33 @@
                 <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>
             </summary>
         </member>
+        <member name="T:eZet.EveLib.Core.RequestHandlers.CacheLevel">
+            <summary>
+                Enum CacheLevel
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Core.RequestHandlers.CacheLevel.Default">
+            <summary>
+                Satisfies the request by using local cache if available, or by sending a request to the server if needed. New
+                requests may be stored in local cache.
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Core.RequestHandlers.CacheLevel.BypassCache">
+            <summary>
+                Bypasses cache complete. A new request will be sent to the server. No entries will be added to or removed from the
+                cache.
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Core.RequestHandlers.CacheLevel.Refresh">
+            <summary>
+                A request will be sent to the server. Outdated cache will be removed, and a new entry may be stored.
+            </summary>
+        </member>
+        <member name="F:eZet.EveLib.Core.RequestHandlers.CacheLevel.CacheOnly">
+            <summary>
+                Will serve the request from the local cache if any. If no cache is available, the request will return null.
+            </summary>
+        </member>
         <member name="T:eZet.EveLib.Core.RequestHandlers.IImageRequestHandler">
             <summary>
                 Interface for requesting images from URIs
@@ -630,6 +647,68 @@
             <param name="uri">URI to request</param>
             <param name="file">File to save image as.</param>
             <returns>The task</returns>
+        </member>
+        <member name="T:eZet.EveLib.Core.Util.AsyncHelpers">
+            <summary>
+                Class AsyncHelpers.
+            </summary>
+        </member>
+        <member name="M:eZet.EveLib.Core.Util.AsyncHelpers.RunSync(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+                Runs the synchronize.
+            </summary>
+            <param name="task">The task.</param>
+        </member>
+        <member name="M:eZet.EveLib.Core.Util.AsyncHelpers.RunSync``1(System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+                Runs the synchronize.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="task">The task.</param>
+            <returns>T.</returns>
+        </member>
+        <member name="T:eZet.EveLib.Core.Util.AsyncHelpers.ExclusiveSynchronizationContext">
+            <summary>
+                Class ExclusiveSynchronizationContext.
+            </summary>
+        </member>
+        <member name="M:eZet.EveLib.Core.Util.AsyncHelpers.ExclusiveSynchronizationContext.Send(System.Threading.SendOrPostCallback,System.Object)">
+            <summary>
+                When overridden in a derived class, dispatches a synchronous message to a synchronization context.
+            </summary>
+            <param name="d">The <see cref="T:System.Threading.SendOrPostCallback"/> delegate to call.</param>
+            <param name="state">The object passed to the delegate.</param>
+            <exception cref="T:System.NotSupportedException">We cannot send to our same thread</exception>
+        </member>
+        <member name="M:eZet.EveLib.Core.Util.AsyncHelpers.ExclusiveSynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)">
+            <summary>
+                When overridden in a derived class, dispatches an asynchronous message to a synchronization context.
+            </summary>
+            <param name="d">The <see cref="T:System.Threading.SendOrPostCallback" /> delegate to call.</param>
+            <param name="state">The object passed to the delegate.</param>
+        </member>
+        <member name="M:eZet.EveLib.Core.Util.AsyncHelpers.ExclusiveSynchronizationContext.EndMessageLoop">
+            <summary>
+                Ends the message loop.
+            </summary>
+        </member>
+        <member name="M:eZet.EveLib.Core.Util.AsyncHelpers.ExclusiveSynchronizationContext.BeginMessageLoop">
+            <summary>
+                Begins the message loop.
+            </summary>
+            <exception cref="T:System.AggregateException">AsyncHelpers.Run method threw an exception.</exception>
+        </member>
+        <member name="M:eZet.EveLib.Core.Util.AsyncHelpers.ExclusiveSynchronizationContext.CreateCopy">
+            <summary>
+                When overridden in a derived class, creates a copy of the synchronization context.
+            </summary>
+            <returns>A new <see cref="T:System.Threading.SynchronizationContext" /> object.</returns>
+        </member>
+        <member name="P:eZet.EveLib.Core.Util.AsyncHelpers.ExclusiveSynchronizationContext.InnerException">
+            <summary>
+                Gets or sets the inner exception.
+            </summary>
+            <value>The inner exception.</value>
         </member>
         <member name="T:eZet.EveLib.Core.Util.AsyncLazy`1">
             <summary>
@@ -765,15 +844,11 @@
                 Gets or sets the cache used by this request handler
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Core.RequestHandlers.ICachedRequestHandler.EnableCacheLoad">
+        <member name="P:eZet.EveLib.Core.RequestHandlers.ICachedRequestHandler.CacheLevel">
             <summary>
-                Enables or disables loading from cache
+                Gets or sets the cache level.
             </summary>
-        </member>
-        <member name="P:eZet.EveLib.Core.RequestHandlers.ICachedRequestHandler.EnableCacheStore">
-            <summary>
-                Enables or disables storing to cache
-            </summary>
+            <value>The cache level.</value>
         </member>
         <member name="T:eZet.EveLib.Core.Cache.IEveLibCache">
             <summary>
@@ -865,6 +940,13 @@
             <param name="uri">URI to request</param>
             <returns>The response content</returns>
         </member>
+        <member name="M:eZet.EveLib.Core.Util.HttpRequestHelper.AddPostData(System.Net.HttpWebRequest,System.String)">
+            <summary>
+                Adds the post data.
+            </summary>
+            <param name="request">The request.</param>
+            <param name="postData">The post data.</param>
+        </member>
         <member name="M:eZet.EveLib.Core.Util.HttpRequestHelper.GetResponseAsync(System.Net.HttpWebRequest)">
             <summary>
                 Executes a web request using the given request, and returns the HttpWebResponse
@@ -891,6 +973,13 @@
                 Simple plain file cache implementation
             </summary>
         </member>
+        <member name="M:eZet.EveLib.Core.Cache.EveLibFileCache.#ctor(System.String,System.String)">
+            <summary>
+                Initializes a new instance of the <see cref="T:eZet.EveLib.Core.Cache.EveLibFileCache"/> class.
+            </summary>
+            <param name="cachePath">The relative cache path.</param>
+            <param name="cacheRegisterName">Name of the cache register.</param>
+        </member>
         <member name="M:eZet.EveLib.Core.Cache.EveLibFileCache.StoreAsync(System.Uri,System.DateTime,System.String)">
             <summary>
                 Stores data to the cache
@@ -914,6 +1003,18 @@
             <param name="uri"></param>
             <param name="value"></param>
             <returns></returns>
+        </member>
+        <member name="P:eZet.EveLib.Core.Cache.EveLibFileCache.CachePath">
+            <summary>
+                Gets the cache path.
+            </summary>
+            <value>The cache path.</value>
+        </member>
+        <member name="P:eZet.EveLib.Core.Cache.EveLibFileCache.CacheRegister">
+            <summary>
+                Gets the cache register.
+            </summary>
+            <value>The cache register.</value>
         </member>
     </members>
 </doc>

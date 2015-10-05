@@ -4,45 +4,45 @@
         <name>EveLib.EveCentral</name>
     </assembly>
     <members>
-        <member name="T:eZet.EveLib.Modules.EveCentral">
+        <member name="T:eZet.EveLib.EveCentralModule.EveCentral">
             <summary>
                 Class for accessing the EveCentral API
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveCentral.#ctor">
+        <member name="M:eZet.EveLib.EveCentralModule.EveCentral.#ctor">
             <summary>
                 Creates a new EveCentral object, with a default base uri and request handler.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveCentral.GetMarketStat(eZet.EveLib.Modules.EveCentralOptions)">
+        <member name="M:eZet.EveLib.EveCentralModule.EveCentral.GetMarketStat(eZet.EveLib.EveCentralModule.EveCentralOptions)">
             <summary>
                 Returns aggregate statistics for the items specified.
             </summary>
             <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
             <returns></returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveCentral.GetMarketStatAsync(eZet.EveLib.Modules.EveCentralOptions)">
+        <member name="M:eZet.EveLib.EveCentralModule.EveCentral.GetMarketStatAsync(eZet.EveLib.EveCentralModule.EveCentralOptions)">
             <summary>
                 Returns aggregate statistics for the items specified.
             </summary>
             <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
             <returns></returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveCentral.GetQuicklook(eZet.EveLib.Modules.EveCentralOptions)">
+        <member name="M:eZet.EveLib.EveCentralModule.EveCentral.GetQuicklook(eZet.EveLib.EveCentralModule.EveCentralOptions)">
             <summary>
                 Returns all of the available market orders, including prices, stations, order IDs, volumes, etc.
             </summary>
             <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
             <returns></returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveCentral.GetQuicklookAsync(eZet.EveLib.Modules.EveCentralOptions)">
+        <member name="M:eZet.EveLib.EveCentralModule.EveCentral.GetQuicklookAsync(eZet.EveLib.EveCentralModule.EveCentralOptions)">
             <summary>
                 Returns all of the available market orders, including prices, stations, order IDs, volumes, etc.
             </summary>
             <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
             <returns></returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveCentral.GetQuicklookPath(System.Object,System.Object,System.Int64,eZet.EveLib.Modules.EveCentralOptions)">
+        <member name="M:eZet.EveLib.EveCentralModule.EveCentral.GetQuicklookPath(System.Object,System.Object,System.Int64,eZet.EveLib.EveCentralModule.EveCentralOptions)">
             <summary>
                 Retrieve all of the available market orders, including prices, stations, order IDs, volumes, etc., on a given jump
                 path.
@@ -53,7 +53,7 @@
             <param name="options">Optional; Valid options: HourLimit, MinQuantity.</param>
             <returns></returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveCentral.GetQuicklookPathAsync(System.Object,System.Object,System.Int64,eZet.EveLib.Modules.EveCentralOptions)">
+        <member name="M:eZet.EveLib.EveCentralModule.EveCentral.GetQuicklookPathAsync(System.Object,System.Object,System.Int64,eZet.EveLib.EveCentralModule.EveCentralOptions)">
             <summary>
                 Retrieve all of the available market orders, including prices, stations, order IDs, volumes, etc., on a given jump
                 path.
@@ -64,291 +64,291 @@
             <param name="options">Optional; Valid options: HourLimit, MinQuantity.</param>
             <returns></returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveCentral.GetHistory">
+        <member name="M:eZet.EveLib.EveCentralModule.EveCentral.GetHistory">
             <summary>
                 Retrieves the eve central market history
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveCentral.BaseUri">
+        <member name="P:eZet.EveLib.EveCentralModule.EveCentral.BaseUri">
             <summary>
                 Gets or sets the base URI for requests.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveCentral.RequestHandler">
+        <member name="P:eZet.EveLib.EveCentralModule.EveCentral.RequestHandler">
             <summary>
                 Gets or sets the RequestHandler used to perform requests.
             </summary>
         </member>
-        <member name="T:eZet.EveLib.Modules.EveCentralOptions">
+        <member name="T:eZet.EveLib.EveCentralModule.EveCentralOptions">
             <summary>
                 Provides a set of configurable options for EveCentral requests.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveCentralOptions.#ctor">
+        <member name="M:eZet.EveLib.EveCentralModule.EveCentralOptions.#ctor">
             <summary>
                 Creates a new options object.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveCentralOptions.GetItemQuery(System.String)">
+        <member name="M:eZet.EveLib.EveCentralModule.EveCentralOptions.GetItemQuery(System.String)">
             <summary>
                 Returns items in a query string format.
             </summary>
             <param name="paramName"></param>
             <returns></returns>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveCentralOptions.Items">
+        <member name="P:eZet.EveLib.EveCentralModule.EveCentralOptions.Items">
             <summary>
                 Gets or sets a collection of type IDs.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveCentralOptions.Regions">
+        <member name="P:eZet.EveLib.EveCentralModule.EveCentralOptions.Regions">
             <summary>
                 Gets or sets a collection of region IDs.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveCentralOptions.HourLimit">
+        <member name="P:eZet.EveLib.EveCentralModule.EveCentralOptions.HourLimit">
             <summary>
                 Gets or sets an age limit for data in the response, specified in hours.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveCentralOptions.MinQuantity">
+        <member name="P:eZet.EveLib.EveCentralModule.EveCentralOptions.MinQuantity">
             <summary>
                 Gets or sets the minimum quantity limit for data to be included in the response.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveCentralOptions.System">
+        <member name="P:eZet.EveLib.EveCentralModule.EveCentralOptions.System">
             <summary>
                 Gets or sets a system ID.
             </summary>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EveCentralResponse">
+        <member name="T:eZet.EveLib.EveCentralModule.Models.EveCentralResponse">
             <summary>
                 Class EveCentralResponse.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralResponse.Version">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralResponse.Version">
             <summary>
                 Gets or sets the version.
             </summary>
             <value>The version.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralResponse.Method">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralResponse.Method">
             <summary>
                 Gets or sets the method.
             </summary>
             <value>The method.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EveCentralMarketStatResponse">
+        <member name="T:eZet.EveLib.EveCentralModule.Models.MarketStatResponse">
             <summary>
-                Class EveCentralMarketStatResponse.
+                Class MarketStatResponse.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatResponse.Result">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.MarketStatResponse.Result">
             <summary>
                 Gets or sets the result.
             </summary>
             <value>The result.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EveCentralMarketStatItem">
+        <member name="T:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatItem">
             <summary>
                 Class EveCentralMarketStatItem.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatItem.TypeId">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatItem.TypeId">
             <summary>
                 Gets or sets the type identifier.
             </summary>
             <value>The type identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatItem.BuyOrders">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatItem.BuyOrders">
             <summary>
                 Gets or sets the buy orders.
             </summary>
             <value>The buy orders.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatItem.SellOrders">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatItem.SellOrders">
             <summary>
                 Gets or sets the sell orders.
             </summary>
             <value>The sell orders.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatItem.All">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatItem.All">
             <summary>
                 Gets or sets all.
             </summary>
             <value>All.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EveCentralMarketStatOrderData">
+        <member name="T:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatOrderData">
             <summary>
                 Class EveCentralMarketStatOrderData.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatOrderData.Volume">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatOrderData.Volume">
             <summary>
                 Gets or sets the volume.
             </summary>
             <value>The volume.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatOrderData.Average">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatOrderData.Average">
             <summary>
                 Gets or sets the average.
             </summary>
             <value>The average.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatOrderData.Max">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatOrderData.Max">
             <summary>
                 Gets or sets the maximum.
             </summary>
             <value>The maximum.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatOrderData.Min">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatOrderData.Min">
             <summary>
                 Gets or sets the minimum.
             </summary>
             <value>The minimum.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatOrderData.StdDev">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatOrderData.StdDev">
             <summary>
                 Gets or sets the standard dev.
             </summary>
             <value>The standard dev.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatOrderData.Median">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatOrderData.Median">
             <summary>
                 Gets or sets the median.
             </summary>
             <value>The median.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralMarketStatOrderData.Percentile">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralMarketStatOrderData.Percentile">
             <summary>
                 Gets or sets the percentile.
             </summary>
             <value>The percentile.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EveCentralQuickLookResponse">
+        <member name="T:eZet.EveLib.EveCentralModule.Models.QuickLookResponse">
             <summary>
-                Class EveCentralQuickLookResponse.
+                Class QuickLookResponse.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuickLookResponse.Result">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.QuickLookResponse.Result">
             <summary>
                 Gets or sets the result.
             </summary>
             <value>The result.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.QuicklookResult">
+        <member name="T:eZet.EveLib.EveCentralModule.Models.QuicklookResult">
             <summary>
                 Class QuicklookResult.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.QuicklookResult.TypeId">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.QuicklookResult.TypeId">
             <summary>
                 Gets or sets the type identifier.
             </summary>
             <value>The type identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.QuicklookResult.TypeName">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.QuicklookResult.TypeName">
             <summary>
                 Gets or sets the name of the type.
             </summary>
             <value>The name of the type.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.QuicklookResult.HourLimit">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.QuicklookResult.HourLimit">
             <summary>
                 Gets or sets the hour limit.
             </summary>
             <value>The hour limit.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.QuicklookResult.MinQuantity">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.QuicklookResult.MinQuantity">
             <summary>
                 Gets or sets the minimum quantity.
             </summary>
             <value>The minimum quantity.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.QuicklookResult.Regions">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.QuicklookResult.Regions">
             <summary>
                 Gets or sets the regions.
             </summary>
             <value>The regions.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.QuicklookResult.SellOrders">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.QuicklookResult.SellOrders">
             <summary>
                 Gets or sets the sell orders.
             </summary>
             <value>The sell orders.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.QuicklookResult.BuyOrders">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.QuicklookResult.BuyOrders">
             <summary>
                 Gets or sets the buy orders.
             </summary>
             <value>The buy orders.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder">
+        <member name="T:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder">
             <summary>
                 Class EveCentralQuicklookOrder.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.OrderId">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.OrderId">
             <summary>
                 Gets or sets the order identifier.
             </summary>
             <value>The order identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.RegionId">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.RegionId">
             <summary>
                 Gets or sets the region identifier.
             </summary>
             <value>The region identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.StationId">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.StationId">
             <summary>
                 Gets or sets the station identifier.
             </summary>
             <value>The station identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.StationName">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.StationName">
             <summary>
                 Gets or sets the name of the station.
             </summary>
             <value>The name of the station.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.SecurityRating">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.SecurityRating">
             <summary>
                 Gets or sets the security rating.
             </summary>
             <value>The security rating.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.Range">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.Range">
             <summary>
                 Gets or sets the range.
             </summary>
             <value>The range.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.Price">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.Price">
             <summary>
                 Gets or sets the price.
             </summary>
             <value>The price.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.VolRemaining">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.VolRemaining">
             <summary>
                 Gets or sets the vol remaining.
             </summary>
             <value>The vol remaining.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.MinVolume">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.MinVolume">
             <summary>
                 Gets or sets the minimum volume.
             </summary>
             <value>The minimum volume.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.Expires">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.Expires">
             <summary>
                 Gets or sets the expires.
             </summary>
             <value>The expires.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveCentralQuicklookOrder.ReportedTime">
+        <member name="P:eZet.EveLib.EveCentralModule.Models.EveCentralQuicklookOrder.ReportedTime">
             <summary>
                 Gets or sets the reported time.
             </summary>

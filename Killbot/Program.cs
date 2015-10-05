@@ -237,7 +237,7 @@ namespace Killbot
 
             foreach (ZkbResponse.ZkbAttacker Attacker in kill.Attackers)
             {
-                if (Attacker.FinalBlow == "1")
+                if (Attacker.FinalBlow == true)
                 {
                     messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine3, Attacker.CharacterName, GetProductType(Attacker.ShipTypeId).Name));
                 }
@@ -298,7 +298,7 @@ namespace Killbot
 
             foreach (ZkbResponse.ZkbAttacker Attacker in kill.Attackers)
             {
-                if (Attacker.FinalBlow == "1")
+                if (Attacker.FinalBlow == true)
                 {
                     messageLines.Add(string.Format(Properties.Settings.Default.MessageFormatLine3, Attacker.CharacterName, GetProductType(Attacker.ShipTypeId).Name));
                 }

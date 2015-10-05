@@ -4,25 +4,25 @@
         <name>EveLib.EveMarketData</name>
     </assembly>
     <members>
-        <member name="T:eZet.EveLib.Modules.EveMarketData">
+        <member name="T:eZet.EveLib.EveMarketDataModule.EveMarketData">
             <summary>
                 C# API for the API supplied by api.eve-marketdata.com.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.#ctor(eZet.EveLib.Modules.EveMarketData.DataFormat,System.String)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.#ctor(eZet.EveLib.EveMarketDataModule.EveMarketData.DataFormat,System.String)">
             <summary>
                 Creates a new object using the specified format.
             </summary>
             <param name="format"></param>
             <param name="name"></param>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.SetFormat(eZet.EveLib.Modules.EveMarketData.DataFormat)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.SetFormat(eZet.EveLib.EveMarketDataModule.EveMarketData.DataFormat)">
             <summary>
                 Sets the request format
             </summary>
             <param name="format"></param>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetRecentUploads(eZet.EveLib.Modules.EveMarketDataOptions,eZet.EveLib.Modules.UploadType)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetRecentUploads(eZet.EveLib.EveMarketDataModule.EmdOptions,eZet.EveLib.EveMarketDataModule.UploadType)">
             <summary>
                 Returns a list of any orders that were recently updated.
             </summary>
@@ -31,7 +31,7 @@
             <returns>A list of any orders that were recently updated.</returns>
             <exception cref="T:eZet.EveLib.Core.Exceptions.EveLibWebException">The request was invalid.</exception>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetRecentUploadsAsync(eZet.EveLib.Modules.EveMarketDataOptions,eZet.EveLib.Modules.UploadType)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetRecentUploadsAsync(eZet.EveLib.EveMarketDataModule.EmdOptions,eZet.EveLib.EveMarketDataModule.UploadType)">
             <summary>
                 Returns a list of any orders that were recently updated.
             </summary>
@@ -40,7 +40,7 @@
             <returns>A list of any orders that were recently updated.</returns>
             <exception cref="T:eZet.EveLib.Core.Exceptions.EveLibWebException">The request was invalid.</exception>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetItemPrice(eZet.EveLib.Modules.EveMarketDataOptions,eZet.EveLib.Modules.OrderType,eZet.EveLib.Modules.MinMax)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetItemPrice(eZet.EveLib.EveMarketDataModule.EmdOptions,eZet.EveLib.EveMarketDataModule.OrderType,eZet.EveLib.EveMarketDataModule.MinMax)">
             <summary>
                 Returns all the orders on the market.
             </summary>
@@ -49,7 +49,7 @@
             <param name="minmax"></param>
             <returns>All orders on the market.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetItemPriceAsync(eZet.EveLib.Modules.EveMarketDataOptions,eZet.EveLib.Modules.OrderType,eZet.EveLib.Modules.MinMax)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetItemPriceAsync(eZet.EveLib.EveMarketDataModule.EmdOptions,eZet.EveLib.EveMarketDataModule.OrderType,eZet.EveLib.EveMarketDataModule.MinMax)">
             <summary>
                 Returns all the orders on the market.
             </summary>
@@ -58,7 +58,7 @@
             <param name="minmax"></param>
             <returns>All orders on the market.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetItemOrders(eZet.EveLib.Modules.EveMarketDataOptions,eZet.EveLib.Modules.OrderType)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetItemOrders(eZet.EveLib.EveMarketDataModule.EmdOptions,eZet.EveLib.EveMarketDataModule.OrderType)">
             <summary>
                 Returns market history for one or more items.
             </summary>
@@ -66,7 +66,7 @@
             <param name="type"></param>
             <returns>Market history for one or more items.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetItemOrdersAsync(eZet.EveLib.Modules.EveMarketDataOptions,eZet.EveLib.Modules.OrderType)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetItemOrdersAsync(eZet.EveLib.EveMarketDataModule.EmdOptions,eZet.EveLib.EveMarketDataModule.OrderType)">
             <summary>
                 Returns market history for one or more items.
             </summary>
@@ -74,208 +74,208 @@
             <param name="type"></param>
             <returns>Market history for one or more items.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetItemHistory(eZet.EveLib.Modules.EveMarketDataOptions)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetItemHistory(eZet.EveLib.EveMarketDataModule.EmdOptions)">
             <summary>
                 Returns a best guess price of one or multiple items.
             </summary>
             <param name="options">Valid options: Items, Regions, DayLimit</param>
             <returns>A best guess price of one or multiple items.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetItemHistoryAsync(eZet.EveLib.Modules.EveMarketDataOptions)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetItemHistoryAsync(eZet.EveLib.EveMarketDataModule.EmdOptions)">
             <summary>
                 Returns a best guess price of one or multiple items.
             </summary>
             <param name="options">Valid options: Items, Regions, DayLimit</param>
             <returns>A best guess price of one or multiple items.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetStationRank(eZet.EveLib.Modules.EveMarketDataOptions)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetStationRank(eZet.EveLib.EveMarketDataModule.EmdOptions)">
             <summary>
                 Returns the daily station rank in a region and order statistics for stations.
             </summary>
             <param name="options">Valid options: Stations, Solarsystems, Regions, DayLimit</param>
             <returns>The daily station rank in a region and order statistics for stations</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetStationRankAsync(eZet.EveLib.Modules.EveMarketDataOptions)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetStationRankAsync(eZet.EveLib.EveMarketDataModule.EmdOptions)">
             <summary>
                 Returns the daily station rank in a region and order statistics for stations.
             </summary>
             <param name="options">Valid options: Stations, Solarsystems, Regions, DayLimit</param>
             <returns>The daily station rank in a region and order statistics for stations</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketData.GetScannerUri(eZet.EveLib.Modules.EveMarketDataOptions)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EveMarketData.GetScannerUri(eZet.EveLib.EveMarketDataModule.EmdOptions)">
             <summary>
                 Returns a url to a list of ingame item links. Reqiured use of the ingame browser.
             </summary>
             <param name="options">Valid options: Items, ItemGroups</param>
             <returns></returns>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketData.BaseUri">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EveMarketData.BaseUri">
             <summary>
                 Gets or sets the base URI for Eve Market Data.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketData.Format">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EveMarketData.Format">
             <summary>
                 Gets or sets the request format.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketData.Name">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EveMarketData.Name">
             <summary>
                 Gets or sets the name supplied to marketdata in the query string. Use your ingame name if you want evemarketdata to
                 be able to contact you in case of problems.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketData.RequestHandler">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EveMarketData.RequestHandler">
             <summary>
                 Gets or sets the RequestHandler.
             </summary>
         </member>
-        <member name="T:eZet.EveLib.Modules.EveMarketData.DataFormat">
+        <member name="T:eZet.EveLib.EveMarketDataModule.EveMarketData.DataFormat">
             <summary>
                 Represents the requestable data formats
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.EveMarketData.DataFormat.Json">
+        <member name="F:eZet.EveLib.EveMarketDataModule.EveMarketData.DataFormat.Json">
             <summary>
                 JSON
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.EveMarketData.DataFormat.Xml">
+        <member name="F:eZet.EveLib.EveMarketDataModule.EveMarketData.DataFormat.Xml">
             <summary>
                 XML
             </summary>
         </member>
-        <member name="T:eZet.EveLib.Modules.UploadType">
+        <member name="T:eZet.EveLib.EveMarketDataModule.UploadType">
             <summary>
                 Represents the upload types.
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.UploadType.Orders">
+        <member name="F:eZet.EveLib.EveMarketDataModule.UploadType.Orders">
             <summary>
                 Orders
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.UploadType.History">
+        <member name="F:eZet.EveLib.EveMarketDataModule.UploadType.History">
             <summary>
                 History
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.UploadType.Both">
+        <member name="F:eZet.EveLib.EveMarketDataModule.UploadType.Both">
             <summary>
                 Order and history
             </summary>
         </member>
-        <member name="T:eZet.EveLib.Modules.OrderType">
+        <member name="T:eZet.EveLib.EveMarketDataModule.OrderType">
             <summary>
                 Represents the order types
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.OrderType.Sell">
+        <member name="F:eZet.EveLib.EveMarketDataModule.OrderType.Sell">
             <summary>
                 Sell order
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.OrderType.Buy">
+        <member name="F:eZet.EveLib.EveMarketDataModule.OrderType.Buy">
             <summary>
                 Buy order
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.OrderType.Both">
+        <member name="F:eZet.EveLib.EveMarketDataModule.OrderType.Both">
             <summary>
                 Buy and sell orders
             </summary>
         </member>
-        <member name="T:eZet.EveLib.Modules.MinMax">
+        <member name="T:eZet.EveLib.EveMarketDataModule.MinMax">
             <summary>
                 I honestly don't know what this represents, see marketdata api docs.
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.MinMax.None">
+        <member name="F:eZet.EveLib.EveMarketDataModule.MinMax.None">
             <summary>
                 None
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.MinMax.Min">
+        <member name="F:eZet.EveLib.EveMarketDataModule.MinMax.Min">
             <summary>
                 Minimum
             </summary>
         </member>
-        <member name="F:eZet.EveLib.Modules.MinMax.Max">
+        <member name="F:eZet.EveLib.EveMarketDataModule.MinMax.Max">
             <summary>
                 Maximum
             </summary>
         </member>
-        <member name="T:eZet.EveLib.Modules.EveMarketDataOptions">
+        <member name="T:eZet.EveLib.EveMarketDataModule.EmdOptions">
             <summary>
                 Provides a set of configurable options for EveMarketData requests.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketDataOptions.#ctor">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EmdOptions.#ctor">
             <summary>
                 Default constructor
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketDataOptions.GetAgeLimit">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EmdOptions.GetAgeLimit">
             <summary>
                 Returns a DateTime representing AgeSpan subtracted from current time.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketDataOptions.UploadTypeToString(eZet.EveLib.Modules.UploadType)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EmdOptions.UploadTypeToString(eZet.EveLib.EveMarketDataModule.UploadType)">
             <summary>
                 Resolves UploadType to it's query string value.
             </summary>
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.EveMarketDataOptions.OrderTypeToString(eZet.EveLib.Modules.OrderType)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EmdOptions.OrderTypeToString(eZet.EveLib.EveMarketDataModule.OrderType)">
             <summary>
                 Resolves OrderType to it's query string value.
             </summary>
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketDataOptions.Items">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EmdOptions.Items">
             <summary>
                 Gets or sets a collection of item IDs.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketDataOptions.ItemGroups">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EmdOptions.ItemGroups">
             <summary>
                 Gets or sets a collection of item group IDs.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketDataOptions.Regions">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EmdOptions.Regions">
             <summary>
                 Gets or sets a list of region IDs.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketDataOptions.Solarsystems">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EmdOptions.Solarsystems">
             <summary>
                 Gets or sets a list of solarsystem IDs.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketDataOptions.Stations">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EmdOptions.Stations">
             <summary>
                 Gets or sets a list of station IDs.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketDataOptions.RowLimit">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EmdOptions.RowLimit">
             <summary>
                 Gets or sets the maximum nubmer of rows to request.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.EveMarketDataOptions.AgeSpan">
+        <member name="P:eZet.EveLib.EveMarketDataModule.EmdOptions.AgeSpan">
             <summary>
                 Gets or sets the age span, a TimeSpan for how far back in time to request data for.
             </summary>
         </member>
-        <member name="T:eZet.EveLib.Modules.JsonConverters.EmdRecentUploadsJsonConverter">
+        <member name="T:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRecentUploadsJsonConverter">
             <summary>
                 Class EmdRecentUploadsJsonConverter.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdRecentUploadsJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRecentUploadsJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Writes the JSON representation of the object.
             </summary>
@@ -284,7 +284,7 @@
             <param name="serializer">The calling serializer.</param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdRecentUploadsJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRecentUploadsJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Reads the JSON representation of the object.
             </summary>
@@ -294,7 +294,7 @@
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdRecentUploadsJsonConverter.CanConvert(System.Type)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRecentUploadsJsonConverter.CanConvert(System.Type)">
             <summary>
                 Determines whether this instance can convert the specified object type.
             </summary>
@@ -305,13 +305,13 @@
             </returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="T:eZet.EveLib.Modules.JsonConverters.EmdRowSetCollectionJsonConverter`1">
+        <member name="T:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRowSetCollectionJsonConverter`1">
             <summary>
                 Class EmdRowSetCollectionJsonConverter.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdRowSetCollectionJsonConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRowSetCollectionJsonConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Writes the JSON representation of the object.
             </summary>
@@ -320,7 +320,7 @@
             <param name="serializer">The calling serializer.</param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdRowSetCollectionJsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRowSetCollectionJsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Reads the JSON representation of the object.
             </summary>
@@ -330,7 +330,7 @@
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdRowSetCollectionJsonConverter`1.CanConvert(System.Type)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRowSetCollectionJsonConverter`1.CanConvert(System.Type)">
             <summary>
                 Determines whether this instance can convert the specified object type.
             </summary>
@@ -340,12 +340,12 @@
                 <c>false</c>.
             </returns>
         </member>
-        <member name="T:eZet.EveLib.Modules.JsonConverters.EmdStationRankJsonConverter">
+        <member name="T:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdStationRankJsonConverter">
             <summary>
                 Class EmdStationRankJsonConverter.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdStationRankJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdStationRankJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Writes the JSON representation of the object.
             </summary>
@@ -354,7 +354,7 @@
             <param name="serializer">The calling serializer.</param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdStationRankJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdStationRankJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Reads the JSON representation of the object.
             </summary>
@@ -364,7 +364,7 @@
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdStationRankJsonConverter.CanConvert(System.Type)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdStationRankJsonConverter.CanConvert(System.Type)">
             <summary>
                 Determines whether this instance can convert the specified object type.
             </summary>
@@ -375,12 +375,12 @@
             </returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="T:eZet.EveLib.Modules.JsonConverters.EmdItemHistoryJsonConverter">
+        <member name="T:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemHistoryJsonConverter">
             <summary>
                 Class EmdItemHistoryJsonConverter.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdItemHistoryJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemHistoryJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Writes the JSON representation of the object.
             </summary>
@@ -389,7 +389,7 @@
             <param name="serializer">The calling serializer.</param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdItemHistoryJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemHistoryJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Reads the JSON representation of the object.
             </summary>
@@ -399,7 +399,7 @@
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdItemHistoryJsonConverter.CanConvert(System.Type)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemHistoryJsonConverter.CanConvert(System.Type)">
             <summary>
                 Determines whether this instance can convert the specified object type.
             </summary>
@@ -410,12 +410,12 @@
             </returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="T:eZet.EveLib.Modules.JsonConverters.EmdItemOrderJsonConverter">
+        <member name="T:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemOrderJsonConverter">
             <summary>
                 Class EmdItemOrderJsonConverter.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdItemOrderJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemOrderJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Writes the JSON representation of the object.
             </summary>
@@ -424,7 +424,7 @@
             <param name="serializer">The calling serializer.</param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdItemOrderJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemOrderJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Reads the JSON representation of the object.
             </summary>
@@ -434,7 +434,7 @@
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdItemOrderJsonConverter.CanConvert(System.Type)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemOrderJsonConverter.CanConvert(System.Type)">
             <summary>
                 Determines whether this instance can convert the specified object type.
             </summary>
@@ -445,12 +445,12 @@
             </returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="T:eZet.EveLib.Modules.JsonConverters.EmdItemPricesJsonConverter">
+        <member name="T:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemPricesJsonConverter">
             <summary>
                 Class EmdItemPricesJsonConverter.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdItemPricesJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemPricesJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Writes the JSON representation of the object.
             </summary>
@@ -459,7 +459,7 @@
             <param name="serializer">The calling serializer.</param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdItemPricesJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemPricesJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Reads the JSON representation of the object.
             </summary>
@@ -469,7 +469,7 @@
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdItemPricesJsonConverter.CanConvert(System.Type)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdItemPricesJsonConverter.CanConvert(System.Type)">
             <summary>
                 Determines whether this instance can convert the specified object type.
             </summary>
@@ -480,13 +480,13 @@
             </returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="T:eZet.EveLib.Modules.JsonConverters.EmdRowCollectionJsonConverter`1">
+        <member name="T:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRowCollectionJsonConverter`1">
             <summary>
                 Class EmdRowCollectionJsonConverter.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdRowCollectionJsonConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRowCollectionJsonConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Writes the JSON representation of the object.
             </summary>
@@ -495,7 +495,7 @@
             <param name="serializer">The calling serializer.</param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdRowCollectionJsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRowCollectionJsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
                 Reads the JSON representation of the object.
             </summary>
@@ -505,7 +505,7 @@
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:eZet.EveLib.Modules.JsonConverters.EmdRowCollectionJsonConverter`1.CanConvert(System.Type)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.JsonConverters.EmdRowCollectionJsonConverter`1.CanConvert(System.Type)">
             <summary>
                 Determines whether this instance can convert the specified object type.
             </summary>
@@ -515,304 +515,304 @@
                 <c>false</c>.
             </returns>
         </member>
-        <member name="T:eZet.EveLib.Modules.NewtonSoftJsonSerializer">
+        <member name="T:eZet.EveLib.EveMarketDataModule.EmdSerializer">
             <summary>
                 JSON serializer
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.NewtonSoftJsonSerializer.eZet#EveLib#Core#Serializers#ISerializer#Deserialize``1(System.String)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.EmdSerializer.eZet#EveLib#Core#Serializers#ISerializer#Deserialize``1(System.String)">
             <summary>
                 Deserializes JSON using JSON.NET
             </summary>
             <param name="data">A JSON string</param>
             <returns></returns>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EveMarketDataResponse`1">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.EmdResponse`1">
             <summary>
-                Class EveMarketDataResponse.
+                Class EmdResponse.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveMarketDataResponse`1.CurrentTime">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.EmdResponse`1.CurrentTime">
             <summary>
                 Gets or sets the current time.
             </summary>
             <value>The current time.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveMarketDataResponse`1.Version">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.EmdResponse`1.Version">
             <summary>
                 Gets or sets the version.
             </summary>
             <value>The version.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveMarketDataResponse`1.Result">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.EmdResponse`1.Result">
             <summary>
                 Gets or sets the result.
             </summary>
             <value>The result.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EmdItemHistory">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.ItemHistory">
             <summary>
-                Class EmdItemHistory.
+                Class ItemHistory.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemHistory.History">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemHistory.History">
             <summary>
                 Gets or sets the history.
             </summary>
             <value>The history.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EmdItemHistory.ItemHistoryEntry">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.ItemHistory.ItemHistoryEntry">
             <summary>
                 Class ItemHistoryEntry.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemHistory.ItemHistoryEntry.TypeId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemHistory.ItemHistoryEntry.TypeId">
             <summary>
                 Gets or sets the type identifier.
             </summary>
             <value>The type identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemHistory.ItemHistoryEntry.RegionId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemHistory.ItemHistoryEntry.RegionId">
             <summary>
                 Gets or sets the region identifier.
             </summary>
             <value>The region identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemHistory.ItemHistoryEntry.Date">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemHistory.ItemHistoryEntry.Date">
             <summary>
                 Gets or sets the date.
             </summary>
             <value>The date.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemHistory.ItemHistoryEntry.MinPrice">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemHistory.ItemHistoryEntry.MinPrice">
             <summary>
                 Gets or sets the minimum price.
             </summary>
             <value>The minimum price.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemHistory.ItemHistoryEntry.MaxPrice">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemHistory.ItemHistoryEntry.MaxPrice">
             <summary>
                 Gets or sets the maximum price.
             </summary>
             <value>The maximum price.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemHistory.ItemHistoryEntry.AvgPrice">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemHistory.ItemHistoryEntry.AvgPrice">
             <summary>
                 Gets or sets the average price.
             </summary>
             <value>The average price.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemHistory.ItemHistoryEntry.Volume">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemHistory.ItemHistoryEntry.Volume">
             <summary>
                 Gets or sets the volume.
             </summary>
             <value>The volume.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemHistory.ItemHistoryEntry.Orders">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemHistory.ItemHistoryEntry.Orders">
             <summary>
                 Gets or sets the orders.
             </summary>
             <value>The orders.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EmdItemOrders">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.ItemOrders">
             <summary>
-                Class EmdItemOrders.
+                Class ItemOrders.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.Orders">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.Orders">
             <summary>
                 Gets or sets the orders.
             </summary>
             <value>The orders.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry">
             <summary>
                 Class ItemOrderEntry.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.OrderType">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.OrderType">
             <summary>
                 Gets or sets the type of the order.
             </summary>
             <value>The type of the order.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.TypeId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.TypeId">
             <summary>
                 Gets or sets the type identifier.
             </summary>
             <value>The type identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.StationId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.StationId">
             <summary>
                 Gets or sets the station identifier.
             </summary>
             <value>The station identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.SolarSystemId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.SolarSystemId">
             <summary>
                 Gets or sets the solar system identifier.
             </summary>
             <value>The solar system identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.RegionId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.RegionId">
             <summary>
                 Gets or sets the region identifier.
             </summary>
             <value>The region identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.Price">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.Price">
             <summary>
                 Gets or sets the price.
             </summary>
             <value>The price.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.OrderId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.OrderId">
             <summary>
                 Gets or sets the order identifier.
             </summary>
             <value>The order identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.VolEntered">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.VolEntered">
             <summary>
                 Gets or sets the vol entered.
             </summary>
             <value>The vol entered.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.VolRemaining">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.VolRemaining">
             <summary>
                 Gets or sets the vol remaining.
             </summary>
             <value>The vol remaining.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.MinVolume">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.MinVolume">
             <summary>
                 Gets or sets the minimum volume.
             </summary>
             <value>The minimum volume.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.Range">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.Range">
             <summary>
                 Gets or sets the range.
             </summary>
             <value>The range.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.IssuedDate">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.IssuedDate">
             <summary>
                 Gets or sets the issued date.
             </summary>
             <value>The issued date.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.ExpiresDate">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.ExpiresDate">
             <summary>
                 Gets or sets the expires date.
             </summary>
             <value>The expires date.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemOrders.ItemOrderEntry.CreatedDate">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemOrders.ItemOrderEntry.CreatedDate">
             <summary>
                 Gets or sets the created date.
             </summary>
             <value>The created date.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EmdItemPrices">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.ItemPrices">
             <summary>
-                Class EmdItemPrices.
+                Class ItemPrices.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemPrices.Prices">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemPrices.Prices">
             <summary>
                 Gets or sets the prices.
             </summary>
             <value>The prices.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EmdItemPrices.ItemPriceEntry">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.ItemPrices.ItemPriceEntry">
             <summary>
                 Class ItemPriceEntry.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemPrices.ItemPriceEntry.OrderType">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemPrices.ItemPriceEntry.OrderType">
             <summary>
                 Gets or sets the type of the order.
             </summary>
             <value>The type of the order.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemPrices.ItemPriceEntry.TypeId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemPrices.ItemPriceEntry.TypeId">
             <summary>
                 Gets or sets the type identifier.
             </summary>
             <value>The type identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemPrices.ItemPriceEntry.RegionId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemPrices.ItemPriceEntry.RegionId">
             <summary>
                 Gets or sets the region identifier.
             </summary>
             <value>The region identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemPrices.ItemPriceEntry.Price">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemPrices.ItemPriceEntry.Price">
             <summary>
                 Gets or sets the price.
             </summary>
             <value>The price.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdItemPrices.ItemPriceEntry.Updated">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.ItemPrices.ItemPriceEntry.Updated">
             <summary>
                 Gets or sets the updated.
             </summary>
             <value>The updated.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EmdRecentUploads">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.RecentUploads">
             <summary>
-                Class EmdRecentUploads.
+                Class RecentUploads.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdRecentUploads.Uploads">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.RecentUploads.Uploads">
             <summary>
                 Gets or sets the uploads.
             </summary>
             <value>The uploads.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EmdRecentUploads.RecentUploadsEntry">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.RecentUploads.RecentUploadsEntry">
             <summary>
                 Class RecentUploadsEntry.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdRecentUploads.RecentUploadsEntry.UploadType">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.RecentUploads.RecentUploadsEntry.UploadType">
             <summary>
                 Gets or sets the type of the upload.
             </summary>
             <value>The type of the upload.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdRecentUploads.RecentUploadsEntry.RegionId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.RecentUploads.RecentUploadsEntry.RegionId">
             <summary>
                 Gets or sets the region identifier.
             </summary>
             <value>The region identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdRecentUploads.RecentUploadsEntry.TypeId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.RecentUploads.RecentUploadsEntry.TypeId">
             <summary>
                 Gets or sets the type identifier.
             </summary>
             <value>The type identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdRecentUploads.RecentUploadsEntry.Updated">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.RecentUploads.RecentUploadsEntry.Updated">
             <summary>
                 Gets or sets the updated.
             </summary>
             <value>The updated.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1">
             <summary>
-                Class EveMarketDataRowCollection.
+                Class EmdRowCollection.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1.#ctor">
+        <member name="M:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1.#ctor">
             <summary>
-                Initializes a new instance of the <see cref="T:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1"/> class.
+                Initializes a new instance of the <see cref="T:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1"/> class.
             </summary>
         </member>
-        <member name="M:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1.GetSchema">
+        <member name="M:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1.GetSchema">
             <summary>
                 This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return
                 null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the
@@ -826,119 +826,119 @@
             </returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1.ReadXml(System.Xml.XmlReader)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1.ReadXml(System.Xml.XmlReader)">
             <summary>
                 Generates an object from its XML representation.
             </summary>
             <param name="reader">The <see cref="T:System.Xml.XmlReader" /> stream from which the object is deserialized.</param>
         </member>
-        <member name="M:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1.WriteXml(System.Xml.XmlWriter)">
+        <member name="M:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1.WriteXml(System.Xml.XmlWriter)">
             <summary>
                 Converts an object into its XML representation.
             </summary>
             <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the object is serialized.</param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1.RowSetMeta">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1.RowSetMeta">
             <summary>
                 Gets the row set meta.
             </summary>
             <value>The row set meta.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1.RowSetAttributes">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1.RowSetAttributes">
             <summary>
                 Class RowSetAttributes.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1.RowSetAttributes.Name">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1.RowSetAttributes.Name">
             <summary>
                 Gets or sets the name.
             </summary>
             <value>The name.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1.RowSetAttributes.Key">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1.RowSetAttributes.Key">
             <summary>
                 Gets or sets the key.
             </summary>
             <value>The key.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EveMarketDataRowCollection`1.RowSetAttributes.Columns">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.EmdRowCollection`1.RowSetAttributes.Columns">
             <summary>
                 Gets or sets the columns.
             </summary>
             <value>The columns.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EmdStationRank">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.StationRank">
             <summary>
-                Class EmdStationRank.
+                Class StationRank.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.Stations">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.Stations">
             <summary>
                 Gets or sets the stations.
             </summary>
             <value>The stations.</value>
         </member>
-        <member name="T:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry">
+        <member name="T:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry">
             <summary>
                 Class StationRankEntry.
             </summary>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry.StationId">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry.StationId">
             <summary>
                 Gets or sets the station identifier.
             </summary>
             <value>The station identifier.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry.Date">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry.Date">
             <summary>
                 Gets or sets the date.
             </summary>
             <value>The date.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry.RankByOrders">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry.RankByOrders">
             <summary>
                 Gets or sets the rank by orders.
             </summary>
             <value>The rank by orders.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry.RankByPrice">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry.RankByPrice">
             <summary>
                 Gets or sets the rank by price.
             </summary>
             <value>The rank by price.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry.SellOrders">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry.SellOrders">
             <summary>
                 Gets or sets the sell orders.
             </summary>
             <value>The sell orders.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry.BuyOrders">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry.BuyOrders">
             <summary>
                 Gets or sets the buy orders.
             </summary>
             <value>The buy orders.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry.SellTotal">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry.SellTotal">
             <summary>
                 Gets or sets the sell total.
             </summary>
             <value>The sell total.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry.BuyTotal">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry.BuyTotal">
             <summary>
                 Gets or sets the buy total.
             </summary>
             <value>The buy total.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry.AvgSellPrice">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry.AvgSellPrice">
             <summary>
                 Gets or sets the average sell price.
             </summary>
             <value>The average sell price.</value>
         </member>
-        <member name="P:eZet.EveLib.Modules.Models.EmdStationRank.StationRankEntry.AvgBuyPrice">
+        <member name="P:eZet.EveLib.EveMarketDataModule.Models.StationRank.StationRankEntry.AvgBuyPrice">
             <summary>
                 Gets or sets the average buy price.
             </summary>
