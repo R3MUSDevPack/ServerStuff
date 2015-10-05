@@ -65,7 +65,7 @@ namespace r3mus.Controllers
                 (m.MailerId == null && !m.Name.Contains("Citizen") && !m.Name.Contains("Trader") && !m.Name.Contains("Miner"))).ToList()
             .Where(m =>
                 ((m.InNPCCorp)
-                && (m.DateOfBirthInRange))).ToList();
+                && (m.DateOfBirthInRange))).Take(20).ToList();
 
             //List < RecruitmentMailee> NPCMailees = new List<RecruitmentMailee>();
 

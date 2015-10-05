@@ -292,9 +292,13 @@
     <Compile Include="Migrations\201506021406442_AddForums1.Designer.cs">
       <DependentUpon>201506021406442_AddForums1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201509231040459_RecruitmentMaillee_DoB.cs" />
-    <Compile Include="Migrations\201509231040459_RecruitmentMaillee_DoB.Designer.cs">
-      <DependentUpon>201509231040459_RecruitmentMaillee_DoB.cs</DependentUpon>
+    <Compile Include="Migrations\201509231040459_RecruitmentMailee_DoB.cs" />
+    <Compile Include="Migrations\201509231040459_RecruitmentMailee_DoB.Designer.cs">
+      <DependentUpon>201509231040459_RecruitmentMailee_DoB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510050914196_RecruitmentMailee_LastUpdated.cs" />
+    <Compile Include="Migrations\201510050914196_RecruitmentMailee_LastUpdated.Designer.cs">
+      <DependentUpon>201510050914196_RecruitmentMailee_LastUpdated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Applicant.cs" />
@@ -634,8 +638,11 @@
     <EmbeddedResource Include="Migrations\201506021406442_AddForums1.resx">
       <DependentUpon>201506021406442_AddForums1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509231040459_RecruitmentMaillee_DoB.resx">
-      <DependentUpon>201509231040459_RecruitmentMaillee_DoB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201509231040459_RecruitmentMailee_DoB.resx">
+      <DependentUpon>201509231040459_RecruitmentMailee_DoB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510050914196_RecruitmentMailee_LastUpdated.resx">
+      <DependentUpon>201510050914196_RecruitmentMailee_LastUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

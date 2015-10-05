@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace SiteUpdateBot
 {
     class Program
-    {      
+    {
         static void Main(string[] args)
         {
             try
@@ -41,7 +41,7 @@ namespace SiteUpdateBot
                 using (var r3musDB = new r3musDbContext())
                 {
                     //totalCount = r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && (DbFunctions.DiffHours(mailee.Submitted, DateTime.Now) > 24)).Count();
-                    
+
                     ResetMailees(true);
 
                     if (doFullRun)
@@ -61,7 +61,7 @@ namespace SiteUpdateBot
 
                 System.Threading.Thread.Sleep(1000);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 if (Environment.UserInteractive)
@@ -76,13 +76,14 @@ namespace SiteUpdateBot
             if (reset)
             {
                 var r3musDB = new r3musDbContext();
-                
+
                 r3musDB.RecruitmentMailees.Where(mailee =>
                     (mailee.MailerId == null)
-                    && (!mailee.Name.Contains("Citizen")) 
-                    && (!mailee.Name.Contains("Trader")) 
+                    && (!mailee.Name.Contains("Citizen"))
+                    && (!mailee.Name.Contains("Trader"))
                     && (!mailee.Name.Contains("Miner"))
-                    && (DbFunctions.DiffHours(mailee.Submitted, DateTime.Now) >= 24))
+                    && (DbFunctions.DiffHours(mailee.Submitted, DateTime.Now) >= 24)
+                    && (DbFunctions.DiffHours(mailee.LastUpdated, DateTime.Now) >= 24))
                     .Take(500).ToList().ForEach(mailee => mailee.CorpId_AtLastCheck = 0);
 
                 var count = r3musDB.SaveChanges();
@@ -122,46 +123,46 @@ namespace SiteUpdateBot
                 var forumRole = r3musForum.MembershipRoles.Where(role => role.RoleName == "Standard Members").FirstOrDefault();
 
                 siteUsers.ForEach(siteUser =>
+                {
+                    var forumUser = forumUsers.Where(user => user.UserName == siteUser.UserName).FirstOrDefault();
+                    if (forumUser == null)
                     {
-                        var forumUser = forumUsers.Where(user => user.UserName == siteUser.UserName).FirstOrDefault();
-                        if (forumUser == null)
+                        forumUser = new MembershipUser()
                         {
-                            forumUser = new MembershipUser()
-                                {
-                                    Id = new Guid(siteUser.Id),
-                                    UserName = siteUser.UserName,
-                                    Password = string.Concat("R3MUSUser_", siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" "))),
-                                    Email = siteUser.EmailAddress,
-                                    PasswordSalt = string.Concat("R3MUS_", siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" "))),
-                                    IsApproved = true,
-                                    IsLockedOut = false,
-                                    CreateDate = DateTime.Now,
-                                    LastLoginDate = DateTime.Now,
-                                    LastPasswordChangedDate = DateTime.Now,
-                                    LastLockoutDate = DateTime.Now,
-                                    FailedPasswordAttemptCount = 3,
-                                    FailedPasswordAnswerAttempt = 3,
-                                    Slug = string.Empty,
-                                    DisableEmailNotifications = true,
-                                    IsExternalAccount = true
-                                };
-                            forumUser.Password = GenerateSaltedHash(forumUser.Password, forumUser.PasswordSalt);
-                            r3musForum.MembershipUsers.Add(forumUser);
+                            Id = new Guid(siteUser.Id),
+                            UserName = siteUser.UserName,
+                            Password = string.Concat("R3MUSUser_", siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" "))),
+                            Email = siteUser.EmailAddress,
+                            PasswordSalt = string.Concat("R3MUS_", siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" "))),
+                            IsApproved = true,
+                            IsLockedOut = false,
+                            CreateDate = DateTime.Now,
+                            LastLoginDate = DateTime.Now,
+                            LastPasswordChangedDate = DateTime.Now,
+                            LastLockoutDate = DateTime.Now,
+                            FailedPasswordAttemptCount = 3,
+                            FailedPasswordAnswerAttempt = 3,
+                            Slug = string.Empty,
+                            DisableEmailNotifications = true,
+                            IsExternalAccount = true
+                        };
+                        forumUser.Password = GenerateSaltedHash(forumUser.Password, forumUser.PasswordSalt);
+                        r3musForum.MembershipUsers.Add(forumUser);
 
-                            var role = new MembershipUsersInRole()
-                            {
-                                Id = Guid.NewGuid(),
-                                UserIdentifier = forumUser.Id,
-                                RoleIdentifier = forumRole.Id,
-                                MembershipUser = forumUser,
-                                MembershipRole = forumRole
-                            };
-                            
-                            r3musForum.MembershipUsersInRoles.Add(role);
-                        }
+                        var role = new MembershipUsersInRole()
+                        {
+                            Id = Guid.NewGuid(),
+                            UserIdentifier = forumUser.Id,
+                            RoleIdentifier = forumRole.Id,
+                            MembershipUser = forumUser,
+                            MembershipRole = forumRole
+                        };
+
+                        r3musForum.MembershipUsersInRoles.Add(role);
                     }
+                }
                     );
-                    r3musForum.SaveChanges();
+                r3musForum.SaveChanges();
             }
             catch (DbEntityValidationException ex)
             {
@@ -227,7 +228,7 @@ namespace SiteUpdateBot
             {
                 return Convert.ToDateTime(ConfigurationSettings.AppSettings["LastCheckedAt"]);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new DateTime();
             }
@@ -248,7 +249,7 @@ namespace SiteUpdateBot
             sw.Start();
             int i = 0;
 
-            using(var r3musDB = new r3musDbContext())
+            using (var r3musDB = new r3musDbContext())
             {
                 r3musDB.RecruitmentMailees.Where(mailee => mailee.CorpId_AtLastCheck == 0).Take(30).ToList().ForEach(mailee =>
                 {
@@ -257,6 +258,7 @@ namespace SiteUpdateBot
                         i++;
                         Console.WriteLine("# {0}: Mailee {1}", i.ToString(), mailee.Name);
                         mailee.GetToonDetails();
+                        mailee.LastUpdated = DateTime.Now;
                     }
                     catch (Exception ex) { Console.WriteLine(string.Format("Mailee: {0}, Error {1}", mailee.Name, ex.Message)); }
                 });
@@ -278,9 +280,9 @@ namespace SiteUpdateBot
 
             Console.WriteLine(string.Format("Running applications check from {0}.", lastRunTime.ToString("yyyy-MM-dd HH:mm:ss")));
 
-            foreach(var application in applications)
+            foreach (var application in applications)
             {
-                if(application.Status == ApplicationReviewViewModel.ApplicationStatus.Applied.ToString())
+                if (application.Status == ApplicationReviewViewModel.ApplicationStatus.Applied.ToString())
                 {
                     SendMessage(string.Format(Properties.Settings.Default.NewApp_MessageFormatLine1, application.Name, application.DateTimeCreated.ToString("yyyy-MM-dd HH:mm:ss")));
                 }
@@ -294,7 +296,7 @@ namespace SiteUpdateBot
                 SendMessage("I am a robot. Beep.");
             }
         }
-        
+
         private static void SendMessage(string message)
         {
             if (Properties.Settings.Default.Plugin.ToUpper() == "HIPCHAT")

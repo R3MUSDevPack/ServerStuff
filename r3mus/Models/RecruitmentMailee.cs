@@ -29,6 +29,8 @@ namespace r3mus.Models
 
         public long CorpId_AtLastCheck { get; set; }
 
+        public DateTime LastUpdated { get; set; }
+
         [NotMapped]
         public bool InNPCCorp { get { return IsInNPCCorp(); } }
         [NotMapped]
