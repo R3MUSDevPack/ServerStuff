@@ -163,7 +163,8 @@ namespace r3mus.Models
 
                     try
                     {
-                        toon = cKey.Characters.Single(c => c.CharacterName == this.UserName);
+                        //var things = cKey.Characters;
+                        toon = cKey.Characters.Single(c => c.CharacterName.ToUpper() == this.UserName.ToUpper());
                     }
                     catch (Exception ex) { }
 

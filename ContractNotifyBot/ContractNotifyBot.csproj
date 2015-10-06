@@ -35,10 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EveAI.Core">
-      <HintPath>..\..\..\EveAI\EveAI.Core.dll</HintPath>
+      <HintPath>..\JKON.EveWho\bin\Debug\EveAI.Core.dll</HintPath>
     </Reference>
     <Reference Include="EveAI.Live">
-      <HintPath>..\..\..\EveAI\EveAI.Live.dll</HintPath>
+      <HintPath>..\JKON.EveWho\bin\Debug\EveAI.Live.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip.Reduced">
       <HintPath>..\packages\EVEAI.2.6.0.0\lib\net20\Ionic.Zip.Reduced.dll</HintPath>

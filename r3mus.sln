@@ -34,7 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JKON.EveApi", "JKON.EveWho\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{8AFBDC2C-B341-4F9E-AEC8-88252A304213}"
 	ProjectSection(SolutionItems) = preProject
-		JKON.EveWho\bin\Debug\EveAI.Core.dll = JKON.EveWho\bin\Debug\EveAI.Core.dll
 		JKON.EveWho\bin\Debug\EveAI.Live.dll = JKON.EveWho\bin\Debug\EveAI.Live.dll
 		JKON.EveWho\bin\Debug\EveLib.Core.dll = JKON.EveWho\bin\Debug\EveLib.Core.dll
 		JKON.EveWho\bin\Debug\EveLib.Core.xml = JKON.EveWho\bin\Debug\EveLib.Core.xml
@@ -52,7 +51,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 		JKON.EveWho\bin\Debug\EveLib.StaticData.xml = JKON.EveWho\bin\Debug\EveLib.StaticData.xml
 		JKON.EveWho\bin\Debug\EveLib.ZKillboard.dll = JKON.EveWho\bin\Debug\EveLib.ZKillboard.dll
 		JKON.EveWho\bin\Debug\EveLib.ZKillboard.xml = JKON.EveWho\bin\Debug\EveLib.ZKillboard.xml
-		JKON.EveWho\bin\Debug\Ionic.Zip.Reduced.dll = JKON.EveWho\bin\Debug\Ionic.Zip.Reduced.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackBot", "SlackBot\SlackBot.csproj", "{C0BF45BB-D83E-4B4F-AE2F-9159634357E7}"
