@@ -63,5 +63,5 @@ ul.listRoles li
 
 @font-face {
     font-family: 'Xirod';
-    src: url('/fonts/xirod.ttf') format('truetype'), url('/fonts/xirod.woff') format('woff');
+    src: url('/content/fonts/xirod.ttf') format('truetype'), url('/content/fonts/xirod.woff') format('woff');
 }

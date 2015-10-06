@@ -489,6 +489,8 @@ namespace r3mus.Models
 
         //public System.Data.Entity.DbSet<r3mus.Models.ApplicationUser> Users { get; set; }
 
+        public virtual DbSet<LatestNew> LatestNewsItem { get; set; }
+
         public System.Data.Entity.DbSet<r3mus.Models.Forum> Forums { get; set; }
         public System.Data.Entity.DbSet<r3mus.Models.Post> Posts { get; set; }
         public System.Data.Entity.DbSet<r3mus.Models.Thread> Threads { get; set; }

@@ -16,7 +16,7 @@ namespace r3mus.Controllers
         {
             if ((User == null) || (User.Identity.IsAuthenticated == false))
             {
-                var latestNewsItem = new LatestNews().LatestNewsItem.FirstOrDefault();
+                var latestNewsItem = new ApplicationDbContext().LatestNewsItem.FirstOrDefault();
 
                 if(TempData["Message"] != null)
                 {
@@ -76,7 +76,7 @@ namespace r3mus.Controllers
 
         public ActionResult LatestNews()
         {
-            var latestNewsItem = new LatestNews().LatestNewsItem.Where(newsItem => newsItem.Category == "External News").FirstOrDefault();
+            var latestNewsItem = new ApplicationDbContext().LatestNewsItem.Where(newsItem => newsItem.Category == "External News").FirstOrDefault();
             return View(latestNewsItem);
         }
 

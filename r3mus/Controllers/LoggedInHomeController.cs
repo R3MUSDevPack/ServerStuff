@@ -53,7 +53,7 @@ namespace r3mus.Controllers
 
             var vm = new WelcomeViewModel()
             {
-                LatestInternalNewsItem = new LatestNews().LatestNewsItem.Where(newsItem => newsItem.Category == "Internal News").FirstOrDefault(),
+                LatestInternalNewsItem = db.LatestNewsItem.Where(newsItem => newsItem.Category == "Internal News").FirstOrDefault(),
                 Apis = currentUser.ApiKeys.GroupBy(api => api.ApiKey).Select(api => api.First()).ToList()
             };
 
