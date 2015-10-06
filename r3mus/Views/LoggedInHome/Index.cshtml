@@ -1,4 +1,5 @@
-﻿@model IEnumerable<r3mus.Models.ApiInfo>
+﻿@*@model IEnumerable<r3mus.Models.ApiInfo>*@
+@model r3mus.ViewModels.WelcomeViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -7,6 +8,8 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
+
+@{Html.RenderPartial("_News", Model.LatestInternalNewsItem);}
 
 <h2>Index</h2>
 @if (ViewBag.Message != string.Empty)
@@ -30,6 +33,7 @@
         @*<li class="ui-state-default ui-corner-top"><a href="#HipchatTab">Hipchat</a></li>*@
         <li class="ui-state-default ui-corner-top"><a href="#SlackTab">Slack</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#MoodleTab">Training</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#ForumTab">Forums</a></li>
     </ul>
 
     <div id="APITab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
@@ -37,21 +41,21 @@
             @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
         </p>
         <div class="col-md-12" style="font-family:Arial; font-size:small; font-weight:600">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Apis)
             {
                 <div class="row">
                     <div class="col-md-1">
-                        @Html.DisplayNameFor(model => model.ApiKey): 
+                        @Html.DisplayNameFor(model => item.ApiKey): 
                         <br />
                         @Html.DisplayFor(modelItem => item.ApiKey)
                     </div>
                     <div class="col-md-6">
-                        @Html.DisplayNameFor(model => model.VerificationCode):
+                        @Html.DisplayNameFor(model => item.VerificationCode):
                         <br />
                         @Html.DisplayFor(modelItem => item.VerificationCode)
                     </div>
                     <div class="col-md-1">
-                        @Html.DisplayNameFor(model => model.AccessMask):
+                        @Html.DisplayNameFor(model => item.AccessMask):
                         <br />
                         @Html.DisplayFor(modelItem => item.AccessMask)
                     </div>
@@ -77,6 +81,9 @@
     </div>
     <div id="MoodleTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         @Html.Partial("_RegisterForMoodle")
+    </div>
+    <div id="ForumTab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        @Html.Partial("_RegisterForForums")
     </div>
 </div>
 <script>

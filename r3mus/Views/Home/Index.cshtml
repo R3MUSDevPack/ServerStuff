@@ -9,13 +9,15 @@
 }
 <div class="row">
     <div class="col-md-4">
-        <h2>Latest News</h2>
+        <h2>Latest News</h2><h4>@ViewBag.NewsDate</h4>
         <p>
-            <h4>@ViewBag.NewsDate</h4>
-            <h3>@ViewBag.NewsTitle</h3>
-            <br />
-            @ViewBag.NewsArticle
+            
+            @*<h3>@ViewBag.NewsTitle</h3>*@
+            @*<br />*@
+            @*@ViewBag.NewsArticle*@
+            @Html.Raw(ViewBag.NewsArticle)
         </p>
+        <p><a class="btn btn-default" href="~/Home/LatestNews">Read More</a></p>
     </div>
     <div class="col-md-4">
         <h2>More About Us</h2>

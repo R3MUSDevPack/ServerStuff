@@ -19,6 +19,8 @@ using System.Data.Entity.Infrastructure;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Security.Cryptography;
+using r3mus.ViewModels;
 
 namespace r3mus.Controllers
 {
@@ -37,6 +39,7 @@ namespace r3mus.Controllers
             currentUser.LoadApiKeys();
             ViewBag.FullAPIAccessMask = Properties.Settings.Default.FullAPIAccessMask;
 
+
             if (TempData["Message"] != null)
             {
                 ViewBag.Message = TempData["Message"].ToString();
@@ -45,9 +48,17 @@ namespace r3mus.Controllers
             {
                 ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
             }
-            List<ApiInfo> apis = currentUser.ApiKeys.GroupBy(api => api.ApiKey).Select(api => api.First()).ToList();
+            //List<ApiInfo> apis = currentUser.ApiKeys.GroupBy(api => api.ApiKey).Select(api => api.First()).ToList();
+            //var latestNewsItem = new LatestNews().LatestNewsItem.Where(newsItem => newsItem.Category == "Internal News").FirstOrDefault();
 
-            return View(apis);
+            var vm = new WelcomeViewModel()
+            {
+                LatestInternalNewsItem = new LatestNews().LatestNewsItem.Where(newsItem => newsItem.Category == "Internal News").FirstOrDefault(),
+                Apis = currentUser.ApiKeys.GroupBy(api => api.ApiKey).Select(api => api.First()).ToList()
+            };
+
+            //return View(apis);
+            return View(vm);
         }
 
         // GET: /LoggedInHome/Details/5
@@ -298,6 +309,71 @@ namespace r3mus.Controllers
             return View();
         }
 
+        public ActionResult RegisterForForums()
+        {
+            try
+            {
+                var r3musForum = new r3musForumDBContext();
+                var siteUser = UserManager.FindById(User.Identity.GetUserId());
+                var forumRole = r3musForum.MembershipRoles.Where(role => role.RoleName == "Standard Members").FirstOrDefault();
+
+                var forumUser = r3musForum.MembershipUsers.Where(user => (user.UserName == siteUser.UserName) || (user.Email == siteUser.EmailAddress)).FirstOrDefault();
+
+                if (forumUser != null)
+                {
+                    forumUser.PasswordSalt = string.Concat("R3MUS_", siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" ")));
+                    forumUser.Password = GenerateSaltedHash(string.Concat("R3MUSUser_", siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" "))), forumUser.PasswordSalt);
+                    r3musForum.SaveChanges();
+                    TempData.Add("Message", "Your access to the forums should now be restored. You can now access the forums using the link in Services at the top of the page.");
+                }
+                else
+                {
+
+                    forumUser = new MembershipUser()
+                    {
+                        Id = new Guid(siteUser.Id),
+                        UserName = siteUser.UserName,
+                        Password = string.Concat("R3MUSUser_", siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" "))),
+                        Email = siteUser.EmailAddress,
+                        PasswordSalt = string.Concat("R3MUS_", siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" "))),
+                        IsApproved = true,
+                        IsLockedOut = false,
+                        CreateDate = DateTime.Now,
+                        LastLoginDate = DateTime.Now,
+                        LastPasswordChangedDate = DateTime.Now,
+                        LastLockoutDate = DateTime.Now,
+                        FailedPasswordAttemptCount = 3,
+                        FailedPasswordAnswerAttempt = 3,
+                        Slug = string.Empty,
+                        DisableEmailNotifications = true,
+                        IsExternalAccount = true
+                    };
+                    forumUser.Password = GenerateSaltedHash(forumUser.Password, forumUser.PasswordSalt);
+                    r3musForum.MembershipUsers.Add(forumUser);
+
+                    var roleLink = new MembershipUsersInRole()
+                    {
+                        Id = Guid.NewGuid(),
+                        UserIdentifier = forumUser.Id,
+                        RoleIdentifier = forumRole.Id,
+                        MembershipUser = forumUser,
+                        MembershipRole = forumRole
+                    };
+
+                    r3musForum.MembershipUsersInRoles.Add(roleLink);
+                    r3musForum.SaveChanges();
+
+                    TempData.Add("Message", "Registration Complete! You can now access the forums using the link in Services at the top of the page.");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData.Add("Message", "An error occurred: Please contact Clyde en Marland with this message; ");
+                TempData.Add("ErrorMessage", ex.Message);
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public ActionResult RegisterForHipchat(int? id)
         {
@@ -384,5 +460,23 @@ namespace r3mus.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private static string GenerateSaltedHash(string plainText, string salt)
+        {
+            // http://stackoverflow.com/questions/2138429/hash-and-salt-passwords-in-c-sharp
+
+            var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            var saltBytes = Encoding.UTF8.GetBytes(salt);
+
+            // Combine the two lists
+            var plainTextWithSaltBytes = new List<byte>(plainTextBytes.Length + saltBytes.Length);
+            plainTextWithSaltBytes.AddRange(plainTextBytes);
+            plainTextWithSaltBytes.AddRange(saltBytes);
+
+            // Produce 256-bit hashed value i.e. 32 bytes
+            HashAlgorithm algorithm = new SHA256Managed();
+            var byteHash = algorithm.ComputeHash(plainTextWithSaltBytes.ToArray());
+            return Convert.ToBase64String(byteHash);
+        }        
     }
 }

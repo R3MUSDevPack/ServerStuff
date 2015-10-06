@@ -1,0 +1,14 @@
+﻿@model r3mus.Models.LatestNew
+
+<div class="row">
+    <h3>@Html.DisplayFor(model => model.Topic)</h3>
+    <hr />
+    <div class="col-md-8">@Html.Raw(Model.Post)</div>
+    <div class="col-md-4">
+        <img src="@Model.Avatar" />
+        <br />
+        @Html.DisplayFor(model => model.UserName)
+        <br />
+        @Html.DisplayFor(model => model.Date)
+    </div>
+</div>

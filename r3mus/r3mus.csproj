@@ -383,7 +383,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LastWeeksSubmissionStats.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\LatestNew.cs" />
+    <Compile Include="Models\LatestNews.cs" />
+    <Compile Include="Models\MembershipRole.cs" />
+    <Compile Include="Models\MembershipUser.cs" />
+    <Compile Include="Models\MembershipUsersInRole.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\r3musForumDBContext.cs" />
     <Compile Include="Models\RecruitmentHelper.cs" />
     <Compile Include="Models\RecruitmentMailee.cs" />
     <Compile Include="Models\Thread.cs" />
@@ -402,6 +408,7 @@
     <Compile Include="ViewModels\LogisticsContractsViewModel.cs" />
     <Compile Include="ViewModels\RecruitmentStatsViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
+    <Compile Include="ViewModels\WelcomeViewModel.cs" />
     <Compile Include="WebAPI\ExternalServicesController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -514,6 +521,8 @@
     <Content Include="Filters\fonts\xirod.ttf" />
     <Content Include="Filters\fonts\xirod.woff" />
     <Content Include="Content\fonts\xirod.woff" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="Properties\PublishProfiles\Mine.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -597,6 +606,8 @@
     <Content Include="Views\LoggedInHome\_RedirectToForums.cshtml" />
     <Content Include="Views\Logistics\ContractStatus.cshtml" />
     <Content Include="Views\Home\Wolves.cshtml" />
+    <Content Include="Views\Home\LatestNews.cshtml" />
+    <Content Include="Views\Shared\_News.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Filters\fonts\glyphicons-halflings-regular.woff" />
