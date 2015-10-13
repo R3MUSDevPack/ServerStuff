@@ -21,6 +21,9 @@ namespace r3mus.Models
 
         public IList<ApiInfo> ApiKeys { get; set; }
 
+        public bool Errored { get; set; }
+        public string ErrorMessage { get; set; }
+
         public IList<Title> Titles { get; set; }
 
         public string MemberType { get; set; }
@@ -63,43 +66,54 @@ namespace r3mus.Models
             //return true;
             bool result = false;
             bool unloadApis = false;
-            
-            long hostCorpID = GetCorpOrAllianceId(IDType.Corporation, Convert.ToInt32(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode);
-            long hostAllianceID = GetCorpOrAllianceId(IDType.Alliance, Convert.ToInt32(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode);
 
-            if(this.ApiKeys.Count == 0)
+            try
             {
-                unloadApis = this.LoadApiKeys();
+                        
+                long hostCorpID = GetCorpOrAllianceId(IDType.Corporation, Convert.ToInt32(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode);
+                long hostAllianceID = GetCorpOrAllianceId(IDType.Alliance, Convert.ToInt32(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode);
+
+                if(this.ApiKeys.Count == 0)
+                {
+                    unloadApis = this.LoadApiKeys();
+                }
+
+                foreach (ApiInfo apiInfo in this.ApiKeys)
+                {
+                    long clientCorpId = GetCorpOrAllianceId(IDType.Corporation, apiInfo.ApiKey, apiInfo.VerificationCode);
+                    long clientAllianceId = GetCorpOrAllianceId(IDType.Alliance, apiInfo.ApiKey, apiInfo.VerificationCode);
+
+                    if (clientCorpId == hostCorpID)
+                    {
+                        MemberType = IDType.Corporation.ToString();
+                        result = apiInfo.ValidateAccessMask(IDType.Corporation);
+                    }
+                    else if (clientAllianceId == hostAllianceID)
+                    {
+                        MemberType = IDType.Alliance.ToString();
+                        result = apiInfo.ValidateAccessMask(IDType.Alliance);
+                    }
+                    else
+                    {
+                        //  Get standings
+                        result = ValidateStandings(UserName, clientCorpId, clientAllianceId, Convert.ToInt32(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode);
+                    }
+                    if(result)
+                    {
+                        break;
+                    }
+                }
+                if(unloadApis)
+                {
+                    this.UnloadApiKeys();
+                }
+                Errored = false;
+
             }
-
-            foreach (ApiInfo apiInfo in this.ApiKeys)
+            catch(Exception ex)
             {
-                long clientCorpId = GetCorpOrAllianceId(IDType.Corporation, apiInfo.ApiKey, apiInfo.VerificationCode);
-                long clientAllianceId = GetCorpOrAllianceId(IDType.Alliance, apiInfo.ApiKey, apiInfo.VerificationCode);
-
-                if (clientCorpId == hostCorpID)
-                {
-                    MemberType = IDType.Corporation.ToString();
-                    result = apiInfo.ValidateAccessMask(IDType.Corporation);
-                }
-                else if (clientAllianceId == hostAllianceID)
-                {
-                    MemberType = IDType.Alliance.ToString();
-                    result = apiInfo.ValidateAccessMask(IDType.Alliance);
-                }
-                else
-                {
-                    //  Get standings
-                    result = ValidateStandings(UserName, clientCorpId, clientAllianceId, Convert.ToInt32(Properties.Settings.Default.CorpAPI), Properties.Settings.Default.VCode);
-                }
-                if(result)
-                {
-                    break;
-                }
-            }
-            if(unloadApis)
-            {
-                this.UnloadApiKeys();
+                Errored = true;
+                ErrorMessage = ex.Message;
             }
 
             return result;

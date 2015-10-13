@@ -213,7 +213,7 @@ namespace r3mus.Controllers
 
             if (!goodAccessMask)
             {
-                ViewBag.Message = "The access mask for the API key you have submitted is not correct. Please correct this and try again.";
+                ViewBag.Message = string.Format("The access mask for the API key you have submitted is not correct ({0}, should be {1}). Please correct this and try again.", api.AccessMask, Properties.Settings.Default.FullAPIAccessMask);
             }
             else if(!goodTZ)
             {

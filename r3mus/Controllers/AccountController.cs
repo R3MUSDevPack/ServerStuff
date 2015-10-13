@@ -132,10 +132,20 @@ namespace r3mus.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "You appear to be neither a corp or alliance member.");
+                    if (!user.Errored)
+                    {
+                        ModelState.AddModelError("", string.Format("You appear to be neither a corp or alliance member (access mask: {0}).", 
+                            user.ApiKeys.Where(api => api.ApiKey == Convert.ToInt32(model.ApiKey)).FirstOrDefault().AccessMask
+                            ));
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", string.Format("Something went wrong: {0}", user.ErrorMessage));
+                    }
                 }
             }
 
+            ViewBag.FullAPIAccessMask = Properties.Settings.Default.FullAPIAccessMask;
             // If we got this far, something failed, redisplay form
             return View(model);
         }
