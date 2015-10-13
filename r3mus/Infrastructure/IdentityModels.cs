@@ -20,8 +20,10 @@ namespace r3mus.Models
         private ApplicationDbContext db = new ApplicationDbContext();
 
         public IList<ApiInfo> ApiKeys { get; set; }
-
+        
+        [NotMapped]
         public bool Errored { get; set; }
+        [NotMapped]
         public string ErrorMessage { get; set; }
 
         public IList<Title> Titles { get; set; }
