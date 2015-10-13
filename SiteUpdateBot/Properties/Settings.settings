@@ -14,7 +14,7 @@
     <Setting Name="Plugin" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Slack</Value>
     </Setting>
-    <Setting Name="RoomName" Type="System.String" Scope="Application">
+    <Setting Name="RecruitmentRoomName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">recruitment</Value>
     </Setting>
     <Setting Name="HipchatToken" Type="System.String" Scope="Application">
@@ -28,6 +28,12 @@
     </Setting>
     <Setting Name="AppUpdate_MessageFormatLine2" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Application from {0} was updated to {1} by {2} at {3}.</Value>
+    </Setting>
+    <Setting Name="LastAnnounceDT" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">09/30/2015 18:35:00</Value>
+    </Setting>
+    <Setting Name="NewsRoomName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">news</Value>
     </Setting>
   </Settings>
 </SettingsFile>

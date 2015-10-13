@@ -65,9 +65,9 @@ namespace SiteUpdateBot.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("recruitment")]
-        public string RoomName {
+        public string RecruitmentRoomName {
             get {
-                return ((string)(this["RoomName"]));
+                return ((string)(this["RecruitmentRoomName"]));
             }
         }
         
@@ -104,6 +104,27 @@ namespace SiteUpdateBot.Properties {
         public string AppUpdate_MessageFormatLine2 {
             get {
                 return ((string)(this["AppUpdate_MessageFormatLine2"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("09/30/2015 18:35:00")]
+        public global::System.DateTime LastAnnounceDT {
+            get {
+                return ((global::System.DateTime)(this["LastAnnounceDT"]));
+            }
+            set {
+                this["LastAnnounceDT"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("news")]
+        public string NewsRoomName {
+            get {
+                return ((string)(this["NewsRoomName"]));
             }
         }
     }

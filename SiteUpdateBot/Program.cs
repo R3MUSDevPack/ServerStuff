@@ -1,4 +1,5 @@
 ﻿using Hipchat_Plugin;
+using JKON.Slack;
 using r3mus.Models;
 using r3mus.ViewModels;
 using Slack_Plugin;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SiteUpdateBot
@@ -22,26 +24,18 @@ namespace SiteUpdateBot
         {
             try
             {
-                //SyncUsers();
-                //return;
                 DateTime checkDT = DateTime.Now;
                 DateTime lastFullRunTime = GetLastRunTime();
                 bool doFullRun = ((checkDT - lastFullRunTime).TotalHours > 23);
 
                 Console.WriteLine(string.Format("Last Run Time {0}", lastFullRunTime));
-                //Console.WriteLine(string.Format("Full Run {0}", doFullRun.ToString()));
-
-                //GetWebsiteUserDetails(doFullRun);
-                //UpdateMailees();
-
-                //NotifyApplicationChanges(lastFullRunTime);
 
                 long totalCount, runCount = 0;
 
+                MakeAnnoucements();
+
                 using (var r3musDB = new r3musDbContext())
                 {
-                    //totalCount = r3musDB.RecruitmentMailees.Where(mailee => (mailee.Mailed == null) && (DbFunctions.DiffHours(mailee.Submitted, DateTime.Now) > 24)).Count();
-
                     ResetMailees(true);
 
                     if (doFullRun)
@@ -234,12 +228,33 @@ namespace SiteUpdateBot
             }
         }
 
+        private static DateTime GetLastAnnouncementTime()
+        {
+            try
+            {
+                return Convert.ToDateTime(ConfigurationSettings.AppSettings["LastAnnounceDT"]);
+            }
+            catch (Exception ex)
+            {
+                return new DateTime();
+            }
+        }
+
         private static void UpdateRunTime(DateTime writeThis)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
             Console.WriteLine(string.Format("Updating Last Run Time in {0}", config.FilePath));
             config.AppSettings.Settings.Remove("LastCheckedAt");
             config.AppSettings.Settings.Add("LastCheckedAt", writeThis.ToString("yyyy-MM-dd HH:mm:ss"));
+            config.Save();
+        }
+
+        private static void UpdateAnnouncementTime(DateTime writeThis)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            Console.WriteLine(string.Format("Updating Last Announcement Time in {0}", config.FilePath));
+            config.AppSettings.Settings.Remove("LastAnnounceDT");
+            config.AppSettings.Settings.Add("LastAnnounceDT", writeThis.ToString("yyyy-MM-dd HH:mm:ss"));
             config.Save();
         }
 
@@ -301,11 +316,11 @@ namespace SiteUpdateBot
         {
             if (Properties.Settings.Default.Plugin.ToUpper() == "HIPCHAT")
             {
-                Hipchat.SendToRoom(message, Properties.Settings.Default.RoomName, Properties.Settings.Default.HipchatToken);
+                Hipchat.SendToRoom(message, Properties.Settings.Default.RecruitmentRoomName, Properties.Settings.Default.HipchatToken);
             }
             else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
             {
-                Slack.SendToRoom(message, Properties.Settings.Default.RoomName, Properties.Settings.Default.SlackWebhook);
+                Slack.SendToRoom(message, Properties.Settings.Default.RecruitmentRoomName, Properties.Settings.Default.SlackWebhook);
             }
         }
 
@@ -319,6 +334,68 @@ namespace SiteUpdateBot
             {
                 Slack.SendPM(message, "Clyde en Marland", Properties.Settings.Default.SlackWebhook);
             }
+        }
+
+        private static void MakeAnnoucements()
+        {
+            var lastAnnouncementTime = GetLastAnnouncementTime();
+            var announcements = new r3musDbContext().Announcements.Where(ann => ann.Date > lastAnnouncementTime).ToList();
+
+            announcements.ForEach(ann =>
+            {
+                ann.Post = ann.Post.Replace("\r", "");
+                ann.Post = Regex.Replace(ann.Post, @"<[^>]+>|&nbsp;", "").Trim();
+                ann.Post = Regex.Replace(ann.Post, @"\s{2,}", " ");
+                SendMessage(HyperFormatKillMessage(ann), Properties.Settings.Default.NewsRoomName);
+            });
+            if (announcements.Count() > 0)
+            { 
+                UpdateAnnouncementTime(announcements.LastOrDefault().Date);
+            }
+        }
+        private static void SendPM(MessagePayload message)
+        {
+            if (Properties.Settings.Default.Plugin.ToUpper() == "HIPCHAT")
+            {
+                //Hipchat.SendPM(message, Properties.Settings.Default.HipchatToken, "Clyde en Marland");
+            }
+            else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
+            {
+                Slack.SendPM(message, "ClydeenMarland", Properties.Settings.Default.SlackWebhook);
+            }
+        }
+
+        private static void SendMessage(MessagePayload message, string room)
+        {
+            if (Properties.Settings.Default.Plugin.ToUpper() == "HIPCHAT")
+            {
+                //Hipchat.SendToRoom(message, Properties.Settings.Default.RoomName, Properties.Settings.Default.HipchatToken);
+            }
+            else if (Properties.Settings.Default.Plugin.ToUpper() == "SLACK")
+            {
+                //message = Linkify(message);
+                Slack.SendToRoom(message, room, Properties.Settings.Default.SlackWebhook);
+            }
+        }
+
+        private static MessagePayload HyperFormatKillMessage(Announcement ann)
+        {
+            MessagePayload message = new MessagePayload();
+            message.Attachments = new List<MessagePayloadAttachment>();
+            message.Text = "CODE PINK";
+
+            message.Attachments.Add(new MessagePayloadAttachment()
+            {
+                Text = ann.Post,
+                TitleLink = string.Format("http://forums.r3mus.org/chat/{0}", ann.Topic.ToLower().Replace(" ", "-")),
+                Title = ann.Topic,
+                ThumbUrl = "http://www.r3mus.org/Images/logo.png",
+                AuthorName = ann.UserName,
+                AuthorIcon = string.Format("http://image.eveonline.com/Character/{0}_32.jpg", JKON.EveWho.Api.GetCharacterID(ann.UserName)),
+                Colour = "#FF3399"
+            });
+            
+            return message;
         }
     }
 }

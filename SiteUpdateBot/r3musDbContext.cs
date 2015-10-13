@@ -16,6 +16,8 @@ namespace SiteUpdateBot
 
         public System.Data.Entity.DbSet<r3mus.Models.Title> Titles { get; set; }
 
+        public virtual System.Data.Entity.DbSet<Announcement> Announcements { get; set; }
+
         public r3musDbContext()
             : base("DefaultConnection")
         {

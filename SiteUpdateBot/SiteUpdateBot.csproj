@@ -81,6 +81,7 @@
     <Compile Include="Activity.cs">
       <DependentUpon>r3mus_ForumEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Announcement.cs" />
     <Compile Include="Badge.cs">
       <DependentUpon>r3mus_ForumEntities.tt</DependentUpon>
     </Compile>
@@ -229,6 +230,10 @@
     <ProjectReference Include="..\Hipchat_Plugin\Hipchat_Plugin.csproj">
       <Project>{62d74a6f-20e1-4b2b-a400-f1f8a31700c0}</Project>
       <Name>Hipchat_Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JKON.EveWho\JKON.EveApi.csproj">
+      <Project>{df188f56-5100-40a0-ab70-58fd5dbd3a05}</Project>
+      <Name>JKON.EveApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\r3mus\r3mus.csproj">
       <Project>{50a8220b-9598-4b98-a436-e561e579787d}</Project>

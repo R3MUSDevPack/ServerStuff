@@ -483,7 +483,7 @@ namespace r3mus.Models
                     result = (mask == allianceAccessMask);
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { }            
 
             return result;
         }
