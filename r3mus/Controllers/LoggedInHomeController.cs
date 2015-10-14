@@ -21,6 +21,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using r3mus.ViewModels;
+using System.Data.Entity.Validation;
 
 namespace r3mus.Controllers
 {
@@ -344,7 +345,7 @@ namespace r3mus.Controllers
                         LastLockoutDate = DateTime.Now,
                         FailedPasswordAttemptCount = 3,
                         FailedPasswordAnswerAttempt = 3,
-                        Slug = string.Empty,
+                        Slug = siteUser.UserName.Substring(0, siteUser.UserName.IndexOf(" ")).ToLower(),
                         DisableEmailNotifications = true,
                         IsExternalAccount = true
                     };
@@ -365,6 +366,11 @@ namespace r3mus.Controllers
 
                     TempData.Add("Message", "Registration Complete! You can now access the forums using the link in Services at the top of the page.");
                 }
+            }
+            catch(DbEntityValidationException ex)
+            {
+                TempData.Add("Message", "An error occurred: Please contact Clyde en Marland with this message; ");
+                TempData.Add("ErrorMessage", ex.Message);
             }
             catch (Exception ex)
             {
